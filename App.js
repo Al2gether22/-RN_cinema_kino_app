@@ -1,12 +1,14 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { View, Text} from 'react-native';
 import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
+import { Provider as MovieProvider } from "./src/context/MoviesContext";
 
 
 const App = () => {
   return (
-    <BottomTabNavigator />
+    <MovieProvider>
+      <BottomTabNavigator />
+    </MovieProvider>
   );
 };
 
