@@ -51,12 +51,12 @@ export default function CinemasStackScreen({ navigation }){
           },
           headerTintColor: '#fffdfd',
           headerTitleStyle: {
-            fontFamily: "SourceSansPro-Bold"
+            fontFamily: "SourceSansPro-Bold",
           },
           headerBackTitleStyle: {
             fontSize: 15,
             color: "#fffdfd",
-            fontFamily: "SourceSansPro-Bold"
+            fontFamily: "SourceSansPro-Bold",
           },           
         })}
       />

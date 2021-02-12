@@ -4,8 +4,8 @@ import _ from "lodash";
 import { Context } from "../context/MoviesContext"
 import { View, Text, FlatList, TouchableOpacity, Image } from "react-native"
 import styles from "../styles/MoviesStyles"
-import PremiereDate from "../components/PremiereDate";
-import SearchFilterFunction from "../components/SearchFilterFunction"
+import PremiereDate from "../components/movies/PremiereDate";
+import SearchFilterFunction from "../components/shared/SearchFilterFunction"
 
 const Movies = () => {
   const navigation = useNavigation();

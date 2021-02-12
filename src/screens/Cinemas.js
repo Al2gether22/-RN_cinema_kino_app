@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Context } from "../context/CinemaContext";
 import { View, Text, FlatList, TouchableOpacity, Image } from "react-native";
 import styles from "../styles/CinemasStyles"
-import SearchFilterFunction from "../components/SearchFilterFunction";
+import SearchFilterFunction from "../components/shared/SearchFilterFunction";
 
 const Cinemas = () => {
   const navigation = useNavigation(); 
