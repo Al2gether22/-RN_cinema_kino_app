@@ -7,10 +7,20 @@ const Stack = createStackNavigator();
 
 export default function HomeStackScreen(){
   return (
-    <Stack.Navigator
-    
-    >
-      <Stack.Screen name="Kino.dk" component={Home} />
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="Kino.dk" 
+        component={Home}  
+        options={() => ({ 
+          title: "Kino.dk",
+          headerStyle: {
+            backgroundColor: "#1d1d27"
+          }, 
+          headerTintColor: "#fffdfd",
+          headerTitleStyle: {
+            fontFamily: "SourceSansPro-Bold"
+          },
+      })} />
     </Stack.Navigator>
   )
 }
