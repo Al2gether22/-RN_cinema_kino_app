@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native"
+import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import { Context as MovieContext } from "../context/MoviesContext"
 import { Context as CinemaContext } from "../context/CinemaContext";
@@ -33,14 +33,14 @@ const Home = () => {
   
   return (
     <>
-      <View>
+      <View style={styles.container} >
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('Movies');
           }}
         >
-          <View>
-            <Text>Vælg Film</Text>  
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Vælg Film</Text>  
           </View>  
         </TouchableOpacity>
 
@@ -49,8 +49,8 @@ const Home = () => {
             navigation.navigate('Cinemas');
           }}
         >
-          <View>
-            <Text>Vælg Biograf</Text>  
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Vælg Biograf</Text>  
           </View>  
         </TouchableOpacity>
 
@@ -59,13 +59,49 @@ const Home = () => {
             navigation.navigate('Profile');
           }}
         >
-          <View>
-            <Text>Profil</Text>  
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Profil</Text>  
           </View>  
         </TouchableOpacity>
       </View>
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: '#1d1d27',
+  },
+  button: {
+    alignSelf: "center",
+    fontSize: 30,
+    backgroundColor: "#ff321e",
+    padding: 10,
+    borderRadius: 5,
+    margin: 10,
+    width: 160,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 11,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+    elevation: 23,
+  },
+  buttonText: {
+    fontFamily: "BureauGrotComp-Medium",
+    color: "white",
+    textAlign: "center",
+    paddingTop: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 5
+  }
+})
 
 export default Home;

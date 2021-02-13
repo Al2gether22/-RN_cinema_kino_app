@@ -14,7 +14,8 @@ export default function HomeStackScreen(){
         options={() => ({ 
           title: "Kino.dk",
           headerStyle: {
-            backgroundColor: "#1d1d27"
+            backgroundColor: "#1d1d27",
+            shadowColor: "transparent"
           }, 
           headerTintColor: "#fffdfd",
           headerTitleStyle: {
