@@ -1,19 +1,36 @@
 import React, { useState } from "react";
 import { View, ImageBackground, Text, TouchableOpacity } from "react-native"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import LinearGradient from 'react-native-linear-gradient';
 
 import MovieTrailerModal from "../../modals/MovieTrailerModal"
 import styles from "../../styles/MovieBackgroundImageStyles";
 
 const MovieBackgroundImage = ({ movie }) => {
   const [modalVisible, setModalVisible] = useState(false)
-  console.log(movie)
+  
   return (
     <View style={styles.imageContainer}>
+      
+      
       <ImageBackground 
         style={styles.coverImage}
         source={{ uri: movie.imageUrl }}
-      ></ImageBackground>
+      >
+
+      <LinearGradient 
+        colors={['rgba(29,29,39,1)', 'rgba(29,29,39,0)']} 
+        
+        style={styles.LinearGradientUpper}
+      />
+
+      <LinearGradient 
+        colors={['rgba(29,29,39,0)', 'rgba(29,29,39,1)']} 
+        
+        style={styles.LinearGradientLower}
+      />
+      </ImageBackground>
+
 
       { !!movie.video_markup &&
         

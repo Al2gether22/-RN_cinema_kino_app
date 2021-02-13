@@ -28,6 +28,21 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
     fontSize: 25
+  },
+  
+  LinearGradientUpper: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+  },
+
+  LinearGradientLower: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    
   }
 })
 

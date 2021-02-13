@@ -1,5 +1,7 @@
 import React from "react";
-import { View, ImageBackground, Text, StyleSheet } from "react-native"
+import { View, ImageBackground, Text } from "react-native"
+import LinearGradient from 'react-native-linear-gradient';
+
 
 import styles from "../../styles/CinemaBackgroundStyles";
 
@@ -11,7 +13,19 @@ const CinemaBackgroundImage = ({ name, img }) => {
         <ImageBackground
           style={styles.coverImage}
           source={{ uri: img }}
-        ></ImageBackground>
+        >
+          <LinearGradient 
+            colors={['rgba(29,29,39,1)', 'rgba(29,29,39,0)']} 
+            
+            style={styles.LinearGradientUpper}
+          />
+
+          <LinearGradient 
+            colors={['rgba(29,29,39,0)', 'rgba(29,29,39,1)']} 
+            
+            style={styles.LinearGradientLower}
+          />
+        </ImageBackground>
       </View>
       
       <View style={styles.cinemaTitleContainer}>
