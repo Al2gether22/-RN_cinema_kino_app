@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native"
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Foundation from "react-native-vector-icons/Foundation"
+import ReadMore from "react-native-read-more-text";
 
 import styles from "../../styles/MovieMetaDataStyles";
 
@@ -10,6 +11,28 @@ const MovieMetaData = ({ movie }) => {
   // Sets the movie description teaser
   const regex = /(<([^>]+)>)/ig;
   const movieDescription = movie.body.replace(regex, '');
+
+    // This is typescript
+    const _renderTruncatedFooter = (handlePress: () => void) => {
+      return (
+        <Text style={styles.toggleMovieBodyText} onPress={handlePress}>
+          Læs mere
+        </Text>
+      );
+    };
+    
+    const _renderRevealedFooter = (handlePress: () => void) => {
+      return (
+        <Text style={styles.toggleMovieBodyText} onPress={handlePress}>
+          Vis mindre
+        </Text>
+      );
+    };
+
+    
+    const _handleTextReady = () => {
+      // ...
+    };
 
   return (
  
@@ -29,10 +52,15 @@ const MovieMetaData = ({ movie }) => {
       </View>
 
       <View style={styles.movieReview}>
-        <Text style={styles.movieReviewHeader}>Resume</Text>
-        
+        <Text style={styles.movieReviewHeader}>Resume</Text> 
+        <ReadMore
+          numberOfLines={3}
+          renderTruncatedFooter={_renderTruncatedFooter}
+          renderRevealedFooter={_renderRevealedFooter}
+          onReady={_handleTextReady}
+        >
           <Text style={styles.movieBody}>{movieDescription}</Text>
-        
+        </ReadMore>
     </View>
   </View>
    
