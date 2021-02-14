@@ -23,7 +23,7 @@ const Cinemas = () => {
     </TouchableOpacity>
     )
   }
-
+  console.log(cinemas[0])
   return (
     <View style={styles.container}>
       <SearchFilterFunction

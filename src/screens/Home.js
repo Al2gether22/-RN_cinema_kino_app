@@ -1,14 +1,129 @@
-import React, { useContext, useEffect } from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet } from "react-native"
+import React, { useContext, useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet, Platform, PermissionsAndroid } from "react-native"
 import { useNavigation } from "@react-navigation/native";
+import Geolocation from '@react-native-community/geolocation';
 import { Context as MovieContext } from "../context/MoviesContext"
 import { Context as CinemaContext } from "../context/CinemaContext";
+import UserInfoModal from "../modals/UserInfoModal"
 
 const Home = () => {
 
   const { getMovies, getVersions } = useContext(MovieContext)
   const { state, updateCinemas, getCinemas } = useContext(CinemaContext)
   const navigation = useNavigation();
+  const [currentLongitude, setCurrentLongitude] = useState('...');
+  const [currentLatitude, setCurrentLatitude] = useState('...');
+  const [locationStatus, setLocationStatus] = useState('');
+  const [modalVisible, setModalVisible] = useState(true);
+
+  // Check if the user allowed/disallowed geo 
+  // Show modal if he didnt say either of the 2
+  // Once clicked ok change status to false
+  // Then request user permissin
+  // Then fetch user location
+  // Then update cinemas with coords
+
+  useEffect(() => {
+    updateCinemas(state.cinemas, currentLatitude, currentLongitude)
+  }, [modalVisible])
+
+
+  useEffect(() => {
+    const requestLocationPermission = async () => {
+      if (Platform.OS === 'ios') {
+        getOneTimeLocation();
+      //  subscribeLocationLocation();
+      } else {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+              title: 'Location Access Required',
+              message: 'This App needs to Access your location',
+            },
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            //To Check, If Permission is granted
+            getOneTimeLocation();
+          //  subscribeLocationLocation();
+          } else {
+            setLocationStatus('Permission Denied');
+          }
+        } catch (err) {
+          console.warn(err);
+        }
+      }
+    };
+    requestLocationPermission();
+    return () => {
+      Geolocation.clearWatch(watchID);
+    };
+  }, []);
+  // Set modal const inside [] to invoke this on "ok"
+
+  const getOneTimeLocation = () => {
+    setLocationStatus('Getting Location ...');
+    Geolocation.getCurrentPosition(
+      //Will give you the current location
+      (position) => {
+        setLocationStatus('You are Here');
+
+        //getting the Longitude from the location json
+        const currentLongitude = 
+          JSON.stringify(position.coords.longitude);
+
+        //getting the Latitude from the location json
+        const currentLatitude = 
+          JSON.stringify(position.coords.latitude);
+
+        //Setting Longitude state
+        setCurrentLongitude(currentLongitude);
+        
+        //Setting Longitude state
+        setCurrentLatitude(currentLatitude);
+      },
+      (error) => {
+        setLocationStatus(error.message);
+      },
+      {
+        enableHighAccuracy: false,
+        timeout: 30000,
+        maximumAge: 1000
+      },
+    );
+  };
+
+  // const subscribeLocationLocation = () => {
+  //   watchID = Geolocation.watchPosition(
+  //     (position) => {
+  //       //Will give you the location on location change
+        
+  //       setLocationStatus('You are Here');
+  //       console.log(position);
+
+  //       //getting the Longitude from the location json        
+  //       const currentLongitude =
+  //         JSON.stringify(position.coords.longitude);
+
+  //       //getting the Latitude from the location json
+  //       const currentLatitude = 
+  //         JSON.stringify(position.coords.latitude);
+
+  //       //Setting Longitude state
+  //       setCurrentLongitude(currentLongitude);
+
+  //       //Setting Latitude state
+  //       setCurrentLatitude(currentLatitude);
+  //     },
+  //     (error) => {
+  //       setLocationStatus(error.message);
+  //     },
+  //     {
+  //       enableHighAccuracy: false,
+  //       maximumAge: 1000
+  //     },
+  //   );
+  // };
 
   // Fetch cinemas, if not fetched
   // Call the getUserCoordinates and updated cinema array with distance parameter based on user coords
@@ -33,6 +148,10 @@ const Home = () => {
   
   return (
     <>
+      <UserInfoModal
+        modalVisible={modalVisible}
+        setModalVisible={() => setModalVisible(false)}
+      />
       <View style={styles.container} >
         <TouchableOpacity
           onPress={() => {
