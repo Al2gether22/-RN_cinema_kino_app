@@ -55,9 +55,7 @@ const Home = () => {
       }
     };
     requestLocationPermission();
-    return () => {
-      Geolocation.clearWatch(watchID);
-    };
+
   }, []);
   // Set modal const inside [] to invoke this on "ok"
 
