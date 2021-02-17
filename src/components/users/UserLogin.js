@@ -74,7 +74,7 @@ const UserLogin = ({ setIsLoggedIn }) => {
         <TouchableOpacity
           onPress={() => [
             setModalVisible(true),
-            setUrl("https://www.kino.dk/user/login/")
+            setUrl("https://www.kino.dk/user/register")
           ]}
         >
           <Text style={styles.webViewLinksText}>Har du ingen profil? Tryk her</Text>
