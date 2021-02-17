@@ -9,7 +9,7 @@ import PurchaseHistory from "./PurchaseHistory"
 
 
 const Profile = ({ user, setIsLoggedIn }) => {
-  const { state, signout } = useContext(Context);
+  const { signout } = useContext(Context);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({});
   const [modalVisible, setModalVisible] = useState(false);

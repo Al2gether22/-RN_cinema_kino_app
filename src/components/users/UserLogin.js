@@ -83,7 +83,6 @@ const UserLogin = ({ setIsLoggedIn }) => {
     </View>
   )
 }
-// on press needs to submit email and password to the api
 
 const styles = StyleSheet.create({
   container: {

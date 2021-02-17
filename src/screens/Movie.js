@@ -4,6 +4,7 @@ import { StatusBar, FlatList, ActivityIndicator } from "react-native"
 
 import MovieBackgroundImage from "../components/movies/MovieBackgroundImage"
 import MovieMetaData from "../components/movies/MovieMetaData"
+import ShowTimes from "../components/movies/ShowTimes"
 import styles from "../styles/MovieStyles";
 
 const Movie = () => {
@@ -41,13 +42,13 @@ const Movie = () => {
               <MovieMetaData movie={movie} />
             </>
           }
-          // ListFooterComponent={
-          //   <ShowTimes
-          //     id={movie.nid}
-          //     movieVersions={route.params.versions}
-          //     nextShowtime={route.params.next_showtime}
-          //   />
-          // }
+          ListFooterComponent={
+            <ShowTimes
+              id={movie.nid}
+              movieVersions={route.params.versions}
+              nextShowtime={route.params.next_showtime}
+            />
+          }
         />
       </>
     );
