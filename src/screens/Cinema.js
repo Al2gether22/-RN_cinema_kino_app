@@ -4,6 +4,7 @@ import { FlatList, ActivityIndicator, StyleSheet } from "react-native"
 
 import CinemaBackgroundImage from "../components/cinemas/CinemaBackgroundImage"
 import CinemaMetaData from "../components/cinemas/CinemaMetaData"
+import ShowTimes from "../components/cinemas/ShowTimes";
 
 const Cinema = () => {
   const route = useRoute();
@@ -40,7 +41,7 @@ const Cinema = () => {
             <CinemaMetaData cinema={cinema} />
           </>
         }
-        // ListFooterComponent={<CinemaShowTimes id={cinema.nid} />}
+        ListFooterComponent={<ShowTimes id={cinema.nid} />}
       />
     </>
   );
