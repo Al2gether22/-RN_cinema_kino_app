@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
   },
+  
   button: {
     alignSelf: "center",
     fontSize: 30,

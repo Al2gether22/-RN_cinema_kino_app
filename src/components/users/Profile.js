@@ -4,6 +4,7 @@ import { Text, View, Image, TouchableOpacity, ActivityIndicator } from "react-na
 
 import styles from "../../styles/ProfileStyles";
 
+import WebViewModal from "../../modals/WebViewModal"
 import PurchaseHistory from "./PurchaseHistory"
 
 
@@ -41,12 +42,13 @@ const Profile = ({ user, setIsLoggedIn }) => {
 
   return (
     <View style={styles.container}>
-      {/* <WebViewModalV2
+      <WebViewModal
         modalVisible={modalVisible}
         setModalVisible={() => setModalVisible(false)}
         url={url}
-        cookie={`${userObject.session_name}=${userObject.session_id}`}
-      /> */}
+        cookieName={userObject.session_name}
+        cookieValue={userObject.session_id}
+      />
       <View style={styles.userDataContainer}>
         <Image
           style={styles.profilePic}

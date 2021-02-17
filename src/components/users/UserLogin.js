@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native"
 import { Context } from "../../context/AuthContext"
 
-//import WebViewModal from "../modals/WebViewModal"
+import WebViewModal from "../../modals/WebViewModal"
 
 const UserLogin = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -13,11 +13,11 @@ const UserLogin = ({ setIsLoggedIn }) => {
 
   return (
     <View style={styles.container}>
-      {/* <WebViewModal
+      <WebViewModal
         modalVisible={modalVisible}
         setModalVisible={() => setModalVisible(false)}
         url={url}
-      /> */}
+      />
       <Text style={styles.header}>Login med din Kino profil</Text>
       {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text>) : null}
       <TextInput 
