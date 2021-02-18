@@ -9,10 +9,11 @@ const UserLogin = ({ setIsLoggedIn }) => {
   const [password, setPassword] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [url, setUrl] = useState("");
-  const { state, signin } = useContext(Context);
+  const { state, signin, clearErrorMessage } = useContext(Context);
 
   return (
     <View style={styles.container}>
+
       <WebViewModal
         modalVisible={modalVisible}
         setModalVisible={() => setModalVisible(false)}

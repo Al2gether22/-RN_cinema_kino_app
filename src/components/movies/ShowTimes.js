@@ -112,7 +112,9 @@ const ShowTimes = ({ id, nextShowtime, movieVersions }) => {
         keyExtractor={(showtime) => showtime.cinema_id}
         data={showtimes}
         extraDate={selectedDate}
-        
+        ItemSeparatorComponent={() => {
+          return (<View style={styles.itemSeperator} />);
+        }}
         // The ListEmptyComponent loads the showtime component with next showtime, the option to update th current date and if it happens the selectedId value is updated in the correct format.
         ListEmptyComponent={
           <NoShowtimes

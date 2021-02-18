@@ -100,6 +100,9 @@ const ShowTimes = ({ id, movieVersions }) => {
           keyExtractor={(index) => index.toString()}
           data={showtimes}
           extraData={selectedDate}
+          ItemSeparatorComponent={() => {
+            return (<View style={styles.itemSeperator} />);
+          }}
           renderItem={({ item }) => (
             <View style={styles.movieShowTimeContainer}>
               {setVersions(item.versions)}

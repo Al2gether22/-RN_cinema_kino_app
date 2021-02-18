@@ -61,6 +61,11 @@ const styles = StyleSheet.create({
     height: 95,
     width: 65,
     borderRadius: 6,
+  },
+  itemSeperator: {
+    backgroundColor: "#676d7c",
+    height: 1,
+    margin: 15
   }
 })
 
