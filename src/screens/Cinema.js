@@ -41,7 +41,12 @@ const Cinema = () => {
             <CinemaMetaData cinema={cinema} />
           </>
         }
-        ListFooterComponent={<ShowTimes id={cinema.nid} />}
+        ListFooterComponent={
+          <ShowTimes 
+            id={cinema.nid} 
+            movieVersions={route.params.versions}
+          />
+        }
       />
     </>
   );

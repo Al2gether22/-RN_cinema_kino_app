@@ -1,9 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, version } from "react";
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image, TouchableHighlight, } from "react-native";
+import _ from "lodash";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DatePicker from "../shared/DatePicker";
 import MovieModal from "../../modals/MovieModal";
 import WebViewModal from "../../modals/WebViewModal"
+import MovieVersionLookup from "../../components/shared/MovieVersionLookup"
 import styles from "../../styles/ShowTimeStyles";
 import moment from "moment";
 import { scrollToIndex } from "../../helpers/datepicker.utils";
@@ -11,7 +13,7 @@ import { scrollToIndex } from "../../helpers/datepicker.utils";
 //We need versions, they are inside item.versions
 const now = moment();
 
-const ShowTimes = (props) => {
+const ShowTimes = ({ id, movieVersions }) => {
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,6 +25,7 @@ const ShowTimes = (props) => {
   // These should be removed after user component is implemented
   const [sessionName, setSessionName] = useState("")  
   const [sessionId, setSessionId] = useState("") 
+  const [versions, setVersions] = useState("")
 
   // Find a way to get user with the fetch user component
   useEffect(() => {
@@ -35,17 +38,31 @@ const ShowTimes = (props) => {
 
   useEffect(() => {
     const url = `https://www.kino.dk/appservices/cinema/${
-      props.id
+      id
     }/${selectedDate.format("YYYY-MM-DD")}`;
     fetch(url, { mode: "no-cors" })
       .then((response) => response.json())
-      .then((json) => setShowtimes(json))
+      .then((json) => {
+        setShowtimes(groupByVersion(json))
+      })
+      
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, [selectedDate]);
 
   if (loading) {
     return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
+  }
+  
+
+  // Groups showtimes by version
+  function groupByVersion(arr1) {
+
+    for (let element of arr1) {
+      element.showtimes = _.groupBy(element.showtimes, "movie_version_id");
+    }
+
+    return arr1;
   }
 
   return (
@@ -63,6 +80,7 @@ const ShowTimes = (props) => {
         cookieName={sessionName}
         cookieValue={sessionId}
       />
+      
 
       <DatePicker
         scrollToIndex={scrollToIndex}
@@ -70,6 +88,7 @@ const ShowTimes = (props) => {
         setSelectedDate={setSelectedDate}
         ref={datePickerRef}
       />
+
       {showtimes.length === 0 ? (
         <View style={styles.noShowtimesContainer}>
           <Text style={styles.sectionHeader}>
@@ -78,10 +97,12 @@ const ShowTimes = (props) => {
         </View>
       ) : (
         <FlatList
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(index) => index.toString()}
           data={showtimes}
+          extraData={selectedDate}
           renderItem={({ item }) => (
             <View style={styles.movieShowTimeContainer}>
+              {setVersions(item.versions)}
               <TouchableHighlight
                 onPress={() => {
                   setMovieModalVisible(true), setMovieId(item.movie_id);
@@ -98,12 +119,23 @@ const ShowTimes = (props) => {
               <View>
                 <Text style={styles.sectionHeader}>{item.danishTitle}</Text>
 
-                <FlatList
-                  keyExtractor={(item) => item.showtime_id.toString()}
-                  data={item.showtimes}
-                  numColumns={3}
-                  renderItem={({ item }) => (
-                    <View style={styles.showTimeContainer}>
+              <FlatList
+              // Here each showtime pr cinema is rendered
+              keyExtractor={(item, index) => index.toString()}
+              data={Object.values(item.showtimes)}
+              //data={Object.entries(item.showtimes)}?
+              numColumns={1}
+              renderItem={({ item }) => (
+                <View style={styles.showTimeContainer}>
+                  <Text style={styles.showtimeVersionLabel}>
+                    {Object(versions[item[0].movie_version_id])["version_name"]}    
+                  </Text>
+                  <FlatList
+                    //keyExtractor={(item) => item.showtimes.id}
+                    keyExtractor={(item, index) => index.toString()}
+                    data={Object.values(item)}
+                    numColumns={4}
+                    renderItem={({ item }) => (
                       <TouchableOpacity
                         onPress={() => [
                           setModalVisible(true),
@@ -115,9 +147,11 @@ const ShowTimes = (props) => {
                           {item.start_time.slice(11, 16)}
                         </Text>
                       </TouchableOpacity>
-                    </View>
-                  )}
-                />
+                    )}
+                  />
+                </View>
+              )}
+            />
               </View>
             </View>
           )}

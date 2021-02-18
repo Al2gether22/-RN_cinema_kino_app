@@ -32,7 +32,6 @@ const PurchaseHistory = ({ user }) => {
       .finally(() => setLoading(false));
   }, []);
 
-  console.log(userHistoryData)
 
   if (loading) {
     return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;

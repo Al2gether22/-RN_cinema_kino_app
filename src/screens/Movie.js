@@ -25,7 +25,6 @@ const Movie = () => {
   if (loading) {
     return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
   }
-
    
     return (
       // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view

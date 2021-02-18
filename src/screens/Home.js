@@ -137,6 +137,7 @@ const Home = () => {
   useEffect(() => {
     getMovies();
     getVersions();
+    
     console.log("Get movies called")
   }, []);
 
