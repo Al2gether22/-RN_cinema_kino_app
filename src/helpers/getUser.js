@@ -12,9 +12,9 @@ const getUser = () => {
         const userObject = await AsyncStorage.getItem('user')
 
         if(userObject !== null) {
-  
-          setUser(userObject)
-          
+
+        setUser(userObject)
+
         } else {
           setUser("")
         }

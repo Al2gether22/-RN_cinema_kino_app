@@ -6,7 +6,7 @@ import Profile from "../components/users/Profile";
 
 const User = () => {
 
-  const user = getUser();
+  const user = getUser()
   
   return (
     <View style={styles.container}>
