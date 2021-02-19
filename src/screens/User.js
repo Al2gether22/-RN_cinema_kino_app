@@ -1,20 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native"
-import { Context } from "../context/AuthContext";
-
+import getUser from "../helpers/getUser";
 import UserLogin from "../components/users/UserLogin";
 import Profile from "../components/users/Profile";
 
 const User = () => {
+
+  const user = getUser();
   
-  const { state } = useContext(Context);
-  console.log(`user - ${state.user}`)
   return (
     <View style={styles.container}>
       { 
-        state.user === null ? 
-        <UserLogin /> :  
-        <Profile user={state.user} />
+        user ? <Profile user={user} /> : <UserLogin />  
       }
     </View>
   )

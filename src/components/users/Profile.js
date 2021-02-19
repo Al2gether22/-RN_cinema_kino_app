@@ -92,7 +92,7 @@ const Profile = ({ user }) => {
           <Text style={styles.buttonText}>Log ud</Text>
         </TouchableOpacity>
       </View>
-      <PurchaseHistory user={user} />
+      {/* <PurchaseHistory user={user} /> */}
     </View>
   );
 };

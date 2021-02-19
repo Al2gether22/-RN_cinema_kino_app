@@ -4,21 +4,18 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 import Geolocation from '@react-native-community/geolocation';
 import { Context as CinemaContext } from "../context/CinemaContext";
-import { Context as MovieContext } from "../context/MoviesContext";
 import UserInfoModal from "../modals/UserInfoModal"
 
 
 const Home = () => {
 
-  const { state, updateCinemas, getCinemas } = useContext(CinemaContext)
-  const { getMovies, getVersions } = useContext(MovieContext)
+  const { state, updateCinemas } = useContext(CinemaContext)
   const navigation = useNavigation();
   const [currentLongitude, setCurrentLongitude] = useState('...');
   const [currentLatitude, setCurrentLatitude] = useState('...');
   const [locationStatus, setLocationStatus] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [geo, setGeo] = useState(false)
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const modalVisibility = async () => {
