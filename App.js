@@ -5,6 +5,7 @@ import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
 import { Provider as MovieProvider } from "./src/context/MoviesContext";
 import { Provider as CinemaProvider } from "./src/context/CinemaContext";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
+import FetchData from "./src/components/shared/FetchData"
 
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
       <MovieProvider>
         <AuthProvider>
           <StatusBar barStyle="light-content" />
+          <FetchData />
           <BottomTabNavigator />
         </AuthProvider>
       </MovieProvider>

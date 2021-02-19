@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity, Modal, StyleSheet } from "react-native";
 
 
-const UserInfoModal = ({ modalVisible, setModalVisible }) => {
+const UserInfoModal = ({ modalVisible, setModalVisible, setGeo }) => {
 
   return (
     <Modal 
@@ -26,6 +26,7 @@ const UserInfoModal = ({ modalVisible, setModalVisible }) => {
           <TouchableOpacity
             onPress={() => {
               setModalVisible(false);
+              setGeo(true)
             }}
           >
             <View style={styles.modalOkButtonContainer} >

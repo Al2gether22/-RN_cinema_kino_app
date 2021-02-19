@@ -3,33 +3,22 @@ import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet, Platform, 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 import Geolocation from '@react-native-community/geolocation';
-import { Context as MovieContext } from "../context/MoviesContext"
 import { Context as CinemaContext } from "../context/CinemaContext";
+import { Context as MovieContext } from "../context/MoviesContext";
 import UserInfoModal from "../modals/UserInfoModal"
 
 
 const Home = () => {
 
-  const { getMovies, getVersions } = useContext(MovieContext)
   const { state, updateCinemas, getCinemas } = useContext(CinemaContext)
+  const { getMovies, getVersions } = useContext(MovieContext)
   const navigation = useNavigation();
   const [currentLongitude, setCurrentLongitude] = useState('...');
   const [currentLatitude, setCurrentLatitude] = useState('...');
   const [locationStatus, setLocationStatus] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [geo, setGeo] = useState(false)
   const [loading, setLoading] = useState(true)
-
-  // Get user in auth 
-  // Get cinemas movies app state
-  // set modal visibility in async storage
-
-  // Check async storage if popup has been seen
-  // Show modal if he didnt say either of the 2
-  // Once clicked ok change status to false
-  // Run useEffect hook for coords if modalVisibility is false
-  // Then request user permissin
-  // Then fetch user location
-  // Then update cinemas with coords
 
   useEffect(() => {
     const modalVisibility = async () => {
@@ -38,11 +27,11 @@ const Home = () => {
 
         if(value !== null) {
           setModalVisible(false)
-          setLoading(false)
+          setGeo(true)
         } else {
           setModalVisible(true)
           await AsyncStorage.setItem('informationModal', "false")
-          setLoading(false)
+          
         }
       } catch(e) {
         // error reading value
@@ -50,24 +39,19 @@ const Home = () => {
     }
     
     modalVisibility();
-  }, [modalVisible])
-
-
-
-  // Check async storage for popup value
-  // change loading state 
-  // render requestlocation
+  }, [])
 
   useEffect(() => {
     updateCinemas(state.cinemas, currentLatitude, currentLongitude)
-  }, [modalVisible])
+  }, [state.cinemas.length && currentLatitude])
 
-
+  
+  
   useEffect(() => {
+    if (!geo) return;
     const requestLocationPermission = async () => {
       if (Platform.OS === 'ios') {
         getOneTimeLocation();
-      //  subscribeLocationLocation();
       } else {
         try {
           const granted = await PermissionsAndroid.request(
@@ -80,7 +64,6 @@ const Home = () => {
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             //To Check, If Permission is granted
             getOneTimeLocation();
-          //  subscribeLocationLocation();
           } else {
             setLocationStatus('Permission Denied');
           }
@@ -90,9 +73,9 @@ const Home = () => {
       }
     };
     requestLocationPermission();
+  }, [geo]);
 
-  }, []);
-  // Set modal const inside [] to invoke this on "ok"
+  
 
   const getOneTimeLocation = () => {
     setLocationStatus('Getting Location ...');
@@ -115,6 +98,7 @@ const Home = () => {
         //Setting Longitude state
         setCurrentLatitude(currentLatitude);
       },
+      
       (error) => {
         setLocationStatus(error.message);
       },
@@ -126,56 +110,6 @@ const Home = () => {
     );
   };
 
-  // const subscribeLocationLocation = () => {
-  //   watchID = Geolocation.watchPosition(
-  //     (position) => {
-  //       //Will give you the location on location change
-        
-  //       setLocationStatus('You are Here');
-  //       console.log(position);
-
-  //       //getting the Longitude from the location json        
-  //       const currentLongitude =
-  //         JSON.stringify(position.coords.longitude);
-
-  //       //getting the Latitude from the location json
-  //       const currentLatitude = 
-  //         JSON.stringify(position.coords.latitude);
-
-  //       //Setting Longitude state
-  //       setCurrentLongitude(currentLongitude);
-
-  //       //Setting Latitude state
-  //       setCurrentLatitude(currentLatitude);
-  //     },
-  //     (error) => {
-  //       setLocationStatus(error.message);
-  //     },
-  //     {
-  //       enableHighAccuracy: false,
-  //       maximumAge: 1000
-  //     },
-  //   );
-  // };
-
-  // Fetch cinemas, if not fetched
-  // Call the getUserCoordinates and updated cinema array with distance parameter based on user coords
-  useEffect(() => {
-    if (state.cinemas.length === 0) {
-      getCinemas();
-      console.log("Get Cinemas called")
-    }
-    
-  }, []);
-  
-  // Fetches the movies
-  useEffect(() => {
-    getMovies();
-    getVersions();
-    
-    console.log("Get movies called")
-  }, []);
-
   if (state.cinemas.length === 0) {
     return <ActivityIndicator size="large" style={{ marginTop: 200 }} />
   }
@@ -185,6 +119,7 @@ const Home = () => {
       <UserInfoModal
         modalVisible={modalVisible}
         setModalVisible={() => setModalVisible(false)}
+        setGeo={() => setGeo(true)}
       />
       <View style={styles.container} >
         <TouchableOpacity
