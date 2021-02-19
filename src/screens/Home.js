@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet, Platform, PermissionsAndroid } from "react-native"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 import Geolocation from '@react-native-community/geolocation';
 import { Context as MovieContext } from "../context/MoviesContext"
 import { Context as CinemaContext } from "../context/CinemaContext";
 import UserInfoModal from "../modals/UserInfoModal"
+
 
 const Home = () => {
 
@@ -14,14 +16,47 @@ const Home = () => {
   const [currentLongitude, setCurrentLongitude] = useState('...');
   const [currentLatitude, setCurrentLatitude] = useState('...');
   const [locationStatus, setLocationStatus] = useState('');
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true)
 
-  // Check if the user allowed/disallowed geo 
+  // Get user in auth 
+  // Get cinemas movies app state
+  // set modal visibility in async storage
+
+  // Check async storage if popup has been seen
   // Show modal if he didnt say either of the 2
   // Once clicked ok change status to false
+  // Run useEffect hook for coords if modalVisibility is false
   // Then request user permissin
   // Then fetch user location
   // Then update cinemas with coords
+
+  useEffect(() => {
+    const modalVisibility = async () => {
+      try {
+        const value = await AsyncStorage.getItem('informationModal')
+
+        if(value !== null) {
+          setModalVisible(false)
+          setLoading(false)
+        } else {
+          setModalVisible(true)
+          await AsyncStorage.setItem('informationModal', "false")
+          setLoading(false)
+        }
+      } catch(e) {
+        // error reading value
+      }
+    }
+    
+    modalVisibility();
+  }, [modalVisible])
+
+
+
+  // Check async storage for popup value
+  // change loading state 
+  // render requestlocation
 
   useEffect(() => {
     updateCinemas(state.cinemas, currentLatitude, currentLongitude)

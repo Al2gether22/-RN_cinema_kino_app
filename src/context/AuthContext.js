@@ -36,7 +36,7 @@ const signin = (dispatch) => async ({ username, password }) => {
       }),
     });
     const json = await response.json();
-    
+   
     // This needs to add an error message if login did not happen otherwise setItem user
     if (json.status) {
       dispatch({

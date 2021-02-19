@@ -4,7 +4,7 @@ import { Context } from "../../context/AuthContext"
 
 import WebViewModal from "../../modals/WebViewModal"
 
-const UserLogin = ({ setIsLoggedIn }) => {
+const UserLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
@@ -53,7 +53,7 @@ const UserLogin = ({ setIsLoggedIn }) => {
       <TouchableOpacity
       onPress={() => {
         signin({ username, password });
-        setIsLoggedIn(true)
+       
         } 
       }
       >
@@ -152,5 +152,3 @@ const styles = StyleSheet.create({
 })
 
 export default UserLogin;
-
-

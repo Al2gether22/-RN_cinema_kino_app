@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     
   },
+  // Checkout the option to resize mode to 'contain' and size for image
   coverImage: {
     aspectRatio: 1,
   },

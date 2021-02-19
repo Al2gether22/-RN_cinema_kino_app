@@ -8,7 +8,7 @@ import WebViewModal from "../../modals/WebViewModal"
 import PurchaseHistory from "./PurchaseHistory"
 
 
-const Profile = ({ user, setIsLoggedIn }) => {
+const Profile = ({ user }) => {
   const { signout } = useContext(Context);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({});
@@ -30,7 +30,14 @@ const Profile = ({ user, setIsLoggedIn }) => {
     })
       .then((response) => response.json())
       .then((json) => {
-        setUserData(json);
+        if (json === "false" ) {
+          console.log("fejl")
+          // Slet bruger fra async storage og state
+          // Samme funktion til purchase history
+        } else {
+          setUserData(json);
+        }
+        
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
@@ -79,7 +86,7 @@ const Profile = ({ user, setIsLoggedIn }) => {
           style={styles.button}
           onPress={() => {
             signout();
-            setIsLoggedIn(false);
+            
           }}
         >
           <Text style={styles.buttonText}>Log ud</Text>
