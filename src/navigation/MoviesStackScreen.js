@@ -1,14 +1,17 @@
 import React from "react";
-import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack";
+import { HeaderBackButton } from "@react-navigation/stack";
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 import Movies from "../screens/Movies";
 import Movie from "../screens/Movie";
 
-const Stack = createStackNavigator();
+const Stack = createSharedElementStackNavigator();
 
 export default function MoviesStackScreen({ navigation }){
+
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator >
       <Stack.Screen name="Movies" component={Movies} 
         options={{
           title: "Film",
@@ -33,9 +36,12 @@ export default function MoviesStackScreen({ navigation }){
             fontFamily: "SourceSansPro-Bold", 
           }
         }}
+ 
+      
       />
 
       <Stack.Screen name="Movie" component={Movie}
+        //options={() => options}
         options={({ route }) => ({ 
           title: route.params.name,
           headerBackTitle: "Tilbage",
@@ -55,6 +61,13 @@ export default function MoviesStackScreen({ navigation }){
             color: "#fffdfd",
             fontFamily: "SourceSansPro-Bold"
           }, 
+          cardStyleInterpolator: ({ current: { progress } }) => {
+            return {
+              cardStyle: {
+                opacity: progress
+              }
+            };
+          }
         })}
       />
     </Stack.Navigator>

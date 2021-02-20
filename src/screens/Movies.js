@@ -2,8 +2,9 @@ import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import _ from "lodash";
 import { Context } from "../context/MoviesContext"
-import { View, Text, FlatList, TouchableOpacity, Image } from "react-native"
+import { View, Text, FlatList, Image } from "react-native"
 import TouchableScale from 'react-native-touchable-scale';
+import { SharedElement } from 'react-navigation-shared-element';
 import styles from "../styles/MoviesStyles"
 import PremiereDate from "../components/movies/PremiereDate";
 import SearchFilterFunction from "../components/shared/SearchFilterFunction"
@@ -16,16 +17,7 @@ const Movies = () => {
   );
   const currentDate = new Date();
    
-  function Item({
-    title,
-    danishTitle,
-    oneliner,
-    imageUrl,
-    id,
-    next_showtime,
-    versions,
-    danishPremiere,
-  }) {
+  function Item(item) {
 
     // Formatting date to compare it to date today
 
@@ -49,22 +41,22 @@ const Movies = () => {
         style={styles.card}
         onPress={() =>
           navigation.navigate("Movie", { 
-              id,
-              next_showtime,
-              versions,
-              name: danishTitle,            
+              item       
           })
-        
         }
       >
-        <Image style={styles.coverImage} source={{ uri: imageUrl }}></Image>
+        <SharedElement id={item.imageUrl}>
+          <Image style={styles.coverImage} source={{ uri: item.imageUrl }} />
+        </SharedElement>
         
-        {parsedDate(danishPremiere) > currentDate && (
-          <PremiereDate PremiereDate={danishPremiere} />
+        {parsedDate(item.danishPremiere) > currentDate && (
+          <PremiereDate PremiereDate={item.danishPremiere} />
         )}
-
-        <Text style={styles.cardTitle}>{title ? title : danishTitle}</Text>
-        <Text style={styles.oneliner}>{oneliner}</Text>
+        <SharedElement id={item.danishTitle}>
+          <Text style={styles.cardTitle}>{item.title ? item.title : item.danishTitle}</Text>
+        </SharedElement>
+        
+        <Text style={styles.oneliner}>{item.oneliner}</Text>
       </TouchableScale>
     );
   }
@@ -87,5 +79,6 @@ const Movies = () => {
     </View>
   );
 };
+
 
 export default Movies;

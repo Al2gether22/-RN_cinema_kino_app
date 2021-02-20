@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
   },
   // Checkout the option to resize mode to 'contain' and size for image
   coverImage: {
-    aspectRatio: 1,
+    width: "100%",
+    aspectRatio: 1
   },
   
   playButtomViewWrapper: {

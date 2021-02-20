@@ -2,35 +2,41 @@ import React, { useState } from "react";
 import { View, ImageBackground, Text, TouchableOpacity } from "react-native"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
-
+import {SharedElement} from 'react-navigation-shared-element';
 import MovieTrailerModal from "../../modals/MovieTrailerModal"
 import styles from "../../styles/MovieBackgroundImageStyles";
 
-const MovieBackgroundImage = ({ movie }) => {
+
+const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
   const [modalVisible, setModalVisible] = useState(false)
-  
+
   return (
+      
     <View style={styles.imageContainer}>
-      
-      
-      <ImageBackground 
-        style={styles.coverImage}
-        source={{ uri: movie.imageUrl }}
-      >
+    
+      <SharedElement id={image}>
+        <ImageBackground 
+          style={styles.coverImage}
+          source={{ uri: image }}
+          resizeMethod="auto"
+          resizeMode="cover"
+          //resizeMode="contain"
+        >
+            <LinearGradient 
+              colors={['rgba(29,29,39,1)', 'rgba(29,29,39,0)']} 
+              
+              style={styles.LinearGradientUpper}
+            />
 
-      <LinearGradient 
-        colors={['rgba(29,29,39,1)', 'rgba(29,29,39,0)']} 
+            <LinearGradient 
+              colors={['rgba(29,29,39,0)', 'rgba(29,29,39,1)']} 
+              
+              style={styles.LinearGradientLower}
+            />
+          
         
-        style={styles.LinearGradientUpper}
-      />
-
-      <LinearGradient 
-        colors={['rgba(29,29,39,0)', 'rgba(29,29,39,1)']} 
-        
-        style={styles.LinearGradientLower}
-      />
-      </ImageBackground>
-
+        </ImageBackground>
+      </SharedElement>
 
       { !!movie.video_markup &&
         
@@ -54,14 +60,20 @@ const MovieBackgroundImage = ({ movie }) => {
           </TouchableOpacity>
         }
       
-      <Text 
-        style={styles.movieTitle} numberOfLines={3}>{movie.danishTitle}
-      </Text>
+      <SharedElement id={danishTitle}>
+        <Text 
+          style={styles.movieTitle} numberOfLines={3}>{danishTitle}
+        </Text>
+      </SharedElement>
+      
       <Text style={styles.movieGenre} numberOfLines={2}>
-        {movie.genre.join(' - ')} {"\n"}Varighed {movie.playingTime} min
+        {genre.join(' - ')} {"\n"}Varighed {movie.playingTime} min
       </Text>
     </View>
+    
   )
 }
+
+
 
 export default MovieBackgroundImage

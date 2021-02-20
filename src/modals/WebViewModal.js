@@ -21,9 +21,9 @@ const WebViewModal = ({ modalVisible, setModalVisible, url, cookieName, cookieVa
       secure: true,
       httpOnly: true,
     }).then((done) => {
-      //console.log('CookieManager.set =>', setHasSetCookies(true));
+      console.log('CookieManager.set =>', setHasSetCookies(true));
       CookieManager.getAll().then((cookies) => {
-        //console.log('CookieManager.getAll =>', cookies);
+        console.log('CookieManager.getAll =>', cookies);
       });
     });
   }, []);
