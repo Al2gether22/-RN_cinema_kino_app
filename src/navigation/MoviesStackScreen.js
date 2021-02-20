@@ -43,7 +43,8 @@ export default function MoviesStackScreen({ navigation }){
       <Stack.Screen name="Movie" component={Movie}
         //options={() => options}
         options={({ route }) => ({ 
-          title: route.params.name,
+          
+          title: route.params.item.title,
           headerBackTitle: "Tilbage",
           navigationOptions: ({ navigation }) => ({
             headerLeft: (<HeaderBackButton onPress={_ => navigation.navigate("Movies")}/>)

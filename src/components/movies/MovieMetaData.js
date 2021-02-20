@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native"
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Foundation from "react-native-vector-icons/Foundation"
+import * as Animatable from 'react-native-animatable';
 import ReadMore from "react-native-read-more-text";
 
 import styles from "../../styles/MovieMetaDataStyles";
@@ -36,7 +37,9 @@ const MovieMetaData = ({ movie }) => {
 
   return (
  
-    <View style={styles.metaDataContainer}>
+    <Animatable.View style={styles.metaDataContainer} animation='fadeIn'
+    duration={600}
+    delay={300}>
       <View style={styles.movieMetaData}>
         <Text style={styles.movieCensur}>Censur: {movie.censorship.name}</Text>
         <View style={styles.movieRating}> 
@@ -62,7 +65,7 @@ const MovieMetaData = ({ movie }) => {
           <Text style={styles.movieBody}>{movieDescription}</Text>
         </ReadMore>
     </View>
-  </View>
+  </Animatable.View>
    
   )
 }

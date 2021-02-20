@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar, FlatList, ActivityIndicator } from "react-native"
+import { StatusBar, FlatList } from "react-native"
 
 import MovieBackgroundImage from "../components/movies/MovieBackgroundImage"
 import MovieMetaData from "../components/movies/MovieMetaData"
@@ -41,6 +41,7 @@ const Movie = ({ route }) => {
             </>
           }
           ListFooterComponent={
+             loading ? null : 
             <ShowTimes
               id={movie.nid}
               movieVersions={item.versions}
@@ -63,7 +64,7 @@ Movie.sharedElements = route => {
   return [
     {
       id: item.imageUrl,
-      animation: "move",
+      animation: "fade",
       resize: "clip", 
       align: "auto"
     }, 
