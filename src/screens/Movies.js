@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import _ from "lodash";
 import { Context } from "../context/MoviesContext"
 import { View, Text, FlatList, TouchableOpacity, Image } from "react-native"
+import TouchableScale from 'react-native-touchable-scale';
 import styles from "../styles/MoviesStyles"
 import PremiereDate from "../components/movies/PremiereDate";
 import SearchFilterFunction from "../components/shared/SearchFilterFunction"
@@ -39,7 +40,12 @@ const Movies = () => {
     };
 
     return (
-      <TouchableOpacity
+      <TouchableScale
+        style={styles.card}
+        activeScale={0.9}
+        tension={50}
+        friction={7}
+        useNativeDriver
         style={styles.card}
         onPress={() =>
           navigation.navigate("Movie", { 
@@ -53,16 +59,13 @@ const Movies = () => {
       >
         <Image style={styles.coverImage} source={{ uri: imageUrl }}></Image>
         
-
-
-
         {parsedDate(danishPremiere) > currentDate && (
           <PremiereDate PremiereDate={danishPremiere} />
         )}
 
         <Text style={styles.cardTitle}>{title ? title : danishTitle}</Text>
         <Text style={styles.oneliner}>{oneliner}</Text>
-      </TouchableOpacity>
+      </TouchableScale>
     );
   }
   
