@@ -9,6 +9,8 @@ import styles from "../../styles/MovieBackgroundImageStyles";
 
 const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
   const [modalVisible, setModalVisible] = useState(false)
+  const genreFallback = genre ? genre : movie.genre
+  const imageFallback = image ? image : movie.imageUrl
 
   return (
       
@@ -17,7 +19,7 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
       <SharedElement id={image}>
         <ImageBackground 
           style={styles.coverImage}
-          source={{ uri: image }}
+          source={{ uri: imageFallback }}
           resizeMethod="auto"
           resizeMode="cover"
           //resizeMode="contain"
@@ -67,7 +69,7 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
       </SharedElement>
       
       <Text style={styles.movieGenre} numberOfLines={2}>
-        {genre.join(' - ')} {"\n"}Varighed {movie.playingTime} min
+        {genreFallback.join(' - ')} {"\n"}Varighed {movie.playingTime} min
       </Text>
     </View>
     
