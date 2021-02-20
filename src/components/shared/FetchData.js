@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
-import { AppState, Text, View } from "react-native";
+import { AppState } from "react-native";
+import getUser from "../../helpers/getUser"
 import { Context as MovieContext } from "../../context/MoviesContext"
 import { Context as CinemaContext } from "../../context/CinemaContext";
 
@@ -17,6 +18,7 @@ const FetchData = () => {
     
     getMovies();
     getVersions();
+    
 
     AppState.addEventListener("change", _handleAppStateChange);
 
@@ -38,7 +40,7 @@ const FetchData = () => {
 
         getMovies();
         getVersions();
-     
+        getUser();
     }
 
     appState.current = nextAppState;

@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native"
 import getUser from "../helpers/getUser";
+import { Context } from "../context/AuthContext"
+
 import UserLogin from "../components/users/UserLogin";
 import Profile from "../components/users/Profile";
 
 const User = () => {
-
-  const user = getUser()
+  const { user } = useContext(Context)
   
   return (
     <View style={styles.container}>
