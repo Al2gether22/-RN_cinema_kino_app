@@ -32,7 +32,7 @@ const UserLogin = () => {
         url={url}
       />
       <Text style={styles.header}>Login med din Kino profil</Text>
-      <Text style={styles.errorMessage}>{state.errorMessage ? state.errorMessage : null}</Text>
+      <Text style={styles.errorMessage}>{state.errorMessage ? state.errorMessage : " "}</Text>
       <TextInput 
         style={isFocused.email ? [styles.inputField, { borderColor: 'white' }] : styles.inputField}
         placeholder={"Email"}
