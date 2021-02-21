@@ -9,9 +9,11 @@ const User = () => {
   const { state } = useContext(Context)
 
   useEffect(() => {
-    
+   
   }, [state])
-  
+
+
+
   return (
     <View style={styles.container}>
       { 

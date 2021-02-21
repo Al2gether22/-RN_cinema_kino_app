@@ -4,14 +4,14 @@ import qs from "qs";
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case "add_error":
-      return { ...state, errorMessage: action.payload };
     case "signin":
-      return { ...state, errorMessage: "", user: action.payload };
+      return { errorMessage: "", user: action.payload };
     case "signout":
       return { user: null, errorMessage: ''}
     case "clear_error_message":
       return { ...state, errorMessage: ''}
+    case "add_error":
+      return { ...state, errorMessage: action.payload };
     default:
       return state;
   }
