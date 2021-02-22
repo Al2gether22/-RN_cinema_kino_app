@@ -4,12 +4,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 import Geolocation from '@react-native-community/geolocation';
 import { Context as CinemaContext } from "../context/CinemaContext";
+import { Context as AuthContext } from "../context/AuthContext";
 import UserInfoModal from "../modals/UserInfoModal"
 
 
 const Home = () => {
 
   const { state, updateCinemas } = useContext(CinemaContext)
+  const { state: { user } } = useContext(AuthContext)
   const navigation = useNavigation();
   const [currentLongitude, setCurrentLongitude] = useState('...');
   const [currentLatitude, setCurrentLatitude] = useState('...');
@@ -145,7 +147,7 @@ const Home = () => {
           }}
         >
           <View style={styles.button}>
-            <Text style={styles.buttonText}>Profil</Text>  
+            <Text style={styles.buttonText}>{ user ? "Profil" : "Login" }</Text>  
           </View>  
         </TouchableOpacity>
       </View>

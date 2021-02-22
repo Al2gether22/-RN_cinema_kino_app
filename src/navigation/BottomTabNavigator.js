@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -15,23 +15,25 @@ export default function BottomTabNavigator() {
 
   const { state } = useContext(Context)
 
+  // Need to check if user is logged in.  If he is logged in show Green Tab icon and label "Profil"
+  // If not logged in, show red icon and label "Log In"
+
   return (
     <NavigationContainer>
       <Tab.Navigator
+        initialRouteName="Hjem"
         screenOptions={({ route }) => ({
+          
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             
-            if (route.name === "Kino.dk") {
+            if (route.name === "Hjem") {
               iconName = focused ? "home" : "home-outline";
             } else if (route.name === "Film") {
               iconName = focused ? "ticket" : "ticket-outline"
             } else if (route.name === "Biografer") {
               iconName = focused ? "movie" : "movie-outline"
-            } else if (route.name === "Profil") {
-              // check to see if logged in
-              state.user ? iconName = focused ? "account" : "account-outline" : iconName = focused ? "account" : "account-outline" ;
-            }
+            } 
             return (
               <MaterialCommunityIcons
                 name={iconName}
@@ -54,10 +56,26 @@ export default function BottomTabNavigator() {
           style: styles.container
         }}
       >
-        <Tab.Screen name="Kino.dk" component={HomeStackScreen} />
+        <Tab.Screen name="Hjem" component={HomeStackScreen} />
         <Tab.Screen name="Film" component={MoviesStackScreen} />
         <Tab.Screen name="Biografer" component={CinemasStackScreen} />
-        <Tab.Screen name="Profil" component={UserStackScreen} />
+        <Tab.Screen name="Profil" component={UserStackScreen} 
+          options={{ 
+            tabBarLabel: state.user ? "Profil" : "Log ind", 
+            tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            // check to see if logged in
+            iconName = focused ? "account" : "account-outline"
+            state.user ? color="green" : color="red"
+    
+            return (
+              <MaterialCommunityIcons
+                name={iconName}
+                size={size}
+                color={color}
+              />
+            )
+          },}} />
       </Tab.Navigator>
     </NavigationContainer>
   )
