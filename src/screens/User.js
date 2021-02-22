@@ -5,12 +5,20 @@ import { Context } from "../context/AuthContext"
 import UserLogin from "../components/users/UserLogin";
 import Profile from "../components/users/Profile";
 
-const User = () => {
-  const { state } = useContext(Context)
+const User = ({ navigation }) => {
+  const { state, clearErrorMessage } = useContext(Context)
 
   useEffect(() => {
    
   }, [state])
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      clearErrorMessage()
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
 
 

@@ -53,7 +53,6 @@ const Movie = ({ route }) => {
     );
   }
 
-
 Movie.defaultProps = {
   average_rating: "0",
 };

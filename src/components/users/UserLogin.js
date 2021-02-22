@@ -67,9 +67,9 @@ const UserLogin = () => {
       />
       <TouchableOpacity
       onPress={() => {
-        signin({ username, password });
+        signin({ username, password });  
         setUsername("");
-        
+        setPassword("");      
         } 
       }
       >
