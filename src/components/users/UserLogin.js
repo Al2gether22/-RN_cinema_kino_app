@@ -69,7 +69,9 @@ const UserLogin = () => {
       onPress={() => {
         signin({ username, password });  
         setUsername("");
-        setPassword("");      
+        setPassword("");  
+        // check if sign in successfully -> Flip anition -> if user -> flip animation
+        // if not -> shake animation -> if state.errormessage -> shake animation
         } 
       }
       >
