@@ -121,7 +121,7 @@ const Home = () => {
       <View style={styles.container} >
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Movies');
+            navigation.navigate('Film');
           }}
         >
           <View style={styles.button}>
@@ -131,7 +131,7 @@ const Home = () => {
 
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Cinemas');
+            navigation.navigate('Biografer');
           }}
         >
           <View style={styles.button}>
@@ -141,7 +141,7 @@ const Home = () => {
 
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Profile');
+            navigation.navigate('Profil');
           }}
         >
           <View style={styles.button}>

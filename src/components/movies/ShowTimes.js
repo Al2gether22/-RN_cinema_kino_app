@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Context } from "../../context/CinemaContext";
+import { Context as CinemaContext } from "../../context/CinemaContext";
+import { Context as AuthContext } from "../../context/AuthContext"
 import WebViewModal from "../../modals/WebViewModal";
 import DatePicker from "../shared/DatePicker"
 import NoShowtimes from "../movies/NoShowtimes";
@@ -23,16 +23,12 @@ const ShowTimes = ({ id, nextShowtime, movieVersions }) => {
   const [selectedDate, setSelectedDate] = useState(monthOfDates[0]);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const { state } = useContext(Context);
+  const { state } = useContext(CinemaContext);
+  const { state: { user } } = useContext(AuthContext)
 
   // Find a way to get user with the fetch user component
   useEffect(() => {
-    AsyncStorage.getItem("user").then((value) => {
-      const userJson = JSON.parse(value);
-      setSessionName(userJson.session_name);
-      setSessionId(userJson.session_id);
-      setLoading(false);
-    });
+    user ? setSessionId(JSON.parse(user).session_id) && setSessionName(JSON.parse(user).session_name) : null
   }, []);
 
   useEffect(() => {
