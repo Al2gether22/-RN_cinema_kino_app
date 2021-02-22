@@ -25,10 +25,9 @@ const ShowTimes = ({ id }) => {
   const [sessionId, setSessionId] = useState("") 
   const [versions, setVersions] = useState("")
   const { state } = useContext(AuthContext)
-  const userObject = JSON.parse(state.user);
 
   useEffect(() => {
-    state.user ? setSessionId(userObject.session_id) && setSessionName(userObject.session_name) : null
+    state.user ? setSessionId(JSON.parse(state.user).session_id) && setSessionName(JSON.parse(state.user).session_name) : null
   }, []);
 
 
