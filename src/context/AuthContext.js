@@ -4,14 +4,14 @@ import qs from "qs";
 
 const authReducer = (state, action) => {
   switch (action.type) {
+    case "signin":
+      return { errorMessage: "", user: action.payload };
+    case "signout":
+      return { errorMessage: "", user: null };
+    case "clear_error_message":
+      return { ...state, errorMessage: ""};
     case "add_error":
       return { ...state, errorMessage: action.payload };
-    case "signin":
-      return { ...state, errorMessage: "", user: action.payload };
-    case "signout":
-      return { user: null, errorMessage: ''}
-    case "clear_error_message":
-      return { ...state, errorMessage: ''}
     default:
       return state;
   }
@@ -61,8 +61,44 @@ const signout = dispatch => async () => {
   dispatch({ type: 'signout' })
 }
 
+
+const tryLocalSignin = dispatch => async () => {
+  const userObject = await AsyncStorage.getItem('user')
+  if (userObject) {
+    const userObjectParsed = JSON.parse(userObject)
+
+      const url = "https://www.kino.dk/appservices/account";
+      fetch(url, {
+        method: "GET",
+        mode: "no-cors",
+        credentials: "omit",
+  
+        headers: {
+          cookie: `${userObjectParsed.session_name}=${userObjectParsed.session_id}`,
+        },
+      })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json === "false" ) {
+          // delete user and and update state
+          console.log("invalid token, deleting user")
+          AsyncStorage.removeItem('user')
+          dispatch({ type: 'signout' })
+        } else {
+          // If response returns data then user is valid and logged in
+          // remember to update state so user can be fetched from auth context
+          console.log("token is valid, update state with user")
+          dispatch({ type: 'signin', payload: userObject })
+        }
+      })
+  } else {
+    console.log("bruger findes ikke i async")
+    return false
+  }
+}
+
 export const { Provider, Context } = dataContext(
   authReducer,
-  { signin, signout, clearErrorMessage },
+  { signin, signout, clearErrorMessage, tryLocalSignin },
   { user: null, errorMessage: "" }
 );

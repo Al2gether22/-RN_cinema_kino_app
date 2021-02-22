@@ -8,8 +8,20 @@ const UserLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [isFocused, setIsFocused] = useState({email: false, password: false})
   const [url, setUrl] = useState("");
   const { state, signin, clearErrorMessage } = useContext(Context);
+
+  const handleInputFocus = (textinput) => {
+    setIsFocused({
+      [textinput]: true
+    })
+  }
+  const handleInputBlur = (textinput) => {
+    setIsFocused({
+      [textinput]: false
+    })
+  }
 
   return (
     <View style={styles.container}>
@@ -20,9 +32,9 @@ const UserLogin = () => {
         url={url}
       />
       <Text style={styles.header}>Login med din Kino profil</Text>
-      {state.errorMessage ? (<Text style={styles.errorMessage}>{state.errorMessage}</Text>) : null}
+      <Text style={styles.errorMessage}>{state.errorMessage ? state.errorMessage : " "}</Text>
       <TextInput 
-        style={styles.inputField}
+        style={isFocused.email ? [styles.inputField, { borderColor: 'white' }] : styles.inputField}
         placeholder={"Email"}
         placeholderTextColor="#676d7c"
         color="#676d7c"
@@ -34,11 +46,12 @@ const UserLogin = () => {
         blurOnSubmit={true}
         keyboardType={"email-address"}
         textContentType={"emailAddress"}
-        
+        onFocus={() => handleInputFocus('email')}
+        onBlur={() => handleInputBlur('email')}
       />
       <TextInput 
         secureTextEntry
-        style={styles.inputField}
+        style={isFocused.password ? [styles.inputField, { borderColor: 'white' }] : styles.inputField}
         placeholder={"Password"}
         placeholderTextColor="#676d7c"
         color="#676d7c"
@@ -49,11 +62,14 @@ const UserLogin = () => {
         autoCorrect={false}
         blurOnSubmit={true}
         textContentType={"password"}
+        onFocus={() => handleInputFocus('password')}
+        onBlur={() => handleInputBlur('password')}
       />
       <TouchableOpacity
       onPress={() => {
-        signin({ username, password });
-       
+        signin({ username, password });  
+        setUsername("");
+        setPassword("");      
         } 
       }
       >

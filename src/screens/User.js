@@ -1,18 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native"
-import getUser from "../helpers/getUser";
 import { Context } from "../context/AuthContext"
 
 import UserLogin from "../components/users/UserLogin";
 import Profile from "../components/users/Profile";
 
-const User = () => {
-  const { user } = useContext(Context)
-  
+const User = ({ navigation }) => {
+  const { state, clearErrorMessage } = useContext(Context)
+
+  useEffect(() => {
+   
+  }, [state])
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      clearErrorMessage()
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+
+
   return (
     <View style={styles.container}>
       { 
-        user ? <Profile user={user} /> : <UserLogin />  
+        state.user ? <Profile user={state.user} /> : <UserLogin />  
       }
     </View>
   )

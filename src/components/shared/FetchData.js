@@ -1,14 +1,15 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { AppState } from "react-native";
-import getUser from "../../helpers/getUser"
 import { Context as MovieContext } from "../../context/MoviesContext"
 import { Context as CinemaContext } from "../../context/CinemaContext";
+import { Context as AuthContext } from "../../context/AuthContext"
 
 const FetchData = () => {
   const appState = useRef(AppState.currentState);
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
   const { getMovies, getVersions } = useContext(MovieContext)
   const { state, getCinemas } = useContext(CinemaContext)
+  const { tryLocalSignin } = useContext(AuthContext)
 
   useEffect(() => {
     // fetches cinemas, movies and versions
@@ -18,7 +19,7 @@ const FetchData = () => {
     
     getMovies();
     getVersions();
-    
+    tryLocalSignin();
 
     AppState.addEventListener("change", _handleAppStateChange);
 
@@ -40,7 +41,7 @@ const FetchData = () => {
 
         getMovies();
         getVersions();
-        getUser();
+        tryLocalSignin();
     }
 
     appState.current = nextAppState;

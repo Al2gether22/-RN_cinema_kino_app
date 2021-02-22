@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef, version } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image, TouchableHighlight, } from "react-native";
 import _ from "lodash";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Context as AuthContext } from "../../context/AuthContext"
 import DatePicker from "../shared/DatePicker";
 import MovieModal from "../../modals/MovieModal";
 import WebViewModal from "../../modals/WebViewModal"
-import MovieVersionLookup from "../../components/shared/MovieVersionLookup"
 import styles from "../../styles/ShowTimeStyles";
 import moment from "moment";
 import { scrollToIndex } from "../../helpers/datepicker.utils";
@@ -13,7 +12,7 @@ import { scrollToIndex } from "../../helpers/datepicker.utils";
 //We need versions, they are inside item.versions
 const now = moment();
 
-const ShowTimes = ({ id, movieVersions }) => {
+const ShowTimes = ({ id }) => {
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,19 +21,15 @@ const ShowTimes = ({ id, movieVersions }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [movieId, setMovieId] = useState();
   const [showtimeId, setShowtimeId] = useState();
-  // These should be removed after user component is implemented
   const [sessionName, setSessionName] = useState("")  
   const [sessionId, setSessionId] = useState("") 
   const [versions, setVersions] = useState("")
+  const { state } = useContext(AuthContext)
 
-  // Find a way to get user with the fetch user component
   useEffect(() => {
-    AsyncStorage.getItem("user").then((value) => {
-      const userJson = JSON.parse(value);
-      setSessionName(userJson.session_name);
-      setSessionId(userJson.session_id);
-    });
+    state.user ? setSessionId(JSON.parse(state.user).session_id) && setSessionName(JSON.parse(state.user).session_name) : null
   }, []);
+
 
   useEffect(() => {
     const url = `https://www.kino.dk/appservices/cinema/${
