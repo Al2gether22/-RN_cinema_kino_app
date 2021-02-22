@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet, Platform, PermissionsAndroid } from "react-native"
+import { View, Text, ActivityIndicator, StyleSheet, Platform, PermissionsAndroid } from "react-native"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 import Geolocation from '@react-native-community/geolocation';
+import TouchableScale from 'react-native-touchable-scale';
 import { Context as CinemaContext } from "../context/CinemaContext";
 import { Context as AuthContext } from "../context/AuthContext";
 import UserInfoModal from "../modals/UserInfoModal"
@@ -121,7 +122,11 @@ const Home = () => {
         setGeo={() => setGeo(true)}
       />
       <View style={styles.container} >
-        <TouchableOpacity
+        <TouchableScale
+          activeScale={0.9}
+          tension={50}
+          friction={7}
+          useNativeDriver
           onPress={() => {
             navigation.navigate('Film');
           }}
@@ -129,9 +134,13 @@ const Home = () => {
           <View style={styles.button}>
             <Text style={styles.buttonText}>Vælg Film</Text>  
           </View>  
-        </TouchableOpacity>
+        </TouchableScale>
 
-        <TouchableOpacity
+        <TouchableScale
+          activeScale={0.9}
+          tension={50}
+          friction={7}
+          useNativeDriver
           onPress={() => {
             navigation.navigate('Biografer');
           }}
@@ -139,9 +148,13 @@ const Home = () => {
           <View style={styles.button}>
             <Text style={styles.buttonText}>Vælg Biograf</Text>  
           </View>  
-        </TouchableOpacity>
+        </TouchableScale>
 
-        <TouchableOpacity
+        <TouchableScale
+          activeScale={0.9}
+          tension={50}
+          friction={7}
+          useNativeDriver
           onPress={() => {
             navigation.navigate('Profil');
           }}
@@ -149,7 +162,7 @@ const Home = () => {
           <View style={styles.button}>
             <Text style={styles.buttonText}>{ user ? "Profil" : "Login" }</Text>  
           </View>  
-        </TouchableOpacity>
+        </TouchableScale>
       </View>
     </>
   )

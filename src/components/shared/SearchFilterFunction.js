@@ -39,7 +39,7 @@ const SearchFilterFunction = ({ data, filteredData, filterValue }) => {
           placeholder="Søg"
           value={search}
           searchIcon={{size: 24}}
-          containerStyle={{backgroundColor: 'transparent', borderWidth: 0, borderTopWidth: 0, borderBottomWidth: 0, marginLeft: 5, marginRight: 5, marginBottom: 20}}
+          containerStyle={{backgroundColor: 'transparent', borderWidth: 0, borderTopWidth: 0, borderBottomWidth: 0, marginLeft: 1, marginRight: 1, marginBottom: 20}}
           inputContainerStyle={{height: 25, borderRadius: 10}}
           inputStyle={{fontSize: 18, fontFamily: "SourceSansPro-BlackIt"}}
           autoCapitalize="none"
@@ -52,7 +52,14 @@ const SearchFilterFunction = ({ data, filteredData, filterValue }) => {
 
 const styles = StyleSheet.create({
   searchFieldContainer: {
-
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+    elevation: 23,
     
   },
 

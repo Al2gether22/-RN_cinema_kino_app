@@ -10,6 +10,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10,
     marginLeft: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+    elevation: 23,
   },
   coverImageContainer: {
     borderRadius: 10,
@@ -19,6 +27,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     
   },
+  titleContainer: {
+    flex: 1
+  }, 
   cardTitle: {
     fontFamily: "BureauGrotComp-Medium",
     fontSize: 20,
@@ -28,6 +39,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     textAlign: "center",
+    paddingTop: 10,
   },
   oneliner: {
     fontFamily: "SourceSansPro-BlackIt",
@@ -35,7 +47,8 @@ const styles = StyleSheet.create({
     color: "#676d7c",
     textAlign: "center",
     marginBottom: 15,
-    marginTop: 15,
+    marginTop: 10,
+    paddingBottom: 20,
   },
 });
 

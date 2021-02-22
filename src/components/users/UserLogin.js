@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native"
+import TouchableScale from 'react-native-touchable-scale';
 import { Context } from "../../context/AuthContext"
 
 import WebViewModal from "../../modals/WebViewModal"
@@ -65,20 +66,24 @@ const UserLogin = () => {
         onFocus={() => handleInputFocus('password')}
         onBlur={() => handleInputBlur('password')}
       />
-      <TouchableOpacity
-      onPress={() => {
-        signin({ username, password });  
-        setUsername("");
-        setPassword("");  
-        // check if sign in successfully -> Flip anition -> if user -> flip animation
-        // if not -> shake animation -> if state.errormessage -> shake animation
-        } 
-      }
-      >
+      <TouchableScale
+        activeScale={0.9}
+        tension={50}
+        friction={7}
+        useNativeDriver
+        onPress={() => {
+          signin({ username, password });  
+          setUsername("");
+          setPassword("");  
+          // check if sign in successfully -> Flip anition -> if user -> flip animation
+          // if not -> shake animation -> if state.errormessage -> shake animation
+          } 
+        }
+        >
         <View style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </View>
-      </TouchableOpacity>
+      </TouchableScale>
       
       <View style={styles.webViewLinksContainer}> 
         <TouchableOpacity

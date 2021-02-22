@@ -14,10 +14,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "black",
     borderRadius: 7,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+    elevation: 23,
   },
   cinemaImage: {
     height: 50,
     width: 100,
+    
   }, 
   cinemaTitle: {
     fontFamily: "BureauGrotComp-Medium",

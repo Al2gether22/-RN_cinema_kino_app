@@ -10,7 +10,7 @@ const Movie = ({ route }) => {
   const { item } = route.params;
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(item)
+
   useEffect(() => {
     fetch(`https://www.kino.dk/appservices/movie/${item.id}`, {
       mode: "no-cors",
@@ -20,8 +20,6 @@ const Movie = ({ route }) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, []);
-
-  
    
     return (
       

@@ -13,14 +13,14 @@ const styles = StyleSheet.create({
   playButtomViewWrapper: {
     display: "flex",
     alignSelf: "center",
-    marginTop: "25%",
+    
     borderRadius: 40, 
     borderWidth: .1, 
-    backgroundColor: "lightgrey"
+    backgroundColor: "lightgrey",
+    
   },
   playButton: {
     color: "#1d1d27",
-    
   },
   
   movieTitle: {

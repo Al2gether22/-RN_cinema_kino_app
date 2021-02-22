@@ -3,6 +3,7 @@ import { View, ImageBackground, Text, TouchableOpacity } from "react-native"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import {SharedElement} from 'react-navigation-shared-element';
+import * as Animatable from 'react-native-animatable';
 import MovieTrailerModal from "../../modals/MovieTrailerModal"
 import styles from "../../styles/MovieBackgroundImageStyles";
 
@@ -29,7 +30,33 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
               
               style={styles.LinearGradientUpper}
             />
+            
+            { !!movie.video_markup &&
+        
+            // checks to see if there is a trailer before rendering the play button
+              <TouchableOpacity
+                onPress={() => { setModalVisible(true)}} 
+              >
+                <Animatable.View style={styles.playButtomViewWrapper} 
+                  animation='zoomIn'
+                  duration={900}
+                  delay={100} 
+                >
 
+                  <MaterialCommunityIcons  
+                    style={styles.playButton}
+                    name="play-circle" 
+                    size={60} 
+                  />
+                </Animatable.View>
+                <MovieTrailerModal 
+                  modalVisible={modalVisible}
+                  setModalVisible={() => setModalVisible(false)}
+                  video_markup={movie.video_markup}
+                  movie={movie}
+                />
+              </TouchableOpacity>
+            }
             <LinearGradient 
               colors={['rgba(29,29,39,0)', 'rgba(29,29,39,1)']} 
               
@@ -40,27 +67,7 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
         </ImageBackground>
       </SharedElement>
 
-      { !!movie.video_markup &&
-        
-        // checks to see if there is a trailer before rendering the play button
-          <TouchableOpacity
-            onPress={() => { setModalVisible(true)}} 
-          >
-            <View style={styles.playButtomViewWrapper}>
-              <MaterialCommunityIcons  
-                style={styles.playButton}
-                name="play-circle" 
-                size={60} 
-              />
-            </View>
-            <MovieTrailerModal 
-              modalVisible={modalVisible}
-              setModalVisible={() => setModalVisible(false)}
-              video_markup={movie.video_markup}
-              movie={movie}
-            />
-          </TouchableOpacity>
-        }
+      
       
       <SharedElement id={danishTitle}>
         <Text 

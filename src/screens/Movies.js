@@ -38,7 +38,6 @@ const Movies = () => {
         tension={50}
         friction={7}
         useNativeDriver
-        style={styles.card}
         onPress={() =>
           navigation.navigate("Movie", { 
               item       
@@ -52,11 +51,13 @@ const Movies = () => {
         {parsedDate(item.danishPremiere) > currentDate && (
           <PremiereDate PremiereDate={item.danishPremiere} />
         )}
-        <SharedElement id={item.danishTitle}>
-          <Text style={styles.cardTitle}>{item.title ? item.title : item.danishTitle}</Text>
-        </SharedElement>
-        
-        <Text style={styles.oneliner}>{item.oneliner}</Text>
+        <View style={styles.titleContainer}>
+          <SharedElement id={item.danishTitle}>
+            <Text style={styles.cardTitle}>{item.title ? item.title : item.danishTitle}</Text>
+          </SharedElement>
+          
+          <Text style={styles.oneliner}>{item.oneliner}</Text>
+        </View>
       </TouchableScale>
     );
   }
@@ -73,6 +74,7 @@ const Movies = () => {
         data={movies}
         extraData={movies}
         numColumns={2}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => Item(item)}
         keyExtractor={(item) => item.id}
       />

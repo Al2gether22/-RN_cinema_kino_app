@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import { FlatList, View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { create1MonthDates } from "../../helpers/date.utils";
+import "moment/locale/da";
 import moment from "moment";
+moment.locale("da");
 
 function dateLabelFromNow(myDate) {
   return moment(myDate).calendar(null, {
     sameDay: "[I dag]",
     nextDay: "[I morgen]",
-    nextWeek: "dddd Do MMM",
-    sameElse: "dddd Do MMM",
+    nextWeek: "ddd Do MMM",
+    sameElse: "ddd Do MMM",
   });
 }
 
@@ -57,6 +59,7 @@ const DatePicker = forwardRef(
 
 const styles = StyleSheet.create({
   showtimeContainer: {
+    minWidth: 80, 
     backgroundColor: "#1d1d27",
     padding: 10,
     borderWidth: 2,
@@ -68,6 +71,7 @@ const styles = StyleSheet.create({
   showtime: {
     color: "#676d7c",
     fontFamily: "SourceSansPro-Bold",
+    textAlign: "center"
   },
   dateLabel: {
     color: "#676d7c",
