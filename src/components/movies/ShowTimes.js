@@ -1,50 +1,62 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, } from "react-native";
-import { Context as CinemaContext } from "../../context/CinemaContext";
-import { Context as AuthContext } from "../../context/AuthContext"
-import WebViewModal from "../../modals/WebViewModal";
-import DatePicker from "../shared/DatePicker"
-import NoShowtimes from "../movies/NoShowtimes";
-import MovieVersionLookup from "../shared/MovieVersionLookup";
-import _ from "lodash";
-import styles from "../../styles/ShowTimeStyles";
-import { create1MonthDates } from "../../helpers/date.utils";
-import { scrollToIndex } from "../../helpers/datepicker.utils";
-import moment from "moment";
+import React, {useEffect, useState, useContext, useRef} from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import {Context as CinemaContext} from '../../context/CinemaContext';
+import {Context as AuthContext} from '../../context/AuthContext';
+import WebViewModal from '../../modals/WebViewModal';
+import DatePicker from '../shared/DatePicker';
+import NoShowtimes from '../movies/NoShowtimes';
+import MovieVersionLookup from '../shared/MovieVersionLookup';
+import _ from 'lodash';
+import styles from '../../styles/ShowTimeStyles';
+import {create1MonthDates} from '../../helpers/date.utils';
+import {scrollToIndex} from '../../helpers/datepicker.utils';
+import moment from 'moment';
 
 const monthOfDates = create1MonthDates();
 
-const ShowTimes = ({ id, nextShowtime, movieVersions }) => {
+const ShowTimes = ({id, nextShowtime, movieVersions}) => {
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
-  const [sessionName, setSessionName] = useState("")  
-  const [sessionId, setSessionId] = useState("") 
+  const [sessionName, setSessionName] = useState('');
+  const [sessionId, setSessionId] = useState('');
   const [showtimeId, setShowtimeId] = useState([]);
   const [selectedDate, setSelectedDate] = useState(monthOfDates[0]);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const { state } = useContext(CinemaContext);
-  const { state: { user } } = useContext(AuthContext)
+  const {state} = useContext(CinemaContext);
+  const {
+    state: {user},
+  } = useContext(AuthContext);
 
   // Find a way to get user with the fetch user component
   useEffect(() => {
-    user ? setSessionId(JSON.parse(user).session_id) && setSessionName(JSON.parse(user).session_name) : null
+    user
+      ? setSessionId(JSON.parse(user).session_id) &&
+        setSessionName(JSON.parse(user).session_name)
+      : null;
   }, []);
 
   useEffect(() => {
     const url = `https://www.kino.dk/appservices/movie/${id}/${selectedDate.format(
-      "YYYY-MM-DD"
+      'YYYY-MM-DD',
     )}`;
-    
+
     fetch(url, {
-      mode: "no-cors",
+      mode: 'no-cors',
     })
-      .then((response) => response.json())
+      .then(response => response.json())
       // sets showtimes to the response through the mergeArray method that calculates the distance
-      .then((json) => {
-        setShowtimes(mergeArrays(json, state.cinemas)); console.log(mergeArrays(json, state.cinemas))
+      .then(json => {
+        setShowtimes(mergeArrays(json, state.cinemas));
+        console.log(mergeArrays(json, state.cinemas));
       })
-      .catch((error) => console.error(error))
+      .catch(error => console.error(error))
       .finally(() => setLoading(false));
   }, [selectedDate]);
 
@@ -59,30 +71,29 @@ const ShowTimes = ({ id, nextShowtime, movieVersions }) => {
     for (let i = 0; i < arr1.length; i++) {
       merged.push({
         ...arr1[i],
-        ...arr2.find((itmInner) => itmInner.id === parseInt(arr1[i].cinema_id)),
+        ...arr2.find(itmInner => itmInner.id === parseInt(arr1[i].cinema_id)),
       });
     }
 
     for (let element of merged) {
-      element.showtimes = _.groupBy(element.showtimes, "movie_version_id");
+      element.showtimes = _.groupBy(element.showtimes, 'movie_version_id');
     }
 
-    return _.orderBy(merged, "distance");
+    return _.orderBy(merged, 'distance');
   }
 
   const onPressNextShowtime = () => {
     const nextShowTimeMoment = moment(nextShowtime);
-    monthOfDates.forEach((date) => {
-      if (date.isSame(nextShowTimeMoment, "day")) {
-        setSelectedDate(date);
+    setSelectedDate(nextShowTimeMoment);
+    monthOfDates.forEach(date => {
+      if (date.isSame(nextShowTimeMoment, 'day')) {
         scrollToIndex(datePickerRef, monthOfDates, date);
       }
     });
   };
 
-  
   if (loading) {
-    return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
+    return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
 
   return (
@@ -105,11 +116,11 @@ const ShowTimes = ({ id, nextShowtime, movieVersions }) => {
 
       <FlatList
         // Here each cinema is rendered
-        keyExtractor={(showtime) => showtime.cinema_id}
+        keyExtractor={showtime => showtime.cinema_id}
         data={showtimes}
         extraDate={selectedDate}
         ItemSeparatorComponent={() => {
-          return (<View style={styles.itemSeperator} />);
+          return <View style={styles.itemSeperator} />;
         }}
         // The ListEmptyComponent loads the showtime component with next showtime, the option to update th current date and if it happens the selectedId value is updated in the correct format.
         ListEmptyComponent={
@@ -119,11 +130,11 @@ const ShowTimes = ({ id, nextShowtime, movieVersions }) => {
           />
         }
         // Each cinema has a range of showtimes
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <View>
             <Text style={styles.sectionHeader}>
-              {item.name}{" "}
-              {item.distance ? `- ${item.distance.toFixed(1)} km` : ""}
+              {item.name}{' '}
+              {item.distance ? `- ${item.distance.toFixed(1)} km` : ''}
             </Text>
 
             <FlatList
@@ -132,7 +143,7 @@ const ShowTimes = ({ id, nextShowtime, movieVersions }) => {
               data={Object.values(item.showtimes)}
               //data={Object.entries(item.showtimes)}?
               numColumns={1}
-              renderItem={({ item }) => (
+              renderItem={({item}) => (
                 <View style={styles.showTimeContainer}>
                   <Text style={styles.showtimeVersionLabel}>
                     <MovieVersionLookup
@@ -146,14 +157,13 @@ const ShowTimes = ({ id, nextShowtime, movieVersions }) => {
                     keyExtractor={(item, index) => index.toString()}
                     data={Object.values(item)}
                     numColumns={4}
-                    renderItem={({ item }) => (
+                    renderItem={({item}) => (
                       <TouchableOpacity
                         onPress={() => [
                           setModalVisible(true),
                           setShowtimeId(item.showtime_id),
                         ]}
-                        style={styles.showTime}
-                      >
+                        style={styles.showTime}>
                         <Text style={styles.showTimeText}>
                           {item.start_time.slice(11, 16)}
                         </Text>
