@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
   const dateOptions = {
     weekday: "long",
-    month: "short",
+    month: "long",
     day: "numeric",
   };
 

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   movieTitle: {
     fontFamily: "BureauGrotComp-Medium",
     color: "white",
-    marginTop: "10%",
+    marginTop: "5%",
     marginLeft: "5%",
     marginRight: "20%",
     fontSize: 35

@@ -1,15 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native"
 import { Context } from "../context/AuthContext"
-
 import UserLogin from "../components/users/UserLogin";
 import Profile from "../components/users/Profile";
 
 const User = ({ navigation }) => {
   const { state, clearErrorMessage } = useContext(Context)
+  const [animation, setAnimation] = useState("")
 
   useEffect(() => {
-   
+    handleAnimation()
+    
   }, [state])
 
   useEffect(() => {
@@ -20,12 +21,15 @@ const User = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
-
+  const handleAnimation = () => {
+    state.errorMessage ? setAnimation("shake") : null
+    setTimeout(() => { setAnimation("") }, 600)
+  }
 
   return (
     <View style={styles.container}>
       { 
-        state.user ? <Profile user={state.user} /> : <UserLogin />  
+        state.user ? <Profile user={state.user} /> : <UserLogin state={state} animation={animation} />  
       }
     </View>
   )

@@ -40,6 +40,14 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: "center",
     paddingTop: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+    elevation: 23,
   },
   oneliner: {
     fontFamily: "SourceSansPro-BlackIt",

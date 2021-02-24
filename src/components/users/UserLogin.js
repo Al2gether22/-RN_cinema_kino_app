@@ -1,17 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native"
 import TouchableScale from 'react-native-touchable-scale';
+import * as Animatable from 'react-native-animatable';
 import { Context } from "../../context/AuthContext"
 
 import WebViewModal from "../../modals/WebViewModal"
 
-const UserLogin = () => {
+const UserLogin = ({ state, animation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [isFocused, setIsFocused] = useState({email: false, password: false})
   const [url, setUrl] = useState("");
-  const { state, signin, clearErrorMessage } = useContext(Context);
+  const { signin, clearErrorMessage } = useContext(Context);
 
   const handleInputFocus = (textinput) => {
     setIsFocused({
@@ -33,57 +34,61 @@ const UserLogin = () => {
         url={url}
       />
       <Text style={styles.header}>Login med din Kino profil</Text>
-      <Text style={styles.errorMessage}>{state.errorMessage ? state.errorMessage : " "}</Text>
-      <TextInput 
-        style={isFocused.email ? [styles.inputField, { borderColor: 'white' }] : styles.inputField}
-        placeholder={"Email"}
-        placeholderTextColor="#676d7c"
-        color="#676d7c"
-        paddingLeft={10}
-        onChangeText={setUsername}
-        value={username}
-        autoCapitalize="none"
-        autoCorrect={false}
-        blurOnSubmit={true}
-        keyboardType={"email-address"}
-        textContentType={"emailAddress"}
-        onFocus={() => handleInputFocus('email')}
-        onBlur={() => handleInputBlur('email')}
-      />
-      <TextInput 
-        secureTextEntry
-        style={isFocused.password ? [styles.inputField, { borderColor: 'white' }] : styles.inputField}
-        placeholder={"Password"}
-        placeholderTextColor="#676d7c"
-        color="#676d7c"
-        paddingLeft={10}
-        onChangeText={setPassword}
-        value={password}
-        autoCapitalize="none"
-        autoCorrect={false}
-        blurOnSubmit={true}
-        textContentType={"password"}
-        onFocus={() => handleInputFocus('password')}
-        onBlur={() => handleInputBlur('password')}
-      />
-      <TouchableScale
-        activeScale={0.9}
-        tension={50}
-        friction={7}
-        useNativeDriver
-        onPress={() => {
-          signin({ username, password });  
-          setUsername("");
-          setPassword("");  
-          // check if sign in successfully -> Flip anition -> if user -> flip animation
-          // if not -> shake animation -> if state.errormessage -> shake animation
-          } 
-        }
-        >
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
-        </View>
-      </TouchableScale>
+
+      <Animatable.View animation={animation} >
+        <Text style={styles.errorMessage}>{state.errorMessage ? state.errorMessage : " "}</Text>
+        <TextInput 
+          style={isFocused.email ? [styles.inputField, { borderColor: 'white' }] : styles.inputField}
+          placeholder={"Email"}
+          placeholderTextColor="#676d7c"
+          color="#676d7c"
+          paddingLeft={10}
+          onChangeText={setUsername}
+          value={username}
+          autoCapitalize="none"
+          autoCorrect={false}
+          blurOnSubmit={true}
+          keyboardType={"email-address"}
+          textContentType={"emailAddress"}
+          onFocus={() => handleInputFocus('email')}
+          onBlur={() => handleInputBlur('email')}
+        />
+        <TextInput 
+          secureTextEntry
+          style={isFocused.password ? [styles.inputField, { borderColor: 'white' }] : styles.inputField}
+          placeholder={"Password"}
+          placeholderTextColor="#676d7c"
+          color="#676d7c"
+          paddingLeft={10}
+          onChangeText={setPassword}
+          value={password}
+          autoCapitalize="none"
+          autoCorrect={false}
+          blurOnSubmit={true}
+          textContentType={"password"}
+          onFocus={() => handleInputFocus('password')}
+          onBlur={() => handleInputBlur('password')}
+        />
+        <TouchableScale
+          activeScale={0.9}
+          tension={50}
+          friction={7}
+          useNativeDriver
+          onPress={() => {
+            signin({ username, password });  
+            setUsername("");
+            setPassword("");  
+           
+            // check if sign in successfully -> Flip anition -> if user -> flip animation
+            // if not -> shake animation -> if state.errormessage -> shake animation
+            } 
+          }
+          >
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Login</Text>
+          </View>
+        </TouchableScale>
+      </Animatable.View>
       
       <View style={styles.webViewLinksContainer}> 
         <TouchableOpacity
@@ -113,6 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: "10%",
     backgroundColor: '#1d1d27',
+    
   },
   header: {
     textAlign: "center",
@@ -138,6 +144,7 @@ const styles = StyleSheet.create({
     borderColor: "#676d7c",
     borderRadius: 5, 
     fontFamily: "SourceSansPro-Bold", 
+    
   },
   button: {
     alignSelf: "center",
