@@ -1,5 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native"
+import { Platform } from "react-native";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Linking } from "react-native"
+import { createOpenLink } from 'react-native-open-maps';
 
 const CinemaMetaData = ({ cinema }) => {
 
@@ -8,27 +12,68 @@ const CinemaMetaData = ({ cinema }) => {
   const cinemaDescription = cinema.description.replace(regex, '');
   const cinemaOpeningHours = cinema.opening_hours.replace(regex, '');
 
+  callCinema = () => {
+    let phoneNumber = ''
+
+    if (Platform.OS === 'android') {
+      phoneNumber = `tel:${cinema.phone}`;
+    } else {
+      phoneNumber = `telprompt:${cinema.phone}`;
+    }
+  
+    Linking.openURL(phoneNumber);
+  }
+
+  const openMap = createOpenLink({query: cinema.address});
+
+
   return (
-          <>
+    <>
     <View style={styles.cinemaMetaContainer}>
-      <View style={styles.cinemaMetaDataContainer}>
-      <Text style={styles.cinemaMetaHeader}>Adresse:</Text>
+      <TouchableOpacity style={styles.cinemaMetaDataContainer}
+        onPress={openMap}
+      >
+      <Text style={styles.cinemaMetaHeader} >
+        <MaterialCommunityIcons
+          name="map-marker"
+          size={25}
+          color="white"
+        />
+      </Text>
         <Text style={styles.cinemaMetaContent}>{cinema.address}</Text>
-      </View>
-      <View style={styles.cinemaMetaDataContainer}>
-      <Text style={styles.cinemaMetaHeader}>Telefon:</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.cinemaMetaDataContainer}
+        onPress={callCinema}
+      >
+      <Text style={styles.cinemaMetaHeader}>
+        <MaterialCommunityIcons
+          name="phone"
+          size={25}
+          color="white"
+        />
+      </Text>
         <Text style={styles.cinemaMetaContent}>{cinema.phone}</Text>
-      </View>
-      <View style={styles.cinemaMetaDataContainer}>
-        <Text style={styles.cinemaMetaHeader}>Email:</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.cinemaMetaDataContainer}
+        onPress={() => Linking.openURL(`mailto:${cinema.email}`)}
+      >
+        <Text style={styles.cinemaMetaHeader}>
+          <MaterialCommunityIcons
+            name="email"
+            size={25}
+            color="white"
+          />
+        </Text>
         <Text style={styles.cinemaMetaContent}>{cinema.email}</Text>
-      </View>
+      </TouchableOpacity>
       
     </View>
-      <View style={styles.cinemaDescriptionContainer}>
-        <Text style={styles.cinemaDescription}>{cinemaDescription}</Text>
-        <Text style={styles.cinemaDescription}>Åbningstider: {cinemaOpeningHours}</Text>
-      </View>
+    <View style={styles.cinemaDescriptionContainer}>
+      <Text style={styles.cinemaDescription}>{cinemaDescription}</Text>
+      <Text style={styles.cinemaDescription}>Åbningstider: {cinemaOpeningHours}</Text>
+    </View>
     </>
   )
 }
@@ -48,17 +93,18 @@ const styles = StyleSheet.create({
     flex: 3
   },
   cinemaMetaHeader: {
-    fontFamily: "SourceSansPro-BlackIt",
-    color: "white",
     textAlign: "center",
     marginBottom: 5
   },
   cinemaMetaContent: {
     fontFamily: "SourceSansPro-BlackIt",
     color: "#676d7c",
+    fontSize: 12,
     textAlign: "center",
-    marginLeft: 4,
-    marginRight: 4
+    marginLeft: 3,
+    marginRight: 3, 
+    
+    
   },
   cinemaDescriptionContainer: {
     marginTop: 10,
