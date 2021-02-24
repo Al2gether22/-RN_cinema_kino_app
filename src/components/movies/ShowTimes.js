@@ -88,6 +88,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions}) => {
     monthOfDates.forEach(date => {
       if (date.isSame(nextShowTimeMoment, 'day')) {
         scrollToIndex(datePickerRef, monthOfDates, date);
+        setSelectedDate(date);
       }
     });
   };
