@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { ImageBackground, Text, StyleSheet, TouchableOpacity } from "react-native"
 import LinearGradient from 'react-native-linear-gradient';
 import MovieModal from "../../modals/MovieModal"
+import * as Animatable from 'react-native-animatable';
 
 
 const FeaturedMovie = () => {
@@ -25,7 +26,12 @@ const FeaturedMovie = () => {
   return (
     featuredMovieItem[0] ? 
     <>
-      
+      <Animatable.View 
+      style={styles.coverImage} 
+      animation='fadeIn'
+      duration={900}
+      delay={30}
+    >
       <ImageBackground 
         style={styles.coverImage}
         source={{ uri: featuredMovieItem[0].imageUrl }}
@@ -60,7 +66,7 @@ const FeaturedMovie = () => {
         </LinearGradient>
         
       </ImageBackground>
-     
+      </Animatable.View>
     </>
     : null 
   )

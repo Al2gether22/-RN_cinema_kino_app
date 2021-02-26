@@ -26,12 +26,13 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
           
           //resizeMode="contain"
         >
-         
-            <LinearGradient 
+          
+          <LinearGradient 
               colors={['rgba(29,29,39,1)', 'rgba(29,29,39,0)']} 
               
               style={styles.LinearGradientUpper}
-            />
+            ></LinearGradient>
+           
            
             { !!movie.video_markup &&
         
@@ -63,7 +64,7 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
               colors={['rgba(29,29,39,0)', 'rgba(29,29,39,1)']} 
               
               style={styles.LinearGradientLower}
-            />
+            ></LinearGradient>
           
         
         </ImageBackground>

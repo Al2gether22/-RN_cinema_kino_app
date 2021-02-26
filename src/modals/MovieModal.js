@@ -22,7 +22,7 @@ const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId, showtime
     if (loading) {
       return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
     }
-    console.log(movie)
+
     return (
       
       <Modal
