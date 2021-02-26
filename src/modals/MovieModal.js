@@ -4,9 +4,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import styles from "../styles/MovieStyles";
 import MovieBackgroundImage from "../components/movies/MovieBackgroundImage";
 import MovieMetaData from "../components/movies/MovieMetaData";
+import ShowTimes from "../components/movies/ShowTimes"
 
 
-const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId }) => {
+const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId, showtimes }) => {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -17,7 +18,11 @@ const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId }) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, [movieId])
-  
+
+    if (loading) {
+      return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
+    }
+    console.log(movie)
     return (
       
       <Modal
@@ -59,8 +64,14 @@ const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId }) => {
                 />
                 
                 </>
-              }
-              
+              } 
+              ListFooterComponent={
+                loading ? null : 
+                showtimes ? 
+                  <ShowTimes
+                    id={movie.id}
+                  /> : null
+             }
             />
           </> 
           }

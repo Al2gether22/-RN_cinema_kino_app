@@ -37,9 +37,12 @@ const MovieMetaData = ({ movie }) => {
 
   return (
  
-    <Animatable.View style={styles.metaDataContainer} animation='fadeIn'
-    duration={600}
-    delay={300}>
+    <Animatable.View 
+      style={styles.metaDataContainer} 
+      animation='fadeIn'
+      duration={600}
+      delay={300}
+    >
       <View style={styles.movieMetaData}>
         <Text style={styles.movieCensur}>Censur: {movie.censorship.name}</Text>
         <View style={styles.movieRating}> 

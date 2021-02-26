@@ -7,7 +7,7 @@ import TouchableScale from 'react-native-touchable-scale';
 import { Context as CinemaContext } from "../context/CinemaContext";
 import { Context as AuthContext } from "../context/AuthContext";
 import UserInfoModal from "../modals/UserInfoModal"
-
+import FeaturedMovie from "../components/shared/FeaturedMovie"
 
 const Home = () => {
 
@@ -122,6 +122,7 @@ const Home = () => {
         setGeo={() => setGeo(true)}
       />
       <View style={styles.container} >
+        <FeaturedMovie />
         <TouchableScale
           activeScale={0.9}
           tension={50}
@@ -164,6 +165,7 @@ const Home = () => {
           </View>  
         </TouchableScale>
       </View>
+     
     </>
   )
 }
@@ -175,6 +177,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: '#1d1d27',
+    
   },
   button: {
     alignSelf: "center",

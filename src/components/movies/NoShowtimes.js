@@ -11,6 +11,10 @@ const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
 
   const nextShowtimeDate = new Date(nextShowtime);
 
+  if (!nextShowtime) {
+    return null
+  }
+
   return (
     <TouchableOpacity onPress={onPressNextShowtime}>
       <View style={styles.nextShowtimeContainer}>

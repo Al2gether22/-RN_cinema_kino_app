@@ -23,14 +23,16 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
           source={{ uri: imageFallback }}
           resizeMethod="auto"
           resizeMode="cover"
+          
           //resizeMode="contain"
         >
+         
             <LinearGradient 
               colors={['rgba(29,29,39,1)', 'rgba(29,29,39,0)']} 
               
               style={styles.LinearGradientUpper}
             />
-            
+           
             { !!movie.video_markup &&
         
             // checks to see if there is a trailer before rendering the play button

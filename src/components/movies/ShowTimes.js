@@ -79,7 +79,6 @@ const ShowTimes = ({ id, nextShowtime, movieVersions }) => {
       }
     });
   };
-
   
   if (loading) {
     return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;

@@ -43,16 +43,12 @@ const styles = StyleSheet.create({
 
   LinearGradientUpper: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5,
+    
   },
 
   LinearGradientLower: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5,
+    
     
   }
 
