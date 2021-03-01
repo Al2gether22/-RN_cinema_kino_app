@@ -97,11 +97,11 @@ target 'KinoApp' do
   end
 end
 
-target 'KinoApp-tvOS' do
-  # Pods for KinoApp-tvOS
+# target 'KinoApp-tvOS' do
+#   # Pods for KinoApp-tvOS
 
-  target 'KinoApp-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-end
+#   target 'KinoApp-tvOSTests' do
+#     inherit! :search_paths
+#     # Pods for testing
+#   end
+# end

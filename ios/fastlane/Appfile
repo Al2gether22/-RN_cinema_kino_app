@@ -1,0 +1,8 @@
+app_identifier("dk.kino.iphoneapp--dk.kino.iphoneapp") # The bundle identifier of your app
+apple_id("charli@kompjuter.dk") # Your Apple email address
+
+itc_team_id("481903") # App Store Connect Team ID
+team_id("RX5GA4QADF") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
