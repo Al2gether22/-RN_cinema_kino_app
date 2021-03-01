@@ -92,11 +92,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions}) => {
       }
     });
   };
-<<<<<<< HEAD
   
-=======
-
->>>>>>> nextplaytime-fix
   if (loading) {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
