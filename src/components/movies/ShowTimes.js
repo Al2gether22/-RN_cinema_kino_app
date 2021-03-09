@@ -18,9 +18,8 @@ import {create1MonthDates} from '../../helpers/date.utils';
 import {scrollToIndex} from '../../helpers/datepicker.utils';
 import moment from 'moment';
 
-const monthOfDates = create1MonthDates();
-
 const ShowTimes = ({id, nextShowtime, movieVersions}) => {
+  const monthOfDates = create1MonthDates(nextShowtime);
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
   const [sessionName, setSessionName] = useState('');
@@ -92,7 +91,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions}) => {
       }
     });
   };
-  
+
   if (loading) {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
