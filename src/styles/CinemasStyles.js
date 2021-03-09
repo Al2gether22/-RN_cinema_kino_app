@@ -30,13 +30,15 @@ const styles = StyleSheet.create({
   }, 
   cinemaTitle: {
     fontFamily: "BureauGrotComp-Medium",
-    fontSize: 13,
+    fontSize: 20,
     color: "white",
     textAlign: "center",
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: "center"
+    alignSelf: "center", 
+    marginLeft: 10,
+    marginRight: 10
   }, 
   cinemaDistance: {
     fontFamily: "SourceSansPro-BlackIt",
