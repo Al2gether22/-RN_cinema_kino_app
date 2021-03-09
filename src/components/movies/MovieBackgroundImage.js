@@ -79,7 +79,7 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
       </SharedElement>
       
       <Text style={styles.movieGenre} numberOfLines={2}>
-        {genreFallback.join(' - ')} {"\n"}{ movie.playingTime ? `Varighed ${movie.playingTime} min` : null}
+        {genreFallback.join(', ')} {"\n"}{ movie.playingTime ? `Varighed ${movie.playingTime} min` : null}
       </Text>
     </View>
     
