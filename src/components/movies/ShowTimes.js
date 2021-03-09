@@ -19,12 +19,14 @@ import {scrollToIndex} from '../../helpers/datepicker.utils';
 import moment from 'moment';
 
 const ShowTimes = ({id, nextShowtime, movieVersions}) => {
-  const monthOfDates = create1MonthDates(nextShowtime);
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
   const [sessionName, setSessionName] = useState('');
   const [sessionId, setSessionId] = useState('');
   const [showtimeId, setShowtimeId] = useState([]);
+  const [monthOfDates, setMonthOfDates] = useState(
+    create1MonthDates(nextShowtime),
+  );
   const [selectedDate, setSelectedDate] = useState(monthOfDates[0]);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
