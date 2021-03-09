@@ -11,6 +11,9 @@ export const create1MonthDates = nextShowTime => {
   }
   if (nextShowTimeMoment.isAfter(endDate)) {
     dates.push(nextShowTimeMoment);
+    for (var i = 1; i < 14; i++) {
+      dates.push(nextShowTimeMoment.clone().add(i, 'days'));
+    }
   }
   return dates;
 };
