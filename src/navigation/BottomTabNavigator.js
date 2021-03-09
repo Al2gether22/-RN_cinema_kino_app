@@ -56,11 +56,12 @@ export default function BottomTabNavigator() {
           style: styles.container
         }}
       >
-        <Tab.Screen name="Hjem" component={HomeStackScreen} />
-        <Tab.Screen name="Film" component={MoviesStackScreen} />
-        <Tab.Screen name="Biografer" component={CinemasStackScreen} />
+        <Tab.Screen name="Hjem" component={HomeStackScreen} options={{ unmountOnBlur: true }} />
+        <Tab.Screen name="Film" component={MoviesStackScreen} options={{ unmountOnBlur: true }} />
+        <Tab.Screen name="Biografer" component={CinemasStackScreen} options={{ unmountOnBlur: true }} />
         <Tab.Screen name="Profil" component={UserStackScreen} 
           options={{ 
+            onmountOnBlur: true,
             tabBarLabel: state.user ? "Profil" : "Log ind", 
             tabBarIcon: ({ focused, color, size }) => {
             let iconName;
