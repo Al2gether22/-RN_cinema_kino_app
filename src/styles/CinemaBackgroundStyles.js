@@ -15,19 +15,16 @@ const styles = StyleSheet.create({
   },
   cinemaTitleContainer: {
     position: "absolute",
-    top: 0,
+    top: 150,
     right: 0,
     left: 0,
-    bottom: "50%",
-    justifyContent: "center",
-    alignItems: "center"
-    
   },
   cinemaTitle: {
     fontFamily: "BureauGrotComp-Medium",
     textAlign: "center",
     color: "white",
-    fontSize: 25
+    fontSize: 25,
+    
   },
   
   LinearGradientUpper: {

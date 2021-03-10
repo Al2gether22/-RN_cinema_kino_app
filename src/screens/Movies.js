@@ -55,8 +55,6 @@ const Movies = () => {
           <SharedElement id={item.danishTitle}>
             <Text style={styles.cardTitle}>{item.title ? item.title : item.danishTitle}</Text>
           </SharedElement>
-          
-          <Text style={styles.oneliner}>{item.oneliner}</Text>
         </View>
       </TouchableScale>
     );

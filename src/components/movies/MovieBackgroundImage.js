@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, ImageBackground, Text, TouchableOpacity } from "react-native"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
-import {SharedElement} from 'react-navigation-shared-element';
+import { SharedElement } from 'react-navigation-shared-element';
 import * as Animatable from 'react-native-animatable';
 import MovieTrailerModal from "../../modals/MovieTrailerModal"
 import styles from "../../styles/MovieBackgroundImageStyles";

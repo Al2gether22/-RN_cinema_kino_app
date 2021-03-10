@@ -1,10 +1,12 @@
 import React from "react";
-import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack";
+import { HeaderBackButton } from "@react-navigation/stack";
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 import Cinemas from "../screens/Cinemas";
 import Cinema from "../screens/Cinema";
 
-const Stack = createStackNavigator();
+const Stack = createSharedElementStackNavigator();
+
 
 export default function CinemasStackScreen({ navigation }){
   return (
@@ -37,7 +39,7 @@ export default function CinemasStackScreen({ navigation }){
 
       <Stack.Screen name="Cinema" component={Cinema}
         options={({ route }) => ({
-          title: route.params.name, 
+          title: route.params.item.name, 
           headerBackTitle: "Tilbage",
           navigationOptions: ({ navigation }) => ({
             headerLeft: (
@@ -57,7 +59,14 @@ export default function CinemasStackScreen({ navigation }){
             fontSize: 15,
             color: "#fffdfd",
             fontFamily: "SourceSansPro-Bold",
-          },           
+          },  
+          cardStyleInterpolator: ({ current: { progress } }) => {
+            return {
+              cardStyle: {
+                opacity: progress
+              }
+            };
+          }         
         })}
       />
     </Stack.Navigator>

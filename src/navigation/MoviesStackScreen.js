@@ -9,7 +9,6 @@ const Stack = createSharedElementStackNavigator();
 
 export default function MoviesStackScreen({ navigation }){
 
-
   return (
     <Stack.Navigator >
       <Stack.Screen name="Movies" component={Movies} 

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { Context } from "../context/CinemaContext";
 import { View, Text, FlatList, Image } from "react-native";
+import { SharedElement } from 'react-navigation-shared-element';
 import TouchableScale from 'react-native-touchable-scale';
 import styles from "../styles/CinemasStyles"
 import SearchFilterFunction from "../components/shared/SearchFilterFunction";
@@ -11,7 +12,7 @@ const Cinemas = () => {
   const { state } = useContext(Context)
   const [cinemas, setCinemas] = useState(state.cinemas)
 
-  function Item({ id, imageUrl, name, distance }) {
+  function Item(item) {
     
     return (
       <TouchableScale
@@ -19,13 +20,24 @@ const Cinemas = () => {
         tension={50}
         friction={7}
         useNativeDriver 
-       style={styles.cinemaOverview} 
-        onPress={() => navigation.navigate("Cinema", { id: id, imageUrl: imageUrl, name: name })}
+        style={styles.cinemaOverview} 
+        onPress={() => navigation.navigate("Cinema", { item })}
       >
-        <Image style={styles.cinemaImage} source={{ uri: imageUrl }}></Image>
-        <Text style={styles.cinemaTitle}>{name}</Text>
-        <Text style={styles.cinemaDistance}>{distance ? `${distance.toFixed(1)} km` : ''}</Text>
-    </TouchableScale>
+        <SharedElement id={item.imageUrl}>
+          <Image style={styles.cinemaImage} source={{ uri: item.imageUrl }}></Image>
+        </SharedElement>  
+
+       
+        <SharedElement id={item.name} style={styles.cinemaTitleContainer}>
+          <Text style={styles.cinemaTitle}>{item.name}</Text>
+        </SharedElement>
+
+         
+        <Text style={styles.cinemaDistance}>{item.distance ? `${item.distance.toFixed(1)} km` : ''}</Text>
+         
+          
+        
+      </TouchableScale>
     )
   }
  

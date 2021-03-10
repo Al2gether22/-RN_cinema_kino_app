@@ -56,14 +56,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   movieBody: {
-    fontFamily: "SourceSansPro-Bold", 
+    fontFamily: "SourceSansPro-Black",
     fontSize: 16, 
+    fontWeight: "200",
     color: '#676d7c', 
-    lineHeight: 20
+    lineHeight: 22,
+    
   },
   toggleMovieBodyText: {
     marginTop: 5,
-    fontFamily: "SourceSansPro-Bold", 
+    fontFamily: "SourceSansPro-Black", 
     fontSize: 16, 
     color: 'white',
     textAlign: "center"

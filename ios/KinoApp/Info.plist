@@ -42,7 +42,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSMainNibFile</key>
 	<string>LaunchScreen</string>
 	<key>UIAppFonts</key>
@@ -52,6 +52,7 @@
 		<string>SourceSansPro-Black.ttf</string>
 		<string>SourceSansPro-BlackIt.ttf</string>
 		<string>SourceSansPro-Bold.ttf</string>
+		<string>BasierSquare-Regular.otf</string>
 		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
@@ -66,7 +67,6 @@
 		<string>MaterialCommunityIcons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Octicons.ttf</string>
-		<string>Zocial.ttf</string>
 		<string>Fontisto.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

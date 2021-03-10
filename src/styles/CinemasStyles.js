@@ -28,25 +28,23 @@ const styles = StyleSheet.create({
     width: 100,
     
   }, 
+
+  cinemaTitleContainer: {
+    flex: 1, 
+    justifyContent: "center", 
+  },
   cinemaTitle: {
     fontFamily: "BureauGrotComp-Medium",
-    fontSize: 20,
+    fontSize: 18,
     color: "white",
-    textAlign: "center",
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: "center", 
     marginLeft: 10,
-    marginRight: 10
   }, 
+  
   cinemaDistance: {
     fontFamily: "SourceSansPro-BlackIt",
     fontSize: 14,
     color: "#676d7c",
-    textAlign: "center",
-    marginBottom: 15,
-    marginTop: 15
+    alignSelf: "center"
   }
 })
 

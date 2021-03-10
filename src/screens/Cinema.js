@@ -6,14 +6,14 @@ import CinemaBackgroundImage from "../components/cinemas/CinemaBackgroundImage"
 import CinemaMetaData from "../components/cinemas/CinemaMetaData"
 import ShowTimes from "../components/cinemas/ShowTimes";
 
-const Cinema = () => {
-  const route = useRoute();
+const Cinema = ({ route }) => {
+  const { item } = route.params;
   const [cinema, setCinema] = useState([])
   const [loading, setLoading] = useState(true)
 
   // fetches cinema data
   useEffect(() => {
-    fetch(`https://www.kino.dk/appservices/cinema/${route.params.id}`, {
+    fetch(`https://www.kino.dk/appservices/cinema/${item.id}`, {
       mode: "no-cors"
       })
       .then((response) => response.json())
@@ -21,10 +21,6 @@ const Cinema = () => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, []);
-
-  if (loading) {
-    return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
-  }
 
   return (
     <>
@@ -35,16 +31,18 @@ const Cinema = () => {
         ListHeaderComponent={
           <>
             <CinemaBackgroundImage
-              name={route.params.name}
-              img={route.params.imageUrl}
+              name={item.name}
+              img={item.imageUrl}
             />
-            <CinemaMetaData cinema={cinema} />
+            { loading ? null : <CinemaMetaData cinema={cinema} />}
+            
           </>
         }
         ListFooterComponent={
+          loading ? null : 
           <ShowTimes 
             id={cinema.nid} 
-            movieVersions={route.params.versions}
+            movieVersions={item.versions}
           />
         }
       />
@@ -59,5 +57,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#1d1d27",
   },
 });
+
+Cinema.sharedElements = route => {
+  const { item } = route.params;
+  
+  return [
+    {
+      id: item.imageUrl,
+      animation: "fade",
+      resize: "clip", 
+      align: "auto"
+    }, 
+    {
+      id: item.name,
+      animation: "fade",
+      resize: "none", 
+      align: "auto"
+    }
+  ];
+};
 
 export default Cinema;

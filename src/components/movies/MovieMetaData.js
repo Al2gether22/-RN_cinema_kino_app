@@ -3,7 +3,9 @@ import { View, Text } from "react-native"
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Foundation from "react-native-vector-icons/Foundation"
 import * as Animatable from 'react-native-animatable';
+
 import ReadMore from "react-native-read-more-text";
+
 
 import styles from "../../styles/MovieMetaDataStyles";
 
@@ -35,6 +37,18 @@ const MovieMetaData = ({ movie }) => {
       // ...
     };
 
+    const renderViewMore = (onPress) => {
+      return(
+        <Text onPress={onPress}>View more</Text>
+      )
+    }
+
+    const renderViewLess = (onPress) => {
+      return(
+        <Text onPress={onPress}>View less</Text>
+      )
+    }
+
   return (
  
     <Animatable.View 
@@ -64,9 +78,11 @@ const MovieMetaData = ({ movie }) => {
           renderTruncatedFooter={_renderTruncatedFooter}
           renderRevealedFooter={_renderRevealedFooter}
           onReady={_handleTextReady}
-        >
+        >          
+          
           <Text style={styles.movieBody}>{movieDescription}</Text>
         </ReadMore>
+
     </View>
   </Animatable.View>
    

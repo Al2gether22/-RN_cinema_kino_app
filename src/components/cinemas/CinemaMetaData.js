@@ -4,6 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { TouchableOpacity } from "react-native";
 import { View, Text, StyleSheet, Linking } from "react-native"
 import { createOpenLink } from 'react-native-open-maps';
+import * as Animatable from 'react-native-animatable';
 
 const CinemaMetaData = ({ cinema }) => {
 
@@ -29,7 +30,12 @@ const CinemaMetaData = ({ cinema }) => {
 
   return (
     <>
-    <View style={styles.cinemaMetaContainer}>
+    <Animatable.View 
+      style={styles.cinemaMetaContainer} 
+      animation='fadeIn'
+      duration={600}
+      delay={300}
+    >
       <TouchableOpacity style={styles.cinemaMetaDataContainer}
         onPress={openMap}
       >
@@ -40,7 +46,7 @@ const CinemaMetaData = ({ cinema }) => {
           color="white"
         />
       </Text>
-        <Text style={styles.cinemaMetaContent}>{cinema.address}</Text>
+        
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.cinemaMetaDataContainer}
@@ -53,7 +59,7 @@ const CinemaMetaData = ({ cinema }) => {
           color="white"
         />
       </Text>
-        <Text style={styles.cinemaMetaContent}>{cinema.phone}</Text>
+        
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.cinemaMetaDataContainer}
@@ -66,14 +72,19 @@ const CinemaMetaData = ({ cinema }) => {
             color="white"
           />
         </Text>
-        <Text style={styles.cinemaMetaContent}>{cinema.email}</Text>
+        
       </TouchableOpacity>
       
-    </View>
-    <View style={styles.cinemaDescriptionContainer}>
+    </Animatable.View>
+    <Animatable.View 
+      style={styles.cinemaDescriptionContainer} 
+      animation='fadeIn'
+      duration={600}
+      delay={300}
+    >
       <Text style={styles.cinemaDescription}>{cinemaDescription}</Text>
       <Text style={styles.cinemaDescription}>Åbningstider: {cinemaOpeningHours}</Text>
-    </View>
+    </Animatable.View>
     </>
   )
 }
@@ -96,16 +107,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 5
   },
-  cinemaMetaContent: {
-    fontFamily: "SourceSansPro-BlackIt",
-    color: "#676d7c",
-    fontSize: 12,
-    textAlign: "center",
-    marginLeft: 3,
-    marginRight: 3, 
-    
-    
-  },
+
   cinemaDescriptionContainer: {
     marginTop: 10,
     marginLeft: 25,
