@@ -82,7 +82,7 @@ const CinemaMetaData = ({ cinema }) => {
       duration={600}
       delay={300}
     >
-      <Text style={styles.cinemaDescription}>{cinemaDescription}</Text>
+      
       <Text style={styles.cinemaDescription}>Åbningstider: {cinemaOpeningHours}</Text>
     </Animatable.View>
     </>

@@ -13,6 +13,8 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
   const genreFallback = genre ? genre : movie.genre
   const imageFallback = image ? image : movie.imageUrl
 
+  
+
   return (
       
     <View style={styles.imageContainer}>
@@ -78,8 +80,8 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
         </Text>
       </SharedElement>
       
-      <Text style={styles.movieGenre} numberOfLines={2}>
-        {genreFallback.join(', ')} {"\n"}{ movie.playingTime ? `Varighed ${movie.playingTime} min` : null}
+      <Text style={styles.movieGenre} numberOfLines={3}>
+        {genreFallback.join(', ')} {"\n"}{ movie.playingTime ? `Varighed ${movie.playingTime} min` : null} {"\n"}{ movie.censorship ? `${movie.censorship.name}` : null}
       </Text>
     </View>
     

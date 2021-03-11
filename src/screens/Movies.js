@@ -71,7 +71,7 @@ const Movies = () => {
       <FlatList
         data={movies}
         extraData={movies}
-        numColumns={2}
+        numColumns={3}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => Item(item)}
         keyExtractor={(item) => item.id}

@@ -58,7 +58,7 @@ const MovieMetaData = ({ movie }) => {
       delay={300}
     >
       <View style={styles.movieMetaData}>
-        <Text style={styles.movieCensur}>Censur: {movie.censorship.name}</Text>
+        
         <View style={styles.movieRating}> 
           <MaterialIcons name="stars" size={34} color="#ff321e" style={styles.movieRatingIcon} />
           <Text style={styles.movieRatingRating}>{movie.average_rating? movie.average_rating.toFixed(0) : '0'} / 6</Text>

@@ -26,22 +26,19 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
+    marginTop: 20
   },
-  movieCensur: {
-    fontFamily: "SourceSansPro-Bold",
-    flex: 2,
-    color: "white",
-    textAlign: "center"
-  },
+
   movieRating: {
-    
     flex: 2,
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
+    
   },
   movieRatingIcon: {
     textAlign: "center",
     marginBottom: 5,
+    
   },
   movieRatingRating: {
     fontFamily: "SourceSansPro-Bold",
