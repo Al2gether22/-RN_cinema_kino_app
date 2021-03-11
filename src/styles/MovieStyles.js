@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#1d1d27"
   },
-  
 
 })
 

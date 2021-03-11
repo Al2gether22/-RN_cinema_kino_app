@@ -9,19 +9,7 @@ const styles = StyleSheet.create({
     marginRight: "4%",
     padding: 5,
   },
-  movieReview: {
-    marginTop: 15,
-    
-  },
-  movieReviewHeader: {
-    fontFamily: "SourceSansPro-Bold",
-    color: "white",
-    fontSize: 20,
-    
-  },
-  movieReviewBody: {
-    
-  },
+
   movieMetaData: {
     flex: 1,
     flexDirection: "row",
@@ -52,21 +40,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: "center",
   },
-  movieBody: {
-    fontFamily: "SourceSansPro-Black",
-    fontSize: 16, 
-    fontWeight: "200",
-    color: '#676d7c', 
-    lineHeight: 22,
-    
-  },
-  toggleMovieBodyText: {
-    marginTop: 5,
-    fontFamily: "SourceSansPro-Black", 
-    fontSize: 16, 
-    color: 'white',
-    textAlign: "center"
-  }
 
 })
 

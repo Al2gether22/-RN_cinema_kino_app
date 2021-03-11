@@ -260,6 +260,8 @@ PODS:
     - React
   - react-native-safe-area-context (3.1.9):
     - React-Core
+  - react-native-viewpager (5.0.12):
+    - React-Core
   - react-native-webview (11.2.3):
     - React-Core
   - React-perflogger (0.64.0-rc.4)
@@ -385,6 +387,7 @@ DEPENDENCIES:
   - "react-native-cookies (from `../node_modules/@react-native-cookies/cookies`)"
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-viewpager (from `../node_modules/react-native-pager-view`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -461,6 +464,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-viewpager:
+    :path: "../node_modules/react-native-pager-view"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-perflogger:
@@ -535,6 +540,7 @@ SPEC CHECKSUMS:
   react-native-cookies: 3b5b182d008b714fefc337df15b787f00385a598
   react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
   react-native-safe-area-context: 86612d2c9a9e94e288319262d10b5f93f0b395f5
+  react-native-viewpager: 51b445512ca937fa43e7e2715041dbfe90b4c8c0
   react-native-webview: 36561eaf7508e67f72d8c959b713bac841f3652e
   React-perflogger: 22385ffdf9f2ce78ba0251c260924c6bbefbe916
   React-RCTActionSheet: 6337f324f825b15a506bfc18f1ac08592f8ef78f

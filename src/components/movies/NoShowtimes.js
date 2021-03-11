@@ -8,7 +8,7 @@ const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
     month: "long",
     day: "numeric",
   };
-
+ 
   const nextShowtimeDate = new Date(nextShowtime);
 
   if (!nextShowtime) {
@@ -29,7 +29,6 @@ const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
 
 const styles = StyleSheet.create({
   nextShowtimeContainer: {
-    flex: 1,
     alignSelf: "center",
     backgroundColor: "#1d1d27",
     padding: 10,
