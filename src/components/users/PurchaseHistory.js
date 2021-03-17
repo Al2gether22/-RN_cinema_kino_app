@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator, FlatList, Image, Text } from "react-native";
 
 import styles from "../../styles/ProfileStyles"
 
@@ -32,18 +32,54 @@ const PurchaseHistory = ({ user }) => {
       .finally(() => setLoading(false));
   }, []);
 
-
+ 
   if (loading) {
     return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
   }
 
   if (!userHistoryData) {
-    return null
+    return(
+      <Text>Ingen Købshistorik tilgængelig</Text>
+    )
+  }
+  
+  const Item = (item) => {
+    console.log(typeof item.showtime)
+    return (
+
+      <View style={styles.itemContainer}>
+        <View style={styles.posterImgContainer}>
+          <Image
+            style={styles.posterImg}
+            source={{
+            uri: item.imageUrl,
+            }}
+          />
+        </View>
+        <View style={styles.dataContainer}>
+          <Text style={styles.title}>
+            {item.title}
+          </Text>
+          <Text style={styles.metaData}>{item.cinema}</Text>
+          <Text style={styles.metaData}>{item.date}</Text>
+          <Text style={styles.metaData}>{item.showtime}</Text>
+          <Text style={styles.metaData}>{item.room_name} - {item.seats}</Text>
+          <Text style={styles.metaData}>{item.price} kr</Text>
+        </View>
+      </View>
+     
+    );
   }
 
   return (
-    <View style={styles.container}>
-      
+    <View style={styles.purchaseHistoryContainer}>
+      <Text style={styles.purchaseHistoryHeadline}>Købshistorik</Text>
+      <FlatList 
+        data={userHistoryData}
+        renderItem={({ item }) => Item(item)}
+        keyExtractor={(item) => `${item.id}${item.date}`}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   )
 }
