@@ -6,7 +6,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#1d1d27"
   },
-
+  goBackContainer: {
+    position: "absolute", 
+    zIndex: 9999,
+    top: 25,
+    left: 15, 
+    
+  },
 })
 
 export default styles;

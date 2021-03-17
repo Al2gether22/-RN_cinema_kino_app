@@ -30,7 +30,7 @@ const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
 const styles = StyleSheet.create({
   nextShowtimeContainer: {
     alignSelf: "center",
-    backgroundColor: "#1d1d27",
+    backgroundColor: "black",
     padding: 10,
     borderWidth: 2,
     borderColor: "#676d7c",
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   nextShowtimeText: {
-    color: "#676d7c",
+    color: "white",
     fontFamily: "SourceSansPro-Bold",
   },
 });

@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     marginLeft: "4%",
     marginRight: "4%",
     padding: 5,
+    marginBottom: 20
   },
 
   movieMetaData: {

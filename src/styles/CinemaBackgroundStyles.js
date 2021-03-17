@@ -26,6 +26,14 @@ const styles = StyleSheet.create({
     fontSize: 25,
     
   },
+
+  goBackContainer: {
+    position: "absolute", 
+    zIndex: 9999,
+    top: 25,
+    left: 15, 
+    
+  },
   
   LinearGradientUpper: {
     flex: 1,

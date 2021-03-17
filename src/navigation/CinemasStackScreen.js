@@ -39,27 +39,7 @@ export default function CinemasStackScreen({ navigation }){
 
       <Stack.Screen name="Cinema" component={Cinema}
         options={({ route }) => ({
-          title: route.params.item.name, 
-          headerBackTitle: "Tilbage",
-          navigationOptions: ({ navigation }) => ({
-            headerLeft: (
-              <HeaderBackButton 
-                onPress={_ => navigation.navigate("Cinemas")} />
-            )
-          }),
-          headerStyle: {
-          backgroundColor: '#1d1d27',
-          shadowColor: 'transparent',
-          },
-          headerTintColor: '#fffdfd',
-          headerTitleStyle: {
-            fontFamily: "SourceSansPro-Bold",
-          },
-          headerBackTitleStyle: {
-            fontSize: 15,
-            color: "#fffdfd",
-            fontFamily: "SourceSansPro-Bold",
-          },  
+          headerShown: false,
           cardStyleInterpolator: ({ current: { progress } }) => {
             return {
               cardStyle: {

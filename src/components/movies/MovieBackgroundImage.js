@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, ImageBackground, Text, TouchableOpacity } from "react-native"
+import { useNavigation, StackActions, CommonActions } from "@react-navigation/native";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import { SharedElement } from 'react-navigation-shared-element';
@@ -8,17 +9,27 @@ import MovieTrailerModal from "../../modals/MovieTrailerModal"
 import styles from "../../styles/MovieBackgroundImageStyles";
 
 
-const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
+const MovieBackgroundImage = ({ movie, image, danishTitle, genre, backgroundColor, primaryFontColor, secondaryFontColor }) => {
   const [modalVisible, setModalVisible] = useState(false)
+  const navigation = useNavigation();
   const genreFallback = genre ? genre : movie.genre
   const imageFallback = image ? image : movie.imageUrl
-
+  const titleFallback = danishTitle ? danishTitle : movie.title
   
-
   return (
-      
-    <View style={styles.imageContainer}>
     
+    <View style={styles.imageContainer}>
+      <TouchableOpacity
+        onPress={() => { navigation.goBack();
+          
+        }}
+        style={styles.goBackContainer}
+      >
+        <Text style={styles.goBack}>
+          <MaterialCommunityIcons name="arrow-left-circle" size={35} color={primaryFontColor} />
+        </Text>
+      </TouchableOpacity>
+
       <SharedElement id={image}>
         <ImageBackground 
           style={styles.coverImage}
@@ -28,59 +39,52 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre }) => {
           
           //resizeMode="contain"
         >
-          
-          <LinearGradient 
-              colors={['rgba(29,29,39,1)', 'rgba(29,29,39,0)']} 
-              
-              style={styles.LinearGradientUpper}
-            ></LinearGradient>
-           
-           
-            { !!movie.video_markup &&
-        
-            // checks to see if there is a trailer before rendering the play button
-              <TouchableOpacity
-                onPress={() => { setModalVisible(true)}} 
-              >
-                <Animatable.View style={styles.playButtomViewWrapper} 
-                  animation='zoomIn'
-                  duration={900}
-                  delay={100} 
-                >
 
-                  <MaterialCommunityIcons  
-                    style={styles.playButton}
-                    name="play-circle" 
-                    size={60} 
-                  />
-                </Animatable.View>
-                <MovieTrailerModal 
-                  modalVisible={modalVisible}
-                  setModalVisible={() => setModalVisible(false)}
-                  video_markup={movie.video_markup}
-                  movie={movie}
-                />
-              </TouchableOpacity>
-            }
             <LinearGradient 
-              colors={['rgba(29,29,39,0)', 'rgba(29,29,39,1)']} 
+              colors={[`${backgroundColor}00`, `${backgroundColor}`]} 
               
               style={styles.LinearGradientLower}
             ></LinearGradient>
-          
-        
         </ImageBackground>
+        { !!movie.video_markup &&
+        
+        // checks to see if there is a trailer before rendering the play button
+          <TouchableOpacity
+            onPress={() => { setModalVisible(true)}} 
+          >
+            <Animatable.View style={styles.playButtomViewWrapper} 
+              animation='zoomIn'
+              duration={900}
+              delay={100} 
+            >
+
+              <MaterialCommunityIcons  
+                style={styles.playButton}
+                color={primaryFontColor}
+                name="play-circle" 
+                size={60} 
+              />
+            </Animatable.View>
+            <MovieTrailerModal 
+              modalVisible={modalVisible}
+              setModalVisible={() => setModalVisible(false)}
+              video_markup={movie.video_markup}
+              movie={movie}
+            />
+          </TouchableOpacity>
+        }
       </SharedElement>
 
       
       
-      <SharedElement id={danishTitle}>
+      <SharedElement id={titleFallback}>
         <Text 
-          style={styles.movieTitle} numberOfLines={3}>{danishTitle}
+          
+          style={[styles.movieTitle, {color: primaryFontColor}]}  numberOfLines={3}>{titleFallback}
         </Text>
       </SharedElement>
       
-      <Text style={styles.movieGenre} numberOfLines={3}>
+      <Text style={[styles.movieGenre, {color: secondaryFontColor}]} numberOfLines={3}>
         {genreFallback.join(', ')} {"\n"}{ movie.playingTime ? `Varighed ${movie.playingTime} min` : null} {"\n"}{ movie.censorship ? `${movie.censorship.name}` : null}
       </Text>
     </View>

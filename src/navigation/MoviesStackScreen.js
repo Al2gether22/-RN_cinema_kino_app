@@ -15,6 +15,7 @@ export default function MoviesStackScreen({ navigation }){
         options={{
           title: "Film",
           headerBackTitle: "Tilbage",
+          
           headerLeft: (props) => (
             <HeaderBackButton 
               {...props}
@@ -41,26 +42,10 @@ export default function MoviesStackScreen({ navigation }){
 
       <Stack.Screen name="Movie" component={Movie}
         //options={() => options}
+        
         options={({ route }) => ({ 
+          headerShown: false,
           
-          title: route.params.item.title,
-          headerBackTitle: "Tilbage",
-          navigationOptions: ({ navigation }) => ({
-            headerLeft: (<HeaderBackButton onPress={_ => navigation.navigate("Movies")}/>)
-          }),
-          headerStyle: {
-          backgroundColor: '#1d1d27',
-          shadowColor: 'transparent',
-          },
-          headerTintColor: '#fffdfd',
-          headerTitleStyle: {
-            fontFamily: "SourceSansPro-Bold"
-          },
-          headerBackTitleStyle: {
-            fontSize: 15,
-            color: "#fffdfd",
-            fontFamily: "SourceSansPro-Bold"
-          }, 
           cardStyleInterpolator: ({ current: { progress } }) => {
             return {
               cardStyle: {

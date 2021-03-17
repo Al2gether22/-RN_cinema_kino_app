@@ -24,6 +24,7 @@ const DatePicker = forwardRef(
     ref
   ) => {
     const Item = ({ item, style }) => (
+      
       <TouchableOpacity
         onPress={() => {
           scrollToIndex(ref, dates, item);
@@ -37,7 +38,7 @@ const DatePicker = forwardRef(
     );
 
     const renderItem = ({ item }) => {
-      const backgroundColor = item === selectedDate ? "white" : "#1d1d27";
+      const backgroundColor = item === selectedDate ? "white" : "black";
 
       return (
         <Item key={item.toString()} item={item} style={{ backgroundColor }} />
@@ -60,10 +61,10 @@ const DatePicker = forwardRef(
 const styles = StyleSheet.create({
   showtimeContainer: {
     minWidth: 80, 
-    backgroundColor: "#1d1d27",
+    backgroundColor: "black",
     padding: 10,
     borderWidth: 2,
-    borderColor: "#676d7c",
+    borderColor: "black",
     borderRadius: 6,
     marginRight: 7,
     marginBottom: 15,
