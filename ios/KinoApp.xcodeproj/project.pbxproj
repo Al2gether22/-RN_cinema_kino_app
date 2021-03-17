@@ -13,9 +13,14 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		515FFAE77AF805565E23C018 /* libPods-KinoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA4CD5578C258DA28D7B69C /* libPods-KinoApp.a */; };
-		8640EF4125F79E55008F4CB1 /* BasierSquare-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8640EF3F25F79E55008F4CB1 /* BasierSquare-Regular.otf */; };
 		8695C71425E69AAC00D74D08 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8695C71325E69AAC00D74D08 /* Images-2.xcassets */; };
 		EE4625C6AFCDCEBF47E3B074 /* libPods-KinoApp-KinoAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59393621CECBB9B90C3FB02C /* libPods-KinoApp-KinoAppTests.a */; };
+		F879183E2600ADBA00B06245 /* BasierSquare-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F879183D2600ADAE00B06245 /* BasierSquare-Regular.otf */; };
+		F87918412600ADC100B06245 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5675BCDCC5846029E63EF42 /* SourceSansPro-Bold.ttf */; };
+		F87918442600AE0300B06245 /* BureauGrotComp-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7F2BF8E283740FB9C9AB3B6 /* BureauGrotComp-Medium.ttf */; };
+		F87918472600AE6E00B06245 /* BureauGrotCond-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DFDB03D4E6C4A43A93C0F3B /* BureauGrotCond-Light.ttf */; };
+		F879184A2600AE7200B06245 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D921D66A5F1149F2ACEA9352 /* SourceSansPro-Black.ttf */; };
+		F879184B2600AE7400B06245 /* SourceSansPro-BlackIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 072AE1DC66784149BAB1E629 /* SourceSansPro-BlackIt.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +64,6 @@
 		5FB791DFDF8641D9B8007CD7 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
 		690F036D2F894980808867A3 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
 		73A28D2D3B04496082CF02A4 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = ../assets/fonts/SimpleLineIcons.ttf; sourceTree = "<group>"; };
-		8640EF3F25F79E55008F4CB1 /* BasierSquare-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierSquare-Regular.otf"; path = "../../../../Desktop/Basier_Complete_Desktop/Basier_Square_Desktop/BasierSquare-Regular.otf"; sourceTree = "<group>"; };
 		8695C71325E69AAC00D74D08 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "KinoApp/Images-2.xcassets"; sourceTree = "<group>"; };
 		8DFDB03D4E6C4A43A93C0F3B /* BureauGrotCond-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BureauGrotCond-Light.ttf"; path = "../assets/fonts/BureauGrotCond-Light.ttf"; sourceTree = "<group>"; };
 		8F04E7E26C6CB4D98943EA23 /* Pods-KinoApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-KinoApp-tvOS/Pods-KinoApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,11 +77,11 @@
 		C7F2BF8E283740FB9C9AB3B6 /* BureauGrotComp-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BureauGrotComp-Medium.ttf"; path = "../assets/fonts/BureauGrotComp-Medium.ttf"; sourceTree = "<group>"; };
 		D316F26547F9446C96D09352 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = ../assets/fonts/Feather.ttf; sourceTree = "<group>"; };
 		D921D66A5F1149F2ACEA9352 /* SourceSansPro-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Black.ttf"; path = "../assets/fonts/SourceSansPro-Black.ttf"; sourceTree = "<group>"; };
-		E2F27D61CA5A477DBC6BF673 /* BasierSquare-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BasierSquare-Regular.otf"; path = "../assets/fonts/BasierSquare-Regular.otf"; sourceTree = "<group>"; };
 		E39EBEB94BADE9CF3EFC67BB /* Pods-KinoApp-KinoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoApp-KinoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-KinoApp-KinoAppTests/Pods-KinoApp-KinoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F648DB8B4ACC4511896299D5 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = ../assets/fonts/AntDesign.ttf; sourceTree = "<group>"; };
+		F879183D2600ADAE00B06245 /* BasierSquare-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierSquare-Regular.otf"; path = "../assets/fonts/BasierSquare-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,15 +167,14 @@
 		2FD02F0697C24ACC81624094 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F879183D2600ADAE00B06245 /* BasierSquare-Regular.otf */,
 				C7F2BF8E283740FB9C9AB3B6 /* BureauGrotComp-Medium.ttf */,
 				8DFDB03D4E6C4A43A93C0F3B /* BureauGrotCond-Light.ttf */,
 				D921D66A5F1149F2ACEA9352 /* SourceSansPro-Black.ttf */,
 				072AE1DC66784149BAB1E629 /* SourceSansPro-BlackIt.ttf */,
 				B5675BCDCC5846029E63EF42 /* SourceSansPro-Bold.ttf */,
 				F648DB8B4ACC4511896299D5 /* AntDesign.ttf */,
-				E2F27D61CA5A477DBC6BF673 /* BasierSquare-Regular.otf */,
 				53D4B7E4E8EB4818B1D38F85 /* Entypo.ttf */,
-				8640EF3F25F79E55008F4CB1 /* BasierSquare-Regular.otf */,
 				21629ACD30EF46F6973F4E24 /* EvilIcons.ttf */,
 				D316F26547F9446C96D09352 /* Feather.ttf */,
 				24515852F5044A95ABD0C554 /* FontAwesome.ttf */,
@@ -309,7 +312,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8640EF4125F79E55008F4CB1 /* BasierSquare-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +320,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				F879183E2600ADBA00B06245 /* BasierSquare-Regular.otf in Resources */,
+				F87918442600AE0300B06245 /* BureauGrotComp-Medium.ttf in Resources */,
+				F87918412600ADC100B06245 /* SourceSansPro-Bold.ttf in Resources */,
+				F879184A2600AE7200B06245 /* SourceSansPro-Black.ttf in Resources */,
+				F87918472600AE6E00B06245 /* BureauGrotCond-Light.ttf in Resources */,
+				F879184B2600AE7400B06245 /* SourceSansPro-BlackIt.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				8695C71425E69AAC00D74D08 /* Images-2.xcassets in Resources */,
 			);
