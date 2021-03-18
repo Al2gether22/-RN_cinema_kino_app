@@ -81,10 +81,11 @@ const Top10Movies = () => {
 
 const styles = StyleSheet.create({
   container: {
-
+    marginTop: 10
   }, 
   headLineContainer: {
-    backgroundColor: "black",
+    color: "white",
+    backgroundColor: "rgba(29,29,39,0.8)",
     flexDirection: "row",
     
   },
@@ -109,15 +110,16 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   itemContainer: {
-    margin: 10,
-   
+    margin: 5,
+    borderRadius: 7
     
   },
   img: {
     height: 60,
     width: 120,
     borderColor: "black",
-    borderWidth: 4
+    borderWidth: 2,
+    borderRadius: 7
   },
   title: {
     position: "absolute",

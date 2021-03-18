@@ -19,12 +19,12 @@ const MovieMetaData = ({ movie, backgroundColor, primaryFontColor, secondaryFont
       <View style={styles.movieMetaData}>
         
         <View style={styles.movieRating}> 
-          <MaterialIcons name="stars" size={34} color="#ff321e" style={styles.movieRatingIcon} />
+          <MaterialIcons name="stars" size={34} color={secondaryFontColor} style={styles.movieRatingIcon} />
           <Text style={[styles.movieRatingRating, { color: primaryFontColor}]}>{movie.average_rating? movie.average_rating.toFixed(0) : '0'} / 6</Text>
           <Text style={[styles.movieRatingUsers, {color: secondaryFontColor}]}>Brugere ({movie.votes_count})</Text>
         </View>
         <View style={styles.movieRating}>
-          <Foundation name="star" size={34} color="yellow" style={styles.movieRatingIcon} />
+          <Foundation name="star" size={34} color={secondaryFontColor} style={styles.movieRatingIcon} />
           <Text style={[styles.movieRatingRating, { color: primaryFontColor}]}>{movie.media_rating_value? parseInt(movie.media_rating_value) : 0} / 6</Text>
           <Text style={[styles.movieRatingUsers, {color: secondaryFontColor}]}>Medier ({movie.media_rating_count})</Text>
         </View>

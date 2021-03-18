@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     paddingBottom: 5
   },
   purchaseHistoryContainer: {
-    
+    margin: "4%",
+    padding: 5,
   },
   purchaseHistoryHeadline: {
     color: "white",

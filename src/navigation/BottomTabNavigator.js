@@ -44,9 +44,9 @@ export default function BottomTabNavigator() {
           },
         })}
         tabBarOptions={{
-          activeTintColor: "black",
+          activeTintColor: "white",
           inactiveTintColor: "white",
-          activeBackgroundColor: "tomato",
+          activeBackgroundColor: "#ff321e",
           inactiveBackgroundColor: "black",
           labelPosition: "below-icon",
           labelStyle: {

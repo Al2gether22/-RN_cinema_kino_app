@@ -44,7 +44,7 @@ const PurchaseHistory = ({ user }) => {
   }
   
   const Item = (item) => {
-    console.log(typeof item.showtime)
+    
     return (
 
       <View style={styles.itemContainer}>
@@ -64,7 +64,7 @@ const PurchaseHistory = ({ user }) => {
           <Text style={styles.metaData}>{item.date}</Text>
           <Text style={styles.metaData}>{item.showtime}</Text>
           <Text style={styles.metaData}>{item.room_name} - {item.seats}</Text>
-          <Text style={styles.metaData}>{item.price} kr</Text>
+          <Text style={styles.metaData}>{item.tickets} billetter - {item.price} kr</Text>
         </View>
       </View>
      

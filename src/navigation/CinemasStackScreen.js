@@ -27,12 +27,13 @@ export default function CinemasStackScreen({ navigation }){
           },
           headerTintColor: "#fffdfd",
           headerTitleStyle: {
-            fontFamily: "SourceSansPro-Bold",
+            fontFamily: "BureauGrotComp-Medium",
+            fontSize: 18
           }, 
           headerBackTitleStyle: {
-            fontSize: 15,
+            fontSize: 18,
             color: "#fffdfd",
-            fontFamily: "SourceSansPro-Bold", 
+            fontFamily: "BureauGrotComp-Medium", 
           }
         }}
       />

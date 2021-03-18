@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   headLineContainer: {
     color: "white",
-    backgroundColor: "black",
+    backgroundColor: "rgba(29,29,39,0.8)",
     flexDirection: "row",
     
   },
@@ -106,14 +106,15 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   itemContainer: {
-    margin: 10,
-    
+    margin: 5,
+    borderRadius: 7
   },
   img: {
     height: 120,
     width: 81,
     borderColor: "black",
-    borderWidth: 4
+    borderWidth: 2,
+    borderRadius: 7
   },
   title: {
     width: 81,
