@@ -21,50 +21,51 @@ const Movie = ({ route }) => {
   const [secondaryFontColor, setSecondaryFontColor] = useState("white");
   const [active, setActive] = useState(0)
 
-  useEffect(() => {
-    const fetchColors = async () => {
-      const result = await ImageColors.getColors(item.imageUrl, {
-        fallback: '#000000',
-        quality: 'lowest',
-        pixelSpacing: 500,
-      });
+  // useEffect(() => {
+  //   const fetchColors = async () => {
+  //     const result = await ImageColors.getColors(item.imageUrl, {
+  //       fallback: '#000000',
+  //       quality: 'lowest',
+  //       pixelSpacing: 500,
+  //     });
 
-      if (result.platform === 'android') {
-        setColors({
-          colorOne: {value: result.average, name: 'average'},
-          colorTwo: {value: result.dominant, name: 'dominant'},
-          colorThree: {value: result.vibrant, name: 'vibrant'},
-          colorFour: {value: result.darkVibrant, name: 'darkVibrant'},
-          rawResult: JSON.stringify(result),
+  //     if (result.platform === 'android') {
+  //       setColors({
+  //         colorOne: {value: result.average, name: 'average'},
+  //         colorTwo: {value: result.dominant, name: 'dominant'},
+  //         colorThree: {value: result.vibrant, name: 'vibrant'},
+  //         colorFour: {value: result.darkVibrant, name: 'darkVibrant'},
+  //         rawResult: JSON.stringify(result),
           
-        });
-        setBackgroundColor(colors.colorOne.value)
-        setPrimaryFontColor(colors.colorThree.value)
-        setSecondaryFontColor(colors.colorFour.value)
-      } else {
-        setColors({
-          colorOne: {value: result.background, name: 'background'},
-          colorTwo: {value: result.detail, name: 'detail'},
-          colorThree: {value: result.primary, name: 'primary'},
-          colorFour: {value: result.secondary, name: 'secondary'},
-          rawResult: JSON.stringify(result),
-        });
-        setBackgroundColor(colors.colorOne.value)
-        setPrimaryFontColor(colors.colorThree.value)
-        setSecondaryFontColor(colors.colorFour.value)
-      }
+  //       });
+  //       setBackgroundColor(colors.colorOne.value)
+  //       setPrimaryFontColor(colors.colorThree.value)
+  //       setSecondaryFontColor(colors.colorFour.value)
+  //     } else {
+  //       setColors({
+  //         colorOne: {value: result.background, name: 'background'},
+  //         colorTwo: {value: result.detail, name: 'detail'},
+  //         colorThree: {value: result.primary, name: 'primary'},
+  //         colorFour: {value: result.secondary, name: 'secondary'},
+  //         rawResult: JSON.stringify(result),
+  //       });
+  //       setBackgroundColor(colors.colorOne.value)
+  //       setPrimaryFontColor(colors.colorThree.value)
+  //       setSecondaryFontColor(colors.colorFour.value)
+  //     }
 
-    };
+  //   };
     
-    fetchColors();
-  }, [movie]);
+  //   fetchColors();
+  // }, [movie]);
   
   useEffect(() => {
     fetch(`https://www.kino.dk/appservices/movie/${item.id}`, {
       mode: "no-cors",
     })
       .then((response) => response.json())
-      .then((json) => {setMovie(json), setColors2(fetchColorsFromImage(json.imageUrl))})
+      .then((json) => setMovie(json))
+      .then(() => setColors2(fetchColorsFromImage(item.imageUrl)))
       .catch((error) => console.error(error))
       .finally(() => {setLoading(false)})
       
