@@ -8,14 +8,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import styles from "../../styles/CinemaBackgroundStyles";
 
-const CinemaBackgroundImage = ({ name, img }) => {
+const CinemaBackgroundImage = ({ name, img, modal }) => {
 
   const navigation = useNavigation();
 
   return (
     <>
       <View style={styles.imageContainer}>
-
+      { modal ? null : 
       <TouchableOpacity
         onPress={navigation.goBack}
         style={styles.goBackContainer}
@@ -23,7 +23,7 @@ const CinemaBackgroundImage = ({ name, img }) => {
         <Text style={styles.goBack}>
           <MaterialCommunityIcons name="arrow-left-circle" size={35} color={"white"} />
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity>}
 
         <SharedElement id={img}>
           <ImageBackground

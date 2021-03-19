@@ -106,7 +106,7 @@ const MovieModal = ({ movieModalVisible, setMovieModalVisible, passedMovie, show
                
                 
                 <MovieBackgroundImage 
-                  movie={movie} image={passedMovie.imageUrl} danishTitle={passedMovie.title} backgroundColor={backgroundColor} primaryFontColor={primaryFontColor} secondaryFontColor={secondaryFontColor}
+                  movie={movie} image={passedMovie.imageUrl} danishTitle={passedMovie.title} modal={true} backgroundColor={backgroundColor} primaryFontColor={primaryFontColor} secondaryFontColor={secondaryFontColor}
                 /> 
                 
                 <MovieMetaData 

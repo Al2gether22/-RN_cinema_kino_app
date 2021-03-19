@@ -3,9 +3,9 @@ import {
   View,
   Text,
   FlatList,
-  TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import TouchableScale from 'react-native-touchable-scale';
 import {Context as CinemaContext} from '../../context/CinemaContext';
 import {Context as AuthContext} from '../../context/AuthContext';
 import WebViewModal from '../../modals/WebViewModal';
@@ -159,7 +159,11 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
                     data={Object.values(item)}
                     numColumns={4}
                     renderItem={({item}) => (
-                      <TouchableOpacity
+                      <TouchableScale
+                        activeScale={0.9}
+                        tension={50}
+                        friction={7}
+                        useNativeDriver
                         onPress={() => [
                           setModalVisible(true),
                           setShowtimeId(item.showtime_id),
@@ -168,7 +172,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
                         <Text style={styles.showTimeText}>
                           {item.start_time.slice(11, 16)}
                         </Text>
-                      </TouchableOpacity>
+                      </TouchableScale>
                     )}
                   />
                 </View>

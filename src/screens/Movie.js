@@ -68,7 +68,7 @@ const Movie = ({ route }) => {
   }, []);
    
     return (
-      loading ? null :
+      
       // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
       <>
         

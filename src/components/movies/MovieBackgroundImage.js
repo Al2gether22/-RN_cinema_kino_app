@@ -9,7 +9,7 @@ import MovieTrailerModal from "../../modals/MovieTrailerModal"
 import styles from "../../styles/MovieBackgroundImageStyles";
 
 
-const MovieBackgroundImage = ({ movie, image, danishTitle, genre, backgroundColor, primaryFontColor, secondaryFontColor }) => {
+const MovieBackgroundImage = ({ movie, image, danishTitle, genre, modal, backgroundColor, primaryFontColor, secondaryFontColor }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const navigation = useNavigation();
   const genreFallback = genre ? genre : movie.genre
@@ -19,6 +19,7 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre, backgroundColo
   return (
     
     <View style={styles.imageContainer}>
+      { modal ? null : 
       <TouchableOpacity
         onPress={() => { navigation.goBack();
           
@@ -28,7 +29,7 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre, backgroundColo
         <Text style={styles.goBack}>
           <MaterialCommunityIcons name="arrow-left-circle" size={35} color={primaryFontColor} />
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity>}
 
       <SharedElement id={image}>
         <ImageBackground 

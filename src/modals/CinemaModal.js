@@ -58,6 +58,7 @@ const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }
                 <CinemaBackgroundImage
                   name={passedCinema.name}
                   img={passedCinema.imageUrl}
+                  modal={true}
                 />
                 { !cinema ? null : <CinemaMetaData cinema={cinema} />}
                 
