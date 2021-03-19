@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Image, TouchableHighlight, } from "react-native";
+import { View, Text, FlatList, ActivityIndicator, Image } from "react-native";
 import _ from "lodash";
 import { Context as AuthContext } from "../../context/AuthContext"
 import DatePicker from "../shared/DatePicker";
@@ -7,6 +7,7 @@ import MovieModal from "../../modals/MovieModal";
 import WebViewModal from "../../modals/WebViewModal"
 import styles from "../../styles/ShowTimeStyles";
 import moment from "moment";
+import TouchableScale from 'react-native-touchable-scale';
 import { scrollToIndex } from "../../helpers/datepicker.utils";
 
 //We need versions, they are inside item.versions
@@ -19,7 +20,7 @@ const ShowTimes = ({ id }) => {
   const [selectedDate, setSelectedDate] = useState(now);
   const [movieModalVisible, setMovieModalVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [movieId, setMovieId] = useState();
+  const [movie, setMovie] = useState({});
   const [showtimeId, setShowtimeId] = useState();
   const [sessionName, setSessionName] = useState("")  
   const [sessionId, setSessionId] = useState("") 
@@ -65,7 +66,7 @@ const ShowTimes = ({ id }) => {
       <MovieModal
         movieModalVisible={movieModalVisible}
         setMovieModalVisible={() => setMovieModalVisible(false)}
-        movieId={movieId}
+        passedMovie={movie}
         showtimes={false}
       />
 
@@ -102,10 +103,16 @@ const ShowTimes = ({ id }) => {
           renderItem={({ item }) => (
             <View style={styles.movieShowTimeContainer}>
               {setVersions(item.versions)}
-              <TouchableHighlight
+              <TouchableScale
+                activeScale={0.9}
+                tension={50}
+                friction={7}
+                useNativeDriver
                 onPress={() => {
-                  setMovieModalVisible(true), setMovieId(item.movie_id);
+                  setMovieModalVisible(true), setMovie(item);
+                  
                 }}
+                //onPress={() => navigation.navigate("Film", { screen: "Movie", params: { item }})}
               >
                 <View style={styles.moviePosterContainer}>
                   <Image
@@ -113,7 +120,7 @@ const ShowTimes = ({ id }) => {
                     style={styles.poster}
                   />
                 </View>
-              </TouchableHighlight>
+              </TouchableScale>
 
               <View>
                 <Text style={styles.sectionHeader}>{item.danishTitle}</Text>
@@ -135,7 +142,11 @@ const ShowTimes = ({ id }) => {
                     data={Object.values(item)}
                     numColumns={4}
                     renderItem={({ item }) => (
-                      <TouchableOpacity
+                      <TouchableScale
+                        activeScale={0.9}
+                        tension={50}
+                        friction={7}
+                        useNativeDriver
                         onPress={() => [
                           setModalVisible(true),
                           setShowtimeId(item.showtime_id),
@@ -145,7 +156,7 @@ const ShowTimes = ({ id }) => {
                         <Text style={styles.showTimeText}>
                           {item.start_time.slice(11, 16)}
                         </Text>
-                      </TouchableOpacity>
+                      </TouchableScale>
                     )}
                   />
                 </View>

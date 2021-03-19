@@ -3,9 +3,9 @@ import {
   View,
   Text,
   FlatList,
-  TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import TouchableScale from 'react-native-touchable-scale';
 import {Context as CinemaContext} from '../../context/CinemaContext';
 import {Context as AuthContext} from '../../context/AuthContext';
 import WebViewModal from '../../modals/WebViewModal';
@@ -18,7 +18,8 @@ import {create1MonthDates} from '../../helpers/date.utils';
 import {scrollToIndex} from '../../helpers/datepicker.utils';
 import moment from 'moment';
 
-const ShowTimes = ({id, nextShowtime, movieVersions}) => {
+
+const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFontColor, secondaryFontColor, active }) => {
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
   const [sessionName, setSessionName] = useState('');
@@ -55,7 +56,6 @@ const ShowTimes = ({id, nextShowtime, movieVersions}) => {
       // sets showtimes to the response through the mergeArray method that calculates the distance
       .then(json => {
         setShowtimes(mergeArrays(json, state.cinemas));
-        console.log(mergeArrays(json, state.cinemas));
       })
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
@@ -98,8 +98,9 @@ const ShowTimes = ({id, nextShowtime, movieVersions}) => {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
 
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: backgroundColor, display: active}]}>
       <WebViewModal
         modalVisible={modalVisible}
         setModalVisible={() => setModalVisible(false)}
@@ -134,7 +135,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions}) => {
         // Each cinema has a range of showtimes
         renderItem={({item}) => (
           <View>
-            <Text style={styles.sectionHeader}>
+            <Text style={[styles.sectionHeader, { color: primaryFontColor }]}>
               {item.name}{' '}
               {item.distance ? `- ${item.distance.toFixed(1)} km` : ''}
             </Text>
@@ -147,7 +148,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions}) => {
               numColumns={1}
               renderItem={({item}) => (
                 <View style={styles.showTimeContainer}>
-                  <Text style={styles.showtimeVersionLabel}>
+                  <Text style={[styles.showtimeVersionLabel, { color: secondaryFontColor }]}>
                     <MovieVersionLookup
                       // Make check to see if item[0] exists
                       id={item[0].movie_version_id}
@@ -160,7 +161,11 @@ const ShowTimes = ({id, nextShowtime, movieVersions}) => {
                     data={Object.values(item)}
                     numColumns={4}
                     renderItem={({item}) => (
-                      <TouchableOpacity
+                      <TouchableScale
+                        activeScale={0.9}
+                        tension={50}
+                        friction={7}
+                        useNativeDriver
                         onPress={() => [
                           setModalVisible(true),
                           setShowtimeId(item.showtime_id),
@@ -169,7 +174,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions}) => {
                         <Text style={styles.showTimeText}>
                           {item.start_time.slice(11, 16)}
                         </Text>
-                      </TouchableOpacity>
+                      </TouchableScale>
                     )}
                   />
                 </View>

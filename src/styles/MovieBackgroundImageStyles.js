@@ -7,26 +7,25 @@ const styles = StyleSheet.create({
   // Checkout the option to resize mode to 'contain' and size for image
   coverImage: {
     width: "100%",
-    aspectRatio: 1
+    aspectRatio: 2 / 3, 
+    
   },
   
   playButtomViewWrapper: {
-    display: "flex",
-    alignSelf: "center",
-    
-    borderRadius: 40, 
-    borderWidth: .1, 
-    backgroundColor: "lightgrey",
-    
+    zIndex: 99999,
+    position: "absolute",
+    left: "50%",
+    top: -350
   },
   playButton: {
-    color: "#1d1d27",
+    position: "relative",
+    left: "-50%"
   },
   
   movieTitle: {
     fontFamily: "BureauGrotComp-Medium",
     color: "white",
-    marginTop: "5%",
+    marginTop: -30,
     marginLeft: "5%",
     marginRight: "20%",
     fontSize: 35
@@ -41,8 +40,11 @@ const styles = StyleSheet.create({
     
   },
 
-  LinearGradientUpper: {
-    flex: 1,
+  goBackContainer: {
+    position: "absolute", 
+    zIndex: 9999,
+    top: 25,
+    left: 15, 
     
   },
 

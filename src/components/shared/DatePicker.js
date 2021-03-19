@@ -23,7 +23,8 @@ const DatePicker = forwardRef(
     { selectedDate, setSelectedDate, dates = defaultDates, scrollToIndex },
     ref
   ) => {
-    const Item = ({ item, style }) => (
+    const Item = ({ item, style, color }) => (
+      
       <TouchableOpacity
         onPress={() => {
           scrollToIndex(ref, dates, item);
@@ -31,16 +32,16 @@ const DatePicker = forwardRef(
         }}
       >
         <View style={[styles.showtimeContainer, style]}>
-          <Text style={styles.showtime}>{dateLabelFromNow(item)}</Text>
+          <Text style={[styles.showtime, { color }]}>{dateLabelFromNow(item)}</Text>
         </View>
       </TouchableOpacity>
     );
 
     const renderItem = ({ item }) => {
-      const backgroundColor = item === selectedDate ? "white" : "#1d1d27";
-
+      const backgroundColor = item === selectedDate ? "white" : "black";
+      const color = item === selectedDate ? "black" : "white"
       return (
-        <Item key={item.toString()} item={item} style={{ backgroundColor }} />
+        <Item key={item.toString()} item={item} color={color} style={{ backgroundColor }} />
       );
     };
 
@@ -60,21 +61,21 @@ const DatePicker = forwardRef(
 const styles = StyleSheet.create({
   showtimeContainer: {
     minWidth: 80, 
-    backgroundColor: "#1d1d27",
+    backgroundColor: "black",
     padding: 10,
     borderWidth: 2,
-    borderColor: "#676d7c",
+    borderColor: "black",
     borderRadius: 6,
     marginRight: 7,
     marginBottom: 15,
   },
   showtime: {
-    color: "#676d7c",
+    
     fontFamily: "SourceSansPro-Bold",
     textAlign: "center"
   },
   dateLabel: {
-    color: "#676d7c",
+    
     fontFamily: "SourceSansPro-Bold",
   },
 });

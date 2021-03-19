@@ -40,7 +40,7 @@ const Movies = () => {
         useNativeDriver
         onPress={() =>
           navigation.navigate("Movie", { 
-              item       
+              item: item, lastScreen: "Film"       
           })
         }
       >

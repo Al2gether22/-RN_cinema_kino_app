@@ -1,10 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../../context/AuthContext";
-import { Text, View, Image, TouchableOpacity, ActivityIndicator } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 
-import styles from "../../styles/ProfileStyles";
-
-import WebViewModal from "../../modals/WebViewModal"
+import UserMetaData from "../users/UserMetaData"
 import PurchaseHistory from "./PurchaseHistory"
 
 
@@ -12,8 +10,7 @@ const Profile = ({ user }) => {
   const { signout } = useContext(Context);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({});
-  const [modalVisible, setModalVisible] = useState(false);
-  const [url, setUrl] = useState("");
+
   const userObject = JSON.parse(user);
 
   useEffect(() => {
@@ -31,9 +28,7 @@ const Profile = ({ user }) => {
       .then((response) => response.json())
       .then((json) => {
         if (json === "false" ) {
-          console.log("fejl")
-          // Slet bruger fra async storage og state
-          // Samme funktion til purchase history
+          signout
         } else {
           setUserData(json);
         }
@@ -48,53 +43,13 @@ const Profile = ({ user }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <WebViewModal
-        modalVisible={modalVisible}
-        setModalVisible={() => setModalVisible(false)}
-        url={url}
-        cookieName={userObject.session_name}
-        cookieValue={userObject.session_id}
-      />
-      <View style={styles.userDataContainer}>
-        <Image
-          style={styles.profilePic}
-          source={{ uri: userData.image }}
-        ></Image>
-        <View style={styles.userData}>
-          {userData.displayname ? (
-            <Text style={styles.userDataText}>{userData.displayname}</Text>
-          ) : (
-            <Text style={styles.userDataText}>{userData.firstname}</Text>
-          )}
-          <Text style={styles.userDataText}>{userData.mail}</Text>
-          <Text style={styles.userDataText}>{userData.phone}</Text>
-        </View>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => [
-            setModalVisible(true),
-            setUrl(`https://www.kino.dk/user/${userData.uid}`),
-          ]}
-        >
-          <Text style={styles.buttonText}>Rediger Profil</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            signout();
-            
-          }}
-        >
-          <Text style={styles.buttonText}>Log ud</Text>
-        </TouchableOpacity>
-      </View>
-      {/* <PurchaseHistory user={user} /> */}
-    </View>
+    <FlatList 
+      
+      ListHeaderComponent={<UserMetaData userData={userData} signout={signout} userObject={userObject} />}
+      ListFooterComponent={<PurchaseHistory user={user} />}
+    />
   );
 };
 
 export default Profile;
+

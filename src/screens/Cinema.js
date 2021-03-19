@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useRoute } from "@react-navigation/native";
-import { FlatList, ActivityIndicator, StyleSheet } from "react-native"
-
+import { FlatList, StyleSheet, StatusBar } from "react-native"
 import CinemaBackgroundImage from "../components/cinemas/CinemaBackgroundImage"
 import CinemaMetaData from "../components/cinemas/CinemaMetaData"
 import ShowTimes from "../components/cinemas/ShowTimes";
@@ -30,6 +28,7 @@ const Cinema = ({ route }) => {
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <>
+            <StatusBar hidden={true} />
             <CinemaBackgroundImage
               name={item.name}
               img={item.imageUrl}
