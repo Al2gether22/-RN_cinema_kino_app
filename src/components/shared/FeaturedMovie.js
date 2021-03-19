@@ -22,8 +22,6 @@ const FeaturedMovie = () => {
     fetchData();
   }, [])
 
-  console.log(featuredMovieItem)
-
   return (
     featuredMovieItem[0] ? 
     <>

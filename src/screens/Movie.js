@@ -8,12 +8,14 @@ import MovieResume from "../components/movies/MovieResume";
 import MovieCast from "../components/movies/MovieCast"
 import styles from "../styles/MovieStyles";
 import TabViewComponent from "../components/movies/TabViewComponent"
+import { fetchColorsFromImage } from "../helpers/fetchColorsFromImage"
 
 const Movie = ({ route }) => {
   const { item } = route.params;
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
   const [colors, setColors] = useState();
+  const [colors2, setColors2] = useState();
   const [backgroundColor, setBackgroundColor] = useState("#1d1d27");
   const [primaryFontColor, setPrimaryFontColor] = useState("white");
   const [secondaryFontColor, setSecondaryFontColor] = useState("white");
@@ -53,7 +55,7 @@ const Movie = ({ route }) => {
       }
 
     };
-
+    
     fetchColors();
   }, [movie]);
   
@@ -62,10 +64,13 @@ const Movie = ({ route }) => {
       mode: "no-cors",
     })
       .then((response) => response.json())
-      .then((json) => setMovie(json))
+      .then((json) => {setMovie(json), setColors2(fetchColorsFromImage(json.imageUrl))})
       .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
+      .finally(() => {setLoading(false)})
+      
   }, []);
+  
+  console.log(colors2)
    
     return (
       
