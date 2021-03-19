@@ -5,16 +5,15 @@ import { Context } from "../../context/CinemaContext"
 import { ImageBackground } from "react-native";
 import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
-import { useNavigation } from "@react-navigation/native";
+import CinemaModal from "../../modals/CinemaModal"
 
 
 const Top10Movies = () => {
 
   const { state } = useContext(Context);
   const [cinemas, setCinemas] = useState(state.cinemas)
-  const navigation = useNavigation();
-
-  
+  const [cinemaModalVisible, setCinemaModalVisible] = useState(false);
+  const [cinema, setCinema] = useState({})
 
   const Item = (item) => {
 
@@ -26,8 +25,11 @@ const Top10Movies = () => {
           tension={50}
           friction={7}
           useNativeDriver
-          //onPress={() => navigation.navigate("Cinema", { item })}
-          onPress={() => navigation.navigate("Biografer", { screen: "Cinema", params: { item }})}
+          onPress={() => {
+            setCinemaModalVisible(true), 
+            setCinema(item)
+          }}
+          //onPress={() => navigation.navigate("Biografer", { screen: "Cinema", params: { item }})}
         >
           <ImageBackground
             style={styles.img}
@@ -51,6 +53,12 @@ const Top10Movies = () => {
       duration={900}
       delay={30}
     >
+
+      <CinemaModal 
+        cinemaModalVisible={cinemaModalVisible}
+        setCinemaModalVisible={() => setCinemaModalVisible(false)}
+        passedCinema={cinema}
+      />  
     
       <View style={styles.headLineContainer}>
         <Text style={styles.headLine}>Biografer</Text>

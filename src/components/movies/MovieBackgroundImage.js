@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, ImageBackground, Text, TouchableOpacity } from "react-native"
-import { useNavigation, StackActions, CommonActions } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import { SharedElement } from 'react-navigation-shared-element';
@@ -85,7 +85,7 @@ const MovieBackgroundImage = ({ movie, image, danishTitle, genre, backgroundColo
       </SharedElement>
       
       <Text style={[styles.movieGenre, {color: secondaryFontColor}]} numberOfLines={3}>
-        {genreFallback.join(', ')} {"\n"}{ movie.playingTime ? `Varighed ${movie.playingTime} min` : null} {"\n"}{ movie.censorship ? `${movie.censorship.name}` : null}
+        {genreFallback ? genreFallback.join(', ') : ""} {"\n"}{ movie.playingTime ? `Varighed ${movie.playingTime} min` : null} {"\n"}{ movie.censorship ? `${movie.censorship.name}` : null}
       </Text>
     </View>
     

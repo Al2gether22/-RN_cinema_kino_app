@@ -11,7 +11,8 @@ import MovieCast from "../components/movies/MovieCast"
 import TabViewComponent from "../components/movies/TabViewComponent"
 
 
-const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId, versions, nextShowtime }) => {
+const MovieModal = ({ movieModalVisible, setMovieModalVisible, passedMovie, showtimes }) => {
+
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
   const [colors, setColors] = useState();
@@ -22,7 +23,7 @@ const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId, versions
 
   useEffect(() => {
     const fetchColors = async () => {
-      const result = await ImageColors.getColors(item.imageUrl, {
+      const result = await ImageColors.getColors(movie.imageUrl, {
         fallback: '#000000',
         quality: 'lowest',
         pixelSpacing: 500,
@@ -52,28 +53,31 @@ const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId, versions
         setPrimaryFontColor(colors.colorThree.value)
         setSecondaryFontColor(colors.colorFour.value)
       }
-
+     
     };
-
+    
     fetchColors();
   }, []);
 
   useEffect(() => {
-    fetch(`https://www.kino.dk/appservices/movie/${movieId}`, { mode: 'no-cors', headers: { 'APIKEY': 'bGV0bWVpbgYkdWMGJXVnBiZz09'}})
+    fetch(`https://www.kino.dk/appservices/movie/${passedMovie.id ? passedMovie.id : passedMovie.movie_id}`, {
+      mode: "no-cors",
+    })
       .then((response) => response.json())
       .then((json) => setMovie(json))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-  }, [movieId])
+  }, [passedMovie]);
 
-    if (loading) {
-      return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
-    }
 
+  if (loading) {
+    return null
+  }
+   
     return (
       
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={movieModalVisible}
         onRequestClose={() => setMovieModalVisible(!movieModalVisible)}
@@ -82,7 +86,7 @@ const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId, versions
         swipeDirection="down"
         onSwipe={() => setMovieModalVisible(!movieModalVisible)}
         >
-          { !movie ? <ActivityIndicator /> : 
+          
            <>
             <FlatList 
               style={styles.container}
@@ -95,22 +99,26 @@ const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId, versions
                   onPress={() => {
                     setMovieModalVisible(!movieModalVisible);
                     setActive(0)
+                    
                   }}>
-                  <MaterialCommunityIcons name="arrow-left-circle" size={35} color={"white"} />
+                  <MaterialCommunityIcons name="arrow-left-circle" size={35} color={primaryFontColor} />
                 </TouchableOpacity>
-                <MovieBackgroundImage 
-                  movie={movie} backgroundColor={backgroundColor} primaryFontColor={primaryFontColor} secondaryFontColor={secondaryFontColor}
-                />
-
-                <MovieMetaData 
-                  movie={movie} backgroundColor={"#1d1d27"} primaryFontColor={"#fff"} secondaryFontColor={"#fff"} 
-                />
+               
                 
+                <MovieBackgroundImage 
+                  movie={movie} image={passedMovie.imageUrl} danishTitle={passedMovie.title} backgroundColor={backgroundColor} primaryFontColor={primaryFontColor} secondaryFontColor={secondaryFontColor}
+                /> 
+                
+                <MovieMetaData 
+                  movie={movie} backgroundColor={backgroundColor} primaryFontColor={primaryFontColor} secondaryFontColor={secondaryFontColor} 
+                /> 
+              
                 </>
               } 
               ListFooterComponent={
-                loading ? null : 
+              
                  <>
+                 
                    <TabViewComponent 
                      setActive={setActive}
                      active={active}
@@ -118,35 +126,38 @@ const MovieModal = ({ movieModalVisible, setMovieModalVisible, movieId, versions
                      primaryFontColor={primaryFontColor ? primaryFontColor : "blue"}
                      secondaryFontColor={secondaryFontColor ? secondaryFontColor : "green"}
                    />
-
+                  
+                  
                    <ShowTimes
-                     id={movie.nid}
-                     movieVersions={versions}
-                     nextShowtime={nextShowtime}
+                     id={passedMovie.id}
+                     movieVersions={passedMovie.versions}
+                     nextShowtime={passedMovie.next_showtime}
                      backgroundColor={backgroundColor ? backgroundColor : "white"}
                      primaryFontColor={primaryFontColor ? primaryFontColor : "blue"}
                      secondaryFontColor={secondaryFontColor ? secondaryFontColor : "green"}
                      active={ active === 0 ? "flex" : "none" }
                    />
-   
+
+                  { !movie ? null : 
                    <MovieResume 
                      resume={movie.body}
                      primaryFontColor={primaryFontColor ? primaryFontColor : "blue"}
                      active={active === 1 ? "flex" : "none"}
-                   />
-   
+                   />}
+                   { !movie ? null : 
                    <MovieCast 
                      movie={movie}
                      primaryFontColor={primaryFontColor ? primaryFontColor : "blue"}
                      secondaryFontColor={secondaryFontColor ? secondaryFontColor : "green"}
                      active={active === 2 ? "flex" : "none"}
-                   />
+                   />}
+                    
                  </>
                 
              }
            />
           </> 
-          }
+          
         
       </Modal>
     )

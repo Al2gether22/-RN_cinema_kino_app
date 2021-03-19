@@ -45,7 +45,7 @@ const Profile = ({ user }) => {
   return (
     <FlatList 
       
-      ListHeaderComponent={<UserMetaData userData={userData} userObject={userObject} />}
+      ListHeaderComponent={<UserMetaData userData={userData} signout={signout} userObject={userObject} />}
       ListFooterComponent={<PurchaseHistory user={user} />}
     />
   );

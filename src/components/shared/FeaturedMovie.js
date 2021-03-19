@@ -9,7 +9,6 @@ const FeaturedMovie = () => {
 
   const [featuredMovieItem, setFeaturedMovieItem] = useState({});
   const [movieModalVisible, setMovieModalVisible] = useState(false);
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchData() {
@@ -22,6 +21,8 @@ const FeaturedMovie = () => {
 
     fetchData();
   }, [])
+
+  console.log(featuredMovieItem)
 
   return (
     featuredMovieItem[0] ? 
@@ -50,12 +51,11 @@ const FeaturedMovie = () => {
           style={styles.linearGradient}
           
         >
-          
+        
           <MovieModal 
             movieModalVisible={movieModalVisible}
             setMovieModalVisible={() => setMovieModalVisible(false)}
-            movieId={featuredMovieItem[0].id}
-            showtimes={true}
+            passedMovie={featuredMovieItem[0]}
           />
           
         </LinearGradient>

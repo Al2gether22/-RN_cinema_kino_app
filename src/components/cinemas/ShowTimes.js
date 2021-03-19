@@ -19,7 +19,7 @@ const ShowTimes = ({ id }) => {
   const [selectedDate, setSelectedDate] = useState(now);
   const [movieModalVisible, setMovieModalVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [movieId, setMovieId] = useState();
+  const [movie, setMovie] = useState({});
   const [showtimeId, setShowtimeId] = useState();
   const [sessionName, setSessionName] = useState("")  
   const [sessionId, setSessionId] = useState("") 
@@ -65,7 +65,7 @@ const ShowTimes = ({ id }) => {
       <MovieModal
         movieModalVisible={movieModalVisible}
         setMovieModalVisible={() => setMovieModalVisible(false)}
-        movieId={movieId}
+        passedMovie={movie}
         showtimes={false}
       />
 
@@ -104,7 +104,8 @@ const ShowTimes = ({ id }) => {
               {setVersions(item.versions)}
               <TouchableHighlight
                 onPress={() => {
-                  setMovieModalVisible(true), setMovieId(item.movie_id);
+                  setMovieModalVisible(true), setMovie(item);
+                  
                 }}
               >
                 <View style={styles.moviePosterContainer}>

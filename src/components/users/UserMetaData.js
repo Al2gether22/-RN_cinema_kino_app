@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native"
 import styles from "../../styles/ProfileStyles";
 import WebViewModal from "../../modals/WebViewModal"
 
-const UserMetaData = ({ userData, userObject }) => {
+const UserMetaData = ({ userData, userObject, signout }) => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [url, setUrl] = useState("");
