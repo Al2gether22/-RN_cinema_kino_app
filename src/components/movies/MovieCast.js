@@ -5,15 +5,19 @@ import { View, Text, FlatList, StyleSheet, Image } from "react-native"
 const MovieCast = ({ movie, active, primaryFontColor, secondaryFontColor }) => {
   
   const Item = (item) => {
-
+    console.log(item.photo)
     return (
 
       <View style={styles.itemContainer}>
         <Image
           style={styles.img}
-          source={{
-          uri: item.photo,
-        }}
+          source={ 
+            !item.photo.includes("user-default") ? 
+              {
+                uri: item.photo,
+              } :
+              require('./user-default.jpg')
+          }
       />
         <Text style={[styles.name, { color: secondaryFontColor}]}>{item.first_name} {item.last_name}</Text>
       </View>

@@ -12,13 +12,13 @@ const ImageHeader = () => {
     <SafeAreaView style={{flexDirection: 'column', backgroundColor: "#1d1d27",
     }}>
       <Image
-        source={{
-          uri:
-            'https://www.kino.dk/sites/all/themes/kino/img/logo-small.svg',
-        }}
+        source={ require('./logo.png')
+          
+        }
         style={{
-          width: 60,
+          width: 70,
           height: 40,
+          
           justifyContent: "center",
           alignContent: "center",
           alignItems: "center",
