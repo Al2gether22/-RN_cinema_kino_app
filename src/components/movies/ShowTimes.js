@@ -17,7 +17,6 @@ import styles from '../../styles/ShowTimeStyles';
 import {create1MonthDates} from '../../helpers/date.utils';
 import {scrollToIndex} from '../../helpers/datepicker.utils';
 import moment from 'moment';
-import GestureRecognizer from 'react-native-swipe-gestures';
 
 
 const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFontColor, secondaryFontColor, active }) => {
@@ -36,11 +35,6 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
   const {
     state: {user},
   } = useContext(AuthContext);
-
-  const config = {
-    velocityThreshold: 0.4,
-    directionalOffsetThreshold: 80
-  };
 
   // Find a way to get user with the fetch user component
   useEffect(() => {
