@@ -2,14 +2,19 @@ import {useState, useEffect} from 'react';
 import ImageColors from 'react-native-image-colors';
 
 function usePosterColors(img) {
-  const [imgColors, setImgColors] = useState({
+  const defaultState = {
     backgroundColor: '#1d1d27',
     primaryFontColor: 'white',
     secondaryFontColor: 'white',
-  });
+  };
+  const [imgColors, setImgColors] = useState(defaultState);
 
   async function fetchColors() {
     try {
+      if (!img) {
+        setImgColors(defaultState);
+        return;
+      }
       const colors = await ImageColors.getColors(img, {
         fallback: '#000000',
         quality: 'lowest',
@@ -34,6 +39,7 @@ function usePosterColors(img) {
   }
 
   useEffect(() => {
+    console.log('useEffect fetchColors', img);
     fetchColors();
   }, [img]);
 

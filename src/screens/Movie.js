@@ -15,6 +15,7 @@ const Movie = ({route}) => {
   const {item} = route.params;
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log('Movie');
   const {
     backgroundColor,
     primaryFontColor,
@@ -39,6 +40,10 @@ const Movie = ({route}) => {
         setLoading(false);
       });
   }, []);
+
+  console.log('backgroundColor', backgroundColor);
+  console.log('primaryFontColor', primaryFontColor);
+  console.log('secondaryFontColor', secondaryFontColor);
 
   return (
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
