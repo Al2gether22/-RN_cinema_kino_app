@@ -39,7 +39,9 @@ const Top10Movies = () => {
             uri: item.imageUrl,
             }}
           >
-            <Text style={styles.title}>{item.name}</Text>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>{item.name}</Text>
+            </View>
           </ImageBackground>
         </TouchableScale>
       </View>
@@ -97,7 +99,6 @@ const styles = StyleSheet.create({
     color: "white",
     backgroundColor: "rgba(29,29,39,0.8)",
     flexDirection: "row",
-    
   },
   headLine: {
     color: "white",
@@ -131,15 +132,19 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 7
   },
-  title: {
+  titleContainer: {
     position: "absolute",
-    bottom: -10,
-    left: 0,
+    bottom: -4,
+    left: -2,
+    borderBottomLeftRadius: 7,
+    backgroundColor: "black",
+    padding: 5,
+  },
+  title: {
+    borderRadius: 7,
     color: "white",
     fontSize: 10,
     fontFamily: "SourceSansPro-Bold",
-    backgroundColor: "black",
-    padding: 5
   }
 })
 

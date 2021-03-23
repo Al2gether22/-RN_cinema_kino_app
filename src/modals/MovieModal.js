@@ -25,13 +25,14 @@ const MovieModal = ({
 }) => {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log('MovieModal');
-  const {
-    backgroundColor,
-    primaryFontColor,
-    secondaryFontColor,
-  } = usePosterColors(movie.imageUrl);
   const [active, setActive] = useState(0);
+
+  const {
+      backgroundColor,
+      primaryFontColor,
+      secondaryFontColor,
+    } = usePosterColors(movie.imageUrl);
+
 
   const config = {
     velocityThreshold: 0.2,
@@ -51,15 +52,12 @@ const MovieModal = ({
       .then(json => setMovie(json))
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
-  }, [passedMovie]);
+  }, [passedMovie, backgroundColor]);
 
   if (loading) {
     return null;
   }
 
-  console.log('backgroundColor', backgroundColor);
-  console.log('primaryFontColor', primaryFontColor);
-  console.log('secondaryFontColor', secondaryFontColor);
 
   return (
     <GestureRecognizer
@@ -75,7 +73,7 @@ const MovieModal = ({
         visible={movieModalVisible}>
         <>
           <FlatList
-            style={styles.container}
+            style={[styles.container, { backgroundColor: backgroundColor}]}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <>

@@ -15,7 +15,7 @@ const Movie = ({route}) => {
   const {item} = route.params;
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log('Movie');
+  
   const {
     backgroundColor,
     primaryFontColor,
