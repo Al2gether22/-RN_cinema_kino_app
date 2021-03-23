@@ -48,34 +48,37 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: "white",
-    height: "30%",
-    width: "50%",
-    borderRadius: 15
+    height: 400,
+    width: 300,
+    borderRadius: 15,
+    justifyContent: "space-around"
   },
   modalTextContainer: {
-    padding: 10
+    padding: 15, 
   }, 
   headerText: {
     fontFamily: "BureauGrotComp-Medium",
     fontSize: 30, 
-    textAlign: "center"
+    textAlign: "center",
+    marginBottom: 25
   }, 
   bodyText: {
     fontFamily: "SourceSansPro-Bold",
-    color: "#676d7c",
-    fontSize: 12
+    color: "black",
+    lineHeight: 20,
+    fontSize: 15
   },
   modalOkButtonContainer: {
     padding: 10,
     backgroundColor: "tomato",
-    marginRight: 10,
-    marginLeft: 10,
+    marginRight: 15,
+    marginLeft: 15,
     borderRadius: 5
   }, 
   modalOkButton: {
     fontFamily: "SourceSansPro-Bold",
     color: "black",
-    fontSize: 12,
+    fontSize: 15,
     textAlign: "center"
   }
 })

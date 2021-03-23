@@ -6,10 +6,12 @@ import { ImageBackground } from "react-native";
 import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
 import CinemaModal from "../../modals/CinemaModal"
+import { useNavigation } from "@react-navigation/native";
 
 
 const Top10Movies = () => {
 
+  const navigation = useNavigation();
   const { state } = useContext(Context);
   const [cinemas, setCinemas] = useState(state.cinemas)
   const [cinemaModalVisible, setCinemaModalVisible] = useState(false);

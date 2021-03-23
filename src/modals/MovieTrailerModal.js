@@ -44,7 +44,7 @@ const MovieTrailerModal = ({ modalVisible, setModalVisible, video_markup }) => {
             setModalVisible(!modalVisible);
           }}>
           <MaterialCommunityIcons  
-            style={{ textAlign: "right", color: "white", marginTop: "10%", marginRight: "10%"}}
+            style={{ textAlign: "right", color: "white", marginTop: "10%", marginRight: "5%"}}
             name="close-circle" 
             size={30} 
             
