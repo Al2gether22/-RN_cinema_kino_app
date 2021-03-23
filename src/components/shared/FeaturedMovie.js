@@ -9,7 +9,6 @@ const FeaturedMovie = () => {
 
   const [featuredMovieItem, setFeaturedMovieItem] = useState({});
   const [movieModalVisible, setMovieModalVisible] = useState(false);
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchData() {
@@ -30,7 +29,7 @@ const FeaturedMovie = () => {
       style={styles.coverImage} 
       animation='fadeIn'
       duration={900}
-      delay={30}
+      delay={50}
     >
       <ImageBackground 
         style={styles.coverImage}
@@ -43,19 +42,22 @@ const FeaturedMovie = () => {
           
           style={styles.linearGradient}
         />
+        
         <LinearGradient 
           colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']} 
           
           style={styles.linearGradient}
           
         >
+        
           <MovieModal 
             movieModalVisible={movieModalVisible}
             setMovieModalVisible={() => setMovieModalVisible(false)}
-            movieId={featuredMovieItem[0].id}
-            showtimes={true}
+            passedMovie={featuredMovieItem[0]}
           />
-          <TouchableOpacity 
+          
+        </LinearGradient>
+        <TouchableOpacity 
             style={styles.linkContainer}
             onPress={() =>
               setMovieModalVisible(true)
@@ -63,8 +65,6 @@ const FeaturedMovie = () => {
           >
             <Text style={styles.linkText}>Læs mere om {featuredMovieItem[0].danishTitle}</Text>
           </TouchableOpacity>
-        </LinearGradient>
-        
       </ImageBackground>
       </Animatable.View>
     </>
@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
   coverImage: {
     position: "absolute",
     height: "100%",
-    width: "100%"
-    
+    width: "100%",
+    zIndex: -999
   }, 
   linearGradient: {
     flex: 1,
@@ -86,18 +86,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   linkContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-end', 
+    padding: 15,
     borderRadius: 10,
-    marginBottom: "15%"
+    backgroundColor: "black",
+    position: "absolute",
+    bottom: 50,
+    left: "50%",
   },
   linkText: {
-    textAlign: "right",
     color: "white", 
     fontFamily: "BureauGrotComp-Medium",
     fontSize: 25, 
-    padding: 15,
+    left: "-50%",
   }
 })
 

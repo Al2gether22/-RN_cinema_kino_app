@@ -2,14 +2,12 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#1d1d27",
     marginTop: "4%",
     marginLeft: "4%",
     marginRight: "4%",
     marginBottom: "7%",
     padding: 5,
-    
   },
   sectionHeader: {
     fontFamily: "BureauGrotCond-Light",

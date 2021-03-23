@@ -44,9 +44,9 @@ export default function BottomTabNavigator() {
           },
         })}
         tabBarOptions={{
-          activeTintColor: "black",
+          activeTintColor: "white",
           inactiveTintColor: "white",
-          activeBackgroundColor: "tomato",
+          activeBackgroundColor: "#ff321e",
           inactiveBackgroundColor: "black",
           labelPosition: "below-icon",
           labelStyle: {
@@ -57,8 +57,26 @@ export default function BottomTabNavigator() {
         }}
       >
         <Tab.Screen name="Hjem" component={HomeStackScreen} options={{ unmountOnBlur: true }} />
-        <Tab.Screen name="Film" component={MoviesStackScreen} options={{ unmountOnBlur: true }} />
-        <Tab.Screen name="Biografer" component={CinemasStackScreen} options={{ unmountOnBlur: true }} />
+        <Tab.Screen 
+          name="Film" 
+          component={MoviesStackScreen} 
+          options={{ unmountOnBlur: true }} 
+          listeners={({ navigation }) => ({
+            tabPress: () => {
+              navigation.navigate('Film', { screen: 'Movies' });
+            },
+          })}
+        />
+        <Tab.Screen 
+          name="Biografer" 
+          component={CinemasStackScreen} 
+          options={{ unmountOnBlur: true }} 
+          listeners={({ navigation }) => ({
+            tabPress: () => {
+              navigation.navigate('Biografer', { screen: 'Cinemas' });
+            },
+          })}
+        />
         <Tab.Screen name="Profil" component={UserStackScreen} 
           options={{ 
             onmountOnBlur: true,

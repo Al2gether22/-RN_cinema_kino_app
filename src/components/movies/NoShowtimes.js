@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import TouchableScale from 'react-native-touchable-scale';
+
 
 const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
   const dateOptions = {
@@ -8,7 +9,7 @@ const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
     month: "long",
     day: "numeric",
   };
-
+ 
   const nextShowtimeDate = new Date(nextShowtime);
 
   if (!nextShowtime) {
@@ -16,22 +17,26 @@ const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
   }
 
   return (
-    <TouchableOpacity onPress={onPressNextShowtime}>
+    <TouchableScale
+      activeScale={0.9}
+      tension={50}
+      friction={7}
+      useNativeDriver
+      onPress={onPressNextShowtime}>
       <View style={styles.nextShowtimeContainer}>
         <Text style={styles.nextShowtimeText}>
           Næste spilletid er{" "}
           {nextShowtimeDate.toLocaleDateString("da", dateOptions)}
         </Text>
       </View>
-    </TouchableOpacity>
+    </TouchableScale>
   );
 };
 
 const styles = StyleSheet.create({
   nextShowtimeContainer: {
-    flex: 1,
     alignSelf: "center",
-    backgroundColor: "#1d1d27",
+    backgroundColor: "black",
     padding: 10,
     borderWidth: 2,
     borderColor: "#676d7c",
@@ -40,7 +45,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   nextShowtimeText: {
-    color: "#676d7c",
+    color: "white",
     fontFamily: "SourceSansPro-Bold",
   },
 });

@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   },
   cinemaDescription: {
     fontFamily: "SourceSansPro-Bold",
-    color: "#676d7c",
+    color: "#b3b6bd",
     marginBottom: 5
   }
 })

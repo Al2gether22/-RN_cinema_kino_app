@@ -56,6 +56,46 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 5,
     paddingBottom: 5
+  },
+  purchaseHistoryContainer: {
+    margin: "4%",
+    padding: 5,
+  },
+  purchaseHistoryHeadline: {
+    color: "white",
+    fontSize: 20,
+    marginTop: 25,
+    textAlign: "center",
+    fontFamily: "SourceSansPro-Bold",
+    paddingBottom: 5
+  },
+  itemContainer: {
+    flexDirection: "row",
+    marginTop: 30
+  },
+  posterImgContainer: {
+    
+  },
+  dataContainer: {
+    marginLeft: 15,
+    paddingTop: 10
+  },
+  posterImg: {
+    height: 120,
+    width: 81, 
+    
+  },
+  title: {
+    fontFamily: "SourceSansPro-Bold",
+    color: "white",
+    fontSize: 16,
+    
+  }, 
+  metaData: {
+    fontFamily: "SourceSansPro-Bold",
+    color: "white",
+    fontSize: 12,
+    marginTop: 2
   }
 })
 

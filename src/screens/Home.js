@@ -8,6 +8,8 @@ import { Context as CinemaContext } from "../context/CinemaContext";
 import { Context as AuthContext } from "../context/AuthContext";
 import UserInfoModal from "../modals/UserInfoModal"
 import FeaturedMovie from "../components/shared/FeaturedMovie"
+import Top10Movies from "../components/shared/Top10Movies"
+import TopCinemas from "../components/shared/TopCinemas"
 
 const Home = () => {
 
@@ -123,7 +125,12 @@ const Home = () => {
       />
       <View style={styles.container} >
         <FeaturedMovie />
-        <TouchableScale
+        <View style={styles.slidersContainer}>
+          <Top10Movies />
+          <TopCinemas />
+        </View>
+        
+        {/* <TouchableScale
           activeScale={0.9}
           tension={50}
           friction={7}
@@ -163,7 +170,7 @@ const Home = () => {
           <View style={styles.button}>
             <Text style={styles.buttonText}>{ user ? "Profil" : "Login" }</Text>  
           </View>  
-        </TouchableScale>
+        </TouchableScale> */}
       </View>
      
     </>
@@ -178,6 +185,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: '#1d1d27',
     
+  },
+  slidersContainer: {
+    flex: 1,
+    width: "100%", 
+    justifyContent: "center",
+    marginBottom: 80
   },
   button: {
     alignSelf: "center",
