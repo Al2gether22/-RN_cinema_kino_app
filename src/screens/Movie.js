@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StatusBar, FlatList } from "react-native"
 import ImageColors from "react-native-image-colors"
 import MovieBackgroundImage from "../components/movies/MovieBackgroundImage"
+import { useNavigation } from "@react-navigation/native";
 import MovieMetaData from "../components/movies/MovieMetaData"
 import ShowTimes from "../components/movies/ShowTimes"
 import MovieResume from "../components/movies/MovieResume";
@@ -9,6 +10,8 @@ import MovieCast from "../components/movies/MovieCast"
 import styles from "../styles/MovieStyles";
 import TabViewComponent from "../components/movies/TabViewComponent"
 import { fetchColorsFromImage } from "../helpers/fetchColorsFromImage"
+import GestureRecognizer from 'react-native-swipe-gestures';
+
 
 const Movie = ({ route }) => {
   const { item } = route.params;
@@ -20,6 +23,13 @@ const Movie = ({ route }) => {
   const [primaryFontColor, setPrimaryFontColor] = useState("white");
   const [secondaryFontColor, setSecondaryFontColor] = useState("white");
   const [active, setActive] = useState(0)
+  const navigation = useNavigation();
+
+  const config = {
+    velocityThreshold: 0.4,
+    directionalOffsetThreshold: 80
+  };
+
 
   // useEffect(() => {
   //   const fetchColors = async () => {
@@ -70,8 +80,6 @@ const Movie = ({ route }) => {
       .finally(() => {setLoading(false)})
       
   }, []);
-  
-  console.log(colors2)
    
     return (
       
@@ -82,14 +90,22 @@ const Movie = ({ route }) => {
           style={[styles.container, {backgroundColor: backgroundColor}]}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
-            <>
+            <GestureRecognizer      
+              onSwipeDown={() => navigation.goBack()}
+              config={config}
+              style={{
+                flex: 1,
+                backgroundColor: "transparent",
+                width: "100%",
+                zIndex: 999999
+              }}>
               <StatusBar hidden={true} />
 
               <MovieBackgroundImage movie={movie} image={item.imageUrl} danishTitle={item.danishTitle} genre={item.genre} backgroundColor={backgroundColor} primaryFontColor={primaryFontColor} secondaryFontColor={secondaryFontColor} />
               
               { loading ? null : <MovieMetaData movie={movie} backgroundColor={backgroundColor} primaryFontColor={primaryFontColor} secondaryFontColor={secondaryFontColor} />}
               
-            </>
+            </GestureRecognizer>
           }
           ListFooterComponent={
              loading ? null : 
@@ -101,7 +117,8 @@ const Movie = ({ route }) => {
                   primaryFontColor={primaryFontColor}
                   secondaryFontColor={secondaryFontColor}
                 />
-
+                
+               
                 <ShowTimes
                   id={movie.nid}
                   movieVersions={item.versions}
@@ -111,19 +128,41 @@ const Movie = ({ route }) => {
                   secondaryFontColor={secondaryFontColor}
                   active={ active === 0 ? "flex" : "none" }
                 />
+               
 
-                <MovieResume 
-                  resume={movie.body}
-                  primaryFontColor={primaryFontColor}
-                  active={active === 1 ? "flex" : "none"}
-                />
+                <GestureRecognizer      
+                  onSwipeLeft={() => setActive(2)}
+                  onSwipeRight={() => setActive(0)}
+                  config={config}
+                  style={{
+                    flex: 1,
+                    backgroundColor: "transparent",
+                  }}
+                >
+                  <MovieResume 
+                    resume={movie.body}
+                    primaryFontColor={primaryFontColor}
+                    active={active === 1 ? "flex" : "none"}
+                  />
+                </GestureRecognizer>
 
-                <MovieCast 
-                  movie={movie}
-                  primaryFontColor={primaryFontColor}
-                  secondaryFontColor={secondaryFontColor}
-                  active={active === 2 ? "flex" : "none"}
-                />
+
+                <GestureRecognizer      
+                  onSwipeRight={() => setActive(1)}
+                  config={config}
+                  style={{
+                    flex: 1,
+                    backgroundColor: "transparent",
+                  }}
+                >
+  
+                  <MovieCast 
+                    movie={movie}
+                    primaryFontColor={primaryFontColor}
+                    secondaryFontColor={secondaryFontColor}
+                    active={active === 2 ? "flex" : "none"}
+                  />
+                </GestureRecognizer>
               </>
               
              

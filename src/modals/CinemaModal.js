@@ -4,12 +4,18 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import CinemaBackgroundImage from "../components/cinemas/CinemaBackgroundImage"
 import CinemaMetaData from "../components/cinemas/CinemaMetaData"
 import ShowTimes from "../components/cinemas/ShowTimes";
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 
 const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }) => {
 
   const [cinema, setCinema] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const config = {
+    velocityThreshold: 0.2,
+    directionalOffsetThreshold: 20
+  };
 
   useEffect(() => {
     fetch(`https://www.kino.dk/appservices/cinema/${passedCinema.id}`, {
@@ -27,7 +33,14 @@ const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }
   }
    
     return (
-      
+      <GestureRecognizer      
+        onSwipeDown={() => setCinemaModalVisible(!cinemaModalVisible)}
+        config={config}
+        style={{
+          flex: 1,
+          backgroundColor: "transparent",
+        }}
+      >
       <Modal
         animationType="fade"
         transparent={true}
@@ -76,6 +89,7 @@ const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }
           
         
       </Modal>
+      </GestureRecognizer>
     )
   }
 

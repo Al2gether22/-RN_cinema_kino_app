@@ -6,7 +6,7 @@ import * as Animatable from 'react-native-animatable';
 
 import styles from "../../styles/MovieMetaDataStyles";
 
-const MovieMetaData = ({ movie, backgroundColor, primaryFontColor, secondaryFontColor }) => {
+const MovieMetaData = ({ movie, backgroundColor, primaryFontColor, secondaryFontColor, active }) => {
 
   return (
  
@@ -16,8 +16,7 @@ const MovieMetaData = ({ movie, backgroundColor, primaryFontColor, secondaryFont
       duration={600}
       delay={300}
     >
-      <View style={styles.movieMetaData}>
-        
+      <View style={[ styles.movieMetaData, { display: active }]}>
         <View style={styles.movieRating}> 
           <MaterialIcons name="stars" size={34} color={secondaryFontColor} style={styles.movieRatingIcon} />
           <Text style={[styles.movieRatingRating, { color: primaryFontColor}]}>{movie.average_rating? movie.average_rating.toFixed(0) : '0'} / 6</Text>

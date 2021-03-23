@@ -5,7 +5,6 @@ import { View, Text, FlatList, StyleSheet, Image } from "react-native"
 const MovieCast = ({ movie, active, primaryFontColor, secondaryFontColor }) => {
   
   const Item = (item) => {
-    console.log(item.photo)
     return (
 
       <View style={styles.itemContainer}>
