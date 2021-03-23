@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {View, ActivityIndicator, StyleSheet} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { Context as CinemaContext } from "../context/CinemaContext";
 import { Context as AuthContext } from "../context/AuthContext";
@@ -8,10 +7,6 @@ import UserInfoModal from "../modals/UserInfoModal"
 import FeaturedMovie from "../components/shared/FeaturedMovie"
 import Top10Movies from "../components/shared/Top10Movies"
 import TopCinemas from "../components/shared/TopCinemas"
-import {Context as CinemaContext} from '../context/CinemaContext';
-import {Context as AuthContext} from '../context/AuthContext';
-import UserInfoModal from '../modals/UserInfoModal';
-import FeaturedMovie from '../components/shared/FeaturedMovie';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 
 const Home = () => {
@@ -19,7 +14,6 @@ const Home = () => {
   const {
     state: {user},
   } = useContext(AuthContext);
-  const navigation = useNavigation();
   const [currentLongitude, setCurrentLongitude] = useState('...');
   const [currentLatitude, setCurrentLatitude] = useState('...');
   const [modalVisible, setModalVisible] = useState(false);
@@ -113,45 +107,6 @@ const Home = () => {
           <Top10Movies />
           <TopCinemas />
         </View>
-        
-        {/* <TouchableScale
-          activeScale={0.9}
-          tension={50}
-          friction={7}
-          useNativeDriver
-          onPress={() => {
-            navigation.navigate('Film');
-          }}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Vælg Film</Text>
-          </View>
-        </TouchableScale>
-
-        <TouchableScale
-          activeScale={0.9}
-          tension={50}
-          friction={7}
-          useNativeDriver
-          onPress={() => {
-            navigation.navigate('Biografer');
-          }}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Vælg Biograf</Text>
-          </View>
-        </TouchableScale>
-
-        <TouchableScale
-          activeScale={0.9}
-          tension={50}
-          friction={7}
-          useNativeDriver
-          onPress={() => {
-            navigation.navigate('Profil');
-          }}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>{ user ? "Profil" : "Login" }</Text>  
-          </View>  
-        </TouchableScale> */}
       </View>
     </>
   );
@@ -170,32 +125,6 @@ const styles = StyleSheet.create({
     width: "100%", 
     justifyContent: "center",
     marginBottom: 80
-  },
-  button: {
-    alignSelf: 'center',
-    fontSize: 30,
-    backgroundColor: '#ff321e',
-    padding: 10,
-    borderRadius: 5,
-    margin: 10,
-    width: 160,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 11,
-    },
-    shadowOpacity: 0.57,
-    shadowRadius: 15.19,
-    elevation: 23,
-  },
-  buttonText: {
-    fontFamily: 'BureauGrotComp-Medium',
-    color: 'white',
-    textAlign: 'center',
-    paddingTop: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 5,
   },
 });
 

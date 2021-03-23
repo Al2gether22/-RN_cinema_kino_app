@@ -80,7 +80,7 @@ const Movie = ({ route }) => {
       .finally(() => {setLoading(false)})
       
   }, []);
-   
+    console.log(colors2)
     return (
       
       // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
@@ -163,10 +163,7 @@ const Movie = ({ route }) => {
                     active={active === 2 ? "flex" : "none"}
                   />
                 </GestureRecognizer>
-              </>
-              
-             
-            
+              </>            
           }
         />
       </>
