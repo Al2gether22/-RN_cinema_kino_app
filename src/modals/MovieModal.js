@@ -21,17 +21,17 @@ const MovieModal = ({
   movieModalVisible,
   setMovieModalVisible,
   passedMovie,
-  showtimes,
+  
 }) => {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(0);
 
   const {
-      backgroundColor,
-      primaryFontColor,
-      secondaryFontColor,
-    } = usePosterColors(movie.imageUrl);
+    backgroundColor,
+    primaryFontColor,
+    secondaryFontColor,
+  } = usePosterColors(movie.imageUrl);
 
 
   const config = {
