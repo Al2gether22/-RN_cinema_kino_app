@@ -1,19 +1,14 @@
-import React, { useContext , useState } from "react";
+import React, { useState } from "react";
 import { View, Text, Image, FlatList, StyleSheet } from "react-native"
 import _ from "lodash";
-import { Context } from "../../context/MoviesContext"
 import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
 import MovieModal from "../../modals/MovieModal";
 import { useNavigation } from "@react-navigation/native";
 
-const Top10Movies = () => {
+const Top10Movies = ({ movies }) => {
 
   const navigation = useNavigation();
-  const { state } = useContext(Context);
-  const [movies, setMovies] = useState(
-    _.orderBy(state.movies, "selling_position")
-  ); 
   const [movieModalVisible, setMovieModalVisible] = useState(false);
   const [movie, setMovie] = useState({})
 

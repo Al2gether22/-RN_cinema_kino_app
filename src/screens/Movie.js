@@ -24,11 +24,6 @@ const Movie = ({route}) => {
   const [active, setActive] = useState(0);
   const navigation = useNavigation();
 
-  const config = {
-    velocityThreshold: 0.4,
-    directionalOffsetThreshold: 80,
-  };
-
   useEffect(() => {
     fetch(`https://www.kino.dk/appservices/movie/${item.id}`, {
       mode: 'no-cors',
@@ -51,7 +46,6 @@ const Movie = ({route}) => {
         ListHeaderComponent={
           <GestureRecognizer
             onSwipeDown={() => navigation.goBack()}
-            config={config}
             style={{
               flex: 1,
               backgroundColor: 'transparent',
@@ -104,7 +98,6 @@ const Movie = ({route}) => {
               <GestureRecognizer
                 onSwipeLeft={() => setActive(2)}
                 onSwipeRight={() => setActive(0)}
-                config={config}
                 style={{
                   flex: 1,
                   backgroundColor: 'transparent',
@@ -118,7 +111,6 @@ const Movie = ({route}) => {
 
               <GestureRecognizer
                 onSwipeRight={() => setActive(1)}
-                config={config}
                 style={{
                   flex: 1,
                   backgroundColor: 'transparent',
