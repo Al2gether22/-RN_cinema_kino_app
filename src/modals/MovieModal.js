@@ -17,12 +17,7 @@ import MovieCast from '../components/movies/MovieCast';
 import TabViewComponent from '../components/movies/TabViewComponent';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
-const MovieModal = ({
-  movieModalVisible,
-  setMovieModalVisible,
-  passedMovie,
-  
-}) => {
+const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(0);
@@ -32,7 +27,6 @@ const MovieModal = ({
     primaryFontColor,
     secondaryFontColor,
   } = usePosterColors(movie.imageUrl);
-
 
   const config = {
     velocityThreshold: 0.2,
@@ -58,7 +52,6 @@ const MovieModal = ({
     return null;
   }
 
-
   return (
     <GestureRecognizer
       onSwipeDown={() => setMovieModalVisible(!movieModalVisible)}
@@ -73,7 +66,7 @@ const MovieModal = ({
         visible={movieModalVisible}>
         <>
           <FlatList
-            style={[styles.container, { backgroundColor: backgroundColor}]}
+            style={[styles.container, {backgroundColor: backgroundColor}]}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <>
