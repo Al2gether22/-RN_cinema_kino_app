@@ -22,6 +22,7 @@ const getCinemas = dispatch => async () => {
       "https://www.kino.dk/appservices/cinemas",
       { mode: "no-cors" })
     const cinemas = await response.json();
+    console.log("Get cinemas called from context")
     dispatch({
       type: "get_cinemas",
       payload: cinemas
@@ -45,6 +46,7 @@ const updateCinemas = (dispatch) => {
       };
     });    
     const orderedCinemas = _.orderBy(cinemasWithDistance, 'distance');
+    console.log("Update Cinemas called from context")
     dispatch({ type: "update_cinemas", payload: orderedCinemas });
     // Update cinemas is called with cinemas array and user coordinates
     // A distance value is added to each cinema based on user coords and cinema cords
@@ -52,9 +54,6 @@ const updateCinemas = (dispatch) => {
     // state is updated with new cinemas array and a value of cinemaSorted to be true
   }
 }
-
-
-
 
 export const { Context, Provider } = dataContext(
   cinemaReducer,

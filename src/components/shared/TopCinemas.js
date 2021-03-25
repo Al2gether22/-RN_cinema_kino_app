@@ -1,7 +1,6 @@
-import React, { useContext , useState } from "react";
+import React, { useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native"
 import _ from "lodash";
-import { Context } from "../../context/CinemaContext"
 import { ImageBackground } from "react-native";
 import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
@@ -9,11 +8,9 @@ import CinemaModal from "../../modals/CinemaModal"
 import { useNavigation } from "@react-navigation/native";
 
 
-const Top10Movies = () => {
+const Top10Movies = ({ cinemas }) => {
 
   const navigation = useNavigation();
-  const { state } = useContext(Context);
-  const [cinemas, setCinemas] = useState(state.cinemas)
   const [cinemaModalVisible, setCinemaModalVisible] = useState(false);
   const [cinema, setCinema] = useState({})
 
@@ -31,7 +28,6 @@ const Top10Movies = () => {
             setCinemaModalVisible(true), 
             setCinema(item)
           }}
-          //onPress={() => navigation.navigate("Biografer", { screen: "Cinema", params: { item }})}
         >
           <ImageBackground
             style={styles.img}
@@ -130,7 +126,8 @@ const styles = StyleSheet.create({
     width: 120,
     borderColor: "black",
     borderWidth: 2,
-    borderRadius: 7
+    borderRadius: 7,
+    
   },
   titleContainer: {
     position: "absolute",

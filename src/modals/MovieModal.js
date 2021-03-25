@@ -55,7 +55,6 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
   return (
     <GestureRecognizer
       onSwipeDown={() => setMovieModalVisible(!movieModalVisible)}
-      config={config}
       style={{
         flex: 1,
         backgroundColor: 'transparent',

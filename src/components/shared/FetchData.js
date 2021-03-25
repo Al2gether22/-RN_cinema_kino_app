@@ -10,17 +10,18 @@ const FetchData = () => {
   const { getMovies, getVersions } = useContext(MovieContext)
   const { state, getCinemas } = useContext(CinemaContext)
   const { tryLocalSignin } = useContext(AuthContext)
-
+  
   useEffect(() => {
     // fetches cinemas, movies and versions
-    if (state.cinemas.length === 0) {
+    if ( state.cinemas.length === 0 ) {
       getCinemas();
+      console.log("Get cinemas called from FetchData")
     }
     
     getMovies();
     getVersions();
     tryLocalSignin();
-
+    
     AppState.addEventListener("change", _handleAppStateChange);
 
     return () => {
@@ -34,10 +35,6 @@ const FetchData = () => {
       nextAppState === "active"
     ) {
       // Re-fetching cinemas, movies and versions when appstate changes to active
-        if (state.cinemas.length === 0) {
-          getCinemas();
-          
-        }
 
         getMovies();
         getVersions();

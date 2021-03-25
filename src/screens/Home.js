@@ -2,7 +2,8 @@ import React, {useContext, useEffect, useState} from 'react';
 import {View, ActivityIndicator, StyleSheet} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { Context as CinemaContext } from "../context/CinemaContext";
-import { Context as AuthContext } from "../context/AuthContext";
+import { Context as MoviesContext } from "../context/MoviesContext";
+import _ from "lodash";
 import UserInfoModal from "../modals/UserInfoModal"
 import FeaturedMovie from "../components/shared/FeaturedMovie"
 import Top10Movies from "../components/shared/Top10Movies"
@@ -11,11 +12,9 @@ import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
-  const {
-    state: {user},
-  } = useContext(AuthContext);
-  const [currentLongitude, setCurrentLongitude] = useState('...');
-  const [currentLatitude, setCurrentLatitude] = useState('...');
+  const { state: { movies } } = useContext(MoviesContext)
+  const [currentLongitude, setCurrentLongitude] = useState('');
+  const [currentLatitude, setCurrentLatitude] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
@@ -56,7 +55,9 @@ const Home = () => {
 
   useEffect(() => {
     updateCinemas(state.cinemas, currentLatitude, currentLongitude);
-  }, [state.cinemas.length && currentLatitude]);
+    console.log("Updated cinemas called from HOME")
+    console.log(`currentLatitide ${currentLatitude}`)
+  }, [currentLatitude]);
 
   const requestPermissions = async () => {
     try {
@@ -90,9 +91,11 @@ const Home = () => {
     );
   };
 
-  if (state.cinemas.length === 0) {
+  if (state.cinemas.length === 0 || movies.length == 0) {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
+
+  console.log(state.cinemas[0])
 
   return (
     <>
@@ -104,8 +107,8 @@ const Home = () => {
       <View style={styles.container}>
         <FeaturedMovie />
         <View style={styles.slidersContainer}>
-          <Top10Movies />
-          <TopCinemas />
+          <Top10Movies movies={movies} />
+          <TopCinemas cinemas={state.cinemas} />
         </View>
       </View>
     </>

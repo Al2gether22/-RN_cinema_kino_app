@@ -12,10 +12,6 @@ const Cinema = ({ route }) => {
   const [cinema, setCinema] = useState([])
   const [loading, setLoading] = useState(true)
   const navigation = useNavigation();
-  const config = {
-    velocityThreshold: 0.4,
-    directionalOffsetThreshold: 80
-  };
 
   // fetches cinema data
   useEffect(() => {
@@ -37,7 +33,7 @@ const Cinema = ({ route }) => {
         ListHeaderComponent={
           <GestureRecognizer      
           onSwipeDown={() => navigation.goBack()}
-          config={config}
+          
           style={{
             flex: 1,
             backgroundColor: "transparent",
