@@ -37,6 +37,9 @@ const FeaturedMovie = () => {
         resizeMode="cover"
       >
 
+
+    
+
         <LinearGradient 
           colors={['rgba(29,29,39,1)', 'rgba(29,29,39,0)']} 
           
@@ -84,6 +87,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+   
+   
   },
   linkContainer: {
     padding: 15,

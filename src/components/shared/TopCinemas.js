@@ -126,7 +126,8 @@ const styles = StyleSheet.create({
     width: 120,
     borderColor: "black",
     borderWidth: 2,
-    borderRadius: 7
+    borderRadius: 7,
+    
   },
   titleContainer: {
     position: "absolute",

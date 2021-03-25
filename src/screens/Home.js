@@ -13,8 +13,8 @@ import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
   const { state: { movies } } = useContext(MoviesContext)
-  const [currentLongitude, setCurrentLongitude] = useState('...');
-  const [currentLatitude, setCurrentLatitude] = useState('...');
+  const [currentLongitude, setCurrentLongitude] = useState('');
+  const [currentLatitude, setCurrentLatitude] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
@@ -55,7 +55,9 @@ const Home = () => {
 
   useEffect(() => {
     updateCinemas(state.cinemas, currentLatitude, currentLongitude);
-  }, [state.cinemas.length && currentLatitude]);
+    console.log("Updated cinemas called from HOME")
+    console.log(`currentLatitide ${currentLatitude}`)
+  }, [currentLatitude]);
 
   const requestPermissions = async () => {
     try {
@@ -89,11 +91,11 @@ const Home = () => {
     );
   };
 
-  
-
-  if (state.cinemas.length == 0 || movies.length == 0) {
+  if (state.cinemas.length === 0 || movies.length == 0) {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
+
+  console.log(state.cinemas[0])
 
   return (
     <>

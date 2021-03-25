@@ -33,12 +33,6 @@ const MovieModal = ({
     secondaryFontColor,
   } = usePosterColors(movie.imageUrl);
 
-
-  const config = {
-    velocityThreshold: 0.2,
-    directionalOffsetThreshold: 20,
-  };
-
   useEffect(() => {
     fetch(
       `https://www.kino.dk/appservices/movie/${
@@ -58,11 +52,11 @@ const MovieModal = ({
     return null;
   }
 
+  console.log(backgroundColor)
 
   return (
     <GestureRecognizer
       onSwipeDown={() => setMovieModalVisible(!movieModalVisible)}
-      config={config}
       style={{
         flex: 1,
         backgroundColor: 'transparent',
