@@ -17,8 +17,8 @@ function usePosterColors(img) {
       }
       const colors = await ImageColors.getColors(img, {
         fallback: '#000000',
-        quality: 'lowest',
-        pixelSpacing: 500,
+        quality: 'low',
+        pixelSpacing: 100,
       });
       if (colors.platform === 'android') {
         setImgColors({
