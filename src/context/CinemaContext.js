@@ -7,7 +7,7 @@ const cinemaReducer = (state, action) => {
     case 'add_error':
       return {...state, errorMessage: action.payload};
     case 'get_cinemas':
-      return {...state, cinemas: action.payload, cinemasFetched: true};
+      return {...state, cinemas: action.payload, isCinemasFetched: true};
     case 'update_cinemas':
       return {...state, cinemas: action.payload, cinemasSorted: true};
     default:
@@ -59,5 +59,10 @@ const updateCinemas = dispatch => {
 export const {Context, Provider} = dataContext(
   cinemaReducer,
   {updateCinemas, getCinemas},
-  {cinemas: [], errorMessage: '', cinemasSorted: false, cinemasFetched: false},
+  {
+    cinemas: [],
+    errorMessage: '',
+    cinemasSorted: false,
+    isCinemasFetched: false,
+  },
 );

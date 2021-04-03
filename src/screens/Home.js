@@ -58,12 +58,12 @@ const Home = () => {
 
   useEffect(() => {
     console.log('updateCinemas() useEffect');
-    if (state.cinemasFetched && currentLatitude !== '') {
+    if (state.isCinemasFetched && currentLatitude !== '') {
       updateCinemas(state.cinemas, currentLatitude, currentLongitude);
     }
     console.log('Updated cinemas called from HOME');
     console.log(`currentLatitide ${currentLatitude}`);
-  }, [state.cinemasFetched, currentLatitude]);
+  }, [state.isCinemasFetched, currentLatitude]);
 
   const requestPermissions = async () => {
     try {
