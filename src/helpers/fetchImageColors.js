@@ -5,14 +5,14 @@ async function fetchImageColors(img, setImgColors) {
     if (!img) return;
     const colors = await ImageColors.getColors(img, {
       fallback: '#000000',
-      quality: 'lowest',
-      pixelSpacing: 500,
+      quality: 'low',
+      pixelSpacing: 5,
     });
     if (colors.platform === 'android') {
       setImgColors({
-        backgroundColor: colors.average,
-        primaryFontColor: colors.vibrant,
-        secondaryFontColor: colors.darkVibrant,
+        backgroundColor: colors.dominant,
+        primaryFontColor: colors.average,
+        secondaryFontColor: colors.vibrant,
       });
     } else {
       setImgColors({
