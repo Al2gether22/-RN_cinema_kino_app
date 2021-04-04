@@ -1,18 +1,20 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {View, ActivityIndicator, StyleSheet} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
-import { Context as CinemaContext } from "../context/CinemaContext";
-import { Context as MoviesContext } from "../context/MoviesContext";
-import _ from "lodash";
-import UserInfoModal from "../modals/UserInfoModal"
-import FeaturedMovie from "../components/shared/FeaturedMovie"
-import Top10Movies from "../components/shared/Top10Movies"
-import TopCinemas from "../components/shared/TopCinemas"
+import {Context as CinemaContext} from '../context/CinemaContext';
+import {Context as MoviesContext} from '../context/MoviesContext';
+import _ from 'lodash';
+import UserInfoModal from '../modals/UserInfoModal';
+import FeaturedMovie from '../components/shared/FeaturedMovie';
+import Top10Movies from '../components/shared/Top10Movies';
+import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
-  const { state: { movies } } = useContext(MoviesContext)
+  const {
+    state: {movies},
+  } = useContext(MoviesContext);
   const [currentLongitude, setCurrentLongitude] = useState('');
   const [currentLatitude, setCurrentLatitude] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -22,6 +24,7 @@ const Home = () => {
   }, []);
 
   const checkPermissions = () => {
+    console.log('checkPermissions()');
     check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
       .then(result => {
         switch (result) {
@@ -54,10 +57,13 @@ const Home = () => {
   };
 
   useEffect(() => {
-    updateCinemas(state.cinemas, currentLatitude, currentLongitude);
-    console.log("Updated cinemas called from HOME")
-    console.log(`currentLatitide ${currentLatitude}`)
-  }, [currentLatitude]);
+    console.log('updateCinemas() useEffect');
+    if (state.isCinemasFetched && currentLatitude !== '') {
+      updateCinemas(state.cinemas, currentLatitude, currentLongitude);
+    }
+    console.log('Updated cinemas called from HOME');
+    console.log(`currentLatitide ${currentLatitude}`);
+  }, [state.isCinemasFetched, currentLatitude]);
 
   const requestPermissions = async () => {
     try {
@@ -95,8 +101,6 @@ const Home = () => {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
 
-  console.log(state.cinemas[0])
-
   return (
     <>
       <UserInfoModal
@@ -125,9 +129,9 @@ const styles = StyleSheet.create({
   },
   slidersContainer: {
     flex: 1,
-    width: "100%", 
-    justifyContent: "center",
-    marginBottom: 80
+    width: '100%',
+    justifyContent: 'center',
+    marginBottom: 80,
   },
 });
 
