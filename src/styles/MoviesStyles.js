@@ -5,20 +5,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#1d1d27",
     padding: 10,
-
   },
   filterContainer: {
     flexDirection: "row",
-    margin: 10,
+    marginTop: 5,
+    marginLeft: 5,
+    marginRight: 5,
     justifyContent: "space-between",
     borderRadius: 7,
     marginBottom: 20
   },
   filterButton: {
-    
-    padding: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    paddingTop: 7,
+    paddingBottom: 8,
     flex: 1,
-    borderRadius: 7
+    borderRadius: 7,
+    borderWidth: 1,
+    borderColor: "black",
+    margin: 5,
+    
   },
   filterButtonText: {
     color: "white",
@@ -28,12 +35,11 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    flex: 1,
-    alignSelf: "flex-start",
+    flex: 0.3333,
+    maxWidth: "28%",
     marginRight: 10,
     marginLeft: 10,
     shadowColor: "#000",
-    maxWidth: "45%",
     shadowOffset: {
       width: 0,
       height: 4,

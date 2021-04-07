@@ -20,7 +20,7 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
   return (
     <View style={styles.filterContainer}>
         <TouchableScale
-          style={[styles.filterButton, activeButton === 1 ? { backgroundColor: "red" } : { backgroundColor: "transparent" } ]}
+          style={[styles.filterButton, activeButton === 1 ? { backgroundColor: "tomato" } : { backgroundColor: "black" } ]}
           activeScale={0.9}
           tension={50}
           friction={7}
@@ -31,10 +31,10 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
           ]}
 
         >
-          <Text style={styles.filterButtonText}>Mest Sælgende</Text>
+          <Text style={styles.filterButtonText}>Populære</Text>
         </TouchableScale>
         <TouchableScale
-          style={[styles.filterButton, activeButton === 2 ? { backgroundColor: "red" } : { backgroundColor: "transparent" } ]}
+          style={[styles.filterButton, activeButton === 2 ? { backgroundColor: "tomato" } : { backgroundColor: "black" } ]}
           activeScale={0.9}
           tension={50}
           friction={7}
@@ -44,10 +44,10 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
             setActiveButton(2),
           ]}
         >
-          <Text style={styles.filterButtonText}>Aktuelle Film</Text>
+          <Text style={styles.filterButtonText}>Aktuelle</Text>
         </TouchableScale>
         <TouchableScale
-          style={[styles.filterButton, activeButton === 3 ? { backgroundColor: "red" } : { backgroundColor: "transparent" } ]}
+          style={[styles.filterButton, activeButton === 3 ? { backgroundColor: "tomato" } : { backgroundColor: "black" } ]}
           activeScale={0.9}
           tension={50}
           friction={7}
@@ -57,7 +57,7 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
             setActiveButton(3),
           ]}
         >
-          <Text style={styles.filterButtonText}>Kommende Film</Text>
+          <Text style={styles.filterButtonText}>Kommende</Text>
         </TouchableScale>
       </View>
   )
