@@ -11,10 +11,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     margin: 10,
     justifyContent: "space-between",
-    borderRadius: 7
+    borderRadius: 7,
+    marginBottom: 20
   },
   filterButton: {
-    backgroundColor: "tomato",
+    
     padding: 5,
     flex: 1,
     borderRadius: 7
