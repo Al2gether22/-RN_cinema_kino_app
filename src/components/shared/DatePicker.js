@@ -47,6 +47,7 @@ const DatePicker = forwardRef(
 
     return (
       <FlatList
+        keyboardShouldPersistTaps="always"
         horizontal
         ref={ref}
         keyExtractor={(item) => item.toString()}

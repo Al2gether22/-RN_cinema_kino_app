@@ -7,7 +7,7 @@ import { Context as AuthContext } from "../../context/AuthContext"
 const FetchData = () => {
   const appState = useRef(AppState.currentState);
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
-  const { getMovies, getVersions } = useContext(MovieContext)
+  const { getMovies, getVersions, getUpcomingMovies } = useContext(MovieContext)
   const { state, getCinemas } = useContext(CinemaContext)
   const { tryLocalSignin } = useContext(AuthContext)
   
@@ -19,6 +19,7 @@ const FetchData = () => {
     }
     
     getMovies();
+    getUpcomingMovies();
     getVersions();
     tryLocalSignin();
     
@@ -37,6 +38,7 @@ const FetchData = () => {
       // Re-fetching cinemas, movies and versions when appstate changes to active
 
         getMovies();
+        getUpcomingMovies();
         getVersions();
         tryLocalSignin();
     }

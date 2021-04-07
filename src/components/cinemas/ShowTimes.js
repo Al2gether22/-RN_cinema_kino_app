@@ -96,6 +96,7 @@ const ShowTimes = ({id}) => {
         </View>
       ) : (
         <FlatList
+          keyboardShouldPersistTaps="always"
           keyExtractor={index => index.toString()}
           data={showtimes}
           extraData={selectedDate}
@@ -124,6 +125,7 @@ const ShowTimes = ({id}) => {
                 <Text style={styles.sectionHeader}>{item.danishTitle}</Text>
 
                 <FlatList
+                  keyboardShouldPersistTaps="always"
                   // Here each showtime pr cinema is rendered
                   keyExtractor={(item, index) => index.toString()}
                   data={Object.values(item.showtimes)}
@@ -139,6 +141,7 @@ const ShowTimes = ({id}) => {
                         }
                       </Text>
                       <FlatList
+                        keyboardShouldPersistTaps="always"
                         //keyExtractor={(item) => item.showtimes.id}
                         keyExtractor={(item, index) => index.toString()}
                         data={Object.values(item)}

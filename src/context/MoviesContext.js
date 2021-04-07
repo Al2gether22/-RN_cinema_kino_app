@@ -6,6 +6,8 @@ const movieReducer = (state, action) => {
       return { ...state, errorMessage: action.payload };
     case "get_movies":
       return { ...state, movies: action.payload };
+    case "get_upcoming_movies":
+      return { ...state, upcomingMovies: action.payload };
     case "get_versions":
       return { ...state, versions: action.payload };
     default:
@@ -22,6 +24,25 @@ const getMovies = dispatch => async () => {
     dispatch({
       type: "get_movies",
       payload: movies
+    });
+  } catch (err) {
+    dispatch({
+      type: "add_error",
+      payload: "Something went wrong with the movies"
+    })
+  }
+}
+
+const getUpcomingMovies = dispatch => async () => {
+  try {
+    const response = await fetch(
+      "https://www.kino.dk/appservices/movies-upcoming",
+      { mode: "no-cors" })
+    const upcomingMovies = await response.json();
+    
+    dispatch({
+      type: "get_upcoming_movies",
+      payload: upcomingMovies
     });
   } catch (err) {
     dispatch({
@@ -54,6 +75,6 @@ const getVersions = dispatch => async () => {
 
 export const { Context, Provider } = dataContext(
   movieReducer,
-  { getMovies, getVersions },
-  { movies: [], errorMessage: '', versions: [] }
+  { getMovies, getVersions, getUpcomingMovies },
+  { movies: [], upcomingMovies: [], errorMessage: '', versions: [] }
 );

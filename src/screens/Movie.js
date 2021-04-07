@@ -41,6 +41,7 @@ const Movie = ({route}) => {
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
     <>
       <FlatList
+        keyboardShouldPersistTaps="always"
         style={[styles.container, {backgroundColor: backgroundColor}]}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={

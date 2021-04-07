@@ -49,6 +49,7 @@ const Cinemas = () => {
         filterValue="name"
       />
       <FlatList
+        keyboardShouldPersistTaps="always"
         data={cinemas}
         numColumns={1}
         keyExtractor={(item) => item.id.toString() }

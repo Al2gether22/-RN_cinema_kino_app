@@ -7,6 +7,25 @@ const styles = StyleSheet.create({
     padding: 10,
 
   },
+  filterContainer: {
+    flexDirection: "row",
+    margin: 10,
+    justifyContent: "space-between",
+    borderRadius: 7
+  },
+  filterButton: {
+    backgroundColor: "tomato",
+    padding: 5,
+    flex: 1,
+    borderRadius: 7
+  },
+  filterButtonText: {
+    color: "white",
+    fontFamily: "SourceSansPro-Bold",
+    fontSize: 14,
+    textAlign: "center"
+  },
+
   card: {
     flex: 1,
     alignSelf: "flex-start",

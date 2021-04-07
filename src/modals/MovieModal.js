@@ -69,6 +69,7 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
         visible={movieModalVisible}>
         <>
           <FlatList
+            keyboardShouldPersistTaps="always"
             style={[styles.container, {backgroundColor: backgroundColor}]}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={

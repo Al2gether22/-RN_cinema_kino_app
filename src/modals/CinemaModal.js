@@ -48,6 +48,7 @@ const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }
           
           <>
           <FlatList
+            keyboardShouldPersistTaps="always"
             style={styles.container}
             keyExtractor={(index) => index.toString()}
             showsVerticalScrollIndicator={false}

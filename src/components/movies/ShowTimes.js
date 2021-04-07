@@ -118,6 +118,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
       />
 
       <FlatList
+        keyboardShouldPersistTaps="always"
         // Here each cinema is rendered
         keyExtractor={showtime => showtime.cinema_id}
         data={showtimes}
@@ -141,6 +142,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
             </Text>
 
             <FlatList
+              keyboardShouldPersistTaps="always"
               // Here each showtime pr cinema is rendered
               keyExtractor={(item, index) => index.toString()}
               data={Object.values(item.showtimes)}
@@ -156,6 +158,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
                     />
                   </Text>
                   <FlatList
+                    keyboardShouldPersistTaps="always"
                     //keyExtractor={(item) => item.showtimes.id}
                     keyExtractor={(item, index) => index.toString()}
                     data={Object.values(item)}

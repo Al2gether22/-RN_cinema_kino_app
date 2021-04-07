@@ -8,6 +8,7 @@ import { SharedElement } from 'react-navigation-shared-element';
 import styles from "../styles/MoviesStyles"
 import PremiereDate from "../components/movies/PremiereDate";
 import SearchFilterFunction from "../components/shared/SearchFilterFunction"
+import { TouchableOpacity } from "react-native";
 
 const Movies = () => {
   const navigation = useNavigation();
@@ -16,6 +17,16 @@ const Movies = () => {
     _.orderBy(state.movies, "selling_position")
   );
   const currentDate = new Date();
+  const [filteredMovies, setFilteredMovies] = useState(movies)
+
+  const filterByCurrent = () => {
+    const currentMovies = state.movies.filter(movie => movie.status === "current")
+    setFilteredMovies(_.orderBy(currentMovies, "danishPremiere"))
+  }
+
+  const filterByUpcoming = () => {
+    setFilteredMovies(state.upcomingMovies)
+  }
    
   function Item(item) {
 
@@ -63,14 +74,36 @@ const Movies = () => {
   return (
     <View style={styles.container}>
       <SearchFilterFunction
-        data={movies}
-        filteredData={setMovies}
+        data={filteredMovies}
+        filteredData={setFilteredMovies}
         filterValue="title"
       />
 
+      <View style={styles.filterContainer}>
+        <TouchableOpacity
+          onPress={() => setFilteredMovies(_.orderBy(state.movies, "selling_position"))}  
+          style={styles.filterButton}
+        >
+          <Text style={styles.filterButtonText}>Mest Sælgende</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => filterByCurrent()}  
+          style={styles.filterButton}
+        >
+          <Text style={styles.filterButtonText}>Aktuelle Film</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => filterByUpcoming()} 
+          style={styles.filterButton} 
+        >
+          <Text style={styles.filterButtonText}>Kommende Film</Text>
+        </TouchableOpacity>
+      </View>
+
       <FlatList
-        data={movies}
-        extraData={movies}
+        keyboardShouldPersistTaps="always"
+        data={filteredMovies}
+        extraData={filteredMovies}
         numColumns={3}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => Item(item)}

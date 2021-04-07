@@ -72,6 +72,7 @@ const Top10Movies = ({ movies }) => {
         
       </View>
       <FlatList 
+        keyboardShouldPersistTaps="always"
         data={movies.slice(0, 10)}
         renderItem={({ item }) => Item(item)}
         keyExtractor={(item) => item.id}
