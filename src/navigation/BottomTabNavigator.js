@@ -84,8 +84,7 @@ export default function BottomTabNavigator() {
             tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             // check to see if logged in
-            iconName = focused ? "account" : "account"
-            state.user ? color="#28a804" : color="#ff321e"
+            iconName = state.user ?  "account-check-outline" : "account-outline"
     
             return (
               <MaterialCommunityIcons
