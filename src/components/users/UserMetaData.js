@@ -34,13 +34,13 @@ const UserMetaData = ({ userData, userObject, signout }) => {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.editButton}
           onPress={() => [
             setModalVisible(true),
             setUrl(`https://www.kino.dk/user/${userData.uid}`),
           ]}
         >
-          <Text style={styles.buttonText}>Rediger Profil</Text>
+          <Text style={styles.editButtonText}>Rediger Profil</Text>
         </TouchableOpacity>
 
         <TouchableOpacity

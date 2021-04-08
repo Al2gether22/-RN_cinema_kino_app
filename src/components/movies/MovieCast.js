@@ -49,7 +49,8 @@ const MovieCast = ({ movie, active, primaryFontColor, secondaryFontColor }) => {
 
 const styles = StyleSheet.create({
   container: {
-    margin: "4%"
+    margin: "4%",
+    
   },
   headline: {
     marginTop: 5,
@@ -65,14 +66,14 @@ const styles = StyleSheet.create({
   },
   name: {
     fontFamily: "SourceSansPro-Bold", 
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 10,
     
   }, 
   img: {
-    height: 100,
-    width: 100,
-    borderRadius: 100,
+    height: 80,
+    width: 54,
+    
     marginRight: 20
   }
 })

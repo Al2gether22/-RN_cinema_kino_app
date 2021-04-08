@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: "center", 
   },
   cinemaTitle: {
-    fontFamily: "BureauGrotComp-Medium",
-    fontSize: 18,
+    fontFamily: "SourceSansPro-Bold",
+    fontSize: 16,
     color: "white",
     marginLeft: 10,
   }, 

@@ -26,8 +26,7 @@ const styles = StyleSheet.create({
   userDataText: {
     color: "white",
     fontFamily: "SourceSansPro-Bold", 
-    fontSize: 14, 
-    color: '#676d7c', 
+    fontSize: 14,  
     paddingBottom: 10
   },
   buttonContainer: {
@@ -52,6 +51,29 @@ const styles = StyleSheet.create({
     elevation: 23,
   },
   buttonText: {
+    color: "white",
+    textAlign: "center",
+    paddingTop: 5,
+    paddingBottom: 5
+  },
+  editButton: {
+    alignSelf: "center",
+    fontSize: 30,
+    backgroundColor: "black",
+    padding: 10,
+    borderRadius: 5,
+    margin: 10,
+    width: "45%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 11,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+    elevation: 23,
+  },
+  editButtonText: {
     color: "white",
     textAlign: "center",
     paddingTop: 5,

@@ -99,23 +99,25 @@ const styles = StyleSheet.create({
   },
   headLine: {
     color: "white",
-    fontFamily: "BureauGrotComp-Medium",
-    fontSize: 18,
+    fontFamily: "SourceSansPro-Bold",
+    fontSize: 16,
     marginLeft: 10,
     flex: 1,
     justifyContent: "flex-start",
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
+    
   }, 
   headLineLink: {
     color: "white",
-    fontFamily: "BureauGrotComp-Medium",
-    fontSize: 18,
+    fontFamily: "SourceSansPro-Bold",
+    fontSize: 13,
     justifyContent: "flex-end",
     marginRight: 10,
     paddingTop: 10,
     paddingBottom: 10,  
     textDecorationLine: 'underline',
+    
   },
   itemContainer: {
     margin: 5,

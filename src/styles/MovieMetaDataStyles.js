@@ -8,7 +8,12 @@ const styles = StyleSheet.create({
     marginLeft: "4%",
     marginRight: "4%",
     padding: 5,
-    marginBottom: 20
+    marginBottom: 20,
+    borderBottomColor: "white",
+    borderBottomWidth: 0.2,
+    borderTopColor: "white",
+    borderTopWidth: 0.2,
+    marginTop: 20
   },
 
   movieMetaData: {
@@ -19,7 +24,8 @@ const styles = StyleSheet.create({
   },
 
   movieRating: {
-    flex: 2,
+    flex: 1,
+    flexDirection: "row",
     color: "white",
     textAlign: "center",
     
@@ -27,19 +33,23 @@ const styles = StyleSheet.create({
   movieRatingIcon: {
     textAlign: "center",
     marginBottom: 5,
-    
+    flex: 1,
+    flexDirection: "column"
   },
   movieRatingRating: {
     fontFamily: "SourceSansPro-Bold",
     color: "white",
     fontSize: 20,
     textAlign: "center",
+    flex: 1,
+    flexDirection: "column"
   },
   movieRatingUsers: {
     fontFamily: "SourceSansPro-Bold",
     color: "#676d7c",
     fontSize: 12,
     textAlign: "center",
+    
   },
 
 })

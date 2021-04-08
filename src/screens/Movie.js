@@ -81,9 +81,9 @@ const Movie = ({route}) => {
               <TabViewComponent
                 setActive={setActive}
                 active={active}
-                backgroundColor={backgroundColor}
+                backgroundColor={secondaryFontColor}
                 primaryFontColor={primaryFontColor}
-                secondaryFontColor={secondaryFontColor}
+                secondaryFontColor={backgroundColor}
               />
 
               <ShowTimes

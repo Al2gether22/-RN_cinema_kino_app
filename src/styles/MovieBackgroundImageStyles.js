@@ -23,18 +23,19 @@ const styles = StyleSheet.create({
   },
   
   movieTitle: {
-    fontFamily: "BureauGrotComp-Medium",
+    fontFamily: "SourceSansPro-Bold",
     color: "white",
     marginTop: -30,
     marginLeft: "5%",
     marginRight: "20%",
-    fontSize: 35
+    fontSize: 35,
+    
   },
   movieGenre: {
     fontFamily: "SourceSansPro-Bold",
     color: "#676d7c",
     marginLeft: "5%",
-    marginTop: 5,
+    marginTop: 10,
     marginRight: "10%",
     fontSize: 12,
     

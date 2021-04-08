@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     
   },
   filterButtonText: {
-    color: "white",
     fontFamily: "SourceSansPro-Bold",
     fontSize: 14,
     textAlign: "center"
@@ -62,8 +61,8 @@ const styles = StyleSheet.create({
     
   }, 
   cardTitle: {
-    fontFamily: "BureauGrotComp-Medium",
-    fontSize: 18,
+    fontFamily: "SourceSansPro-Bold",
+    fontSize: 14,
     color: "white",
     marginTop: 5,
     justifyContent: "center",

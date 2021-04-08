@@ -20,7 +20,7 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
   return (
     <View style={styles.filterContainer}>
         <TouchableScale
-          style={[styles.filterButton, activeButton === 1 ? { backgroundColor: "tomato" } : { backgroundColor: "black" } ]}
+          style={[styles.filterButton, activeButton === 1 ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" } ]}
           activeScale={0.9}
           tension={50}
           friction={7}
@@ -34,7 +34,7 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
           <Text style={styles.filterButtonText}>Populære</Text>
         </TouchableScale>
         <TouchableScale
-          style={[styles.filterButton, activeButton === 2 ? { backgroundColor: "tomato" } : { backgroundColor: "black" } ]}
+          style={[styles.filterButton, activeButton === 2 ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" } ]}
           activeScale={0.9}
           tension={50}
           friction={7}
@@ -47,7 +47,7 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
           <Text style={styles.filterButtonText}>Aktuelle</Text>
         </TouchableScale>
         <TouchableScale
-          style={[styles.filterButton, activeButton === 3 ? { backgroundColor: "tomato" } : { backgroundColor: "black" } ]}
+          style={[styles.filterButton, activeButton === 3 ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" } ]}
           activeScale={0.9}
           tension={50}
           friction={7}

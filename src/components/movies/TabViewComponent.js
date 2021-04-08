@@ -8,30 +8,30 @@ const TabViewComponent = ({ setActive, active, backgroundColor, primaryFontColor
   return (
     <View style={[styles.container, { backgroundColor: secondaryFontColor}]}>
       <TouchableOpacity
-        style={active === 0 ? [styles.buttom, { borderBottomColor: backgroundColor }] : styles.buttom }
+        style={active === 0 ? [styles.buttom, { borderBottomColor: backgroundColor }] : [styles.buttom, { borderBottomColor: primaryFontColor }] }
         onPress={() => {
           setActive(0)
         }}
       >
-        <Text style={[styles.buttomText, { color: backgroundColor}]}>Spilletider</Text>
+        <Text style={active === 0 ? [styles.buttomText, { color: backgroundColor }] : [styles.buttomText, { color: primaryFontColor }] }>Spilletider</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={active === 1 ? [styles.buttom, { borderBottomColor: backgroundColor }] : styles.buttom }
+        style={active === 1 ? [styles.buttom, { borderBottomColor: backgroundColor }] : [styles.buttom, { borderBottomColor: primaryFontColor }] }
         onPress={() => {
           setActive(1)
         }}
       >
-        <Text style={[styles.buttomText, { color: backgroundColor}]}>Resume</Text>
+        <Text style={active === 1 ? [styles.buttomText, { color: backgroundColor }] : [styles.buttomText, { color: primaryFontColor }] }>Resume</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={active === 2 ? [styles.buttom, { borderBottomColor: backgroundColor }] : styles.buttom }
+        style={active === 2 ? [styles.buttom, { borderBottomColor: backgroundColor }] : [styles.buttom, { borderBottomColor: primaryFontColor }] }
         onPress={() => {
           setActive(2)
         }}
       >
-        <Text style={[styles.buttomText, { color: backgroundColor}]}>Cast</Text>
+        <Text style={active === 2 ? [styles.buttomText, { color: backgroundColor }] : [styles.buttomText, { color: primaryFontColor }] }>Medvirkende</Text>
       </TouchableOpacity>
     </View>
   )
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     
     justifyContent: "space-around",
+    marginBottom: 10
   },
   buttom: {
     padding: 15,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   },
 
   buttomText: {
-    fontFamily: "BureauGrotComp-Medium",
+    fontFamily: "SourceSansPro-Bold",
     fontSize: 18,
   }
 })
