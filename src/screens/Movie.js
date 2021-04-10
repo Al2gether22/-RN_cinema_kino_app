@@ -10,12 +10,13 @@ import MovieCast from '../components/movies/MovieCast';
 import styles from '../styles/MovieStyles';
 import TabViewComponent from '../components/movies/TabViewComponent';
 import GestureRecognizer from 'react-native-swipe-gestures';
+import useMovieJson from '../hooks/useMovieJson';
 
 const Movie = ({route}) => {
   const {item} = route.params;
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   const {
     backgroundColor,
     primaryFontColor,
@@ -35,7 +36,6 @@ const Movie = ({route}) => {
         setLoading(false);
       });
   }, []);
-    
 
   return (
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
@@ -121,15 +121,15 @@ const Movie = ({route}) => {
                   primaryFontColor={primaryFontColor}
                   secondaryFontColor={secondaryFontColor}
                   active={active === 2 ? 'flex' : 'none'}
-                />  
-              </GestureRecognizer>   
-            </> 
+                />
+              </GestureRecognizer>
+            </>
           )
         }
       />
     </>
-    );
-  }
+  );
+};
 
 Movie.defaultProps = {
   average_rating: '0',

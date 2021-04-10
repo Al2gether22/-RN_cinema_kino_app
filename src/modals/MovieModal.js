@@ -17,10 +17,9 @@ import MovieCast from '../components/movies/MovieCast';
 import TabViewComponent from '../components/movies/TabViewComponent';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import fetchImageColors from '../helpers/fetchImageColors';
+import useMovieJson from '../hooks/useMovieJson';
 
 const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
-  const [movie, setMovie] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(0);
   const defaultState = {
     backgroundColor: '#1d1d27',
@@ -28,32 +27,13 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
     secondaryFontColor: 'white',
   };
   const [imgColors, setImgColors] = useState(defaultState);
+  const {movie, isLoading} = useMovieJson(passedMovie);
 
   useEffect(() => {
-    const fetchPromise = fetch(
-      `https://www.kino.dk/appservices/movie/${
-        passedMovie.id ? passedMovie.id : passedMovie.movie_id
-      }`,
-      {
-        mode: 'no-cors',
-      },
-    )
-      .then(response => response.json())
-      .then(json => setMovie(json))
-      .catch(error => console.error(error));
-    const imageColorPromise = fetchImageColors(
-      passedMovie.imageUrl,
-      setImgColors,
-    );
-    Promise.all([fetchPromise]).then(() => {
-      setLoading(false);
-    });
-    // Promise.all([fetchPromise, imageColorPromise]).then(() => {
-    //   setLoading(false);
-    // });
-  }, [passedMovie, backgroundColor]);
+    fetchImageColors(passedMovie.imageUrl, setImgColors);
+  }, [passedMovie]);
 
-  if (loading) {
+  if (isLoading) {
     return null;
   }
 
