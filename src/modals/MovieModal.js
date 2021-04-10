@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {FlatList, TouchableOpacity, StatusBar, Modal} from 'react-native';
+import {
+  FlatList,
+  TouchableOpacity,
+  StatusBar,
+  Modal,
+  Animated,
+} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/MovieStyles';
 import MovieBackgroundImage from '../components/movies/MovieBackgroundImage';
@@ -17,9 +23,9 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
   const {movie, isLoading} = useMovieJson(passedMovie);
   const {imgColors, fadeAnim} = usePosterColors(passedMovie.imageUrl);
 
-  if (isLoading) {
-    return null;
-  }
+  // if (isLoading) {
+  //   return null;
+  // }
 
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
 
@@ -35,9 +41,9 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
         presentationStyle={'fullScreen'}
         visible={movieModalVisible}>
         <>
-          <FlatList
+          <Animated.FlatList
             keyboardShouldPersistTaps="always"
-            style={[styles.container, {backgroundColor: backgroundColor}]}
+            style={[styles.container, {backgroundColor, opacity: fadeAnim}]}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <>
