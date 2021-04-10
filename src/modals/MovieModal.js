@@ -45,9 +45,12 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
       passedMovie.imageUrl,
       setImgColors,
     );
-    Promise.all([fetchPromise, imageColorPromise]).then(() => {
+    Promise.all([fetchPromise]).then(() => {
       setLoading(false);
     });
+    // Promise.all([fetchPromise, imageColorPromise]).then(() => {
+    //   setLoading(false);
+    // });
   }, [passedMovie, backgroundColor]);
 
   if (loading) {
