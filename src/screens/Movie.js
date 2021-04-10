@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StatusBar, FlatList} from 'react-native';
+import {StatusBar, FlatList, Animated} from 'react-native';
 import usePosterColors from '../hooks/usePosterColors';
 import MovieBackgroundImage from '../components/movies/MovieBackgroundImage';
 import {useNavigation} from '@react-navigation/native';
@@ -15,20 +15,17 @@ import useMovieJson from '../hooks/useMovieJson';
 const Movie = ({route}) => {
   const {item} = route.params;
   const {movie, isLoading} = useMovieJson(item);
-  const {
-    backgroundColor,
-    primaryFontColor,
-    secondaryFontColor,
-  } = usePosterColors(item.imageUrl);
+  const {imgColors, fadeAnim} = usePosterColors(item.imageUrl);
+  const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
   const [active, setActive] = useState(0);
   const navigation = useNavigation();
 
   return (
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
     <>
-      <FlatList
+      <Animated.FlatList
         keyboardShouldPersistTaps="always"
-        style={[styles.container, {backgroundColor: backgroundColor}]}
+        style={[styles.container, {backgroundColor, opacity: fadeAnim}]}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <GestureRecognizer

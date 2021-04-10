@@ -1,12 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {
-  FlatList,
-  ActivityIndicator,
-  TouchableOpacity,
-  StatusBar,
-  Modal,
-} from 'react-native';
-import usePosterColors from '../hooks/usePosterColors';
+import React, {useState} from 'react';
+import {FlatList, TouchableOpacity, StatusBar, Modal} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/MovieStyles';
 import MovieBackgroundImage from '../components/movies/MovieBackgroundImage';
@@ -16,22 +9,13 @@ import MovieResume from '../components/movies/MovieResume';
 import MovieCast from '../components/movies/MovieCast';
 import TabViewComponent from '../components/movies/TabViewComponent';
 import GestureRecognizer from 'react-native-swipe-gestures';
-import fetchImageColors from '../helpers/fetchImageColors';
 import useMovieJson from '../hooks/useMovieJson';
+import usePosterColors from '../hooks/usePosterColors';
 
 const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
   const [active, setActive] = useState(0);
-  const defaultState = {
-    backgroundColor: '#1d1d27',
-    primaryFontColor: 'white',
-    secondaryFontColor: 'white',
-  };
-  const [imgColors, setImgColors] = useState(defaultState);
   const {movie, isLoading} = useMovieJson(passedMovie);
-
-  useEffect(() => {
-    fetchImageColors(passedMovie.imageUrl, setImgColors);
-  }, [passedMovie]);
+  const {imgColors, fadeAnim} = usePosterColors(passedMovie.imageUrl);
 
   if (isLoading) {
     return null;
