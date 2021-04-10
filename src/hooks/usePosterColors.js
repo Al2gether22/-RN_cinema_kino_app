@@ -1,5 +1,4 @@
-import {useState, useEffect, useRef} from 'react';
-import {Animated} from 'react-native';
+import {useState, useEffect} from 'react';
 import fetchImageColors from '../helpers/fetchImageColors';
 
 function usePosterColors(img) {
@@ -9,22 +8,12 @@ function usePosterColors(img) {
     secondaryFontColor: 'white',
   };
   const [imgColors, setImgColors] = useState(defaultState);
-  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
 
   useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 2000,
-      useNativeDriver: true,
-    }).start();
-  }, [fadeAnim]);
-
-  useEffect(() => {
-    console.log('useEffect fetchColors', img);
     fetchImageColors(img, setImgColors);
   }, [img]);
 
-  return {imgColors, fadeAnim};
+  return {imgColors};
 }
 
 export default usePosterColors;

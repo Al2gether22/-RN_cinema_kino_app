@@ -15,7 +15,7 @@ import useMovieJson from '../hooks/useMovieJson';
 const Movie = ({route}) => {
   const {item} = route.params;
   const {movie, isLoading} = useMovieJson(item);
-  const {imgColors, fadeAnim} = usePosterColors(item.imageUrl);
+  const {imgColors} = usePosterColors(item.imageUrl);
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
   const [active, setActive] = useState(0);
   const navigation = useNavigation();
@@ -23,9 +23,9 @@ const Movie = ({route}) => {
   return (
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
     <>
-      <Animated.FlatList
+      <FlatList
         keyboardShouldPersistTaps="always"
-        style={[styles.container, {backgroundColor, opacity: fadeAnim}]}
+        style={[styles.container, {backgroundColor}]}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <GestureRecognizer
