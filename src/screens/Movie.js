@@ -14,9 +14,7 @@ import useMovieJson from '../hooks/useMovieJson';
 
 const Movie = ({route}) => {
   const {item} = route.params;
-  const [movie, setMovie] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+  const {movie, isLoading} = useMovieJson(item);
   const {
     backgroundColor,
     primaryFontColor,
@@ -24,18 +22,6 @@ const Movie = ({route}) => {
   } = usePosterColors(item.imageUrl);
   const [active, setActive] = useState(0);
   const navigation = useNavigation();
-
-  useEffect(() => {
-    fetch(`https://www.kino.dk/appservices/movie/${item.id}`, {
-      mode: 'no-cors',
-    })
-      .then(response => response.json())
-      .then(json => setMovie(json))
-      .catch(error => console.error(error))
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
 
   return (
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
@@ -65,7 +51,7 @@ const Movie = ({route}) => {
               secondaryFontColor={secondaryFontColor}
             />
 
-            {loading ? null : (
+            {isLoading ? null : (
               <MovieMetaData
                 movie={movie}
                 backgroundColor={backgroundColor}
@@ -76,7 +62,7 @@ const Movie = ({route}) => {
           </GestureRecognizer>
         }
         ListFooterComponent={
-          loading ? null : (
+          isLoading ? null : (
             <>
               <TabViewComponent
                 setActive={setActive}

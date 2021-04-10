@@ -1,10 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
 import {Context as CinemaContext} from '../../context/CinemaContext';
 import {Context as AuthContext} from '../../context/AuthContext';
@@ -18,8 +13,15 @@ import {create1MonthDates} from '../../helpers/date.utils';
 import {scrollToIndex} from '../../helpers/datepicker.utils';
 import moment from 'moment';
 
-
-const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFontColor, secondaryFontColor, active }) => {
+const ShowTimes = ({
+  id,
+  nextShowtime,
+  movieVersions,
+  backgroundColor,
+  primaryFontColor,
+  secondaryFontColor,
+  active,
+}) => {
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
   const [sessionName, setSessionName] = useState('');
@@ -45,6 +47,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
     const url = `https://www.kino.dk/appservices/movie/${id}/${selectedDate.format(
       'YYYY-MM-DD',
     )}`;
@@ -55,10 +58,19 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
       .then(response => response.json())
       // sets showtimes to the response through the mergeArray method that calculates the distance
       .then(json => {
-        setShowtimes(mergeArrays(json, state.cinemas));
+        if (isMounted) {
+          setShowtimes(mergeArrays(json, state.cinemas));
+        }
       })
       .catch(error => console.error(error))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        if (isMounted) {
+          setLoading(false);
+        }
+      });
+    return () => {
+      isMounted = false;
+    };
   }, [selectedDate]);
 
   // Takes showtime as arr1 and cinemas as arr2
@@ -98,9 +110,12 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
 
-
   return (
-    <View style={[styles.container, { backgroundColor: backgroundColor, display: active}]}>
+    <View
+      style={[
+        styles.container,
+        {backgroundColor: backgroundColor, display: active},
+      ]}>
       <WebViewModal
         modalVisible={modalVisible}
         setModalVisible={() => setModalVisible(false)}
@@ -136,7 +151,7 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
         // Each cinema has a range of showtimes
         renderItem={({item}) => (
           <View>
-            <Text style={[styles.sectionHeader, { color: primaryFontColor }]}>
+            <Text style={[styles.sectionHeader, {color: primaryFontColor}]}>
               {item.name}{' '}
               {item.distance ? `- ${item.distance.toFixed(1)} km` : ''}
             </Text>
@@ -150,7 +165,11 @@ const ShowTimes = ({id, nextShowtime, movieVersions, backgroundColor, primaryFon
               numColumns={1}
               renderItem={({item}) => (
                 <View style={styles.showTimeContainer}>
-                  <Text style={[styles.showtimeVersionLabel, { color: secondaryFontColor }]}>
+                  <Text
+                    style={[
+                      styles.showtimeVersionLabel,
+                      {color: secondaryFontColor},
+                    ]}>
                     <MovieVersionLookup
                       // Make check to see if item[0] exists
                       id={item[0].movie_version_id}
