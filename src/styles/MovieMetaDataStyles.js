@@ -3,8 +3,6 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   
   metaDataContainer: {
-    flex: 1,
-    flexDirection: "column",
     marginLeft: "4%",
     marginRight: "4%",
     padding: 5,
@@ -13,43 +11,39 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.2,
     borderTopColor: "white",
     borderTopWidth: 0.2,
-    marginTop: 20
+    marginTop: 25
   },
 
   movieMetaData: {
-    flex: 1,
     flexDirection: "row",
-    alignItems: "center",
-    marginTop: 20
+    
+    paddingTop: 5,
+    paddingBottom: 5
   },
 
   movieRating: {
     flex: 1,
     flexDirection: "row",
     color: "white",
-    textAlign: "center",
-    
+    alignItems: "center",
+    justifyContent: "space-evenly"
   },
   movieRatingIcon: {
-    textAlign: "center",
     marginBottom: 5,
-    flex: 1,
-    flexDirection: "column"
+    
   },
   movieRatingRating: {
     fontFamily: "SourceSansPro-Bold",
     color: "white",
     fontSize: 20,
-    textAlign: "center",
-    flex: 1,
-    flexDirection: "column"
+    paddingBottom: 6
+   
   },
   movieRatingUsers: {
     fontFamily: "SourceSansPro-Bold",
     color: "#676d7c",
     fontSize: 12,
-    textAlign: "center",
-    
+    paddingBottom: 6
   },
 
 })
