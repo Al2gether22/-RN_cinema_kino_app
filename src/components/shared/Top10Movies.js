@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
   container: {
     
     
-    
   },
   headLineContainer: {
     color: "white",
@@ -125,10 +124,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 7
   },
-  title: {
-    width: 81,
-    
-  },
+ 
 
 })
 

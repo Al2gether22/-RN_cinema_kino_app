@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
     color: "white",
     backgroundColor: "rgba(29,29,39,0.8)",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    
   },
   headLine: {
     color: "white",
@@ -118,14 +119,14 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     margin: 5,
-    borderRadius: 7
-    
+    borderRadius: 7,
+    borderColor: "black",
+    borderWidth: 2,
   },
   img: {
     height: 60,
     width: 120,
-    borderColor: "black",
-    borderWidth: 2,
+    
     borderRadius: 7,
     
   },
