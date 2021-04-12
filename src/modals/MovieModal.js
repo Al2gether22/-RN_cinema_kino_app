@@ -1,12 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {
-  FlatList,
-  ActivityIndicator,
-  TouchableOpacity,
-  StatusBar,
-  Modal,
-} from 'react-native';
-import usePosterColors from '../hooks/usePosterColors';
+import React, {useState} from 'react';
+import {FlatList, TouchableOpacity, StatusBar, Modal} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/MovieStyles';
 import MovieBackgroundImage from '../components/movies/MovieBackgroundImage';
@@ -16,46 +9,19 @@ import MovieResume from '../components/movies/MovieResume';
 import MovieCast from '../components/movies/MovieCast';
 import TabViewComponent from '../components/movies/TabViewComponent';
 import GestureRecognizer from 'react-native-swipe-gestures';
-import fetchImageColors from '../helpers/fetchImageColors';
+import useMovieJson from '../hooks/useMovieJson';
+import usePosterColors from '../hooks/usePosterColors';
 
 const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
-  const [movie, setMovie] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(0);
-  const defaultState = {
-    backgroundColor: '#1d1d27',
-    primaryFontColor: 'white',
-    secondaryFontColor: 'white',
-  };
-  const [imgColors, setImgColors] = useState(defaultState);
+  const {movie, isLoading} = useMovieJson(passedMovie);
+  const {imgColors, isLoadingColors} = usePosterColors(passedMovie.imageUrl);
 
-  useEffect(() => {
-    const fetchPromise = fetch(
-      `https://www.kino.dk/appservices/movie/${
-        passedMovie.id ? passedMovie.id : passedMovie.movie_id
-      }`,
-      {
-        mode: 'no-cors',
-      },
-    )
-      .then(response => response.json())
-      .then(json => setMovie(json))
-      .catch(error => console.error(error));
-    const imageColorPromise = fetchImageColors(
-      passedMovie.imageUrl,
-      setImgColors,
-    );
-    Promise.all([fetchPromise, imageColorPromise]).then(() => {
-      setLoading(false);
-    });
-  }, [passedMovie, backgroundColor]);
-
-  if (loading) {
+  if (isLoading || isLoadingColors) {
     return null;
   }
 
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
-
   return (
     <GestureRecognizer
       onSwipeDown={() => setMovieModalVisible(!movieModalVisible)}
@@ -70,7 +36,7 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
         <>
           <FlatList
             keyboardShouldPersistTaps="always"
-            style={[styles.container, {backgroundColor: backgroundColor}]}
+            style={[styles.container, {backgroundColor}]}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <>

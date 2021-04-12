@@ -1,32 +1,32 @@
-import React, { useContext, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import _ from "lodash";
-import { Context } from "../context/MoviesContext"
-import { View, Text, FlatList, Image } from "react-native"
+import React, {useContext, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import _ from 'lodash';
+import {Context} from '../context/MoviesContext';
+import {View, Text, FlatList, Image} from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
-import { SharedElement } from 'react-navigation-shared-element';
-import styles from "../styles/MoviesStyles"
-import PremiereDate from "../components/movies/PremiereDate";
-import SearchFilterFunction from "../components/shared/SearchFilterFunction"
-import FilterMovies from "../components/movies/FilterMovies"
-import { TouchableOpacity } from "react-native";
+import {SharedElement} from 'react-navigation-shared-element';
+import styles from '../styles/MoviesStyles';
+import PremiereDate from '../components/movies/PremiereDate';
+import SearchFilterFunction from '../components/shared/SearchFilterFunction';
+import FilterMovies from '../components/movies/FilterMovies';
+import usePosterColors from '../hooks/usePosterColors';
+import fetchImageColors from '../helpers/fetchImageColors';
 
 const Movies = () => {
   const navigation = useNavigation();
-  const { state } = useContext(Context);
+  const {state} = useContext(Context);
   const [movies, setMovies] = useState(
-    _.orderBy(state.movies, "selling_position")
+    _.orderBy(state.movies, 'selling_position'),
   );
   const currentDate = new Date();
-  const [filteredMovies, setFilteredMovies] = useState(movies)
-   
-  function Item(item) {
+  const [filteredMovies, setFilteredMovies] = useState(movies);
 
+  function Item(item) {
     // Formatting date to compare it to date today
 
-    const parsedDate = (danishPremiere) => {
+    const parsedDate = danishPremiere => {
       if (danishPremiere !== null) {
-        const premiereDate = danishPremiere.split(" ")[0];
+        const premiereDate = danishPremiere.split(' ')[0];
         const parsedDate = new Date(premiereDate);
         return parsedDate;
       } else {
@@ -41,28 +41,32 @@ const Movies = () => {
         tension={50}
         friction={7}
         useNativeDriver
-        onPress={() =>
-          navigation.navigate("Movie", { 
-              item: item, lastScreen: "Film"       
-          })
-        }
-      >
+        onPress={async () => {
+          const imgColors = await fetchImageColors(item.imageUrl);
+          navigation.navigate('Movie', {
+            item,
+            imgColors,
+            lastScreen: 'Film',
+          });
+        }}>
         <SharedElement id={item.imageUrl}>
-          <Image style={styles.coverImage} source={{ uri: item.imageUrl }} />
+          <Image style={styles.coverImage} source={{uri: item.imageUrl}} />
         </SharedElement>
-        
+
         {parsedDate(item.danishPremiere) > currentDate && (
           <PremiereDate PremiereDate={item.danishPremiere} />
         )}
         <View style={styles.titleContainer}>
           <SharedElement id={item.danishTitle}>
-            <Text style={styles.cardTitle}>{item.title ? item.title : item.danishTitle}</Text>
+            <Text style={styles.cardTitle}>
+              {item.title ? item.title : item.danishTitle}
+            </Text>
           </SharedElement>
         </View>
       </TouchableScale>
     );
   }
-  
+
   return (
     <View style={styles.container}>
       <SearchFilterFunction
@@ -71,10 +75,7 @@ const Movies = () => {
         filterValue="title"
       />
 
-      <FilterMovies 
-        state={state}
-        setFilteredMovies={setFilteredMovies}
-      />
+      <FilterMovies state={state} setFilteredMovies={setFilteredMovies} />
 
       <FlatList
         keyboardShouldPersistTaps="always"
@@ -82,12 +83,11 @@ const Movies = () => {
         extraData={filteredMovies}
         numColumns={3}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => Item(item)}
-        keyExtractor={(item) => item.id}
+        renderItem={({item}) => Item(item)}
+        keyExtractor={item => item.id}
       />
     </View>
   );
 };
-
 
 export default Movies;

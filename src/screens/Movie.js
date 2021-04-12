@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {StatusBar, FlatList} from 'react-native';
 import usePosterColors from '../hooks/usePosterColors';
 import MovieBackgroundImage from '../components/movies/MovieBackgroundImage';
@@ -10,39 +10,21 @@ import MovieCast from '../components/movies/MovieCast';
 import styles from '../styles/MovieStyles';
 import TabViewComponent from '../components/movies/TabViewComponent';
 import GestureRecognizer from 'react-native-swipe-gestures';
+import useMovieJson from '../hooks/useMovieJson';
 
 const Movie = ({route}) => {
-  const {item} = route.params;
-  const [movie, setMovie] = useState([]);
-  const [loading, setLoading] = useState(true);
-  
-  const {
-    backgroundColor,
-    primaryFontColor,
-    secondaryFontColor,
-  } = usePosterColors(item.imageUrl);
+  const {item, imgColors} = route.params;
+  const {movie, isLoading} = useMovieJson(item);
+  const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
   const [active, setActive] = useState(0);
   const navigation = useNavigation();
-
-  useEffect(() => {
-    fetch(`https://www.kino.dk/appservices/movie/${item.id}`, {
-      mode: 'no-cors',
-    })
-      .then(response => response.json())
-      .then(json => setMovie(json))
-      .catch(error => console.error(error))
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-    
 
   return (
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
     <>
       <FlatList
         keyboardShouldPersistTaps="always"
-        style={[styles.container, {backgroundColor: backgroundColor}]}
+        style={[styles.container, {backgroundColor}]}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <GestureRecognizer
@@ -65,7 +47,7 @@ const Movie = ({route}) => {
               secondaryFontColor={secondaryFontColor}
             />
 
-            {loading ? null : (
+            {isLoading ? null : (
               <MovieMetaData
                 movie={movie}
                 backgroundColor={backgroundColor}
@@ -76,7 +58,7 @@ const Movie = ({route}) => {
           </GestureRecognizer>
         }
         ListFooterComponent={
-          loading ? null : (
+          isLoading ? null : (
             <>
               <TabViewComponent
                 setActive={setActive}
@@ -121,15 +103,15 @@ const Movie = ({route}) => {
                   primaryFontColor={primaryFontColor}
                   secondaryFontColor={secondaryFontColor}
                   active={active === 2 ? 'flex' : 'none'}
-                />  
-              </GestureRecognizer>   
-            </> 
+                />
+              </GestureRecognizer>
+            </>
           )
         }
       />
     </>
-    );
-  }
+  );
+};
 
 Movie.defaultProps = {
   average_rating: '0',

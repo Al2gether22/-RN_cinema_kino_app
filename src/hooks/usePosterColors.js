@@ -8,13 +8,18 @@ function usePosterColors(img) {
     secondaryFontColor: 'white',
   };
   const [imgColors, setImgColors] = useState(defaultState);
+  const [isLoadingColors, setIsLoadingColors] = useState(true);
 
-  useEffect(() => {
-    console.log('useEffect fetchColors', img);
-    fetchImageColors(img, setImgColors);
+  useEffect(async () => {
+    const loadColors = async () => {
+      setIsLoadingColors(true);
+      await fetchImageColors(img, setImgColors);
+      setIsLoadingColors(false);
+    };
+    loadColors();
   }, [img]);
 
-  return imgColors;
+  return {imgColors, isLoadingColors};
 }
 
 export default usePosterColors;
