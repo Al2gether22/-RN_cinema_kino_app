@@ -21,11 +21,11 @@ import usePosterColors from '../hooks/usePosterColors';
 const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
   const [active, setActive] = useState(0);
   const {movie, isLoading} = useMovieJson(passedMovie);
-  const {imgColors, fadeAnim} = usePosterColors(passedMovie.imageUrl);
+  const {imgColors, isLoadingColors} = usePosterColors(passedMovie.imageUrl);
 
-  // if (isLoading) {
-  //   return null;
-  // }
+  if (isLoading && isLoadingColors) {
+    return null;
+  }
 
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
 
@@ -43,7 +43,7 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
         <>
           <Animated.FlatList
             keyboardShouldPersistTaps="always"
-            style={[styles.container, {backgroundColor, opacity: fadeAnim}]}
+            style={[styles.container, {backgroundColor}]}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <>
