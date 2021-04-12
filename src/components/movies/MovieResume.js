@@ -6,7 +6,7 @@ import styles from "../../styles/MovieResumeStyles";
 
 
 const MovieMetaData = ({ resume, primaryFontColor, active }) => {
-
+  
   return (
     !resume ? null : 
     
