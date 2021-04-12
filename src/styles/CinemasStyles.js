@@ -11,9 +11,14 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     marginLeft: 10,
     marginBottom: 15,
-    flexDirection: "row",
-    backgroundColor: "black",
-    borderRadius: 7,
+    flexDirection: "column",
+    
+  },
+  cinemaImage: {
+    width: "100%",
+    height: 100,
+    
+    marginTop: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -22,29 +27,32 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.57,
     shadowRadius: 15.19,
     elevation: 23,
-  },
-  cinemaImage: {
-    height: 50,
-    width: 100,
-    
   }, 
 
   cinemaTitleContainer: {
     flex: 1, 
+    flexDirection: "column",
     justifyContent: "center", 
+    
   },
   cinemaTitle: {
     fontFamily: "SourceSansPro-Bold",
     fontSize: 16,
     color: "white",
-    marginLeft: 10,
+    alignSelf: "center",
+    backgroundColor: "black",
+    padding: 4,
+    
   }, 
   
   cinemaDistance: {
-    fontFamily: "SourceSansPro-BlackIt",
+    fontFamily: "SourceSansPro-Bold",
     fontSize: 14,
-    color: "#676d7c",
-    alignSelf: "center"
+    color: "white",
+    alignSelf: "center",
+    backgroundColor: "black",
+    padding: 4,
+    
   }
 })
 

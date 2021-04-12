@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { Context } from "../context/CinemaContext";
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, FlatList, ImageBackground } from "react-native";
 import { SharedElement } from 'react-navigation-shared-element';
 import TouchableScale from 'react-native-touchable-scale';
 import styles from "../styles/CinemasStyles"
@@ -24,19 +24,20 @@ const Cinemas = () => {
         onPress={() => navigation.navigate("Cinema", { item })}
       >
         <SharedElement id={item.imageUrl}>
-          <Image style={styles.cinemaImage} source={{ uri: item.imageUrl }}></Image>
+          <ImageBackground 
+            style={styles.cinemaImage} 
+            source={{ uri: item.imageUrl }}
+            resizeMode="cover"
+            >
+            <SharedElement id={item.name} style={styles.cinemaTitleContainer}>
+              <Text style={styles.cinemaTitle}>{item.name}</Text>
+              <Text style={styles.cinemaDistance}>{item.distance ? `${item.distance.toFixed(1)} km` : ''}</Text>
+            </SharedElement>
+
+
+          </ImageBackground>
         </SharedElement>  
 
-       
-        <SharedElement id={item.name} style={styles.cinemaTitleContainer}>
-          <Text style={styles.cinemaTitle}>{item.name}</Text>
-        </SharedElement>
-
-         
-        <Text style={styles.cinemaDistance}>{item.distance ? `${item.distance.toFixed(1)} km` : ''}</Text>
-         
-          
-        
       </TouchableScale>
     )
   }
@@ -51,7 +52,6 @@ const Cinemas = () => {
       <FlatList
         keyboardShouldPersistTaps="always"
         data={cinemas}
-        numColumns={1}
         keyExtractor={(item) => item.id.toString() }
         renderItem={({ item }) => Item(item)}
       />
