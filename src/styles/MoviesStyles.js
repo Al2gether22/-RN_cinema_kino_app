@@ -55,7 +55,9 @@ const styles = StyleSheet.create({
   coverImage: {
     aspectRatio: 2 / 3,
     borderRadius: 10,
-    
+    borderColor: "black",
+    borderWidth: 2,
+    borderRadius: 7
   },
   titleContainer: {
     flex: 1,

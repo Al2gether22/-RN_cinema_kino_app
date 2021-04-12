@@ -17,16 +17,18 @@ const styles = StyleSheet.create({
   cinemaImage: {
     width: "100%",
     height: 100,
-    
+    borderColor: "black",
+    borderWidth: 2,
+    borderRadius: 7,
     marginTop: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 3,
     },
-    shadowOpacity: 0.57,
-    shadowRadius: 15.19,
-    elevation: 23,
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
   }, 
 
   cinemaTitleContainer: {
