@@ -9,7 +9,8 @@ import styles from '../styles/MoviesStyles';
 import PremiereDate from '../components/movies/PremiereDate';
 import SearchFilterFunction from '../components/shared/SearchFilterFunction';
 import FilterMovies from '../components/movies/FilterMovies';
-import {TouchableOpacity} from 'react-native';
+import usePosterColors from '../hooks/usePosterColors';
+import fetchImageColors from '../helpers/fetchImageColors';
 
 const Movies = () => {
   const navigation = useNavigation();
@@ -19,6 +20,7 @@ const Movies = () => {
   );
   const currentDate = new Date();
   const [filteredMovies, setFilteredMovies] = useState(movies);
+  const [imgColors, setImgColors] = useState({});
 
   function Item(item) {
     // Formatting date to compare it to date today
@@ -40,12 +42,14 @@ const Movies = () => {
         tension={50}
         friction={7}
         useNativeDriver
-        onPress={() =>
+        onPress={async () => {
+          const imgColors = await fetchImageColors(item.imageUrl, setImgColors);
           navigation.navigate('Movie', {
-            item: item,
+            item,
+            imgColors,
             lastScreen: 'Film',
-          })
-        }>
+          });
+        }}>
         <SharedElement id={item.imageUrl}>
           <Image style={styles.coverImage} source={{uri: item.imageUrl}} />
         </SharedElement>

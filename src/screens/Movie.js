@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {StatusBar, FlatList, Animated} from 'react-native';
+import React, {useState} from 'react';
+import {StatusBar, FlatList} from 'react-native';
 import usePosterColors from '../hooks/usePosterColors';
 import MovieBackgroundImage from '../components/movies/MovieBackgroundImage';
 import {useNavigation} from '@react-navigation/native';
@@ -13,9 +13,8 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import useMovieJson from '../hooks/useMovieJson';
 
 const Movie = ({route}) => {
-  const {item} = route.params;
+  const {item, imgColors} = route.params;
   const {movie, isLoading} = useMovieJson(item);
-  const {imgColors} = usePosterColors(item.imageUrl);
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
   const [active, setActive] = useState(0);
   const navigation = useNavigation();
