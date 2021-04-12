@@ -11,6 +11,11 @@ const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }
 
   const [cinema, setCinema] = useState([]);
   const [loading, setLoading] = useState(true);
+  const config = {
+    velocityThreshold: 0.8,
+    directionalOffsetThreshold: 150,
+    gestureIsClickThreshold: 10
+  };
 
   useEffect(() => {
     fetch(`https://www.kino.dk/appservices/cinema/${passedCinema.id}`, {
@@ -30,6 +35,7 @@ const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }
     return (
       <GestureRecognizer      
         onSwipeDown={() => setCinemaModalVisible(!cinemaModalVisible)}
+        config={config}
         style={{
           flex: 1,
           backgroundColor: "transparent",

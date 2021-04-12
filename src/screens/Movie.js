@@ -23,6 +23,11 @@ const Movie = ({route}) => {
   } = usePosterColors(item.imageUrl);
   const [active, setActive] = useState(0);
   const navigation = useNavigation();
+  const config = {
+    velocityThreshold: 0.8,
+    directionalOffsetThreshold: 150,
+    gestureIsClickThreshold: 10
+  };
 
   useEffect(() => {
     fetch(`https://www.kino.dk/appservices/movie/${item.id}`, {
@@ -47,6 +52,7 @@ const Movie = ({route}) => {
         ListHeaderComponent={
           <GestureRecognizer
             onSwipeDown={() => navigation.goBack()}
+            config={config}
             style={{
               flex: 1,
               backgroundColor: 'transparent',
@@ -99,6 +105,7 @@ const Movie = ({route}) => {
               <GestureRecognizer
                 onSwipeLeft={() => setActive(2)}
                 onSwipeRight={() => setActive(0)}
+                config={config}
                 style={{
                   flex: 1,
                   backgroundColor: 'transparent',
@@ -112,6 +119,7 @@ const Movie = ({route}) => {
 
               <GestureRecognizer
                 onSwipeRight={() => setActive(1)}
+                config={config}
                 style={{
                   flex: 1,
                   backgroundColor: 'transparent',

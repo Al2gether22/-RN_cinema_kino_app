@@ -28,6 +28,11 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
     secondaryFontColor: 'white',
   };
   const [imgColors, setImgColors] = useState(defaultState);
+  const config = {
+    velocityThreshold: 0.8,
+    directionalOffsetThreshold: 150,
+    gestureIsClickThreshold: 10
+  };
 
   useEffect(() => {
     const fetchPromise = fetch(
@@ -59,6 +64,7 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
   return (
     <GestureRecognizer
       onSwipeDown={() => setMovieModalVisible(!movieModalVisible)}
+      config={config}
       style={{
         flex: 1,
         backgroundColor: 'transparent',

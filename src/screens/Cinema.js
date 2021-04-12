@@ -12,6 +12,11 @@ const Cinema = ({ route }) => {
   const [cinema, setCinema] = useState([])
   const [loading, setLoading] = useState(true)
   const navigation = useNavigation();
+  const config = {
+    velocityThreshold: 0.8,
+    directionalOffsetThreshold: 150,
+    gestureIsClickThreshold: 10
+  };
 
   // fetches cinema data
   useEffect(() => {
@@ -33,14 +38,15 @@ const Cinema = ({ route }) => {
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <GestureRecognizer      
-          onSwipeDown={() => navigation.goBack()}
-          
-          style={{
-            flex: 1,
-            backgroundColor: "transparent",
-            width: "100%",
-            zIndex: 999999
-          }}>
+            onSwipeDown={() => navigation.goBack()}
+            config={config}
+            style={{
+              flex: 1,
+              backgroundColor: "transparent",
+              width: "100%",
+              zIndex: 999999
+            }}
+          >
             <StatusBar hidden={true} />
             <CinemaBackgroundImage
               name={item.name}
