@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     padding: 15, 
   }, 
   headerText: {
-    fontFamily: "BureauGrotComp-Medium",
+    fontFamily: "SourceSansPro-Bold",
     fontSize: 30, 
     textAlign: "center",
     marginBottom: 25
