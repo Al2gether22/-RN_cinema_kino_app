@@ -20,7 +20,7 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
   return (
     <View style={styles.filterContainer}>
         <TouchableScale
-          style={[styles.filterButton, activeButton === 1 ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" } ]}
+          style={[styles.filterButton, activeButton === 1 ? { backgroundColor: "white" } : { backgroundColor: "black" } ]}
           activeScale={0.9}
           tension={50}
           friction={7}
@@ -31,10 +31,10 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
           ]}
 
         >
-          <Text style={styles.filterButtonText}>Populære</Text>
+          <Text style={[styles.filterButtonText, activeButton === 1 ? { color: "black" } : {}]}>Populære</Text>
         </TouchableScale>
         <TouchableScale
-          style={[styles.filterButton, activeButton === 2 ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" } ]}
+          style={[styles.filterButton, activeButton === 2 ? { backgroundColor: "white" } : { backgroundColor: "black" } ]}
           activeScale={0.9}
           tension={50}
           friction={7}
@@ -44,10 +44,10 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
             setActiveButton(2),
           ]}
         >
-          <Text style={styles.filterButtonText}>Aktuelle</Text>
+          <Text style={[styles.filterButtonText, activeButton === 2 ? { color: "black" } : {}]}>Aktuelle</Text>
         </TouchableScale>
         <TouchableScale
-          style={[styles.filterButton, activeButton === 3 ? { backgroundColor: "white", color: "black" } : { backgroundColor: "black", color: "white" } ]}
+          style={[styles.filterButton, activeButton === 3 ? { backgroundColor: "white" } : { backgroundColor: "black" } ]}
           activeScale={0.9}
           tension={50}
           friction={7}
@@ -57,7 +57,7 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
             setActiveButton(3),
           ]}
         >
-          <Text style={styles.filterButtonText}>Kommende</Text>
+          <Text style={[styles.filterButtonText, activeButton === 3 ? { color: "black" } : {}]}>Kommende</Text>
         </TouchableScale>
       </View>
   )

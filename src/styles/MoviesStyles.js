@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     margin: 5,
-    
+    backgroundColor: "black"
   },
   filterButtonText: {
     fontFamily: "SourceSansPro-Bold",
     fontSize: 14,
-    textAlign: "center"
+    textAlign: "center",
+    color: "white"
   },
 
   card: {
