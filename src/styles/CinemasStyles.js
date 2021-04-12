@@ -4,23 +4,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1d1d27',
-    padding: 10, 
+    padding: 10,
   },
   cinemaOverview: {
     flex: 1,
-    paddingRight: 10,
-    marginLeft: 10,
-    marginBottom: 15,
-    flexDirection: "column",
+    margin: 10,
     
+    height: 100,
   },
   cinemaImage: {
     width: "100%",
-    height: 100,
+    height: "100%",
     borderColor: "black",
     borderWidth: 2,
     borderRadius: 7,
-    marginTop: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

@@ -23,7 +23,7 @@ const Cinemas = () => {
         style={styles.cinemaOverview} 
         onPress={() => navigation.navigate("Cinema", { item })}
       >
-        <SharedElement id={item.imageUrl}>
+        <SharedElement id={item.imageUrl} >
           <ImageBackground 
             style={styles.cinemaImage} 
             source={{ uri: item.imageUrl }}
