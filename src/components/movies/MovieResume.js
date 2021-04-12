@@ -7,15 +7,13 @@ import styles from "../../styles/MovieResumeStyles";
 
 const MovieMetaData = ({ resume, primaryFontColor, active }) => {
 
-
-
   return (
     !resume ? null : 
     
     <View style={[styles.movieReviewContainer, { display: active }]}>
       <HTML 
         source={{ html: resume }} 
-        ignoredTags={[ ...IGNORED_TAGS]}
+        ignoredTags={[ ...IGNORED_TAGS, 'img']}
         tagsStyles={{ p: { color: primaryFontColor, fontFamily: "SourceSansPro-Bold", fontSize: 16, }, a: { color: primaryFontColor, fontFamily: "SourceSansPro-Bold", fontSize: 16, textDecorationLine: "none" } }}
         onLinkPress={() => null}
       />
