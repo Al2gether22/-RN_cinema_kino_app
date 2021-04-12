@@ -94,29 +94,25 @@ const styles = StyleSheet.create({
     color: "white",
     backgroundColor: "rgba(29,29,39,0.8)",
     flexDirection: "row",
-    
+    alignItems: "center"
   },
   headLine: {
     color: "white",
     fontFamily: "SourceSansPro-Bold",
     fontSize: 16,
     marginLeft: 10,
-    flex: 1,
-    justifyContent: "flex-start",
     paddingTop: 10,
     paddingBottom: 10,
-    
+    flex: 1
   }, 
   headLineLink: {
     color: "white",
     fontFamily: "SourceSansPro-Bold",
     fontSize: 13,
-    justifyContent: "flex-end",
     marginRight: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
     textDecorationLine: 'underline',
     
+
   },
   itemContainer: {
     margin: 5,
