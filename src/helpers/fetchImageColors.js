@@ -5,7 +5,7 @@ async function fetchImageColors(img, setImgColors) {
     if (!img) return;
     const colors = await ImageColors.getColors(img, {
       fallback: '#000000',
-      quality: 'low',
+      quality: 'lowest',
       pixelSpacing: 5,
     });
     let result;
@@ -21,7 +21,7 @@ async function fetchImageColors(img, setImgColors) {
         secondaryFontColor: colors.vibrant,
       };
     }
-    setImgColors(result);
+    if (setImgColors) setImgColors(result);
     return result;
   } catch (err) {
     console.error(err);

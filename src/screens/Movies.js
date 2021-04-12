@@ -20,7 +20,6 @@ const Movies = () => {
   );
   const currentDate = new Date();
   const [filteredMovies, setFilteredMovies] = useState(movies);
-  const [imgColors, setImgColors] = useState({});
 
   function Item(item) {
     // Formatting date to compare it to date today
@@ -43,7 +42,7 @@ const Movies = () => {
         friction={7}
         useNativeDriver
         onPress={async () => {
-          const imgColors = await fetchImageColors(item.imageUrl, setImgColors);
+          const imgColors = await fetchImageColors(item.imageUrl);
           navigation.navigate('Movie', {
             item,
             imgColors,
