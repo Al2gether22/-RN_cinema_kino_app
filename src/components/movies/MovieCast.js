@@ -23,7 +23,7 @@ const MovieCast = ({ movie, active, primaryFontColor, secondaryFontColor }) => {
      
     );
   }
-
+  
   return (
     
     <View style={[ styles.container, { display: active }]}>
@@ -71,9 +71,8 @@ const styles = StyleSheet.create({
     
   }, 
   img: {
-    height: 80,
-    width: 54,
-    
+    height: 90,
+    width: 90,
     marginRight: 20
   }
 })
