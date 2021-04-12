@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StatusBar, FlatList} from 'react-native';
 import usePosterColors from '../hooks/usePosterColors';
 import MovieBackgroundImage from '../components/movies/MovieBackgroundImage';
@@ -18,6 +18,12 @@ const Movie = ({route}) => {
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
   const [active, setActive] = useState(0);
   const navigation = useNavigation();
+  const config = {
+    velocityThreshold: 0.8,
+    directionalOffsetThreshold: 150,
+    gestureIsClickThreshold: 10
+  };
+
 
   return (
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
@@ -29,6 +35,7 @@ const Movie = ({route}) => {
         ListHeaderComponent={
           <GestureRecognizer
             onSwipeDown={() => navigation.goBack()}
+            config={config}
             style={{
               flex: 1,
               backgroundColor: 'transparent',
@@ -81,6 +88,7 @@ const Movie = ({route}) => {
               <GestureRecognizer
                 onSwipeLeft={() => setActive(2)}
                 onSwipeRight={() => setActive(0)}
+                config={config}
                 style={{
                   flex: 1,
                   backgroundColor: 'transparent',
@@ -94,6 +102,7 @@ const Movie = ({route}) => {
 
               <GestureRecognizer
                 onSwipeRight={() => setActive(1)}
+                config={config}
                 style={{
                   flex: 1,
                   backgroundColor: 'transparent',

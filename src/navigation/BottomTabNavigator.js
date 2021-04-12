@@ -37,7 +37,7 @@ export default function BottomTabNavigator() {
             return (
               <MaterialCommunityIcons
                 name={iconName}
-                size={size}
+                size={23}
                 color={color}
               />
             )
@@ -89,7 +89,7 @@ export default function BottomTabNavigator() {
             return (
               <MaterialCommunityIcons
                 name={iconName}
-                size={size}
+                size={23}
                 color={color}
               />
             )

@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginTop: "10%",
     marginBottom: "15%",
-    fontFamily: "BureauGrotComp-Medium",
+    fontFamily: "SourceSansPro-Bold", 
   }, 
   errorMessage: {
     color: "tomato", 

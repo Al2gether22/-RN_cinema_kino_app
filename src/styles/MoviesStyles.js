@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     margin: 5,
-    
+    backgroundColor: "black"
   },
   filterButtonText: {
     fontFamily: "SourceSansPro-Bold",
     fontSize: 14,
-    textAlign: "center"
+    textAlign: "center",
+    color: "white"
   },
 
   card: {
@@ -54,7 +55,9 @@ const styles = StyleSheet.create({
   coverImage: {
     aspectRatio: 2 / 3,
     borderRadius: 10,
-    
+    borderColor: "black",
+    borderWidth: 2,
+    borderRadius: 7
   },
   titleContainer: {
     flex: 1,

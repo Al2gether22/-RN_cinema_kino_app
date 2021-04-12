@@ -16,6 +16,12 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
   const [active, setActive] = useState(0);
   const {movie, isLoading} = useMovieJson(passedMovie);
   const {imgColors, isLoadingColors} = usePosterColors(passedMovie.imageUrl);
+  
+  const config = {
+    velocityThreshold: 0.8,
+    directionalOffsetThreshold: 150,
+    gestureIsClickThreshold: 10
+  };
 
   if (isLoading || isLoadingColors) {
     return null;
@@ -25,6 +31,7 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
   return (
     <GestureRecognizer
       onSwipeDown={() => setMovieModalVisible(!movieModalVisible)}
+      config={config}
       style={{
         flex: 1,
         backgroundColor: 'transparent',
@@ -77,9 +84,9 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
                 <TabViewComponent
                   setActive={setActive}
                   active={active}
-                  backgroundColor={backgroundColor}
+                  backgroundColor={secondaryFontColor}
                   primaryFontColor={primaryFontColor}
-                  secondaryFontColor={secondaryFontColor}
+                  secondaryFontColor={backgroundColor}
                 />
 
                 <ShowTimes

@@ -4,47 +4,54 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1d1d27',
-    padding: 10, 
+    padding: 10,
   },
   cinemaOverview: {
     flex: 1,
-    paddingRight: 10,
-    marginLeft: 10,
-    marginBottom: 15,
-    flexDirection: "row",
-    backgroundColor: "black",
+    margin: 10,
+    
+    height: 100,
+  },
+  cinemaImage: {
+    width: "100%",
+    height: "100%",
+    borderColor: "black",
+    borderWidth: 2,
     borderRadius: 7,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 3,
     },
-    shadowOpacity: 0.57,
-    shadowRadius: 15.19,
-    elevation: 23,
-  },
-  cinemaImage: {
-    height: 50,
-    width: 100,
-    
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
   }, 
 
   cinemaTitleContainer: {
     flex: 1, 
+    flexDirection: "column",
     justifyContent: "center", 
+    
   },
   cinemaTitle: {
     fontFamily: "SourceSansPro-Bold",
     fontSize: 16,
     color: "white",
-    marginLeft: 10,
+    alignSelf: "center",
+    backgroundColor: "black",
+    padding: 4,
+    
   }, 
   
   cinemaDistance: {
-    fontFamily: "SourceSansPro-BlackIt",
+    fontFamily: "SourceSansPro-Bold",
     fontSize: 14,
-    color: "#676d7c",
-    alignSelf: "center"
+    color: "white",
+    alignSelf: "center",
+    backgroundColor: "black",
+    padding: 4,
+    
   }
 })
 
