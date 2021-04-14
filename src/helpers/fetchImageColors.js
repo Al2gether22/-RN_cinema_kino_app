@@ -6,7 +6,7 @@ async function fetchImageColors(img, setImgColors) {
     const colors = await ImageColors.getColors(img, {
       fallback: '#000000',
       quality: 'lowest',
-      pixelSpacing: 5,
+      pixelSpacing: 10,
     });
     let result;
     result = {
@@ -14,11 +14,15 @@ async function fetchImageColors(img, setImgColors) {
       primaryFontColor: colors.primary,
       secondaryFontColor: colors.secondary,
     };
+    console.log('fetchImageColors');
+    for (const [key, value] of Object.entries(colors)) {
+      console.log(`%c ${key}: ${value}`, `color: ${value}`);
+    }
     if (colors.platform === 'android') {
       result = {
         backgroundColor: colors.dominant,
-        primaryFontColor: colors.average,
-        secondaryFontColor: colors.vibrant,
+        primaryFontColor: colors.lightMuted,
+        secondaryFontColor: colors.muted,
       };
     }
     if (setImgColors) setImgColors(result);
