@@ -47,10 +47,7 @@ const MovieBackgroundImage = ({
           style={styles.coverImage}
           source={{uri: imageFallback}}
           resizeMethod="auto"
-          resizeMode="cover"
-
-          //resizeMode="contain"
-        >
+          resizeMode="cover">
           <LinearGradient
             colors={[`${backgroundColor}00`, `${backgroundColor}`]}
             style={styles.LinearGradientLower}
@@ -86,8 +83,9 @@ const MovieBackgroundImage = ({
 
       <SharedElement id={titleFallback}>
         <Text
-          style={[styles.movieTitle, {color: primaryFontColor}]}
-          numberOfLines={3}>
+          adjustsFontSizeToFit
+          numberOfLines={1}
+          style={[styles.movieTitle, {color: primaryFontColor}]}>
           {titleFallback}
         </Text>
       </SharedElement>
