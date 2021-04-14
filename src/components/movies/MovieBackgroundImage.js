@@ -43,42 +43,41 @@ const MovieBackgroundImage = ({
       )}
 
       <SharedElement id={image}>
-        <ImageBackground
-          style={styles.coverImage}
-          source={{uri: imageFallback}}
-          resizeMethod="auto"
-          resizeMode="cover">
-          <LinearGradient
-            colors={[`${backgroundColor}00`, `${backgroundColor}`]}
-            style={styles.LinearGradientLower}
-          />
-        </ImageBackground>
-        {!!movie.video_markup && (
-          // checks to see if there is a trailer before rendering the play button
-          <TouchableOpacity
-            onPress={() => {
-              setModalVisible(true);
-            }}>
-            <Animatable.View
-              style={styles.playButtomViewWrapper}
-              animation="zoomIn"
-              duration={900}
-              delay={100}>
-              <MaterialCommunityIcons
-                style={styles.playButton}
-                color={primaryFontColor}
-                name="play-circle"
-                size={60}
-              />
-            </Animatable.View>
-            <MovieTrailerModal
-              modalVisible={modalVisible}
-              setModalVisible={() => setModalVisible(false)}
-              video_markup={movie.video_markup}
-              movie={movie}
+        <>
+          <ImageBackground
+            style={styles.coverImage}
+            source={{uri: imageFallback}}
+            resizeMethod="auto"
+            resizeMode="cover">
+            <LinearGradient
+              colors={[`${backgroundColor}00`, `${backgroundColor}`]}
+              style={styles.LinearGradientLower}
             />
-          </TouchableOpacity>
-        )}
+          </ImageBackground>
+          {!!movie.video_markup && (
+            // checks to see if there is a trailer before rendering the play button
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <Animatable.View
+                style={styles.playButtomViewWrapper}
+                animation="zoomIn"
+                duration={900}
+                delay={100}>
+                <MaterialCommunityIcons
+                  style={styles.playButton}
+                  color={primaryFontColor}
+                  name="play-circle"
+                  size={60}
+                />
+              </Animatable.View>
+              <MovieTrailerModal
+                modalVisible={modalVisible}
+                setModalVisible={() => setModalVisible(false)}
+                video_markup={movie.video_markup}
+                movie={movie}
+              />
+            </TouchableOpacity>
+          )}
+        </>
       </SharedElement>
 
       <SharedElement id={titleFallback}>
