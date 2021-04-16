@@ -7,7 +7,6 @@ import { Provider as CinemaProvider } from "./src/context/CinemaContext";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import FetchData from "./src/components/shared/FetchData"
 
-
 const App = () => {
   return (
     <CinemaProvider>
