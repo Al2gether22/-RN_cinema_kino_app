@@ -56,6 +56,7 @@ const Cinema = ({ route }) => {
             
           </GestureRecognizer>
         }
+        ListFooterComponentStyle={{marginBottom: 50}}
         ListFooterComponent={
           loading ? null : 
           <ShowTimes 

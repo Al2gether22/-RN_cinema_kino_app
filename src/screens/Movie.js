@@ -64,7 +64,7 @@ const Movie = ({route}) => {
             )}
           </GestureRecognizer>
         }
-        ListFooterComponentStyle={{marginBottom: 60}}
+        ListFooterComponentStyle={{marginBottom: 50}}
         ListFooterComponent={
           isLoading ? null : (
             <>
