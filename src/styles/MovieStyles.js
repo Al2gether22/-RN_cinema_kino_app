@@ -4,7 +4,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#1d1d27"
+    backgroundColor: "#1d1d27",
+    
   },
   goBackContainer: {
     position: "absolute", 
