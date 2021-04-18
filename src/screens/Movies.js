@@ -59,7 +59,7 @@ const Movies = () => {
         <View style={styles.titleContainer}>
           <SharedElement id={item.danishTitle}>
             <Text style={styles.cardTitle}>
-              {item.title ? item.title : item.danishTitle}
+              {item.title ? item.danishTitle: item.title}
             </Text>
           </SharedElement>
         </View>
