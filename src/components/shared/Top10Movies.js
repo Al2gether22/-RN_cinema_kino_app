@@ -67,7 +67,7 @@ const Top10Movies = ({ movies }) => {
             navigation.navigate('Film');
           }}
         >
-          <Text style={styles.headLineLink}>Alle Film</Text>
+          <Text style={styles.headLineLink}>Alle film</Text>
         </TouchableScale>
         
       </View>

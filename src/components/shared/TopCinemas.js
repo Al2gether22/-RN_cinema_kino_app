@@ -71,7 +71,7 @@ const Top10Movies = ({ cinemas }) => {
             navigation.navigate('Biografer');
           }}
         >
-          <Text style={styles.headLineLink}>Alle Biografer</Text> 
+          <Text style={styles.headLineLink}>Alle biografer</Text> 
         </TouchableScale>
         
       </View>
