@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
   },
 
   movieReviewBody: {
-    fontFamily: "SourceSansPro-Bold",
+    fontFamily: "SourceSansPro-Regular",
+    fontWeight: "500",
     color: "white",
     fontSize: 18,
   },

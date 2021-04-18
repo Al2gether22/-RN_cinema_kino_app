@@ -14,7 +14,7 @@ const MovieMetaData = ({ resume, primaryFontColor, active }) => {
       <HTML 
         source={{ html: resume }} 
         ignoredTags={[ ...IGNORED_TAGS, 'img']}
-        tagsStyles={{ p: { color: primaryFontColor, fontFamily: "SourceSansPro-Bold", fontSize: 16, }, a: { color: primaryFontColor, fontFamily: "SourceSansPro-Bold", fontSize: 16, textDecorationLine: "none" } }}
+        tagsStyles={{ p: { color: primaryFontColor, fontFamily: "SourceSansPro-Regular", fontWeight: "500", fontSize: 16, }, a: { color: primaryFontColor, fontFamily: "SourceSansPro-Regular", fontWeight: "500", fontSize: 16, textDecorationLine: "none" } }}
         onLinkPress={() => null}
       />
     </View>

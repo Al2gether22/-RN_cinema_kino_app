@@ -22,6 +22,8 @@
 		F87918472600AE6E00B06245 /* BureauGrotCond-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DFDB03D4E6C4A43A93C0F3B /* BureauGrotCond-Light.ttf */; };
 		F879184A2600AE7200B06245 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D921D66A5F1149F2ACEA9352 /* SourceSansPro-Black.ttf */; };
 		F879184B2600AE7400B06245 /* SourceSansPro-BlackIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 072AE1DC66784149BAB1E629 /* SourceSansPro-BlackIt.ttf */; };
+		531928282CA94918A8E4DF3B /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A60306E4FD124714A9A17BD6 /* SourceSansPro-Light.ttf */; };
+		71628A1F871B4062B3E1547E /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB164675004D43008C1BF2CD /* SourceSansPro-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F648DB8B4ACC4511896299D5 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = ../assets/fonts/AntDesign.ttf; sourceTree = "<group>"; };
 		F879183D2600ADAE00B06245 /* BasierSquare-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierSquare-Regular.otf"; path = "../assets/fonts/BasierSquare-Regular.otf"; sourceTree = "<group>"; };
+		A60306E4FD124714A9A17BD6 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; name = "SourceSansPro-Light.ttf"; path = "../assets/fonts/SourceSansPro-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DB164675004D43008C1BF2CD /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; name = "SourceSansPro-Regular.ttf"; path = "../assets/fonts/SourceSansPro-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +196,8 @@
 				690F036D2F894980808867A3 /* Octicons.ttf */,
 				73A28D2D3B04496082CF02A4 /* SimpleLineIcons.ttf */,
 				43ACBCD6A16D4EA09C9F69E8 /* Zocial.ttf */,
+				A60306E4FD124714A9A17BD6 /* SourceSansPro-Light.ttf */,
+				DB164675004D43008C1BF2CD /* SourceSansPro-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -333,6 +339,8 @@
 				86BDD07E262CB90C0020AE39 /* GoogleService-Info.plist in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				8695C71425E69AAC00D74D08 /* Images-2.xcassets in Resources */,
+				531928282CA94918A8E4DF3B /* SourceSansPro-Light.ttf in Resources */,
+				71628A1F871B4062B3E1547E /* SourceSansPro-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
