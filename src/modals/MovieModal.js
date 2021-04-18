@@ -88,7 +88,7 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
                   primaryFontColor={primaryFontColor}
                   secondaryFontColor={backgroundColor}
                 />
-
+                
                 <ShowTimes
                   id={passedMovie.id}
                   movieVersions={passedMovie.versions}

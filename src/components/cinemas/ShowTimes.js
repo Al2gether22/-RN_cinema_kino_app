@@ -70,6 +70,7 @@ const ShowTimes = ({id}) => {
         setMovieModalVisible={() => setMovieModalVisible(false)}
         passedMovie={movie}
         showtimes={false}
+        showShowtimes={false}
       />
 
       <WebViewModal

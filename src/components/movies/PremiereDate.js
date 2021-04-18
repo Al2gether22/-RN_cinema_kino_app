@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 8,
-    paddingRight: 3
+    paddingRight: 3,
+    textTransform: "capitalize"
   }
 })
 
