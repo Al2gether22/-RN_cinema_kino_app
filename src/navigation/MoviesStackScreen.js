@@ -28,13 +28,13 @@ export default function MoviesStackScreen({ navigation }){
           },
           headerTintColor: "#fffdfd",
           headerTitleStyle: {
-            fontFamily: "BureauGrotComp-Medium",
+            fontFamily: "SourceSansPro-Bold",
             fontSize: 18
           }, 
           headerBackTitleStyle: {
             fontSize: 18,
             color: "#fffdfd",
-            fontFamily: "BureauGrotComp-Medium",
+            fontFamily: "SourceSansPro-Bold",
           }
         }}
  

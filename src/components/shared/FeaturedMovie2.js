@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     color: "white", 
-    fontFamily: "BureauGrotComp-Medium",
+    fontFamily: "SourceSansPro-Bold",
     fontSize: 25, 
    
   }

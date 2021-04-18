@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   sectionHeader: {
-    fontFamily: "BureauGrotCond-Light",
+    fontFamily: "SourceSansPro-Bold",
     color: "white",
     fontSize: 18,
     marginLeft: 10,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   showtimeVersionLabel: {
-    fontFamily: "BureauGrotCond-Light",
+    fontFamily: "SourceSansPro-Bold",
     color: "#676d7c",
     fontSize: 16,
     marginLeft: 10,

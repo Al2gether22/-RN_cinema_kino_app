@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     left: 0,
   },
   cinemaTitle: {
-    fontFamily: "BureauGrotComp-Medium",
+    fontFamily: "SourceSansPro-Bold",
     textAlign: "center",
     color: "white",
     fontSize: 25,
