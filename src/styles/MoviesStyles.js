@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { COLORS, FONTS, SIZES} from "../constants/theme"
 
 const styles = StyleSheet.create({
   container: {
@@ -28,15 +29,13 @@ const styles = StyleSheet.create({
     backgroundColor: "black"
   },
   filterButtonText: {
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 14,
     textAlign: "center",
-    color: "white"
+    color: "white",
+    ...FONTS.h4
   },
 
   card: {
-    flex: 0.3333,
-    maxWidth: "28%",
+    flex: 0.333,
     marginRight: 10,
     marginLeft: 10,
     shadowColor: "#000",
@@ -64,8 +63,6 @@ const styles = StyleSheet.create({
     
   }, 
   cardTitle: {
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 14,
     color: "white",
     marginTop: 5,
     justifyContent: "center",
@@ -81,6 +78,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.57,
     shadowRadius: 15.19,
     elevation: 23,
+    ...FONTS.h4
   },
 
 });

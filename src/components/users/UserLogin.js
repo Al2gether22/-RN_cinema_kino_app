@@ -3,7 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-nativ
 import TouchableScale from 'react-native-touchable-scale';
 import * as Animatable from 'react-native-animatable';
 import { Context } from "../../context/AuthContext"
-
+import { COLORS, SIZES, FONTS} from "../../constants/theme"
 import WebViewModal from "../../modals/WebViewModal"
 
 const UserLogin = ({ state, animation }) => {
@@ -33,7 +33,7 @@ const UserLogin = ({ state, animation }) => {
         setModalVisible={() => setModalVisible(false)}
         url={url}
       />
-      <Text style={styles.header}>Login med din Kino profil</Text>
+      <Text style={styles.header}>Log ind med din Kino profil</Text>
 
       <Animatable.View animation={animation} >
         <Text style={styles.errorMessage}>{state.errorMessage ? state.errorMessage : " "}</Text>
@@ -117,23 +117,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: "10%",
-    backgroundColor: '#1d1d27',
+    backgroundColor: COLORS.backgroundColor,
     
   },
   header: {
     textAlign: "center",
-    color: '#676d7c',
-    fontSize: 25,
+    color: COLORS.white,
     marginTop: "10%",
     marginBottom: "15%",
-    fontFamily: "SourceSansPro-Bold", 
+    ...FONTS.h2 
   }, 
   errorMessage: {
     color: "tomato", 
-    fontSize: 16,
-    marginLeft: 15,
+    marginLeft: "5%",
     marginBottom: 15,
-    fontFamily: "SourceSansPro-Bold", 
+    ...FONTS.h3
   },
   inputField: {
     marginLeft: "5%",
@@ -143,7 +141,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.8, 
     borderColor: "#676d7c",
     borderRadius: 5, 
-    fontFamily: "SourceSansPro-Bold", 
+    ...FONTS.h3
     
   },
   button: {
@@ -164,20 +162,17 @@ const styles = StyleSheet.create({
     elevation: 23,
   },
   buttonText: {
-    color: "white",
-    fontFamily: "SourceSansPro-Bold", 
+    color: COLORS.white,
     textAlign: "center",
-    paddingTop: 5,
-    paddingBottom: 5
+    ...FONTS.h3,
   }, 
   webViewLinksContainer: {
-    margin: 15
+    margin: "5%"
   },
   webViewLinksText: {
-    fontFamily: "SourceSansPro-Bold", 
-    fontSize: 14, 
     color: '#676d7c', 
-    marginBottom: 20
+    marginBottom: 20,
+    ...FONTS.h4
   }
 })
 

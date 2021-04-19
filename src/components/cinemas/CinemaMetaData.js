@@ -2,16 +2,14 @@ import React from "react";
 import { Platform } from "react-native";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from "react-native";
-import { View, Text, StyleSheet, Linking } from "react-native"
+import { Text, StyleSheet, Linking } from "react-native"
 import { createOpenLink } from 'react-native-open-maps';
+import HTML from "react-native-render-html";
+import { IGNORED_TAGS } from 'react-native-render-html';
 import * as Animatable from 'react-native-animatable';
+import { COLORS, FONTS } from "../../constants/theme";
 
 const CinemaMetaData = ({ cinema }) => {
-
-  // Sets the cinema description teaser
-  const regex = /(<([^>]+)>)/ig;
-  const cinemaDescription = cinema.description.replace(regex, '');
-  const cinemaOpeningHours = cinema.opening_hours.replace(regex, '');
 
   callCinema = () => {
     let phoneNumber = ''
@@ -82,12 +80,23 @@ const CinemaMetaData = ({ cinema }) => {
       duration={600}
       delay={300}
     >
+      <Text style={styles.cinemaOpeningHours}>ÅbningsTider:</Text>
+      { !cinema.opening_hours ? null : 
+    
       
-      <Text style={styles.cinemaDescription}>Åbningstider: {cinemaOpeningHours}</Text>
+      <HTML 
+        source={{ html: cinema.opening_hours }} 
+        ignoredTags={[ ...IGNORED_TAGS, 'img']}
+        tagsStyles={{ p: { color: COLORS.white, ...FONTS.h4, textAlign: "center" }, a: { color: COLORS.white, textDecorationLine: "none", ...FONTS.h4, textAlign: "center" } }}
+        onLinkPress={() => null}
+      /> }
     </Animatable.View>
     </>
   )
 }
+
+
+   
 
 const styles = StyleSheet.create({
   cinemaMetaContainer: {
@@ -114,10 +123,13 @@ const styles = StyleSheet.create({
     marginRight: 25,
 
   },
-  cinemaDescription: {
-    fontFamily: "SourceSansPro-Bold",
-    color: "#b3b6bd",
-    marginBottom: 5
+  cinemaOpeningHours: {
+    textDecorationLine: 'underline',
+    marginBottom: 5,
+    color: COLORS.white,
+    ...FONTS.h2,
+    lineHeight: 0,
+    textAlign: "center"
   }
 })
 

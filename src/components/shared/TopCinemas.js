@@ -6,6 +6,7 @@ import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
 import CinemaModal from "../../modals/CinemaModal"
 import { useNavigation } from "@react-navigation/native";
+import { COLORS, FONTS, SIZES } from "../../constants/theme"
 
 
 const Top10Movies = ({ cinemas }) => {
@@ -100,35 +101,32 @@ const styles = StyleSheet.create({
     
   },
   headLine: {
-    color: "white",
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 16,
+    color: COLORS.white,
     marginLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
-    flex: 1
-    
+    flex: 1,
+    ...FONTS.h3
   }, 
   headLineLink: {
-    color: "white",
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 13,
+    color: COLORS.white,
     marginRight: 10,
     textDecorationLine: 'underline',
-    
+    ...FONTS.h4
   },
   itemContainer: {
     margin: 5,
     borderRadius: 7,
     borderColor: "black",
     borderWidth: 2,
+    height: (SIZES.width / 4),
+    maxWidth: (SIZES.height / 3 ),
   },
   img: {
-    height: 60,
-    width: 120,
-    
-    borderRadius: 7,
-    
+    aspectRatio: 5 / 3,
+    height: "100%",
+    width: "100%",
+    borderRadius: 7, 
   },
   titleContainer: {
     position: "absolute",
@@ -140,9 +138,9 @@ const styles = StyleSheet.create({
   },
   title: {
     borderRadius: 7,
-    color: "white",
-    fontSize: 10,
-    fontFamily: "SourceSansPro-Bold",
+    color: COLORS.white,
+    ...FONTS.h5,
+    
   }
 })
 

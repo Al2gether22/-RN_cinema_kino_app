@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
   itemSeperator: {
     backgroundColor: "#676d7c",
     height: 1,
-    margin: 15
+    marginBottom: 20,
+    marginTop: 15
   }
 })
 

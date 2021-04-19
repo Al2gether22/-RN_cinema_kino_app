@@ -8,6 +8,7 @@ import HomeStackScreen from "./HomeStackScreen";
 import MoviesStackScreen from "./MoviesStackScreen";
 import CinemasStackScreen from "./CinemasStackScreen";
 import UserStackScreen from "./UserStackScreen";
+import { COLORS, FONTS, SIZES} from "../constants/theme"
 
 const Tab = createBottomTabNavigator();
 
@@ -37,7 +38,7 @@ export default function BottomTabNavigator() {
             return (
               <MaterialCommunityIcons
                 name={iconName}
-                size={23}
+                size={SIZES.width / 18}
                 color={color}
               />
             )
@@ -51,7 +52,8 @@ export default function BottomTabNavigator() {
           labelPosition: "below-icon",
           labelStyle: {
             paddingBottom: 5,
-            fontFamily: "SourceSansPro-Bold"
+            fontFamily: "SourceSansPro-Bold",
+            fontSize: SIZES.width / 40
           }, 
           style: styles.container
         }}
@@ -89,7 +91,7 @@ export default function BottomTabNavigator() {
             return (
               <MaterialCommunityIcons
                 name={iconName}
-                size={23}
+                size={SIZES.width / 18}
                 color={color}
               />
             )
@@ -102,6 +104,7 @@ export default function BottomTabNavigator() {
 const styles = StyleSheet.create({
   container: {
     borderTopWidth: 0,
-    backgroundColor: "black"
+    backgroundColor: "black",
+    height: 80
   }
 })

@@ -5,13 +5,13 @@ import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
 import MovieModal from "../../modals/MovieModal";
 import { useNavigation } from "@react-navigation/native";
+import { COLORS, FONTS, SIZES } from "../../constants/theme"
 
 const Top10Movies = ({ movies }) => {
 
   const navigation = useNavigation();
   const [movieModalVisible, setMovieModalVisible] = useState(false);
   const [movie, setMovie] = useState({})
-
 
   const Item = (item) => {
     
@@ -90,36 +90,38 @@ const styles = StyleSheet.create({
     
   },
   headLineContainer: {
-    color: "white",
+    color: COLORS.white,
     backgroundColor: "rgba(29,29,39,0.8)",
     flexDirection: "row",
     alignItems: "center"
   },
   headLine: {
-    color: "white",
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 16,
+    color: COLORS.white,
     marginLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
-    flex: 1
+    flex: 1,
+    ...FONTS.h3
   }, 
   headLineLink: {
-    color: "white",
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 13,
+    color: COLORS.white,
     marginRight: 10,
     textDecorationLine: 'underline',
-    
-
+    ...FONTS.h4
   },
   itemContainer: {
     margin: 5,
-    borderRadius: 7
+    borderRadius: 7,
+    
+    height: (SIZES.width / 3),
+    maxWidth: ((SIZES.height / 3 ) * (9/16)),
   },
   img: {
-    height: 120,
-    width: 81,
+    //height: 120,
+    //width: 81,
+    aspectRatio: 2 / 3,
+    height: "100%",
+    width: "100%",
     borderColor: "black",
     borderWidth: 2,
     borderRadius: 7

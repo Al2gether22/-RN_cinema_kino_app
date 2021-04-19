@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { COLORS, FONTS, SIZES} from "../constants/theme"
 
 const styles = StyleSheet.create({
   container: {
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
     
-    height: 100,
+    height: SIZES.height / 10,
   },
   cinemaImage: {
     width: "100%",
@@ -35,23 +36,21 @@ const styles = StyleSheet.create({
     
   },
   cinemaTitle: {
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 16,
+    
     color: "white",
     alignSelf: "center",
     backgroundColor: "black",
     padding: 4,
-    
+    ...FONTS.h3
   }, 
   
   cinemaDistance: {
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 14,
+    
     color: "white",
     alignSelf: "center",
     backgroundColor: "black",
     padding: 4,
-    
+    ...FONTS.h4
   }
 })
 

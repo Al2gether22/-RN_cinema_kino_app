@@ -9,6 +9,7 @@ import FeaturedMovie from '../components/shared/FeaturedMovie2';
 import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
+import { COLORS } from "../constants/theme"
 
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
@@ -123,8 +124,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
-    backgroundColor: '#1d1d27',
+    backgroundColor: COLORS.backgroundColor,
   },
   slidersContainer: {
 

@@ -9,9 +9,9 @@ const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
     month: "long",
     day: "numeric",
   };
- 
+  
   const nextShowtimeDate = new Date(nextShowtime);
-
+    console.log("Next showtime pressed")
   if (!nextShowtime) {
     return null
   }
