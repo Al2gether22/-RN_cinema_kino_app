@@ -10,6 +10,7 @@ import moment from 'moment';
 import TouchableScale from 'react-native-touchable-scale';
 import {scrollToIndex} from '../../helpers/datepicker.utils';
 import {create1MonthDates} from '../../helpers/date.utils';
+import MovieVersionLookup from '../shared/MovieVersionLookup';
 
 //We need versions, they are inside item.versions
 const now = moment();
@@ -26,7 +27,7 @@ const ShowTimes = ({id}) => {
   const [showtimeId, setShowtimeId] = useState();
   const [sessionName, setSessionName] = useState('');
   const [sessionId, setSessionId] = useState('');
-  const [versions, setVersions] = useState('');
+  const [movieVersions, setMovieVersions] = useState([]);
   const {state} = useContext(AuthContext);
 
   useEffect(() => {
@@ -45,10 +46,17 @@ const ShowTimes = ({id}) => {
       .then(json => {
         setShowtimes(groupByVersion(json));
       })
-
+      .then(() => {
+        // Loop through each showtimes.version and push object values to movieVersions
+        Object.entries(showtimes).forEach(([key, val]) => {
+          setMovieVersions([...movieVersions, Object.values(val.versions)])
+        });
+      })
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
   }, [selectedDate]);
+
+
 
   if (loading) {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
@@ -70,7 +78,7 @@ const ShowTimes = ({id}) => {
         setMovieModalVisible={() => setMovieModalVisible(false)}
         passedMovie={movie}
         showtimes={false}
-        showShowtimes={false}
+        
       />
 
       <WebViewModal
@@ -106,7 +114,8 @@ const ShowTimes = ({id}) => {
           }}
           renderItem={({item}) => (
             <View style={styles.movieShowTimeContainer}>
-              {setVersions(item.versions)}
+              {/* {setMovieVersions(item.versions)} */}
+              
               <TouchableScale
                 activeScale={0.9}
                 tension={50}
@@ -135,11 +144,8 @@ const ShowTimes = ({id}) => {
                   renderItem={({item}) => (
                     <View style={styles.showTimeContainer}>
                       <Text style={styles.showtimeVersionLabel}>
-                        {
-                          Object(versions[item[0].movie_version_id])[
-                            'version_name'
-                          ]
-                        }
+                        {item[0].movie_version_id}
+                        
                       </Text>
                       <FlatList
                         keyboardShouldPersistTaps="always"

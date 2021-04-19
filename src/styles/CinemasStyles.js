@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
   cinemaTitleContainer: {
     flex: 1, 
     flexDirection: "column",
-    justifyContent: "center", 
-    
+    justifyContent: "center"
   },
   cinemaTitle: {
     color: COLORS.white,
@@ -42,7 +41,8 @@ const styles = StyleSheet.create({
     ...FONTS.h3
   }, 
   
-  cinemaDistance: {  
+  cinemaDistance: {
+    
     color: COLORS.white,
     alignSelf: "center",
     backgroundColor: "black",

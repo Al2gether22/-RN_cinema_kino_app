@@ -175,6 +175,7 @@ const ShowTimes = ({
                       id={item[0].movie_version_id}
                       movieVersions={movieVersions}
                     />
+                    
                   </Text>
                   <FlatList
                     keyboardShouldPersistTaps="always"

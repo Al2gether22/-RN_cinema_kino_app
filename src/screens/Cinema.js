@@ -61,7 +61,6 @@ const Cinema = ({ route }) => {
           loading ? null : 
           <ShowTimes 
             id={cinema.nid} 
-            movieVersions={item.versions}
           />
         }
       />

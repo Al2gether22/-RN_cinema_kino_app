@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     paddingRight: 3,
     textTransform: "capitalize",
     ...FONTS.h4,
-    fontSize: 12
+    fontSize: 12,
+    lineHeight: 0
   }
 })
 

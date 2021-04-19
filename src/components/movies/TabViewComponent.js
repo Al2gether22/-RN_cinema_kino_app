@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native"
 import { COLORS, FONTS, SIZES} from "../../constants/theme"
-const TabViewComponent = ({ setActive, active, backgroundColor, primaryFontColor, secondaryFontColor }) => {
 
-
+const TabViewComponent = ({ setActive, active, backgroundColor, primaryFontColor, secondaryFontColor, showtimes }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: secondaryFontColor}]}>
+      { showtimes === false ? null : 
       <TouchableOpacity
         style={active === 0 ? [styles.buttom, { borderBottomColor: backgroundColor }] : [styles.buttom, { borderBottomColor: primaryFontColor }] }
         onPress={() => {
@@ -14,7 +14,7 @@ const TabViewComponent = ({ setActive, active, backgroundColor, primaryFontColor
         }}
       >
         <Text style={active === 0 ? [styles.buttomText, { color: backgroundColor }] : [styles.buttomText, { color: primaryFontColor }] }>Spilletider</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>}
 
       <TouchableOpacity
         style={active === 1 ? [styles.buttom, { borderBottomColor: backgroundColor }] : [styles.buttom, { borderBottomColor: primaryFontColor }] }

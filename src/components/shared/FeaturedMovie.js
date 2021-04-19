@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   linkContainer: {
     padding: 15,
     borderRadius: 10,
-    backgroundColor: "black",
+    backgroundColor: rgba(0, 0, 0, 0.5),
     position: "absolute",
     bottom: 50,
     left: "50%",

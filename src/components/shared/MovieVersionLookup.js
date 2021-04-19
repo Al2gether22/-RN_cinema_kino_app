@@ -3,7 +3,7 @@
 const MovieVersionLookup = ({ id, movieVersions }) => {
 
   const result = movieVersions.find( ({ version_id }) => version_id === parseInt(id) );
-
+  
   if (result) {
     return (
       result.version_name

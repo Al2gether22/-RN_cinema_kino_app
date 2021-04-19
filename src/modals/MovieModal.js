@@ -12,8 +12,8 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import useMovieJson from '../hooks/useMovieJson';
 import usePosterColors from '../hooks/usePosterColors';
 
-const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
-  const [active, setActive] = useState(0);
+const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie, showtimes}) => {
+  const [active, setActive] = useState(showtimes === false ? 1 : 0);
   const {movie, isLoading} = useMovieJson(passedMovie);
   const {imgColors, isLoadingColors} = usePosterColors(passedMovie.imageUrl);
   
@@ -87,8 +87,10 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
                   backgroundColor={secondaryFontColor}
                   primaryFontColor={primaryFontColor}
                   secondaryFontColor={backgroundColor}
+                  showtimes={showtimes}
                 />
                 
+                { showtimes === false ? null : 
                 <ShowTimes
                   id={passedMovie.id}
                   movieVersions={passedMovie.versions}
@@ -97,7 +99,7 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
                   primaryFontColor={primaryFontColor}
                   secondaryFontColor={secondaryFontColor}
                   active={active === 0 ? 'flex' : 'none'}
-                />
+                /> }
 
                 {!movie ? null : (
                   <MovieResume
