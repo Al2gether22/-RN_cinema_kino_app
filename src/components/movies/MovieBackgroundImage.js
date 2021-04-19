@@ -43,6 +43,7 @@ const MovieBackgroundImage = ({
       )}
 
       <SharedElement id={image}>
+        {/* Needs wrapping container <> in SharedElement for Android */}
         <>
           <ImageBackground
             style={styles.coverImage}
@@ -54,9 +55,13 @@ const MovieBackgroundImage = ({
               style={styles.LinearGradientLower}
             />
           </ImageBackground>
-          {!!movie.video_markup && (
+          {movie.video_markup && (
             // checks to see if there is a trailer before rendering the play button
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <TouchableOpacity
+              onPress={() => {
+                console.log('pressing play trailer btn');
+                setModalVisible(true);
+              }}>
               <Animatable.View
                 style={styles.playButtomViewWrapper}
                 animation="zoomIn"
@@ -71,7 +76,7 @@ const MovieBackgroundImage = ({
               </Animatable.View>
               <MovieTrailerModal
                 modalVisible={modalVisible}
-                setModalVisible={() => setModalVisible(false)}
+                hideModal={() => setModalVisible(false)}
                 video_markup={movie.video_markup}
                 movie={movie}
               />
