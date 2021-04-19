@@ -20,7 +20,7 @@ async function fetchImageColors(img, setImgColors) {
     }
     if (colors.platform === 'android') {
       result = {
-        backgroundColor: colors.dominant,
+        backgroundColor: colors.darkMuted,
         primaryFontColor: colors.lightMuted,
         secondaryFontColor: colors.muted,
       };
