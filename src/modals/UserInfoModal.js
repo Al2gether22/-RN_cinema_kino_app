@@ -35,7 +35,7 @@ const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
               af biograferne.
             </Text>
           </View>
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <TouchableOpacity onPress={() => runAfterDismiss()}>
             <View style={styles.modalOkButtonContainer}>
               <Text style={styles.modalOkButton}>OK</Text>
             </View>
@@ -53,40 +53,40 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContainer: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     height: 400,
     width: 300,
     borderRadius: 15,
-    justifyContent: "space-around"
+    justifyContent: 'space-around',
   },
   modalTextContainer: {
-    padding: 15, 
-  }, 
+    padding: 15,
+  },
   headerText: {
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 30, 
-    textAlign: "center",
-    marginBottom: 25
-  }, 
+    fontFamily: 'SourceSansPro-Bold',
+    fontSize: 30,
+    textAlign: 'center',
+    marginBottom: 25,
+  },
   bodyText: {
-    fontFamily: "SourceSansPro-Bold",
-    color: "black",
+    fontFamily: 'SourceSansPro-Bold',
+    color: 'black',
     lineHeight: 20,
-    fontSize: 15
+    fontSize: 15,
   },
   modalOkButtonContainer: {
     padding: 10,
-    backgroundColor: "tomato",
+    backgroundColor: 'tomato',
     marginRight: 15,
     marginLeft: 15,
-    borderRadius: 5
-  }, 
+    borderRadius: 5,
+  },
   modalOkButton: {
-    fontFamily: "SourceSansPro-Bold",
-    color: "black",
+    fontFamily: 'SourceSansPro-Bold',
+    color: 'black',
     fontSize: 15,
-    textAlign: "center"
-  }
-})
+    textAlign: 'center',
+  },
+});
 
 export default UserInfoModal;

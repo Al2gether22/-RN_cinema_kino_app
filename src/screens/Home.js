@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, ActivityIndicator, StyleSheet, ScrollView} from 'react-native';
+import {View, ActivityIndicator, StyleSheet} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import {Context as CinemaContext} from '../context/CinemaContext';
 import {Context as MoviesContext} from '../context/MoviesContext';
@@ -9,6 +9,7 @@ import FeaturedMovie from '../components/shared/FeaturedMovie';
 import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
+import {Platform} from 'react-native';
 
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
@@ -18,42 +19,41 @@ const Home = () => {
   const [currentLongitude, setCurrentLongitude] = useState('');
   const [currentLatitude, setCurrentLatitude] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const platformPermission =
+    Platform.OS === 'ios'
+      ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
+      : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
 
   useEffect(() => {
     checkPermissions();
   }, []);
 
-  const checkPermissions = () => {
+  const checkPermissions = async () => {
     console.log('checkPermissions()');
-    check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
-      .then(result => {
-        switch (result) {
-          case RESULTS.UNAVAILABLE:
-            console.log(
-              'This feature is not available (on this device / in this context)',
-            );
-            break;
-          case RESULTS.DENIED:
-            setModalVisible(true);
-            console.log(
-              'The permission has not been requested / is denied but requestable',
-            );
-            break;
-          case RESULTS.LIMITED:
-            console.log('The permission is limited: some actions are possible');
-            break;
-          case RESULTS.GRANTED:
-            console.log('The permission is granted');
-            getOneTimeLocation();
-            break;
-          case RESULTS.BLOCKED:
-            console.log('The permission is denied and not requestable anymore');
-            break;
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    const result = await check(platformPermission);
+    switch (result) {
+      case RESULTS.UNAVAILABLE:
+        console.log(
+          'This feature is not available (on this device / in this context)',
+        );
+        break;
+      case RESULTS.DENIED:
+        setModalVisible(true);
+        console.log(
+          'The permission has not been requested / is denied but requestable',
+        );
+        break;
+      case RESULTS.LIMITED:
+        console.log('The permission is limited: some actions are possible');
+        break;
+      case RESULTS.GRANTED:
+        console.log('The permission is granted');
+        getOneTimeLocation();
+        break;
+      case RESULTS.BLOCKED:
+        console.log('The permission is denied and not requestable anymore');
+        break;
+    }
   };
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const Home = () => {
 
   const requestPermissions = async () => {
     try {
-      const result = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+      const result = await request(platformPermission);
       console.log('requestPermissions result ' + result);
       checkPermissions();
     } catch (err) {
@@ -90,7 +90,7 @@ const Home = () => {
         console.error(error);
       },
       {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         timeout: 30000,
         maximumAge: 1000,
       },
