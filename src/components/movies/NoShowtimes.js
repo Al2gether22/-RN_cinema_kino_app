@@ -6,8 +6,6 @@ import moment from 'moment';
 moment.locale('da');
 
 const NoShowtimes = ({nextShowtime, onPressNextShowtime}) => {
-  const nextShowtimeDate = new Date(nextShowtime);
-
   if (!nextShowtime) {
     return null;
   }
@@ -21,7 +19,7 @@ const NoShowtimes = ({nextShowtime, onPressNextShowtime}) => {
       onPress={onPressNextShowtime}>
       <View style={styles.nextShowtimeContainer}>
         <Text style={styles.nextShowtimeText}>
-          Næste spilletid er {moment(nextShowtimeDate).format('DD/MM/YYYY')}
+          Næste spilletid er {moment(nextShowtime).format('dddd Do MMM')}
         </Text>
       </View>
     </TouchableScale>
