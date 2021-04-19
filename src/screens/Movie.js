@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StatusBar, FlatList} from 'react-native';
+import {StatusBar, FlatList, Text} from 'react-native';
 import usePosterColors from '../hooks/usePosterColors';
 import MovieBackgroundImage from '../components/movies/MovieBackgroundImage';
 import {useNavigation} from '@react-navigation/native';
@@ -21,104 +21,101 @@ const Movie = ({route}) => {
   const config = {
     velocityThreshold: 0.8,
     directionalOffsetThreshold: 150,
-    gestureIsClickThreshold: 10
+    gestureIsClickThreshold: 10,
   };
-
 
   return (
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
-    <>
-      <FlatList
-        keyboardShouldPersistTaps="always"
-        style={[styles.container, {backgroundColor}]}
-        showsVerticalScrollIndicator={false}
-        ListHeaderComponent={
-          <GestureRecognizer
-            onSwipeDown={() => navigation.goBack()}
-            config={config}
-            style={{
-              flex: 1,
-              backgroundColor: 'transparent',
-              width: '100%',
-              zIndex: 999999,
-            }}>
-            <StatusBar hidden={true} />
+    <FlatList
+      keyboardShouldPersistTaps="always"
+      style={[styles.container, {backgroundColor}]}
+      showsVerticalScrollIndicator={false}
+      ListHeaderComponent={
+        <GestureRecognizer
+          onSwipeDown={() => navigation.goBack()}
+          config={config}
+          style={{
+            flex: 1,
+            backgroundColor: 'transparent',
+            width: '100%',
+            zIndex: 999999,
+          }}>
+          <StatusBar hidden={true} />
 
-            <MovieBackgroundImage
+          <MovieBackgroundImage
+            movie={movie}
+            image={item.imageUrl}
+            danishTitle={item.danishTitle}
+            genre={item.genre}
+            backgroundColor={backgroundColor}
+            primaryFontColor={primaryFontColor}
+            secondaryFontColor={secondaryFontColor}
+          />
+
+          {/* {isLoading ? null : (
+            <MovieMetaData
               movie={movie}
-              image={item.imageUrl}
-              danishTitle={item.danishTitle}
-              genre={item.genre}
               backgroundColor={backgroundColor}
               primaryFontColor={primaryFontColor}
               secondaryFontColor={secondaryFontColor}
             />
+          )} */}
+        </GestureRecognizer>
+      }
+      ListFooterComponent={
+        isLoading ? null : (
+          <>
+            <TabViewComponent
+              setActive={setActive}
+              active={active}
+              backgroundColor={secondaryFontColor}
+              primaryFontColor={primaryFontColor}
+              secondaryFontColor={backgroundColor}
+            />
 
-            {isLoading ? null : (
-              <MovieMetaData
+            <ShowTimes
+              id={movie.nid}
+              movieVersions={item.versions}
+              nextShowtime={item.next_showtime}
+              backgroundColor={backgroundColor}
+              primaryFontColor={primaryFontColor}
+              secondaryFontColor={secondaryFontColor}
+              active={active === 0 ? 'flex' : 'none'}
+            />
+
+            <GestureRecognizer
+              onSwipeLeft={() => setActive(2)}
+              onSwipeRight={() => setActive(0)}
+              config={config}
+              style={{
+                flex: 1,
+                backgroundColor: 'transparent',
+              }}>
+              <MovieResume
+                resume={movie.body}
+                primaryFontColor={primaryFontColor}
+                active={active === 1 ? 'flex' : 'none'}
+              />
+            </GestureRecognizer>
+
+            <GestureRecognizer
+              onSwipeRight={() => setActive(1)}
+              config={config}
+              style={{
+                flex: 1,
+                backgroundColor: 'transparent',
+              }}>
+              <MovieCast
                 movie={movie}
-                backgroundColor={backgroundColor}
                 primaryFontColor={primaryFontColor}
                 secondaryFontColor={secondaryFontColor}
+                active={active === 2 ? 'flex' : 'none'}
               />
-            )}
-          </GestureRecognizer>
-        }
-        ListFooterComponent={
-          isLoading ? null : (
-            <>
-              <TabViewComponent
-                setActive={setActive}
-                active={active}
-                backgroundColor={secondaryFontColor}
-                primaryFontColor={primaryFontColor}
-                secondaryFontColor={backgroundColor}
-              />
-
-              <ShowTimes
-                id={movie.nid}
-                movieVersions={item.versions}
-                nextShowtime={item.next_showtime}
-                backgroundColor={backgroundColor}
-                primaryFontColor={primaryFontColor}
-                secondaryFontColor={secondaryFontColor}
-                active={active === 0 ? 'flex' : 'none'}
-              />
-
-              <GestureRecognizer
-                onSwipeLeft={() => setActive(2)}
-                onSwipeRight={() => setActive(0)}
-                config={config}
-                style={{
-                  flex: 1,
-                  backgroundColor: 'transparent',
-                }}>
-                <MovieResume
-                  resume={movie.body}
-                  primaryFontColor={primaryFontColor}
-                  active={active === 1 ? 'flex' : 'none'}
-                />
-              </GestureRecognizer>
-
-              <GestureRecognizer
-                onSwipeRight={() => setActive(1)}
-                config={config}
-                style={{
-                  flex: 1,
-                  backgroundColor: 'transparent',
-                }}>
-                <MovieCast
-                  movie={movie}
-                  primaryFontColor={primaryFontColor}
-                  secondaryFontColor={secondaryFontColor}
-                  active={active === 2 ? 'flex' : 'none'}
-                />
-              </GestureRecognizer>
-            </>
-          )
-        }
-      />
-    </>
+            </GestureRecognizer>
+          </>
+        )
+      }
+    />
   );
 };
 

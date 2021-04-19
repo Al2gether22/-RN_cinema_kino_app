@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import {FlatList, TouchableOpacity, StatusBar, Modal} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/MovieStyles';
@@ -12,15 +13,15 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import useMovieJson from '../hooks/useMovieJson';
 import usePosterColors from '../hooks/usePosterColors';
 
-const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
+const MovieModal = ({movieModalVisible, hideMovieModal, passedMovie}) => {
   const [active, setActive] = useState(0);
   const {movie, isLoading} = useMovieJson(passedMovie);
   const {imgColors, isLoadingColors} = usePosterColors(passedMovie.imageUrl);
-  
+
   const config = {
     velocityThreshold: 0.8,
     directionalOffsetThreshold: 150,
-    gestureIsClickThreshold: 10
+    gestureIsClickThreshold: 10,
   };
 
   if (isLoading || isLoadingColors) {
@@ -30,7 +31,7 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
   return (
     <GestureRecognizer
-      onSwipeDown={() => setMovieModalVisible(!movieModalVisible)}
+      onSwipeDown={() => hideMovieModal()}
       config={config}
       style={{
         flex: 1,
@@ -47,11 +48,11 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <>
-                <StatusBar hidden={true} />
+                <StatusBar hidden />
                 <TouchableOpacity
                   style={styles.goBackContainer}
                   onPress={() => {
-                    setMovieModalVisible(!movieModalVisible);
+                    hideMovieModal();
                     setActive(0);
                   }}>
                   <MaterialCommunityIcons
@@ -99,14 +100,14 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
                   active={active === 0 ? 'flex' : 'none'}
                 />
 
-                {!movie ? null : (
+                {movie && (
                   <MovieResume
                     resume={movie.body}
                     primaryFontColor={primaryFontColor}
                     active={active === 1 ? 'flex' : 'none'}
                   />
                 )}
-                {!movie ? null : (
+                {movie && (
                   <MovieCast
                     movie={movie}
                     primaryFontColor={primaryFontColor}
@@ -121,6 +122,10 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie}) => {
       </Modal>
     </GestureRecognizer>
   );
+};
+
+MovieModal.propTypes = {
+  hideMovieModal: PropTypes.func.isRequired,
 };
 
 export default MovieModal;

@@ -1,61 +1,71 @@
-import React, { useState } from "react";
-import { View, Text, Image, FlatList, StyleSheet } from "react-native"
-import _ from "lodash";
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  StyleSheet,
+  BackHandler,
+} from 'react-native';
+import _ from 'lodash';
 import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
-import MovieModal from "../../modals/MovieModal";
-import { useNavigation } from "@react-navigation/native";
+import MovieModal from '../../modals/MovieModal';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 
-const Top10Movies = ({ movies }) => {
-
+const Top10Movies = ({movies}) => {
   const navigation = useNavigation();
   const [movieModalVisible, setMovieModalVisible] = useState(false);
-  const [movie, setMovie] = useState({})
+  const [movie, setMovie] = useState({});
 
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        console.log('pressed back button');
+        setMovieModalVisible(false);
+      };
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []),
+  );
 
-  const Item = (item) => {
-    
+  const Item = item => {
     return (
-
       <View style={styles.itemContainer}>
-        
-         <TouchableScale
+        <TouchableScale
           activeScale={0.9}
           tension={50}
           friction={7}
           useNativeDriver
           onPress={() => {
-            setMovieModalVisible(true), 
-            setMovie(item)
+            setMovieModalVisible(true), setMovie(item);
           }}
           //onPress={() => navigation.navigate("Film", { screen: "Movie", params: { item }})}
         >
           <Image
             style={styles.img}
             source={{
-            uri: item.imageUrl,
+              uri: item.imageUrl,
             }}
           />
         </TouchableScale>
       </View>
-     
     );
-  }
+  };
 
   return (
-    <Animatable.View 
+    <Animatable.View
       style={styles.container}
-      animation='fadeIn'
+      animation="fadeIn"
       duration={900}
-      delay={40}
-    >
-
-      <MovieModal 
+      delay={40}>
+      <MovieModal
         movieModalVisible={movieModalVisible}
-        setMovieModalVisible={() => setMovieModalVisible(false)}
+        hideMovieModal={() => setMovieModalVisible(false)}
         passedMovie={movie}
       />
-      
+
       <View style={styles.headLineContainer}>
         <Text style={styles.headLine}>Populære Film</Text>
         <TouchableScale
@@ -65,67 +75,57 @@ const Top10Movies = ({ movies }) => {
           useNativeDriver
           onPress={() => {
             navigation.navigate('Film');
-          }}
-        >
+          }}>
           <Text style={styles.headLineLink}>Alle Film</Text>
         </TouchableScale>
-        
       </View>
-      <FlatList 
+      <FlatList
         keyboardShouldPersistTaps="always"
         data={movies.slice(0, 10)}
-        renderItem={({ item }) => Item(item)}
-        keyExtractor={(item) => item.id}
+        renderItem={({item}) => Item(item)}
+        keyExtractor={item => item.id}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
       />
-      
-      </Animatable.View>
-  )
-}
+    </Animatable.View>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    
-    
-  },
+  container: {},
   headLineContainer: {
-    color: "white",
-    backgroundColor: "rgba(29,29,39,0.8)",
-    flexDirection: "row",
-    alignItems: "center"
+    color: 'white',
+    backgroundColor: 'rgba(29,29,39,0.8)',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   headLine: {
-    color: "white",
-    fontFamily: "SourceSansPro-Bold",
+    color: 'white',
+    fontFamily: 'SourceSansPro-Bold',
     fontSize: 16,
     marginLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
-    flex: 1
-  }, 
+    flex: 1,
+  },
   headLineLink: {
-    color: "white",
-    fontFamily: "SourceSansPro-Bold",
+    color: 'white',
+    fontFamily: 'SourceSansPro-Bold',
     fontSize: 13,
     marginRight: 10,
     textDecorationLine: 'underline',
-    
-
   },
   itemContainer: {
     margin: 5,
-    borderRadius: 7
+    borderRadius: 7,
   },
   img: {
     height: 120,
     width: 81,
-    borderColor: "black",
+    borderColor: 'black',
     borderWidth: 2,
-    borderRadius: 7
+    borderRadius: 7,
   },
- 
+});
 
-})
-
-export default Top10Movies
+export default Top10Movies;

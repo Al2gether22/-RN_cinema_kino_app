@@ -1,19 +1,15 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import React from 'react';
+import {Text, View, StyleSheet} from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
+import 'moment/locale/da';
+import moment from 'moment';
+moment.locale('da');
 
-
-const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
-  const dateOptions = {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  };
- 
+const NoShowtimes = ({nextShowtime, onPressNextShowtime}) => {
   const nextShowtimeDate = new Date(nextShowtime);
 
   if (!nextShowtime) {
-    return null
+    return null;
   }
 
   return (
@@ -25,8 +21,7 @@ const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
       onPress={onPressNextShowtime}>
       <View style={styles.nextShowtimeContainer}>
         <Text style={styles.nextShowtimeText}>
-          Næste spilletid er{" "}
-          {nextShowtimeDate.toLocaleDateString("da", dateOptions)}
+          Næste spilletid er {moment(nextShowtimeDate).format('DD/MM/YYYY')}
         </Text>
       </View>
     </TouchableScale>
@@ -35,18 +30,18 @@ const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
 
 const styles = StyleSheet.create({
   nextShowtimeContainer: {
-    alignSelf: "center",
-    backgroundColor: "black",
+    alignSelf: 'center',
+    backgroundColor: 'black',
     padding: 10,
     borderWidth: 2,
-    borderColor: "#676d7c",
+    borderColor: '#676d7c',
     borderRadius: 6,
     marginBottom: 25,
     marginTop: 10,
   },
   nextShowtimeText: {
-    color: "white",
-    fontFamily: "SourceSansPro-Bold",
+    color: 'white',
+    fontFamily: 'SourceSansPro-Bold',
   },
 });
 

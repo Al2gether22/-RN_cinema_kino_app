@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
 
   playButtomViewWrapper: {
-    zIndex: 99999,
+    zIndex: 1,
     position: 'absolute',
     left: '50%',
     top: -350,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 
   goBackContainer: {
     position: 'absolute',
-    zIndex: 9999,
+    zIndex: 1,
     top: 25,
     left: 15,
   },

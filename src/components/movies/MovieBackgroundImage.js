@@ -24,6 +24,10 @@ const MovieBackgroundImage = ({
   const imageFallback = image ? image : movie.imageUrl;
   const titleFallback = danishTitle ? danishTitle : movie.title;
 
+  console.log(movie.video_markup);
+  const what = true && movie.video_markup;
+  debugger;
+
   return (
     <View style={styles.imageContainer}>
       {modal ? null : (
@@ -43,7 +47,6 @@ const MovieBackgroundImage = ({
       )}
 
       <SharedElement id={image}>
-        {/* Needs wrapping container <> in SharedElement for Android */}
         <>
           <ImageBackground
             style={styles.coverImage}
@@ -55,11 +58,9 @@ const MovieBackgroundImage = ({
               style={styles.LinearGradientLower}
             />
           </ImageBackground>
-          {movie.video_markup && (
-            // checks to see if there is a trailer before rendering the play button
+          {!!movie.video_markup && (
             <TouchableOpacity
               onPress={() => {
-                console.log('pressing play trailer btn');
                 setModalVisible(true);
               }}>
               <Animatable.View

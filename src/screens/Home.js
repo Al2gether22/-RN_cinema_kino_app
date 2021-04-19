@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
+import {View, ActivityIndicator, StyleSheet, ScrollView} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import {Context as CinemaContext} from '../context/CinemaContext';
 import {Context as MoviesContext} from '../context/MoviesContext';
 import _ from 'lodash';
 import UserInfoModal from '../modals/UserInfoModal';
-import FeaturedMovie from '../components/shared/FeaturedMovie2';
+import FeaturedMovie from '../components/shared/FeaturedMovie';
 import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
@@ -108,7 +108,7 @@ const Home = () => {
         setModalVisible={() => setModalVisible(false)}
         requestPermissions={requestPermissions}
       />
-      
+
       <View style={styles.container}>
         <FeaturedMovie />
         <View style={styles.slidersContainer}>
@@ -123,12 +123,10 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+
     backgroundColor: '#1d1d27',
   },
-  slidersContainer: {
-
-  },
+  slidersContainer: {},
 });
 
 export default Home;
