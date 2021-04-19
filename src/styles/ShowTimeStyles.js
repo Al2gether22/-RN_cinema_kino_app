@@ -8,23 +8,25 @@ const styles = StyleSheet.create({
     marginRight: "4%",
     marginBottom: "7%",
     padding: 5,
+    
   },
   sectionHeader: {
     fontFamily: "SourceSansPro-Bold",
     color: "white",
     fontSize: 18,
-    marginLeft: 10,
-    marginBottom: 10,
-    marginTop: 5
- 
+    
+    marginTop: 5,
+    
   },
   showTimeContainer: {
-    marginBottom: 5
+    marginBottom: 5,
+    
   },
   showTime: {
     backgroundColor: "limegreen",
     padding: 8,
-    margin: 5,
+    marginRight: 15,
+    marginBottom: 15,
     borderWidth: 1, 
     borderColor: "black", 
     borderRadius: 6,
@@ -38,15 +40,15 @@ const styles = StyleSheet.create({
     fontFamily: "SourceSansPro-Bold",
     color: "#676d7c",
     fontSize: 16,
-    marginLeft: 10,
     marginBottom: 10,
-    marginTop: 5
+    marginTop: 5,
+    
   },
   movieShowTimeContainer: {
     flexDirection: "row",
     marginBottom: 20,
     borderRadius: 6,
-    
+    marginTop: 10
   },
   noShowtimesContainer: {
     marginTop: 10,
@@ -56,8 +58,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   moviePosterContainer: {
-    marginRight: 10
-
+    marginRight: 10,
+    marginTop: 10
   },
   poster: {
     height: 95,
