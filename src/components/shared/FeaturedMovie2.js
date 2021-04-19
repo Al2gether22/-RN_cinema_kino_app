@@ -4,7 +4,7 @@ import { ImageBackground, Text, StyleSheet, TouchableOpacity } from "react-nativ
 import LinearGradient from 'react-native-linear-gradient';
 import MovieModal from "../../modals/MovieModal"
 import * as Animatable from 'react-native-animatable';
-
+import { FONTS, SIZES, COLORS} from "../../constants/theme"
 
 const FeaturedMovie2 = () => {
 
@@ -78,9 +78,8 @@ const styles = StyleSheet.create({
     left: 10,
   },
   linkText: {
-    color: "white", 
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 25, 
+    color: COLORS.white, 
+    ...FONTS.h2
    
   }
 })

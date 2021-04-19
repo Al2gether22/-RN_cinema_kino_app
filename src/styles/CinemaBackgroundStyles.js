@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { SIZES, COLORS, FONTS} from "../constants/theme"
 
 const styles = StyleSheet.create({
   container: {
@@ -20,11 +21,9 @@ const styles = StyleSheet.create({
     left: 0,
   },
   cinemaTitle: {
-    fontFamily: "SourceSansPro-Bold",
     textAlign: "center",
-    color: "white",
-    fontSize: 25,
-    
+    color: COLORS.white,
+    ...FONTS.h2
   },
 
   goBackContainer: {
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
     zIndex: 9999,
     top: 25,
     left: 15, 
-    
   },
   
   LinearGradientUpper: {

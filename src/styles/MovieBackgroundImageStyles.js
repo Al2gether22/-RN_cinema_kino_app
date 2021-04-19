@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { COLORS, FONTS, SIZES} from "../constants/theme"
 
 const styles = StyleSheet.create({
   imageContainer: {},
@@ -20,20 +21,19 @@ const styles = StyleSheet.create({
   },
 
   movieTitle: {
-    fontFamily: 'SourceSansPro-Bold',
-    color: 'white',
+    color: COLORS.white,
     marginTop: -30,
     marginLeft: '5%',
     marginRight: '20%',
+    ...FONTS.h1,
     fontSize: 35,
   },
   movieGenre: {
-    fontFamily: 'SourceSansPro-Bold',
     color: '#676d7c',
     marginLeft: '5%',
     marginTop: 10,
     marginRight: '10%',
-    fontSize: 12,
+    ...FONTS.h4
   },
 
   goBackContainer: {

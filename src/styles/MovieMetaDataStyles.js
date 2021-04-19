@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { COLORS, FONTS, SIZES} from "../constants/theme"
 
 const styles = StyleSheet.create({
   
@@ -7,16 +8,15 @@ const styles = StyleSheet.create({
     marginRight: "4%",
     padding: 5,
     marginBottom: 20,
-    borderBottomColor: "white",
+    borderBottomColor: COLORS.white,
     borderBottomWidth: 0.2,
-    borderTopColor: "white",
+    borderTopColor: COLORS.white,
     borderTopWidth: 0.2,
     marginTop: 25
   },
 
   movieMetaData: {
     flexDirection: "row",
-    
     paddingTop: 5,
     paddingBottom: 5
   },
@@ -24,26 +24,22 @@ const styles = StyleSheet.create({
   movieRating: {
     flex: 1,
     flexDirection: "row",
-    color: "white",
+    color: COLORS.white,
     alignItems: "center",
     justifyContent: "space-evenly"
   },
   movieRatingIcon: {
     marginBottom: 5,
-    
   },
   movieRatingRating: {
-    fontFamily: "SourceSansPro-Bold",
-    color: "white",
-    fontSize: 20,
-    paddingBottom: 6
-   
+    color: COLORS.white,
+    paddingBottom: 6,
+    ...FONTS.h2
   },
   movieRatingUsers: {
-    fontFamily: "SourceSansPro-Bold",
     color: "#676d7c",
-    fontSize: 12,
-    paddingBottom: 6
+    paddingBottom: 6,
+    ...FONTS.h4
   },
 
 })

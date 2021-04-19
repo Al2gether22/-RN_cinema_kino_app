@@ -4,7 +4,7 @@ import { COLORS, FONTS, SIZES} from "../constants/theme"
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1d1d27",
+    backgroundColor: COLORS.backgroundColor,
     padding: 10,
   },
   filterContainer: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   filterButtonText: {
     textAlign: "center",
-    color: "white",
+    color: COLORS.white,
     ...FONTS.h4
   },
 
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     
   }, 
   cardTitle: {
-    color: "white",
+    color: COLORS.white,
     marginTop: 5,
     justifyContent: "center",
     alignItems: "center",

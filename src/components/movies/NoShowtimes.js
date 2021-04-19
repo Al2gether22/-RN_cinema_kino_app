@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import TouchableScale from 'react-native-touchable-scale';
-
+import { COLORS, FONTS, SIZES} from "../../constants/theme"
 
 const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
   const dateOptions = {
@@ -38,15 +38,16 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "black",
     padding: 10,
-    borderWidth: 2,
-    borderColor: "#676d7c",
+    borderWidth: 1,
+    borderColor: "white",
     borderRadius: 6,
     marginBottom: 25,
     marginTop: 10,
   },
   nextShowtimeText: {
-    color: "white",
-    fontFamily: "SourceSansPro-Bold",
+    color: COLORS.white,
+    ...FONTS.h4,
+    lineHeight: 0
   },
 });
 

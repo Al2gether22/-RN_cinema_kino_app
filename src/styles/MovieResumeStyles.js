@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { COLORS, FONTS, SIZES} from "../constants/theme"
 
 const styles = StyleSheet.create({
   
@@ -12,10 +13,9 @@ const styles = StyleSheet.create({
   },
 
   movieReviewBody: {
-    fontFamily: "SourceSansPro-Regular",
+    color: COLORS.white,
     fontWeight: "500",
-    color: "white",
-    fontSize: 18,
+    ...FONTS.body3
   },
 
 

@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import { COLORS, FONTS, SIZES} from "../constants/theme"
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#1d1d27",
+    backgroundColor: COLORS.backgroundColor,
     
   },
   goBackContainer: {

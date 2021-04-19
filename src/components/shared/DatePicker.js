@@ -6,6 +6,7 @@ import { create1MonthDates } from "../../helpers/date.utils";
 import "moment/locale/da";
 import moment from "moment";
 moment.locale("da");
+import { COLORS, FONTS, SIZES} from "../../constants/theme"
 
 function dateLabelFromNow(myDate) {
   return moment(myDate).calendar(null, {
@@ -71,13 +72,12 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   showtime: {
-    
-    fontFamily: "SourceSansPro-Bold",
-    textAlign: "center"
+    textAlign: "center",
+    ...FONTS.h4,
+    lineHeight: 0
   },
   dateLabel: {
-    
-    fontFamily: "SourceSansPro-Bold",
+    ...FONTS.h4
   },
 });
 

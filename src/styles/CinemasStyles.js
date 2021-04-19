@@ -4,13 +4,12 @@ import { COLORS, FONTS, SIZES} from "../constants/theme"
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1d1d27',
+    backgroundColor: COLORS.backgroundColor,
     padding: 10,
   },
   cinemaOverview: {
     flex: 1,
     margin: 10,
-    
     height: SIZES.height / 10,
   },
   cinemaImage: {
@@ -36,17 +35,15 @@ const styles = StyleSheet.create({
     
   },
   cinemaTitle: {
-    
-    color: "white",
+    color: COLORS.white,
     alignSelf: "center",
     backgroundColor: "black",
     padding: 4,
     ...FONTS.h3
   }, 
   
-  cinemaDistance: {
-    
-    color: "white",
+  cinemaDistance: {  
+    color: COLORS.white,
     alignSelf: "center",
     backgroundColor: "black",
     padding: 4,

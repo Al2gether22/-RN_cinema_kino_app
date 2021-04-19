@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View, TouchableOpacity, Modal, StyleSheet} from 'react-native';
+import { COLORS, FONTS, SIZES} from "../constants/theme"
 
 const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
   function runAfterDismiss() {
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContainer: {
-    backgroundColor: "white",
+    backgroundColor: COLORS.white,
     height: 400,
     width: 300,
     borderRadius: 15,
@@ -63,10 +64,9 @@ const styles = StyleSheet.create({
     padding: 15, 
   }, 
   headerText: {
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 30, 
     textAlign: "center",
-    marginBottom: 25
+    marginBottom: 25,
+    ...FONTS.h1
   }, 
   bodyText: {
     fontFamily: "SourceSansPro-Bold",

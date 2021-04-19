@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native"
-
+import { COLORS, FONTS, SIZES} from "../../constants/theme"
 const TabViewComponent = ({ setActive, active, backgroundColor, primaryFontColor, secondaryFontColor }) => {
 
 
@@ -52,8 +52,7 @@ const styles = StyleSheet.create({
   },
 
   buttomText: {
-    fontFamily: "SourceSansPro-Bold",
-    fontSize: 18,
+    ...FONTS.h3
   }
 })
 

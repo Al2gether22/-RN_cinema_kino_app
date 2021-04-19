@@ -1,8 +1,10 @@
 import { StyleSheet } from "react-native";
+import { COLORS, FONTS, SIZES} from "../constants/theme"
+
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#1d1d27",
+    backgroundColor: COLORS.backgroundColor,
     marginTop: "4%",
     marginLeft: "4%",
     marginRight: "4%",
@@ -11,12 +13,10 @@ const styles = StyleSheet.create({
     
   },
   sectionHeader: {
-    fontFamily: "SourceSansPro-Bold",
-    color: "white",
-    fontSize: 18,
-    
+    color: COLORS.white,
     marginTop: 5,
-    
+    ...FONTS.h3,
+    fontSize: 18
   },
   showTimeContainer: {
     marginBottom: 5,
@@ -37,12 +37,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   showtimeVersionLabel: {
-    fontFamily: "SourceSansPro-Bold",
     color: "#676d7c",
-    fontSize: 16,
     marginBottom: 10,
     marginTop: 5,
-    
+    ...FONTS.h3
   },
   movieShowTimeContainer: {
     flexDirection: "row",

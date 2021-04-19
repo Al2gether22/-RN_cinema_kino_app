@@ -4,7 +4,6 @@ import HTML from "react-native-render-html";
 import { IGNORED_TAGS } from 'react-native-render-html';
 import styles from "../../styles/MovieResumeStyles";
 
-
 const MovieMetaData = ({ resume, primaryFontColor, active }) => {
   
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, FlatList, StyleSheet, Image } from "react-native"
-
+import { COLORS, FONTS, SIZES} from "../../constants/theme"
 
 const MovieCast = ({ movie, active, primaryFontColor, secondaryFontColor }) => {
   
@@ -50,14 +50,11 @@ const MovieCast = ({ movie, active, primaryFontColor, secondaryFontColor }) => {
 const styles = StyleSheet.create({
   container: {
     margin: "4%",
-    
   },
   headline: {
     marginTop: 5,
     marginBottom: 20,
-    fontSize: 22, 
-    fontFamily: "SourceSansPro-Bold"
-
+    ...FONTS.h2
   },
   itemContainer: {
     flex: 1,
@@ -65,10 +62,8 @@ const styles = StyleSheet.create({
     marginBottom: 25
   },
   name: {
-    fontFamily: "SourceSansPro-Bold", 
-    fontSize: 16,
     marginTop: 10,
-    
+    ...FONTS.h3
   }, 
   img: {
     height: 90,

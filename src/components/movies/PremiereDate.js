@@ -1,5 +1,6 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
+import { COLORS, FONTS, SIZES} from "../../constants/theme"
 
 
 const PremiereDate = ({ PremiereDate }) => {
@@ -30,14 +31,14 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 15
   },
   PremiereDate: {
-    color: "white",
-    fontSize: 12,
-    fontFamily: "SourceSansPro-Bold",
+    color: COLORS.white,
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 8,
     paddingRight: 3,
-    textTransform: "capitalize"
+    textTransform: "capitalize",
+    ...FONTS.h4,
+    fontSize: 12
   }
 })
 
