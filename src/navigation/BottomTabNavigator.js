@@ -105,6 +105,6 @@ const styles = StyleSheet.create({
   container: {
     borderTopWidth: 0,
     backgroundColor: "black",
-    height: 80
+    height: SIZES.height / 12
   }
 })
