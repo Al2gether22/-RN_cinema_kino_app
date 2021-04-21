@@ -1,4 +1,6 @@
 import dataContext from "./DataContext";
+import Toast from 'react-native-toast-message';
+
 
 const movieReducer = (state, action) => {
   switch (action.type) {
@@ -26,6 +28,15 @@ const getMovies = dispatch => async () => {
       payload: movies
     });
   } catch (err) {
+    Toast.show({
+      text1: 'Noget gik galt!',
+      text2: 'Prøv at lukke appen og start den igen',
+      position: 'bottom',
+      autoHide: false,
+      bottomOffset: 300,
+      onPress: () => {Toast.hide();}
+
+    });
     dispatch({
       type: "add_error",
       payload: "Something went wrong with the movies"

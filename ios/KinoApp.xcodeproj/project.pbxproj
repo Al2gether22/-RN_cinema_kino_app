@@ -13,6 +13,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		515FFAE77AF805565E23C018 /* libPods-KinoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA4CD5578C258DA28D7B69C /* libPods-KinoApp.a */; };
+		531928282CA94918A8E4DF3B /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A60306E4FD124714A9A17BD6 /* SourceSansPro-Light.ttf */; };
+		71628A1F871B4062B3E1547E /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB164675004D43008C1BF2CD /* SourceSansPro-Regular.ttf */; };
 		8695C71425E69AAC00D74D08 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8695C71325E69AAC00D74D08 /* Images-2.xcassets */; };
 		86BDD07E262CB90C0020AE39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86BDD07D262CB90B0020AE39 /* GoogleService-Info.plist */; };
 		EE4625C6AFCDCEBF47E3B074 /* libPods-KinoApp-KinoAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59393621CECBB9B90C3FB02C /* libPods-KinoApp-KinoAppTests.a */; };
@@ -22,8 +24,6 @@
 		F87918472600AE6E00B06245 /* BureauGrotCond-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DFDB03D4E6C4A43A93C0F3B /* BureauGrotCond-Light.ttf */; };
 		F879184A2600AE7200B06245 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D921D66A5F1149F2ACEA9352 /* SourceSansPro-Black.ttf */; };
 		F879184B2600AE7400B06245 /* SourceSansPro-BlackIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 072AE1DC66784149BAB1E629 /* SourceSansPro-BlackIt.ttf */; };
-		531928282CA94918A8E4DF3B /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A60306E4FD124714A9A17BD6 /* SourceSansPro-Light.ttf */; };
-		71628A1F871B4062B3E1547E /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB164675004D43008C1BF2CD /* SourceSansPro-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +73,7 @@
 		8F04E7E26C6CB4D98943EA23 /* Pods-KinoApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-KinoApp-tvOS/Pods-KinoApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9872D640EDED55E5E0B4744B /* Pods-KinoApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-KinoApp-tvOSTests/Pods-KinoApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9AFD5F048D8BA66DC3C8AFBB /* Pods-KinoApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-KinoApp-tvOSTests/Pods-KinoApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		A60306E4FD124714A9A17BD6 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Light.ttf"; path = "../assets/fonts/SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		A695FC1FF868357B3DF38D79 /* libPods-KinoApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KinoApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC07465E2D54A95A2C59D22 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = ../assets/fonts/FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
 		AE5D91E73A3E406A96FA88ED /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = ../assets/fonts/Ionicons.ttf; sourceTree = "<group>"; };
@@ -81,13 +82,12 @@
 		C7F2BF8E283740FB9C9AB3B6 /* BureauGrotComp-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BureauGrotComp-Medium.ttf"; path = "../assets/fonts/BureauGrotComp-Medium.ttf"; sourceTree = "<group>"; };
 		D316F26547F9446C96D09352 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = ../assets/fonts/Feather.ttf; sourceTree = "<group>"; };
 		D921D66A5F1149F2ACEA9352 /* SourceSansPro-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Black.ttf"; path = "../assets/fonts/SourceSansPro-Black.ttf"; sourceTree = "<group>"; };
+		DB164675004D43008C1BF2CD /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Regular.ttf"; path = "../assets/fonts/SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		E39EBEB94BADE9CF3EFC67BB /* Pods-KinoApp-KinoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoApp-KinoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-KinoApp-KinoAppTests/Pods-KinoApp-KinoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F648DB8B4ACC4511896299D5 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = ../assets/fonts/AntDesign.ttf; sourceTree = "<group>"; };
 		F879183D2600ADAE00B06245 /* BasierSquare-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierSquare-Regular.otf"; path = "../assets/fonts/BasierSquare-Regular.otf"; sourceTree = "<group>"; };
-		A60306E4FD124714A9A17BD6 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; name = "SourceSansPro-Light.ttf"; path = "../assets/fonts/SourceSansPro-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DB164675004D43008C1BF2CD /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; name = "SourceSansPro-Regular.ttf"; path = "../assets/fonts/SourceSansPro-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
