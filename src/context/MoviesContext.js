@@ -20,7 +20,7 @@ const movieReducer = (state, action) => {
 const getMovies = dispatch => async () => {
   try {
     const response = await fetch(
-      "https://www.kino.dk/appservices/movies",
+      "https://www.kino.dk/appservices/moviesq",
       { mode: "no-cors" })
     const movies = await response.json();
     dispatch({
@@ -32,10 +32,8 @@ const getMovies = dispatch => async () => {
       text1: 'Noget gik galt!',
       text2: 'Prøv at lukke appen og start den igen',
       position: 'bottom',
-      autoHide: false,
       bottomOffset: 300,
-      onPress: () => {Toast.hide();}
-
+      autoHide: false
     });
     dispatch({
       type: "add_error",

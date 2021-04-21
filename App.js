@@ -7,7 +7,7 @@ import { Provider as CinemaProvider } from "./src/context/CinemaContext";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import FetchData from "./src/components/shared/FetchData"
 import Toast, { BaseToast } from 'react-native-toast-message';
-
+import { SIZES, FONTS, COLORS } from "./src/constants/theme"
 
 const App = () => {
 
@@ -15,13 +15,18 @@ const App = () => {
     success: ({ text1, text2, ...rest }) => (
       <BaseToast
         {...rest}
-        style={{ borderLeftColor: '#ff2326', backgroundColor: "blue" }}
+        style={{ borderLeftColor: '#ff2326', height: 150, borderColor: "black", borderWidth: 0.5 }}
         contentContainerStyle={{ paddingHorizontal: 15 }}
+        trailingIconStyle={{ position: "absolute", top: -7, right: -7, height: 15, width: 15 }}
+        onPress={() => Toast.hide()}
+        onTrailingIconPress={() => Toast.hide()}
         text1Style={{
-          fontSize: 20,
+          
+          ...FONTS.h2
         }}
         text2Style={{
-          fontSize: 16
+          
+          ...FONTS.h3
         }}
         text1={text1}
         text2={text2}
