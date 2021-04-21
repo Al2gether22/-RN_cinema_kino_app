@@ -12,6 +12,7 @@ import styles from '../../styles/ShowTimeStyles';
 import {create1MonthDates} from '../../helpers/date.utils';
 import {scrollToIndex} from '../../helpers/datepicker.utils';
 import moment from 'moment';
+import { SIZES } from "../../constants/theme"
 
 const ShowTimes = ({
   id,
@@ -162,7 +163,7 @@ const ShowTimes = ({
               keyExtractor={(item, index) => index.toString()}
               data={Object.values(item.showtimes)}
               //data={Object.entries(item.showtimes)}?
-              numColumns={1}
+              //numColumns={1}
               renderItem={({item}) => (
                 <View style={styles.showTimeContainer}>
                   <Text
@@ -182,7 +183,7 @@ const ShowTimes = ({
                     //keyExtractor={(item) => item.showtimes.id}
                     keyExtractor={(item, index) => index.toString()}
                     data={Object.values(item)}
-                    numColumns={4}
+                    numColumns={(SIZES.width / 110).toFixed(0)}
                     renderItem={({item}) => (
                       <TouchableScale
                         activeScale={0.9}

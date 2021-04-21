@@ -11,6 +11,7 @@ import TouchableScale from 'react-native-touchable-scale';
 import {scrollToIndex} from '../../helpers/datepicker.utils';
 import {create1MonthDates} from '../../helpers/date.utils';
 import MovieVersionLookup from '../shared/MovieVersionLookup';
+import { SIZES } from '../../constants/theme';
 
 //We need versions, they are inside item.versions
 const now = moment();
@@ -57,7 +58,6 @@ const ShowTimes = ({id}) => {
   }, [selectedDate]);
 
 
-
   if (loading) {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
@@ -78,7 +78,7 @@ const ShowTimes = ({id}) => {
         setMovieModalVisible={() => setMovieModalVisible(false)}
         passedMovie={movie}
         showtimes={false}
-        
+        showShowtimes={false}
       />
 
       <WebViewModal
@@ -106,7 +106,8 @@ const ShowTimes = ({id}) => {
       ) : (
         <FlatList
           keyboardShouldPersistTaps="always"
-          keyExtractor={index => index.toString()}
+          keyExtractor={showtimes => showtimes.movie_id.toString()}
+          listKey={showtimes => showtimes.movie_id.toString()}
           data={showtimes}
           extraData={selectedDate}
           ItemSeparatorComponent={() => {
@@ -132,33 +133,34 @@ const ShowTimes = ({id}) => {
               </TouchableScale>
 
               <View>
-                <Text style={styles.sectionHeader}>{item.danishTitle}</Text>
+                <Text style={styles.sectionHeader}>{item.danishTitle}}</Text>
 
                 <FlatList
                   keyboardShouldPersistTaps="always"
                   // Here each showtime pr cinema is rendered
-                  keyExtractor={(item, index) => index.toString()}
+                  keyExtractor={(item) => item.toString()}
+                  listKey={(item) => item.toString()}
                   data={Object.values(item.showtimes)}
                   //data={Object.entries(item.showtimes)}?
-                  numColumns={1}
+                 
                   renderItem={({item}) => (
-                    <View style={styles.showTimeContainer}>
+                    <View style={styles.showTimesContainer}>
                       <Text style={styles.showtimeVersionLabel}>
                         {item[0].movie_version_id}
-                        
                       </Text>
                       <FlatList
                         keyboardShouldPersistTaps="always"
-                        //keyExtractor={(item) => item.showtimes.id}
-                        keyExtractor={(item, index) => index.toString()}
-                        data={Object.values(item)}
-                        numColumns={4}
+                        keyExtractor={(item) => item.showtime_id.toString()}
+                        listKey={(item) => item.showtime_id.toString()}
+                        data={Object.values(item)} 
+                        numColumns={(SIZES.width / 110).toFixed(0)}
                         renderItem={({item}) => (
                           <TouchableScale
                             activeScale={0.9}
                             tension={50}
                             friction={7}
                             useNativeDriver
+                            
                             onPress={() => [
                               setModalVisible(true),
                               setShowtimeId(item.showtime_id),

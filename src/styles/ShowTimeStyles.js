@@ -10,19 +10,22 @@ const styles = StyleSheet.create({
     marginRight: "4%",
     marginBottom: "7%",
     padding: 5,
-    
   },
   sectionHeader: {
     color: COLORS.white,
     marginTop: 5,
     ...FONTS.h3,
-    fontSize: 18
-  },
-  showTimeContainer: {
-    marginBottom: 5,
+    fontSize: 18,
     
   },
+  showTimesContainer: {
+    marginBottom: 5,  
+    
+    
+  },
+
   showTime: {
+    
     backgroundColor: "limegreen",
     padding: 8,
     marginRight: 15,
