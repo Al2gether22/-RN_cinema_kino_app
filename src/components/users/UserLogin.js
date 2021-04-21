@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   header: {
     textAlign: "center",
     color: COLORS.white,
-    marginTop: "10%",
+    marginTop: "5%",
     marginBottom: "15%",
     ...FONTS.h2 
   }, 

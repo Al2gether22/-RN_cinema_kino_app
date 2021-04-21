@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   filterButton: {
-    paddingLeft: 5,
-    paddingRight: 5,
+    paddingLeft: 3,
+    paddingRight: 3,
     paddingTop: 7,
     paddingBottom: 8,
     flex: 1,
