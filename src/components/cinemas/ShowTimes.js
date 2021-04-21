@@ -50,18 +50,20 @@ const ShowTimes = ({id}) => {
       .then(() => {
         // Loop through each showtimes.version and push object values to movieVersions
         Object.entries(showtimes).forEach(([key, val]) => {
+          let versions = []
           setMovieVersions([...movieVersions, Object.values(val.versions)])
+          // Save in variable and then once done push it to setMovieVersions
+          console.log(val)
         });
       })
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
   }, [selectedDate]);
-
-
+  
   if (loading) {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
-
+  
   // Groups showtimes by version
   function groupByVersion(arr1) {
     for (let element of arr1) {
@@ -133,7 +135,7 @@ const ShowTimes = ({id}) => {
               </TouchableScale>
 
               <View>
-                <Text style={styles.sectionHeader}>{item.danishTitle}}</Text>
+                <Text style={styles.sectionHeader}>{item.danishTitle}</Text>
 
                 <FlatList
                   keyboardShouldPersistTaps="always"
@@ -146,7 +148,9 @@ const ShowTimes = ({id}) => {
                   renderItem={({item}) => (
                     <View style={styles.showTimesContainer}>
                       <Text style={styles.showtimeVersionLabel}>
-                        {item[0].movie_version_id}
+                        {/* {console.log(showtimes[0].versions[item[0].movie_version_id].version_name)} */}
+                        {console.log(movieVersions)}
+                        
                       </Text>
                       <FlatList
                         keyboardShouldPersistTaps="always"

@@ -11,27 +11,18 @@ import { SIZES, FONTS, COLORS } from "./src/constants/theme"
 
 const App = () => {
 
+
   const toastConfig = {
-    success: ({ text1, text2, ...rest }) => (
-      <BaseToast
-        {...rest}
-        style={{ borderLeftColor: '#ff2326', height: 150, borderColor: "black", borderWidth: 0.5 }}
-        contentContainerStyle={{ paddingHorizontal: 15 }}
-        trailingIconStyle={{ position: "absolute", top: -7, right: -7, height: 15, width: 15 }}
-        onPress={() => Toast.hide()}
-        onTrailingIconPress={() => Toast.hide()}
-        text1Style={{
-          
-          ...FONTS.h2
-        }}
-        text2Style={{
-          
-          ...FONTS.h3
-        }}
-        text1={text1}
-        text2={text2}
-      />
-    )
+
+    error: ({ text1, text2, props, ...rest }) => (
+      <View>
+        <Text>{text1}</Text>
+        <Text>{text2}</Text>
+      </View>
+    ),
+    success: () => {},
+    info: () => {},
+    
   };
 
   return (

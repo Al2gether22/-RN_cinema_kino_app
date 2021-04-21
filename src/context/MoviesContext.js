@@ -33,7 +33,9 @@ const getMovies = dispatch => async () => {
       text2: 'Prøv at lukke appen og start den igen',
       position: 'bottom',
       bottomOffset: 300,
-      autoHide: false
+      type: "error",
+      autoHide: false,
+      onPress: Toast.hide()
     });
     dispatch({
       type: "add_error",
