@@ -49,6 +49,7 @@ const signin = (dispatch) => async ({ username, password }) => {
     }
     
   } catch (err) {
+    
     dispatch({
       type: "add_error",
       payload: "Der gik noget galt",
@@ -81,18 +82,15 @@ const tryLocalSignin = dispatch => async () => {
       .then((json) => {
         if (json === "false" ) {
           // delete user and and update state
-          console.log("invalid token, deleting user")
           AsyncStorage.removeItem('user')
           dispatch({ type: 'signout' })
         } else {
           // If response returns data then user is valid and logged in
           // remember to update state so user can be fetched from auth context
-          console.log("token is valid, update state with user")
           dispatch({ type: 'signin', payload: userObject })
         }
       })
   } else {
-    console.log("bruger findes ikke i async")
     return false
   }
 }

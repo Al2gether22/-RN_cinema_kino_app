@@ -11,7 +11,7 @@ const NoShowtimes = ({ nextShowtime, onPressNextShowtime }) => {
   };
   
   const nextShowtimeDate = new Date(nextShowtime);
-    console.log("Next showtime pressed")
+    
   if (!nextShowtime) {
     return null
   }

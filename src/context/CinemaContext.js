@@ -1,6 +1,7 @@
 import dataContext from './DataContext';
 import _ from 'lodash';
 import {computeDistance} from '../helpers/computeDistance';
+import Toast from 'react-native-toast-message';
 
 const cinemaReducer = (state, action) => {
   switch (action.type) {
@@ -21,12 +22,19 @@ const getCinemas = dispatch => async () => {
       mode: 'no-cors',
     });
     const cinemas = await response.json();
-    console.log('Get cinemas called from context');
     dispatch({
       type: 'get_cinemas',
       payload: cinemas,
     });
   } catch (err) {
+    Toast.show({
+      text1: 'Noget gik galt!',
+      text2: 'Prøv at lukke appen og start den igen',
+      position: 'bottom',
+      bottomOffset: 300,
+      type: "error",
+      autoHide: false,
+    });
     dispatch({
       type: 'add_error',
       payload: 'Something went wrong with the cinemas',
@@ -46,8 +54,7 @@ const updateCinemas = dispatch => {
       };
     });
     const orderedCinemas = _.orderBy(cinemasWithDistance, 'distance');
-    console.log('Update Cinemas called from context');
-    console.log('orderedCinemas first item', orderedCinemas[0]);
+    
     dispatch({type: 'update_cinemas', payload: orderedCinemas});
     // Update cinemas is called with cinemas array and user coordinates
     // A distance value is added to each cinema based on user coords and cinema cords

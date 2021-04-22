@@ -15,7 +15,6 @@ const FetchData = () => {
     // fetches cinemas, movies and versions
     if ( state.cinemas.length === 0 ) {
       getCinemas();
-      console.log("Get cinemas called from FetchData")
     }
     
     getMovies();

@@ -67,7 +67,7 @@ const MovieTrailerModal = ({ modalVisible, setModalVisible, video_markup }) => {
           width={"100%"}
           videoId={extractVideoIdFromYouTubeUrl(video_markup)}
           play={playing}
-          onError={e => console.log(e)}
+          //onError={e => console.log(e)}
           onPlaybackQualityChange={q => console.log(q)}
           volume={50}
           playbackRate={1}

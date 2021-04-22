@@ -13,6 +13,7 @@ import {create1MonthDates} from '../../helpers/date.utils';
 import {scrollToIndex} from '../../helpers/datepicker.utils';
 import moment from 'moment';
 import { SIZES } from "../../constants/theme"
+import Toast from 'react-native-toast-message';
 
 const ShowTimes = ({
   id,
@@ -63,7 +64,14 @@ const ShowTimes = ({
           setShowtimes(mergeArrays(json, state.cinemas));
         }
       })
-      .catch(error => console.error(error))
+      .catch(error => Toast.show({
+        text1: 'Noget gik galt!',
+        text2: 'Prøv at lukke appen og start den igen',
+        position: 'bottom',
+        bottomOffset: 300,
+        type: "error",
+        autoHide: false,
+      }))
       .finally(() => {
         if (isMounted) {
           setLoading(false);

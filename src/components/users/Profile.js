@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../../context/AuthContext";
 import { ActivityIndicator, FlatList } from "react-native";
+import Toast from 'react-native-toast-message';
 
 import UserMetaData from "../users/UserMetaData"
 import PurchaseHistory from "./PurchaseHistory"
@@ -34,7 +35,14 @@ const Profile = ({ user }) => {
         }
         
       })
-      .catch((error) => console.error(error))
+      .catch(error => Toast.show({
+        text1: 'Noget gik galt!',
+        text2: 'Prøv at lukke appen og start den igen',
+        position: 'bottom',
+        bottomOffset: 300,
+        type: "error",
+        autoHide: false,
+      }))
       .finally(() => setLoading(false));
   }, []);
 

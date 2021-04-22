@@ -12,6 +12,8 @@ import {scrollToIndex} from '../../helpers/datepicker.utils';
 import {create1MonthDates} from '../../helpers/date.utils';
 import MovieVersionLookup from '../shared/MovieVersionLookup';
 import { SIZES } from '../../constants/theme';
+import Toast from 'react-native-toast-message';
+
 
 //We need versions, they are inside item.versions
 const now = moment();
@@ -56,7 +58,14 @@ const ShowTimes = ({id}) => {
           console.log(val)
         });
       })
-      .catch(error => console.error(error))
+      .catch(error => Toast.show({
+        text1: 'Noget gik galt!',
+        text2: 'Prøv at lukke appen og start den igen',
+        position: 'bottom',
+        bottomOffset: 300,
+        type: "error",
+        autoHide: false,
+      }))
       .finally(() => setLoading(false));
   }, [selectedDate]);
   

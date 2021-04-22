@@ -4,7 +4,7 @@ import { COLORS, FONTS, SIZES} from "../constants/theme"
 
 const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
   function runAfterDismiss() {
-    console.log('run after dismiss');
+    
     setModalVisible(false);
     requestPermissions();
   }

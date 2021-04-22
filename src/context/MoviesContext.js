@@ -1,7 +1,6 @@
 import dataContext from "./DataContext";
 import Toast from 'react-native-toast-message';
 
-
 const movieReducer = (state, action) => {
   switch (action.type) {
     case "add_error":
@@ -20,7 +19,7 @@ const movieReducer = (state, action) => {
 const getMovies = dispatch => async () => {
   try {
     const response = await fetch(
-      "https://www.kino.dk/appservices/moviesq",
+      "https://www.kino.dk/appservices/movies",
       { mode: "no-cors" })
     const movies = await response.json();
     dispatch({
@@ -35,7 +34,7 @@ const getMovies = dispatch => async () => {
       bottomOffset: 300,
       type: "error",
       autoHide: false,
-      onPress: Toast.hide()
+      
     });
     dispatch({
       type: "add_error",
@@ -56,6 +55,14 @@ const getUpcomingMovies = dispatch => async () => {
       payload: upcomingMovies
     });
   } catch (err) {
+    Toast.show({
+      text1: 'Noget gik galt!',
+      text2: 'Prøv at lukke appen og start den igen',
+      position: 'bottom',
+      bottomOffset: 300,
+      type: "error",
+      autoHide: false,
+    });
     dispatch({
       type: "add_error",
       payload: "Something went wrong with the movies"
@@ -74,6 +81,15 @@ const getVersions = dispatch => async () => {
       payload: versions
     });
   } catch (err) {
+    Toast.show({
+      text1: 'Noget gik galt!',
+      text2: 'Prøv at lukke appen og start den igen',
+      position: 'bottom',
+      bottomOffset: 300,
+      type: "error",
+      autoHide: false,
+      
+    });
     dispatch({
       type: "add_error",
       payload: "Something went wrong with the versions"
