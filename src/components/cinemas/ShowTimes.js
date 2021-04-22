@@ -54,8 +54,7 @@ const ShowTimes = ({id}) => {
         let versions = []
         Object.entries(showtimes).forEach(([key, val]) => {
           
-          versions.push(Object.values(val.versions)[0])
-          
+          Object.values(val.versions).map(el => versions.push(el))
          
           // Save in variable and then once done push it to setMovieVersions
         });
