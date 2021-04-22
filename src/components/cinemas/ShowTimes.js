@@ -51,12 +51,15 @@ const ShowTimes = ({id}) => {
       })
       .then(() => {
         // Loop through each showtimes.version and push object values to movieVersions
+        let versions = []
         Object.entries(showtimes).forEach(([key, val]) => {
-          let versions = []
-          setMovieVersions([...movieVersions, Object.values(val.versions)])
+          
+          versions.push(Object.values(val.versions)[0])
+          
+         
           // Save in variable and then once done push it to setMovieVersions
-          console.log(val)
         });
+        setMovieVersions(versions)
       })
       .catch(error => Toast.show({
         text1: 'Noget gik galt!',
@@ -68,6 +71,8 @@ const ShowTimes = ({id}) => {
       }))
       .finally(() => setLoading(false));
   }, [selectedDate]);
+
+  
   
   if (loading) {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
@@ -158,7 +163,11 @@ const ShowTimes = ({id}) => {
                     <View style={styles.showTimesContainer}>
                       <Text style={styles.showtimeVersionLabel}>
                         {/* {console.log(showtimes[0].versions[item[0].movie_version_id].version_name)} */}
-                        {console.log(movieVersions)}
+                        <MovieVersionLookup
+                          // Make check to see if item[0] exists
+                          id={item[0].movie_version_id}
+                          movieVersions={movieVersions}
+                        />
                         
                       </Text>
                       <FlatList
