@@ -49,17 +49,6 @@ const ShowTimes = ({id}) => {
       .then(json => {
         setShowtimes(groupByVersion(json));
       })
-      .then(() => {
-        // Loop through each showtimes.version and push object values to movieVersions
-        let versions = []
-        Object.entries(showtimes).forEach(([key, val]) => {
-          
-          Object.values(val.versions).map(el => versions.push(el))
-         
-          // Save in variable and then once done push it to setMovieVersions
-        });
-        setMovieVersions(versions)
-      })
       .catch(error => Toast.show({
         text1: 'Noget gik galt!',
         text2: 'Prøv at lukke appen og start den igen',
@@ -71,19 +60,33 @@ const ShowTimes = ({id}) => {
       .finally(() => setLoading(false));
   }, [selectedDate]);
 
-  
-  
-  if (loading) {
-    return <ActivityIndicator size="large" style={{marginTop: 200}} />;
-  }
-  
+  useEffect(() => {
+    fetchMovieVersions()
+  }, [showtimes]);
+
   // Groups showtimes by version
   function groupByVersion(arr1) {
     for (let element of arr1) {
       element.showtimes = _.groupBy(element.showtimes, 'movie_version_id');
     }
-
     return arr1;
+  }
+
+  function fetchMovieVersions() {
+    // Loop through each showtimes.version and push object values to movieVersions
+    let versions = []
+    
+      Object.entries(showtimes).forEach(([key, val]) => {
+      
+        Object.values(val.versions).map(el => versions.push(el))
+       
+        // Save in variable and then once done push it to setMovieVersions
+      }) 
+      setMovieVersions(versions)
+  }
+
+  if (loading) {
+    return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
 
   return (
@@ -162,6 +165,7 @@ const ShowTimes = ({id}) => {
                     <View style={styles.showTimesContainer}>
                       <Text style={styles.showtimeVersionLabel}>
                         {/* {console.log(showtimes[0].versions[item[0].movie_version_id].version_name)} */}
+                        
                         <MovieVersionLookup
                           // Make check to see if item[0] exists
                           id={item[0].movie_version_id}
