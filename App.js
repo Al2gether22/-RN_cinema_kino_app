@@ -46,6 +46,7 @@ const App = () => {
     )
   };
 
+
   return (
     <CinemaProvider>
       <MovieProvider>

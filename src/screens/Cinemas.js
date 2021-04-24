@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { Context } from "../context/CinemaContext";
 import { View, Text, FlatList, ImageBackground } from "react-native";
@@ -6,11 +6,21 @@ import { SharedElement } from 'react-navigation-shared-element';
 import TouchableScale from 'react-native-touchable-scale';
 import styles from "../styles/CinemasStyles"
 import SearchFilterFunction from "../components/shared/SearchFilterFunction";
+import firebase from '@react-native-firebase/app';
+import analytics from '@react-native-firebase/analytics';
 
 const Cinemas = () => {
   const navigation = useNavigation(); 
   const { state } = useContext(Context)
   const [cinemas, setCinemas] = useState(state.cinemas)
+
+  useEffect(() => {
+    firebase.app();
+    analytics().logScreenView({
+      screen_class: 'Biografer',
+      screen_name: 'Biografer',
+    })
+  })
 
   function Item(item) {
     

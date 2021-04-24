@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect } from 'react';
 import {useNavigation} from '@react-navigation/native';
 import _ from 'lodash';
 import {Context} from '../context/MoviesContext';
@@ -11,6 +11,8 @@ import SearchFilterFunction from '../components/shared/SearchFilterFunction';
 import FilterMovies from '../components/movies/FilterMovies';
 import usePosterColors from '../hooks/usePosterColors';
 import fetchImageColors from '../helpers/fetchImageColors';
+import firebase from '@react-native-firebase/app';
+import analytics from '@react-native-firebase/analytics';
 
 const Movies = () => {
   const navigation = useNavigation();
@@ -20,6 +22,14 @@ const Movies = () => {
   );
   const currentDate = new Date();
   const [filteredMovies, setFilteredMovies] = useState(movies);
+
+  useEffect(() => {
+    firebase.app();
+    analytics().logScreenView({
+      screen_class: 'Film',
+      screen_name: 'Film',
+    })
+  })
 
   function Item(item) {
     // Formatting date to compare it to date today

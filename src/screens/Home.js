@@ -10,6 +10,8 @@ import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 import { COLORS } from "../constants/theme"
+import firebase from '@react-native-firebase/app';
+import analytics from '@react-native-firebase/analytics';
 
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
@@ -20,9 +22,17 @@ const Home = () => {
   const [currentLatitude, setCurrentLatitude] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => {  
     checkPermissions();
   }, []);
+
+  useEffect(() => {
+    firebase.app();
+    analytics().logScreenView({
+      screen_class: 'Hjem',
+      screen_name: 'Hjem',
+    })
+  })
 
   const checkPermissions = () => {
     console.log('checkPermissions()');
@@ -101,6 +111,7 @@ const Home = () => {
   if (state.cinemas.length === 0 || movies.length == 0) {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
+
 
   return (
     <>
