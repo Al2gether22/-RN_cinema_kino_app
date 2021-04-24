@@ -3,6 +3,8 @@ import { View, StyleSheet } from "react-native"
 import { Context } from "../context/AuthContext"
 import UserLogin from "../components/users/UserLogin";
 import Profile from "../components/users/Profile";
+import firebase from '@react-native-firebase/app';
+import analytics from '@react-native-firebase/analytics';
 
 const User = ({ navigation }) => {
   const { state, clearErrorMessage } = useContext(Context)
@@ -10,8 +12,20 @@ const User = ({ navigation }) => {
 
   useEffect(() => {
     handleAnimation()
-    
   }, [state])
+
+  useEffect(() => {
+    // Create an scoped async function in the hook
+    async function trackData() {
+      await firebase.app();
+      await analytics().logScreenView({
+        screen_class: 'Profil',
+        screen_name: 'Profil',
+      })
+    }
+    // Execute the created function directly
+    trackData();
+  }, []);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {

@@ -27,12 +27,17 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    firebase.app();
-    analytics().logScreenView({
-      screen_class: 'Hjem',
-      screen_name: 'Hjem',
-    })
-  })
+    // Create an scoped async function in the hook
+    async function trackData() {
+      await firebase.app();
+      await analytics().logScreenView({
+        screen_class: 'Hjem',
+        screen_name: 'Hjem',
+      })
+    }
+    // Execute the created function directly
+    trackData();
+  }, []);
 
   const checkPermissions = () => {
     console.log('checkPermissions()');

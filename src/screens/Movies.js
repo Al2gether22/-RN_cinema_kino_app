@@ -24,12 +24,17 @@ const Movies = () => {
   const [filteredMovies, setFilteredMovies] = useState(movies);
 
   useEffect(() => {
-    firebase.app();
-    analytics().logScreenView({
-      screen_class: 'Film',
-      screen_name: 'Film',
-    })
-  })
+    // Create an scoped async function in the hook
+    async function trackData() {
+      await firebase.app();
+      await analytics().logScreenView({
+        screen_class: 'Film oversigt',
+        screen_name: 'Film oversigt',
+      })
+    }
+    // Execute the created function directly
+    trackData();
+  }, []);
 
   function Item(item) {
     // Formatting date to compare it to date today

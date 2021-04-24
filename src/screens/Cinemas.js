@@ -15,12 +15,17 @@ const Cinemas = () => {
   const [cinemas, setCinemas] = useState(state.cinemas)
 
   useEffect(() => {
-    firebase.app();
-    analytics().logScreenView({
-      screen_class: 'Biografer',
-      screen_name: 'Biografer',
-    })
-  })
+    // Create an scoped async function in the hook
+    async function trackData() {
+      await firebase.app();
+      await analytics().logScreenView({
+        screen_class: 'Biografer',
+        screen_name: 'Biografer',
+      })
+    }
+    // Execute the created function directly
+    trackData();
+  }, []);
 
   function Item(item) {
     
