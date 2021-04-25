@@ -2,7 +2,6 @@ import React, {useRef, useState} from 'react';
 import { ActivityIndicator, Modal, TouchableOpacity, View } from "react-native";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import YoutubePlayer from 'react-native-youtube-iframe';
-
 import styles from "../styles/MovieTrailerModalStyles";
 
 

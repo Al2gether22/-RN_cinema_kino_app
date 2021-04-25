@@ -11,6 +11,7 @@ import styles from '../styles/MovieStyles';
 import TabViewComponent from '../components/movies/TabViewComponent';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import useMovieJson from '../hooks/useMovieJson';
+import analytics from '@react-native-firebase/analytics';
 
 const Movie = ({route}) => {
   const {item, imgColors} = route.params;
@@ -23,6 +24,20 @@ const Movie = ({route}) => {
     directionalOffsetThreshold: 150,
     gestureIsClickThreshold: 10
   };
+
+  useEffect(() => {
+    // Create an scoped async function in the hook
+    async function trackData() {
+      await analytics().logScreenView({
+        screen_class: 'Film',
+        screen_name: 'Film',
+      })
+      await analytics().logEvent("Film", { "Title": item.danishTitle, "id": item.id.toString()});
+
+    }
+    // Execute the created function directly
+    trackData();
+  }, []);
 
 
   return (
@@ -84,6 +99,7 @@ const Movie = ({route}) => {
                 primaryFontColor={primaryFontColor}
                 secondaryFontColor={secondaryFontColor}
                 active={active === 0 ? 'flex' : 'none'}
+                title={item.danishTitle}
               />
 
               <GestureRecognizer

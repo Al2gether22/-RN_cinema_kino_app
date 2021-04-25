@@ -10,7 +10,6 @@ import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 import { COLORS } from "../constants/theme"
-import firebase from '@react-native-firebase/app';
 import analytics from '@react-native-firebase/analytics';
 
 const Home = () => {
@@ -29,7 +28,6 @@ const Home = () => {
   useEffect(() => {
     // Create an scoped async function in the hook
     async function trackData() {
-      await firebase.app();
       await analytics().logScreenView({
         screen_class: 'Hjem',
         screen_name: 'Hjem',

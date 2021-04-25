@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {SharedElement} from 'react-navigation-shared-element';
 import * as Animatable from 'react-native-animatable';
 import MovieTrailerModal from '../../modals/MovieTrailerModal';
+import analytics from '@react-native-firebase/analytics';
 import styles from '../../styles/MovieBackgroundImageStyles';
 
 const MovieBackgroundImage = ({
@@ -59,8 +60,13 @@ const MovieBackgroundImage = ({
         {!!movie.video_markup && (
           // checks to see if there is a trailer before rendering the play button
           <TouchableOpacity
-            onPress={() => {
+            onPress={async() => {
               setModalVisible(true);
+              await analytics().logScreenView({
+                screen_class: 'Trailervisning',
+                screen_name: 'Trailervisning',
+              })
+              await analytics().logEvent("Trailervisning", { "Title": movie.danishTitle, "id": movie.id.toString()});
             }}>
             <Animatable.View
               style={styles.playButtomViewWrapper}

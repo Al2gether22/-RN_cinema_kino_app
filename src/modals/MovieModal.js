@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import {FlatList, TouchableOpacity, StatusBar, Modal} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/MovieStyles';
@@ -11,11 +11,26 @@ import TabViewComponent from '../components/movies/TabViewComponent';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import useMovieJson from '../hooks/useMovieJson';
 import usePosterColors from '../hooks/usePosterColors';
+import analytics from '@react-native-firebase/analytics';
 
 const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie, showtimes}) => {
   const [active, setActive] = useState(showtimes === false ? 1 : 0);
   const {movie, isLoading} = useMovieJson(passedMovie);
   const {imgColors, isLoadingColors} = usePosterColors(passedMovie.imageUrl);
+
+  useEffect(() => {
+    // Create an scoped async function in the hook
+    async function trackData() {
+      await analytics().logScreenView({
+        screen_class: 'Film',
+        screen_name: 'Film',
+      })
+      await analytics().logEvent("Film", { "Title": passedMovie.danishTitle, "id": passedMovie.id.toString()});
+
+    }
+    // Execute the created function directly
+    trackData();
+  }, []);
   
   const config = {
     velocityThreshold: 0.8,

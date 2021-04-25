@@ -6,7 +6,7 @@ import CinemaMetaData from "../components/cinemas/CinemaMetaData"
 import ShowTimes from "../components/cinemas/ShowTimes";
 import GestureRecognizer from 'react-native-swipe-gestures';
 import Toast from 'react-native-toast-message';
-
+import analytics from '@react-native-firebase/analytics';
 
 const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }) => {
 
@@ -34,6 +34,19 @@ const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }
       }))
       .finally(() => setLoading(false));
   }, [passedCinema]);
+
+  useEffect(() => {
+    // Create an scoped async function in the hook
+    async function trackData() {
+      await analytics().logScreenView({
+        screen_class: 'Biograf',
+        screen_name: 'Biograf',
+      })
+      await analytics().logEvent("Biograf", { "Title": passedCinema.name, "id": passedCinema.id.toString()});
+    }
+    // Execute the created function directly
+    trackData();
+  }, []);
 
 
   if (loading) {

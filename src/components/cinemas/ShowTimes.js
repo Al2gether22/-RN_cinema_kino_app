@@ -13,7 +13,7 @@ import {create1MonthDates} from '../../helpers/date.utils';
 import MovieVersionLookup from '../shared/MovieVersionLookup';
 import { SIZES } from '../../constants/theme';
 import Toast from 'react-native-toast-message';
-
+import analytics from '@react-native-firebase/analytics';
 
 //We need versions, they are inside item.versions
 const now = moment();
@@ -178,18 +178,22 @@ const ShowTimes = ({id}) => {
                         keyExtractor={(item) => item.showtime_id.toString()}
                         listKey={(item) => item.showtime_id.toString()}
                         data={Object.values(item)} 
-                        numColumns={(SIZES.width / 110).toFixed(0)}
+                        numColumns={(SIZES.width / 130).toFixed(0)}
                         renderItem={({item}) => (
                           <TouchableScale
                             activeScale={0.9}
                             tension={50}
                             friction={7}
                             useNativeDriver
-                            
-                            onPress={() => [
+                            onPress={async() => {
                               setModalVisible(true),
                               setShowtimeId(item.showtime_id),
-                            ]}
+                              await analytics().logScreenView({
+                                screen_class: 'Spilletidsvisning_biograf',
+                                screen_name: 'Spilletidsvisning_biograf',
+                              })
+                              await analytics().logEvent("Spilletidsvisning_biograf", { "Title": movie.danishTitle, "id": movie.id.toString(), "showtime_id": item.showtime_id.toString(), "cinema": id });
+                            }}
                             style={styles.showTime}>
                             <Text style={styles.showTimeText}>
                               {item.start_time.slice(11, 16)}

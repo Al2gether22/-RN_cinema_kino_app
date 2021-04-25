@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, TouchableOpacity, Modal, StyleSheet} from 'react-native';
 import { COLORS, FONTS, SIZES} from "../constants/theme"
+import analytics from '@react-native-firebase/analytics';
 
 const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
   function runAfterDismiss() {
@@ -36,7 +37,14 @@ const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
               af biograferne.
             </Text>
           </View>
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <TouchableOpacity 
+            onPress={async() => {
+              setModalVisible(false);
+              await analytics().logScreenView({
+                screen_class: 'UserInfoModal',
+                screen_name: 'UserInfoModal',
+              })
+            }}>
             <View style={styles.modalOkButtonContainer}>
               <Text style={styles.modalOkButton}>OK</Text>
             </View>

@@ -6,7 +6,6 @@ import { SharedElement } from 'react-navigation-shared-element';
 import TouchableScale from 'react-native-touchable-scale';
 import styles from "../styles/CinemasStyles"
 import SearchFilterFunction from "../components/shared/SearchFilterFunction";
-import firebase from '@react-native-firebase/app';
 import analytics from '@react-native-firebase/analytics';
 
 const Cinemas = () => {
@@ -17,7 +16,6 @@ const Cinemas = () => {
   useEffect(() => {
     // Create an scoped async function in the hook
     async function trackData() {
-      await firebase.app();
       await analytics().logScreenView({
         screen_class: 'Biografer',
         screen_name: 'Biografer',

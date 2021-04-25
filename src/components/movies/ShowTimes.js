@@ -14,6 +14,8 @@ import {scrollToIndex} from '../../helpers/datepicker.utils';
 import moment from 'moment';
 import { SIZES } from "../../constants/theme"
 import Toast from 'react-native-toast-message';
+import analytics from '@react-native-firebase/analytics';
+
 
 const ShowTimes = ({
   id,
@@ -23,6 +25,7 @@ const ShowTimes = ({
   primaryFontColor,
   secondaryFontColor,
   active,
+  title
 }) => {
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
@@ -198,10 +201,15 @@ const ShowTimes = ({
                         tension={50}
                         friction={7}
                         useNativeDriver
-                        onPress={() => [
+                        onPress={async() => {
                           setModalVisible(true),
                           setShowtimeId(item.showtime_id),
-                        ]}
+                          await analytics().logScreenView({
+                            screen_class: 'Spilletidsvisning_film',
+                            screen_name: 'Spilletidsvisning_film',
+                          })
+                          await analytics().logEvent("Spilletidsvisning_film", { "Title": title, "id": id.toString(), "showtime_id": showtimeId.toString(), "cinema_id": item.cinema_nid.toString() });
+                        }}
                         style={styles.showTime}>
                         <Text style={styles.showTimeText}>
                           {item.start_time.slice(11, 16)}

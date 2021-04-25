@@ -11,7 +11,6 @@ import SearchFilterFunction from '../components/shared/SearchFilterFunction';
 import FilterMovies from '../components/movies/FilterMovies';
 import usePosterColors from '../hooks/usePosterColors';
 import fetchImageColors from '../helpers/fetchImageColors';
-import firebase from '@react-native-firebase/app';
 import analytics from '@react-native-firebase/analytics';
 
 const Movies = () => {
@@ -26,7 +25,6 @@ const Movies = () => {
   useEffect(() => {
     // Create an scoped async function in the hook
     async function trackData() {
-      await firebase.app();
       await analytics().logScreenView({
         screen_class: 'Film oversigt',
         screen_name: 'Film oversigt',

@@ -5,7 +5,6 @@ import CinemaMetaData from "../components/cinemas/CinemaMetaData"
 import ShowTimes from "../components/cinemas/ShowTimes";
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { useNavigation } from "@react-navigation/native";
-import firebase from '@react-native-firebase/app';
 import analytics from '@react-native-firebase/analytics';
 
 const Cinema = ({ route }) => {
@@ -33,16 +32,11 @@ const Cinema = ({ route }) => {
   useEffect(() => {
     // Create an scoped async function in the hook
     async function trackData() {
-      await firebase.app();
       await analytics().logScreenView({
         screen_class: 'Biograf',
         screen_name: 'Biograf',
       })
-      await analytics().logSelectItem({
-        content_type: "Biograf",
-        item_list_name: item.name,
-        item_list_id: item.id.toString()
-      })
+      await analytics().logEvent("Biograf", { "Title": item.name, "id": item.id.toString()});
     }
     // Execute the created function directly
     trackData();
