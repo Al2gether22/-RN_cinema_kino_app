@@ -66,7 +66,7 @@ const MovieBackgroundImage = ({
                 screen_class: 'Trailervisning',
                 screen_name: 'Trailervisning',
               })
-              await analytics().logEvent("Trailervisning", { "Title": movie.danishTitle, "id": movie.id.toString()});
+              await analytics().logEvent("Trailervisning", { Title: movie.danishTitle, id: movie.id});
             }}>
             <Animatable.View
               style={styles.playButtomViewWrapper}

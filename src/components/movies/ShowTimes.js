@@ -208,7 +208,7 @@ const ShowTimes = ({
                             screen_class: 'Spilletidsvisning_film',
                             screen_name: 'Spilletidsvisning_film',
                           })
-                          await analytics().logEvent("Spilletidsvisning_film", { "Title": title, "id": id.toString(), "showtime_id": showtimeId.toString(), "cinema_id": item.cinema_nid.toString() });
+                          await analytics().logEvent("Spilletidsvisning_film", { Title: title, id: id, showtime_id: showtimeId, cinema_id: item.cinema_nid });
                         }}
                         style={styles.showTime}>
                         <Text style={styles.showTimeText}>

@@ -25,7 +25,7 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie, showt
         screen_class: 'Film',
         screen_name: 'Film',
       })
-      await analytics().logEvent("Film", { "Title": passedMovie.danishTitle, "id": passedMovie.id.toString()});
+      await analytics().logEvent("Film", { Title: passedMovie.danishTitle, id: passedMovie.id});
 
     }
     // Execute the created function directly

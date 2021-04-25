@@ -42,7 +42,7 @@ const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }
         screen_class: 'Biograf',
         screen_name: 'Biograf',
       })
-      await analytics().logEvent("Biograf", { "Title": passedCinema.name, "id": passedCinema.id.toString()});
+      await analytics().logEvent("Biograf", { Title: passedCinema.name, id: passedCinema.id});
     }
     // Execute the created function directly
     trackData();

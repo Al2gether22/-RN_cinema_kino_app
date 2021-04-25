@@ -32,8 +32,8 @@ const Movie = ({route}) => {
         screen_class: 'Film',
         screen_name: 'Film',
       })
-      await analytics().logEvent("Film", { "Title": item.danishTitle, "id": item.id.toString()});
-
+      await analytics().logEvent("Film", { Title: item.danishTitle, id: item.id});
+      
     }
     // Execute the created function directly
     trackData();

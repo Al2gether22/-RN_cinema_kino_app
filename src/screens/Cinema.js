@@ -36,7 +36,7 @@ const Cinema = ({ route }) => {
         screen_class: 'Biograf',
         screen_name: 'Biograf',
       })
-      await analytics().logEvent("Biograf", { "Title": item.name, "id": item.id.toString()});
+      await analytics().logEvent("Biograf", { Title: item.name, id: item.id});
     }
     // Execute the created function directly
     trackData();
