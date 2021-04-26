@@ -24,10 +24,6 @@ const MovieBackgroundImage = ({
   const imageFallback = image ? image : movie.imageUrl;
   const titleFallback = danishTitle ? danishTitle : movie.title;
 
-  console.log(movie.video_markup);
-  const what = true && movie.video_markup;
-  debugger;
-
   return (
     <View style={styles.imageContainer}>
       {modal ? null : (
