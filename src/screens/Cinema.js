@@ -6,6 +6,7 @@ import ShowTimes from "../components/cinemas/ShowTimes";
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { useNavigation } from "@react-navigation/native";
 import analytics from '@react-native-firebase/analytics';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const Cinema = ({ route }) => {
   const { item } = route.params;
@@ -25,7 +26,7 @@ const Cinema = ({ route }) => {
       })
       .then((response) => response.json())
       .then((json) => setCinema(json))
-      .catch((error) => console.error(error))
+      .catch((error) => crashlytics().recordError(error))
       .finally(() => setLoading(false));
   }, []);
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { View, ActivityIndicator, FlatList, Image, Text } from "react-native";
 import Toast from 'react-native-toast-message';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import styles from "../../styles/ProfileStyles"
 
@@ -29,14 +30,16 @@ const PurchaseHistory = ({ user }) => {
       .then((json) => {
         setUserHistoryData(json);
       })
-      .catch(error => Toast.show({
-        text1: 'Noget gik galt!',
-        text2: 'Prøv at logge ud og logge ind igen',
-        position: 'bottom',
-        bottomOffset: 300,
-        type: "error",
-        autoHide: false,
-      }))
+      .catch(error => (
+        crashlytics().recordError(error),
+        Toast.show({
+          text1: 'Noget gik galt!',
+          text2: 'Prøv at logge ud og logge ind igen',
+          position: 'bottom',
+          bottomOffset: 300,
+          type: "error",
+          autoHide: false,
+      })))
       .finally(() => setLoading(false));
   }, []);
 

@@ -7,6 +7,8 @@ import ShowTimes from "../components/cinemas/ShowTimes";
 import GestureRecognizer from 'react-native-swipe-gestures';
 import Toast from 'react-native-toast-message';
 import analytics from '@react-native-firebase/analytics';
+import crashlytics from '@react-native-firebase/crashlytics';
+
 
 const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }) => {
 
@@ -24,14 +26,16 @@ const CinemaModal = ({ cinemaModalVisible, setCinemaModalVisible, passedCinema }
     })
       .then((response) => response.json())
       .then((json) => setCinema(json))
-      .catch((error) => Toast.show({
-        text1: 'Noget gik galt!',
-        text2: 'Prøv at lukke appen og start den igen',
-        position: 'bottom',
-        bottomOffset: 300,
-        type: "error",
-        autoHide: false,
-      }))
+      .catch((error) => (
+        crashlytics().recordError(error),
+        Toast.show({
+          text1: 'Noget gik galt!',
+          text2: 'Prøv at lukke appen og start den igen',
+          position: 'bottom',
+          bottomOffset: 300,
+          type: "error",
+          autoHide: false,
+      })))
       .finally(() => setLoading(false));
   }, [passedCinema]);
 

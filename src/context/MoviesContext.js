@@ -1,5 +1,7 @@
 import dataContext from "./DataContext";
 import Toast from 'react-native-toast-message';
+import crashlytics from '@react-native-firebase/crashlytics';
+
 
 const movieReducer = (state, action) => {
   switch (action.type) {
@@ -27,6 +29,7 @@ const getMovies = dispatch => async () => {
       payload: movies
     });
   } catch (err) {
+    crashlytics().recordError(err);
     Toast.show({
       text1: 'Noget gik galt!',
       text2: 'Prøv at lukke appen og start den igen',
@@ -55,6 +58,7 @@ const getUpcomingMovies = dispatch => async () => {
       payload: upcomingMovies
     });
   } catch (err) {
+    crashlytics().recordError(err);
     Toast.show({
       text1: 'Noget gik galt!',
       text2: 'Prøv at lukke appen og start den igen',
@@ -81,6 +85,7 @@ const getVersions = dispatch => async () => {
       payload: versions
     });
   } catch (err) {
+    crashlytics().recordError(err);
     Toast.show({
       text1: 'Noget gik galt!',
       text2: 'Prøv at lukke appen og start den igen',

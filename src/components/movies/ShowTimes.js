@@ -15,6 +15,7 @@ import moment from 'moment';
 import { SIZES } from "../../constants/theme"
 import Toast from 'react-native-toast-message';
 import analytics from '@react-native-firebase/analytics';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 
 const ShowTimes = ({
@@ -67,14 +68,16 @@ const ShowTimes = ({
           setShowtimes(mergeArrays(json, state.cinemas));
         }
       })
-      .catch(error => Toast.show({
-        text1: 'Noget gik galt!',
-        text2: 'Prøv at lukke appen og start den igen',
-        position: 'bottom',
-        bottomOffset: 300,
-        type: "error",
-        autoHide: false,
-      }))
+      .catch(error => (
+        crashlytics().recordError(error),
+        Toast.show({
+          text1: 'Noget gik galt!',
+          text2: 'Prøv at lukke appen og start den igen',
+          position: 'bottom',
+          bottomOffset: 300,
+          type: "error",
+          autoHide: false,
+      })))
       .finally(() => {
         if (isMounted) {
           setLoading(false);

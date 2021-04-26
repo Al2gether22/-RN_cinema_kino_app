@@ -12,6 +12,8 @@ import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 import { COLORS, SIZES } from "../constants/theme"
 import analytics from '@react-native-firebase/analytics';
 import { firebase } from '@react-native-firebase/analytics';
+import crashlytics from '@react-native-firebase/crashlytics';
+
 
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
@@ -69,7 +71,7 @@ const Home = () => {
         }
       })
       .catch(error => {
-        console.error(error);
+        crashlytics().recordError(error);
       });
   };
 
@@ -88,6 +90,7 @@ const Home = () => {
       console.log('requestPermissions result ' + result);
       checkPermissions();
     } catch (err) {
+      crashlytics().recordError(err)
       console.error(err);
     }
   };

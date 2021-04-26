@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import dataContext from "./DataContext";
 import qs from "qs";
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -49,7 +50,7 @@ const signin = (dispatch) => async ({ username, password }) => {
     }
     
   } catch (err) {
-    
+    crashlytics().recordError(err);
     dispatch({
       type: "add_error",
       payload: "Der gik noget galt",

@@ -14,6 +14,7 @@ import MovieVersionLookup from '../shared/MovieVersionLookup';
 import { SIZES } from '../../constants/theme';
 import Toast from 'react-native-toast-message';
 import analytics from '@react-native-firebase/analytics';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 //We need versions, they are inside item.versions
 const now = moment();
@@ -49,14 +50,16 @@ const ShowTimes = ({id}) => {
       .then(json => {
         setShowtimes(groupByVersion(json));
       })
-      .catch(error => Toast.show({
-        text1: 'Noget gik galt!',
-        text2: 'Prøv at lukke appen og start den igen',
-        position: 'bottom',
-        bottomOffset: 300,
-        type: "error",
-        autoHide: false,
-      }))
+      .catch(error => (
+        crashlytics().recordError(error),
+        Toast.show({
+          text1: 'Noget gik galt!',
+          text2: 'Prøv at lukke appen og start den igen',
+          position: 'bottom',
+          bottomOffset: 300,
+          type: "error",
+          autoHide: false,
+      })))
       .finally(() => setLoading(false));
   }, [selectedDate]);
 

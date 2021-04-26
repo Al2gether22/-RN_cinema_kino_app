@@ -5,6 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import MovieModal from "../../modals/MovieModal"
 import * as Animatable from 'react-native-animatable';
 import { FONTS, SIZES, COLORS} from "../../constants/theme"
+import crashlytics from '@react-native-firebase/crashlytics';
 import Toast from 'react-native-toast-message';
 
 const FeaturedMovie2 = () => {
@@ -18,14 +19,16 @@ const FeaturedMovie2 = () => {
       res
         .json()
         .then(res => setFeaturedMovieItem(res))
-        .catch(error => Toast.show({
-          text1: 'Noget gik galt!',
-          text2: 'Prøv at lukke appen og start den igen',
-          position: 'bottom',
-          bottomOffset: 300,
-          type: "error",
-          autoHide: false,
-        }))
+        .catch(error => (
+          crashlytics().recordError(error),
+          Toast.show({
+            text1: 'Noget gik galt!',
+            text2: 'Prøv at lukke appen og start den igen',
+            position: 'bottom',
+            bottomOffset: 300,
+            type: "error",
+            autoHide: false,
+        })))
     }
 
     fetchData();

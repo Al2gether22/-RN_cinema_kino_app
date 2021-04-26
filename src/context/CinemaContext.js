@@ -2,6 +2,7 @@ import dataContext from './DataContext';
 import _ from 'lodash';
 import {computeDistance} from '../helpers/computeDistance';
 import Toast from 'react-native-toast-message';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const cinemaReducer = (state, action) => {
   switch (action.type) {
@@ -27,6 +28,7 @@ const getCinemas = dispatch => async () => {
       payload: cinemas,
     });
   } catch (err) {
+    crashlytics().recordError(err);
     Toast.show({
       text1: 'Noget gik galt!',
       text2: 'Prøv at lukke appen og start den igen',

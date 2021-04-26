@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import Toast from 'react-native-toast-message';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 function useMovieJson(passedMovie) {
   const [movie, setMovie] = useState({});
@@ -20,14 +21,16 @@ function useMovieJson(passedMovie) {
         setMovie(json);
         setIsLoading(false);
       })
-      .catch(error => Toast.show({
-        text1: 'Noget gik galt!',
-        text2: 'Prøv at lukke appen og start den igen',
-        position: 'bottom',
-        bottomOffset: 300,
-        type: "error",
-        autoHide: false,
-      }));
+      .catch(error => (
+        crashlytics().recordError(error),
+        Toast.show({
+          text1: 'Noget gik galt!',
+          text2: 'Prøv at lukke appen og start den igen',
+          position: 'bottom',
+          bottomOffset: 300,
+          type: "error",
+          autoHide: false,
+      })))
   }, [passedMovie]);
 
   return {movie, isLoading};
