@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, StatusBar, Text} from 'react-native';
+import {FlatList, StyleSheet, StatusBar} from 'react-native';
 import CinemaBackgroundImage from '../components/cinemas/CinemaBackgroundImage';
 import CinemaMetaData from '../components/cinemas/CinemaMetaData';
 import ShowTimes from '../components/cinemas/ShowTimes';

@@ -67,7 +67,7 @@ const ShowTimes = ({id}) => {
     <View style={styles.container}>
       <MovieModal
         movieModalVisible={movieModalVisible}
-        setMovieModalVisible={() => setMovieModalVisible(false)}
+        hideMovieModal={() => setMovieModalVisible(false)}
         passedMovie={movie}
         showtimes={false}
       />
