@@ -38,6 +38,7 @@ const MovieModal = ({movieModalVisible, hideMovieModal, passedMovie}) => {
         backgroundColor: 'transparent',
       }}>
       <Modal
+        onRequestClose={() => hideMovieModal()}
         animationType="fade"
         presentationStyle={'fullScreen'}
         visible={movieModalVisible}>
