@@ -11,6 +11,7 @@ import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 import { COLORS } from "../constants/theme"
 import analytics from '@react-native-firebase/analytics';
+import { firebase } from '@react-native-firebase/analytics';
 
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
@@ -28,6 +29,7 @@ const Home = () => {
   useEffect(() => {
     // Create an scoped async function in the hook
     async function trackData() {
+      await firebase.analytics().setAnalyticsCollectionEnabled(true),
       await analytics().logScreenView({
         screen_class: 'Hjem',
         screen_name: 'Hjem',

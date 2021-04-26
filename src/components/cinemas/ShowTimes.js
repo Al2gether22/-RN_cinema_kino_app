@@ -192,7 +192,7 @@ const ShowTimes = ({id}) => {
                                 screen_class: 'Spilletidsvisning_biograf',
                                 screen_name: 'Spilletidsvisning_biograf',
                               })
-                              await analytics().logEvent("Spilletidsvisning_biograf", { Title: movie.danishTitle, id: movie.id, showtime_id: item.showtime_id, cinema: id });
+                              await analytics().logEvent("Spilletidsvisning_biograf", { Title: movie.danishTitle, id: movie.id, showtime_id: item.showtime_id, cinema_id: id });
                             }}
                             style={styles.showTime}>
                             <Text style={styles.showTimeText}>
