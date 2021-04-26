@@ -12,32 +12,41 @@ PODS:
     - React-Core (= 0.64.0-rc.4)
     - React-jsi (= 0.64.0-rc.4)
     - ReactCommon/turbomodule/core (= 0.64.0-rc.4)
-  - Firebase/Analytics (7.9.0):
+  - Firebase/Analytics (7.10.0):
     - Firebase/Core
-  - Firebase/Core (7.9.0):
+  - Firebase/Core (7.10.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 7.9.0)
-  - Firebase/CoreOnly (7.9.0):
-    - FirebaseCore (= 7.9.0)
-  - FirebaseAnalytics (7.9.0):
+    - FirebaseAnalytics (~> 7.10.0)
+  - Firebase/CoreOnly (7.10.0):
+    - FirebaseCore (= 7.10.0)
+  - Firebase/Crashlytics (7.10.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 7.10.0)
+  - FirebaseAnalytics (7.10.0):
     - FirebaseCore (~> 7.0)
     - FirebaseInstallations (~> 7.0)
-    - GoogleAppMeasurement (= 7.9.0)
+    - GoogleAppMeasurement (= 7.10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/MethodSwizzler (~> 7.0)
     - GoogleUtilities/Network (~> 7.0)
     - "GoogleUtilities/NSData+zlib (~> 7.0)"
-    - nanopb (~> 2.30907.0)
-  - FirebaseCore (7.9.0):
+    - nanopb (~> 2.30908.0)
+  - FirebaseCore (7.10.0):
     - FirebaseCoreDiagnostics (~> 7.4)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Logger (~> 7.0)
-  - FirebaseCoreDiagnostics (7.9.0):
-    - GoogleDataTransport (~> 8.0)
+  - FirebaseCoreDiagnostics (7.11.0):
+    - GoogleDataTransport (~> 8.4)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Logger (~> 7.0)
-    - nanopb (~> 2.30907.0)
-  - FirebaseInstallations (7.10.0):
+    - nanopb (~> 2.30908.0)
+  - FirebaseCrashlytics (7.10.0):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstallations (~> 7.0)
+    - GoogleDataTransport (~> 8.4)
+    - nanopb (~> 2.30908.0)
+    - PromisesObjC (~> 1.2)
+  - FirebaseInstallations (7.11.0):
     - FirebaseCore (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/UserDefaults (~> 7.0)
@@ -89,15 +98,15 @@ PODS:
     - FlipperKit/Core
     - FlipperKit/FlipperKitNetworkPlugin
   - glog (0.3.5)
-  - GoogleAppMeasurement (7.9.0):
+  - GoogleAppMeasurement (7.10.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/MethodSwizzler (~> 7.0)
     - GoogleUtilities/Network (~> 7.0)
     - "GoogleUtilities/NSData+zlib (~> 7.0)"
-    - nanopb (~> 2.30907.0)
-  - GoogleDataTransport (8.3.1):
+    - nanopb (~> 2.30908.0)
+  - GoogleDataTransport (8.4.0):
     - GoogleUtilities/Environment (~> 7.2)
-    - nanopb (~> 2.30907.0)
+    - nanopb (~> 2.30908.0)
     - PromisesObjC (~> 1.2)
   - GoogleUtilities/AppDelegateSwizzler (7.3.1):
     - GoogleUtilities/Environment
@@ -119,11 +128,11 @@ PODS:
   - GoogleUtilities/UserDefaults (7.3.1):
     - GoogleUtilities/Logger
   - libevent (2.1.12)
-  - nanopb (2.30907.0):
-    - nanopb/decode (= 2.30907.0)
-    - nanopb/encode (= 2.30907.0)
-  - nanopb/decode (2.30907.0)
-  - nanopb/encode (2.30907.0)
+  - nanopb (2.30908.0):
+    - nanopb/decode (= 2.30908.0)
+    - nanopb/encode (= 2.30908.0)
+  - nanopb/decode (2.30908.0)
+  - nanopb/encode (2.30908.0)
   - OpenSSL-Universal (1.1.180)
   - Permission-LocationAccuracy (3.0.1):
     - RNPermissions
@@ -400,12 +409,16 @@ PODS:
   - RNCMaskedView (0.1.10):
     - React
   - RNFBAnalytics (11.2.0):
-    - Firebase/Analytics (= 7.9.0)
+    - Firebase/Analytics (= 7.10.0)
     - React-Core
     - RNFBApp
-  - RNFBApp (11.2.0):
-    - Firebase/CoreOnly (= 7.9.0)
+  - RNFBApp (11.3.3):
+    - Firebase/CoreOnly (= 7.10.0)
     - React-Core
+  - RNFBCrashlytics (11.3.3):
+    - Firebase/Crashlytics (= 7.10.0)
+    - React-Core
+    - RNFBApp
   - RNGestureHandler (1.10.3):
     - React-Core
   - RNImageColors (1.2.5):
@@ -485,6 +498,7 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNFBAnalytics (from `../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
+  - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageColors (from `../node_modules/react-native-image-colors`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
@@ -502,6 +516,7 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreDiagnostics
+    - FirebaseCrashlytics
     - FirebaseInstallations
     - Flipper
     - Flipper-DoubleConversion
@@ -596,6 +611,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/analytics"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
+  RNFBCrashlytics:
+    :path: "../node_modules/@react-native-firebase/crashlytics"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNImageColors:
@@ -620,11 +637,12 @@ SPEC CHECKSUMS:
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: 5776f027522ce1b2415982c48c8407c95966c60f
   FBReactNativeSpec: 0a3b2628ac539b8fa3cafa0bcfc9361b9baccfd8
-  Firebase: d8bd6bd34b4c7ed57bfdd056c66ff5adcdde53ab
-  FirebaseAnalytics: 31b1269830dfe16687db3c60b76082c12bd6d527
-  FirebaseCore: 0798738ad1ae0fda67e17c7b9081241c431c6859
-  FirebaseCoreDiagnostics: 3d36e05da74cb8b7ce30e6594a8f201b982c725c
-  FirebaseInstallations: bf2ec8dbf36ff4c91af6b9a003d15855757680c1
+  Firebase: fffddd0bab8677d07376538365faa93ff3889b39
+  FirebaseAnalytics: 4641d7ae4220174f6ca5626163ffc5de2e90391e
+  FirebaseCore: ec566d917b2195fc2610aeb148dae99f57a788f9
+  FirebaseCoreDiagnostics: 68ad972f99206cef818230f3f3179d52ccfb7f8c
+  FirebaseCrashlytics: e7669d368a22d202f1d0c7546ffdfdff496e1a8c
+  FirebaseInstallations: a58d4f72ec5861840b84df489f2668d970df558a
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: f7a3caafbd74bda4827954fd7a6e000e36355489
@@ -633,11 +651,11 @@ SPEC CHECKSUMS:
   Flipper-RSocket: 127954abe8b162fcaf68d2134d34dc2bd7076154
   FlipperKit: 8a20b5c5fcf9436cac58551dc049867247f64b00
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
-  GoogleAppMeasurement: 120eec8803fe65a4a7475fb3d3d59a61d0e1a866
-  GoogleDataTransport: 8b0e733ea77c9218778e5a9e34ba9508b8328939
+  GoogleAppMeasurement: 1c863b1161fc3c8cf614a7460d1be6a7c262aab3
+  GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  nanopb: 59221d7f958fb711001e6a449489542d92ae113e
+  nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   Permission-LocationAccuracy: 76669f87b4c276f5ae803cc0ddd1862a4c0e9dd8
   Permission-LocationWhenInUse: 3a2b0dbc167d79e8e920a4377ff9520cdc108407
@@ -671,8 +689,9 @@ SPEC CHECKSUMS:
   ReactCommon: e8b7811e75aec2786c1f9cf6b7d5350472e53c22
   RNCAsyncStorage: fe58eec522885718d6b297b7b658bf87d7ca557b
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNFBAnalytics: 11873c6dccab66da20fc1c75fc47c88244845410
-  RNFBApp: d9ab9f2e63c70a9974294bb44c749b728cd4028f
+  RNFBAnalytics: 5fb6895296e01b4847f627e13888b3f6e3cc8aef
+  RNFBApp: 8b1b4308daa657b8ea87dbed517e31215f5f1456
+  RNFBCrashlytics: c101babbfeb8bf12150b947e36665e19b96aace0
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNImageColors: f55f90cc27ef799c80e6b9a5798c9405919d328e
   RNPermissions: 4c8a37b4dde50f1f152bf8cd08c4a43d2355829e

@@ -39,6 +39,7 @@ const Home = () => {
     trackData();
   }, []);
 
+
   const checkPermissions = () => {
     console.log('checkPermissions()');
     check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)

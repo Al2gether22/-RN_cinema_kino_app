@@ -80,7 +80,7 @@ const CinemaMetaData = ({ cinema }) => {
       duration={600}
       delay={300}
     >
-      <Text style={styles.cinemaOpeningHours}>ÅbningsTider:</Text>
+      <Text style={styles.cinemaOpeningHours}>Åbningstider:</Text>
       { !cinema.opening_hours ? null : 
     
       

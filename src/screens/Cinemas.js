@@ -42,11 +42,12 @@ const Cinemas = () => {
             source={{ uri: item.imageUrl }}
             resizeMode="cover"
             >
-            <SharedElement id={item.name} style={styles.cinemaTitleContainer}>
-              <Text style={styles.cinemaTitle}>{item.name}</Text>
+            <View style={styles.cinemaTitleContainer}>
+              <SharedElement id={item.name}>
+                <Text style={styles.cinemaTitle}>{item.name}</Text>
+              </SharedElement>
               <Text style={styles.cinemaDistance}>{item.distance ? `${item.distance.toFixed(1)} km` : ''}</Text>
-            </SharedElement>
-
+            </View>
 
           </ImageBackground>
         </SharedElement>  
