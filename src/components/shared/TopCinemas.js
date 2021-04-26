@@ -91,7 +91,7 @@ const Top10Movies = ({ cinemas }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10
+    
   }, 
   headLineContainer: {
     color: "white",

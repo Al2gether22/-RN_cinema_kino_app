@@ -34,7 +34,7 @@ const FeaturedMovie = () => {
     featuredMovieItem[0] ? 
     <>
       <Animatable.View 
-      style={styles.coverImage} 
+      style={styles.coverImageContainer} 
       animation='fadeIn'
       duration={900}
       delay={50}
@@ -44,9 +44,6 @@ const FeaturedMovie = () => {
         source={{ uri: featuredMovieItem[0].imageUrl }}
         resizeMode="cover"
       >
-
-
-    
 
         <LinearGradient 
           colors={['rgba(29,29,39,1)', 'rgba(29,29,39,0)']} 
@@ -85,8 +82,11 @@ const FeaturedMovie = () => {
 
 const styles = StyleSheet.create({
 
+  coverImageContainer: {
+    
+  },
   coverImage: {
-    position: "absolute",
+    
     height: "100%",
     width: "100%",
     zIndex: -999
@@ -100,13 +100,12 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     backgroundColor: rgba(0, 0, 0, 0.5),
-    position: "absolute",
-    bottom: 50,
-    left: "50%",
+    
+    
   },
   linkText: {
     color: COLORS.white,
-    left: "-50%",
+    
     ...FONTS.h2
   }
 })

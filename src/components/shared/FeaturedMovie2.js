@@ -69,7 +69,7 @@ const FeaturedMovie2 = () => {
 const styles = StyleSheet.create({
 
   coverImageContainer: {
-    height: "30%",
+    height: "100%",
     marginBottom: 50,
   },
   coverImage: {

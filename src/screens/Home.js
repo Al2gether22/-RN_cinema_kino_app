@@ -9,7 +9,7 @@ import FeaturedMovie from '../components/shared/FeaturedMovie2';
 import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
-import { COLORS } from "../constants/theme"
+import { COLORS, SIZES } from "../constants/theme"
 import analytics from '@react-native-firebase/analytics';
 import { firebase } from '@react-native-firebase/analytics';
 
@@ -127,9 +127,13 @@ const Home = () => {
       />
       
       <View style={styles.container}>
-        <FeaturedMovie />
+        <View style={styles.featuredMovieContainer}>
+          <FeaturedMovie />
+        </View>
         <View style={styles.slidersContainer}>
           <Top10Movies movies={movies} />
+        </View>
+        <View style={styles.slidersContainer}>
           <TopCinemas cinemas={state.cinemas} />
         </View>
       </View>
@@ -139,11 +143,18 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: "100%",
     backgroundColor: COLORS.backgroundColor,
+    flex: 1,
+    alignContent: "flex-start",
+  },
+  featuredMovieContainer: {
+    maxHeight: "30%",
+    
   },
   slidersContainer: {
-
+    marginTop: 20,
+    
   },
 });
 
