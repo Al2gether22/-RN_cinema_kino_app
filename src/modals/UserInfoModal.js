@@ -65,8 +65,7 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: COLORS.white,
-    height: 400,
-    width: 300,
+    maxWidth: "80%",
     borderRadius: 15,
     justifyContent: 'space-around',
   },
@@ -90,6 +89,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
     marginLeft: 15,
     borderRadius: 5,
+    marginBottom: 15
   },
   modalOkButton: {
     fontFamily: 'SourceSansPro-Bold',
