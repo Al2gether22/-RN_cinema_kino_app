@@ -1,34 +1,21 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  FlatList,
-  StyleSheet,
-  BackHandler,
-} from 'react-native';
+import {View, Text, Image, FlatList, StyleSheet} from 'react-native';
 import _ from 'lodash';
 import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
 import MovieModal from '../../modals/MovieModal';
-import {useNavigation, useFocusEffect} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const Top10Movies = ({movies}) => {
   const navigation = useNavigation();
   const [movieModalVisible, setMovieModalVisible] = useState(false);
   const [movie, setMovie] = useState({});
 
-  useFocusEffect(
-    React.useCallback(() => {
-      const onBackPress = () => {
-        console.log('pressed back button');
-        setMovieModalVisible(false);
-      };
-      BackHandler.addEventListener('hardwareBackPress', onBackPress);
-      return () =>
-        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-    }, []),
-  );
+  useEffect(() => {
+    if (movie.title) {
+      setMovieModalVisible(true);
+    }
+  }, [movie]);
 
   const Item = item => {
     return (
@@ -39,10 +26,8 @@ const Top10Movies = ({movies}) => {
           friction={7}
           useNativeDriver
           onPress={() => {
-            setMovieModalVisible(true), setMovie(item);
-          }}
-          //onPress={() => navigation.navigate("Film", { screen: "Movie", params: { item }})}
-        >
+            setMovie(item);
+          }}>
           <Image
             style={styles.img}
             source={{
