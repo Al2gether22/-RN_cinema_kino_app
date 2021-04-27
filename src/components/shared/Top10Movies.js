@@ -3,15 +3,15 @@ import {View, Text, Image, FlatList, StyleSheet} from 'react-native';
 import _ from 'lodash';
 import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
-import MovieModal from "../../modals/MovieModal";
-import { useNavigation } from "@react-navigation/native";
-import { COLORS, FONTS, SIZES } from "../../constants/theme"
+import MovieModal from '../../modals/MovieModal';
+import {useNavigation} from '@react-navigation/native';
+import {COLORS, FONTS, SIZES} from '../../constants/theme';
 
 const Top10Movies = ({movies}) => {
   const navigation = useNavigation();
   const [movieModalVisible, setMovieModalVisible] = useState(false);
   const [movie, setMovie] = useState({});
-    
+
   useEffect(() => {
     if (movie.title) {
       setMovieModalVisible(true);
@@ -60,9 +60,8 @@ const Top10Movies = ({movies}) => {
           friction={7}
           useNativeDriver
           onPress={() => {
-            navigation.navigate('Film');
-          }}
-        >
+            navigation.navigate('Film oversigt');
+          }}>
           <Text style={styles.headLineLink}>Alle Film</Text>
         </TouchableScale>
       </View>
@@ -82,9 +81,9 @@ const styles = StyleSheet.create({
   container: {},
   headLineContainer: {
     color: COLORS.white,
-    backgroundColor: "rgba(29,29,39,0.8)",
-    flexDirection: "row",
-    alignItems: "center"
+    backgroundColor: 'rgba(29,29,39,0.8)',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   headLine: {
     color: COLORS.white,
@@ -92,28 +91,28 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     flex: 1,
-    ...FONTS.h3
-  }, 
+    ...FONTS.h3,
+  },
   headLineLink: {
     color: COLORS.white,
     marginRight: 10,
     textDecorationLine: 'underline',
-    ...FONTS.h4
+    ...FONTS.h4,
   },
   itemContainer: {
     margin: 5,
     borderRadius: 7,
-    
-    height: (SIZES.width / 3),
-    maxWidth: ((SIZES.height / 3 ) * (9/16)),
+
+    height: SIZES.width / 3,
+    maxWidth: (SIZES.height / 3) * (9 / 16),
   },
   img: {
     //height: 120,
     //width: 81,
     aspectRatio: 2 / 3,
-    height: "100%",
-    width: "100%",
-    borderColor: "black",
+    height: '100%',
+    width: '100%',
+    borderColor: 'black',
     borderWidth: 2,
     borderRadius: 7,
   },

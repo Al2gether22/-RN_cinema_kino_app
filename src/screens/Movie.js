@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {StatusBar, FlatList} from 'react-native';
-import usePosterColors from '../hooks/usePosterColors';
 import MovieBackgroundImage from '../components/movies/MovieBackgroundImage';
 import {useNavigation} from '@react-navigation/native';
 import MovieMetaData from '../components/movies/MovieMetaData';
@@ -11,7 +10,6 @@ import styles from '../styles/MovieStyles';
 import TabViewComponent from '../components/movies/TabViewComponent';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import useMovieJson from '../hooks/useMovieJson';
-import analytics from '@react-native-firebase/analytics';
 
 const Movie = ({route}) => {
   const {item, imgColors} = route.params;
@@ -24,21 +22,6 @@ const Movie = ({route}) => {
     directionalOffsetThreshold: 150,
     gestureIsClickThreshold: 10,
   };
-
-  useEffect(() => {
-    // Create an scoped async function in the hook
-    async function trackData() {
-      await analytics().logScreenView({
-        screen_class: 'Film',
-        screen_name: 'Film',
-      })
-      await analytics().logEvent("Film", { Title: item.danishTitle, id: item.id});
-      
-    }
-    // Execute the created function directly
-    trackData();
-  }, []);
-
 
   return (
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
@@ -77,7 +60,6 @@ const Movie = ({route}) => {
             />
           )}
         </GestureRecognizer>
-
       }
       ListFooterComponentStyle={{marginBottom: 50}}
       ListFooterComponent={

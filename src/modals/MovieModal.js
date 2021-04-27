@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {FlatList, TouchableOpacity, StatusBar, Modal} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,7 +14,12 @@ import useMovieJson from '../hooks/useMovieJson';
 import usePosterColors from '../hooks/usePosterColors';
 import analytics from '@react-native-firebase/analytics';
 
-const MovieModal = ({movieModalVisible, hideMovieModal, passedMovie, showtimes}) => {
+const MovieModal = ({
+  movieModalVisible,
+  hideMovieModal,
+  passedMovie,
+  showtimes,
+}) => {
   const [active, setActive] = useState(showtimes === false ? 1 : 0);
   const {movie, isLoading} = useMovieJson(passedMovie);
   const {imgColors, isLoadingColors} = usePosterColors(passedMovie.imageUrl);
@@ -22,17 +27,19 @@ const MovieModal = ({movieModalVisible, hideMovieModal, passedMovie, showtimes})
   useEffect(() => {
     // Create an scoped async function in the hook
     async function trackData() {
+      console.log('movie modal trackData', passedMovie);
       await analytics().logScreenView({
         screen_class: 'Film',
         screen_name: 'Film',
-      })
-      await analytics().logEvent("Film", { Title: passedMovie.danishTitle, id: passedMovie.id});
-
+      });
+      await analytics().logEvent('Film', {
+        Title: passedMovie.danishTitle,
+        id: passedMovie.id,
+      });
     }
     // Execute the created function directly
     trackData();
   }, []);
-
 
   const config = {
     velocityThreshold: 0.8,
@@ -107,17 +114,18 @@ const MovieModal = ({movieModalVisible, hideMovieModal, passedMovie, showtimes})
                   secondaryFontColor={backgroundColor}
                   showtimes={showtimes}
                 />
-                
-                { showtimes === false ? null : 
-                <ShowTimes
-                  id={passedMovie.id}
-                  movieVersions={passedMovie.versions}
-                  nextShowtime={passedMovie.next_showtime}
-                  backgroundColor={backgroundColor}
-                  primaryFontColor={primaryFontColor}
-                  secondaryFontColor={secondaryFontColor}
-                  active={active === 0 ? 'flex' : 'none'}
-                /> }
+
+                {showtimes === false ? null : (
+                  <ShowTimes
+                    id={passedMovie.id}
+                    movieVersions={passedMovie.versions}
+                    nextShowtime={passedMovie.next_showtime}
+                    backgroundColor={backgroundColor}
+                    primaryFontColor={primaryFontColor}
+                    secondaryFontColor={secondaryFontColor}
+                    active={active === 0 ? 'flex' : 'none'}
+                  />
+                )}
 
                 {movie && (
                   <MovieResume

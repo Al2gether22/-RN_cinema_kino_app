@@ -1,11 +1,10 @@
 import React from 'react';
 import {Text, View, TouchableOpacity, Modal, StyleSheet} from 'react-native';
-import { COLORS, FONTS, SIZES} from "../constants/theme"
+import {COLORS, FONTS} from '../constants/theme';
 import analytics from '@react-native-firebase/analytics';
 
 const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
   function runAfterDismiss() {
-    
     setModalVisible(false);
     requestPermissions();
   }
@@ -37,15 +36,13 @@ const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
               af biograferne.
             </Text>
           </View>
-          <TouchableOpacity 
-            onPress={async() => {
-              // Do we need both?
-              runAfterDismiss()
-              setModalVisible(false);
-              await analytics().logScreenView({
+          <TouchableOpacity
+            onPress={() => {
+              runAfterDismiss();
+              analytics().logScreenView({
                 screen_class: 'UserInfoModal',
                 screen_name: 'UserInfoModal',
-              })
+              });
             }}>
             <View style={styles.modalOkButtonContainer}>
               <Text style={styles.modalOkButton}>OK</Text>
@@ -65,7 +62,7 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: COLORS.white,
-    maxWidth: "80%",
+    maxWidth: '80%',
     borderRadius: 15,
     justifyContent: 'space-around',
   },
@@ -73,10 +70,10 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   headerText: {
-    textAlign: "center",
+    textAlign: 'center',
     marginBottom: 25,
-    ...FONTS.h1
-  }, 
+    ...FONTS.h1,
+  },
   bodyText: {
     fontFamily: 'SourceSansPro-Bold',
     color: 'black',
@@ -89,7 +86,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
     marginLeft: 15,
     borderRadius: 5,
-    marginBottom: 15
+    marginBottom: 15,
   },
   modalOkButton: {
     fontFamily: 'SourceSansPro-Bold',

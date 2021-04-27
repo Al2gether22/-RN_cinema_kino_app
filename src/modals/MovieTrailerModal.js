@@ -2,10 +2,9 @@ import React, {useRef, useState} from 'react';
 import {ActivityIndicator, Modal, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import styles from "../styles/MovieTrailerModalStyles";
+import styles from '../styles/MovieTrailerModalStyles';
 
-const MovieTrailerModal = ({ modalVisible, setModalVisible, video_markup }) => {
-
+const MovieTrailerModal = ({modalVisible, hideModal, video_markup}) => {
   const [playing, setPlaying] = useState(true);
   const playerRef = useRef();
   const [loading, setLoading] = useState(true);

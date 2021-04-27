@@ -6,7 +6,6 @@ import ShowTimes from '../components/cinemas/ShowTimes';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import {useNavigation} from '@react-navigation/native';
 import {Platform} from 'react-native';
-import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
 
 const Cinema = ({route}) => {
@@ -23,25 +22,12 @@ const Cinema = ({route}) => {
   // fetches cinema data
   useEffect(() => {
     fetch(`https://www.kino.dk/appservices/cinema/${item.id}`, {
-      mode: "no-cors"
-      })
-      .then((response) => response.json())
-      .then((json) => setCinema(json))
-      .catch((error) => crashlytics().recordError(error))
+      mode: 'no-cors',
+    })
+      .then(response => response.json())
+      .then(json => setCinema(json))
+      .catch(error => crashlytics().recordError(error))
       .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    // Create an scoped async function in the hook
-    async function trackData() {
-      await analytics().logScreenView({
-        screen_class: 'Biograf',
-        screen_name: 'Biograf',
-      })
-      await analytics().logEvent("Biograf", { Title: item.name, id: item.id});
-    }
-    // Execute the created function directly
-    trackData();
   }, []);
 
   return (
