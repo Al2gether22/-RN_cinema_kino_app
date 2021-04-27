@@ -50,6 +50,7 @@ const MovieCast = ({ movie, active, primaryFontColor, secondaryFontColor }) => {
 const styles = StyleSheet.create({
   container: {
     margin: "4%",
+    marginBottom: 40
   },
   headline: {
     marginTop: 5,

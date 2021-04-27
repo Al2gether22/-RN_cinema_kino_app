@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     marginTop: "4%",
     marginLeft: "4%",
     marginRight: "4%",
-    marginBottom: "7%",
+    marginBottom: 60,
     padding: 5,
   },
   sectionHeader: {
