@@ -26,10 +26,6 @@ const MovieBackgroundImage = ({
   const imageFallback = image ? image : movie.imageUrl;
   const titleFallback = danishTitle ? danishTitle : movie.title;
 
-  console.log('What is going on hier');
-  console.log(modal);
-  console.log(Platform.OS);
-
   return (
     <View style={styles.imageContainer}>
       {!modal && Platform.OS === 'ios' && (
