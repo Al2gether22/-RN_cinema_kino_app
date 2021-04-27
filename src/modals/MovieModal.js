@@ -1,4 +1,5 @@
 import React, {useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {FlatList, TouchableOpacity, StatusBar, Modal} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/MovieStyles';
@@ -13,7 +14,7 @@ import useMovieJson from '../hooks/useMovieJson';
 import usePosterColors from '../hooks/usePosterColors';
 import analytics from '@react-native-firebase/analytics';
 
-const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie, showtimes}) => {
+const MovieModal = ({movieModalVisible, hideMovieModal, passedMovie, showtimes}) => {
   const [active, setActive] = useState(showtimes === false ? 1 : 0);
   const {movie, isLoading} = useMovieJson(passedMovie);
   const {imgColors, isLoadingColors} = usePosterColors(passedMovie.imageUrl);
@@ -31,11 +32,12 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie, showt
     // Execute the created function directly
     trackData();
   }, []);
-  
+
+
   const config = {
     velocityThreshold: 0.8,
     directionalOffsetThreshold: 150,
-    gestureIsClickThreshold: 10
+    gestureIsClickThreshold: 10,
   };
 
   if (isLoading || isLoadingColors) {
@@ -45,13 +47,14 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie, showt
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
   return (
     <GestureRecognizer
-      onSwipeDown={() => setMovieModalVisible(!movieModalVisible)}
+      onSwipeDown={() => hideMovieModal()}
       config={config}
       style={{
         flex: 1,
         backgroundColor: 'transparent',
       }}>
       <Modal
+        onRequestClose={() => hideMovieModal()}
         animationType="fade"
         presentationStyle={'fullScreen'}
         visible={movieModalVisible}>
@@ -62,11 +65,11 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie, showt
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <>
-                <StatusBar hidden={true} />
+                <StatusBar hidden />
                 <TouchableOpacity
                   style={styles.goBackContainer}
                   onPress={() => {
-                    setMovieModalVisible(!movieModalVisible);
+                    hideMovieModal();
                     setActive(0);
                   }}>
                   <MaterialCommunityIcons
@@ -116,14 +119,14 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie, showt
                   active={active === 0 ? 'flex' : 'none'}
                 /> }
 
-                {!movie ? null : (
+                {movie && (
                   <MovieResume
                     resume={movie.body}
                     primaryFontColor={primaryFontColor}
                     active={active === 1 ? 'flex' : 'none'}
                   />
                 )}
-                {!movie ? null : (
+                {movie && (
                   <MovieCast
                     movie={movie}
                     primaryFontColor={primaryFontColor}
@@ -138,6 +141,10 @@ const MovieModal = ({movieModalVisible, setMovieModalVisible, passedMovie, showt
       </Modal>
     </GestureRecognizer>
   );
+};
+
+MovieModal.propTypes = {
+  hideMovieModal: PropTypes.func.isRequired,
 };
 
 export default MovieModal;

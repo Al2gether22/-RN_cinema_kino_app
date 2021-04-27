@@ -8,6 +8,8 @@ import * as Animatable from 'react-native-animatable';
 import MovieTrailerModal from '../../modals/MovieTrailerModal';
 import analytics from '@react-native-firebase/analytics';
 import styles from '../../styles/MovieBackgroundImageStyles';
+import {Platform} from 'react-native';
+
 
 const MovieBackgroundImage = ({
   movie,
@@ -19,6 +21,7 @@ const MovieBackgroundImage = ({
   primaryFontColor,
   secondaryFontColor,
 }) => {
+  //Not quite sure why there is both modal + modalVisible variables?
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   const genreFallback = genre ? genre : movie.genre;
@@ -27,7 +30,7 @@ const MovieBackgroundImage = ({
 
   return (
     <View style={styles.imageContainer}>
-      {modal ? null : (
+      {!modal && Platform.OS === 'ios' && (
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();

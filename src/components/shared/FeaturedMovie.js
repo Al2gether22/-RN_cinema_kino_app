@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { ImageBackground, Text, StyleSheet, TouchableOpacity } from "react-native"
-import LinearGradient from 'react-native-linear-gradient';
-import MovieModal from "../../modals/MovieModal"
+import React, {useEffect, useState} from 'react';
+import {
+  ImageBackground,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import MovieModal from '../../modals/MovieModal';
 import * as Animatable from 'react-native-animatable';
 import { COLORS, FONTS } from "../../constants/theme"
 import Toast from 'react-native-toast-message';
 import crashlytics from '@react-native-firebase/crashlytics';
 
 const FeaturedMovie = () => {
-
   const [featuredMovieItem, setFeaturedMovieItem] = useState({});
   const [movieModalVisible, setMovieModalVisible] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("https://www.kino.dk/appservices/featured-movies");
+      const res = await fetch(
+        'https://www.kino.dk/appservices/featured-movies',
+      );
       res
         .json()
         .then(res => setFeaturedMovieItem(res))
@@ -31,57 +36,36 @@ const FeaturedMovie = () => {
     }
 
     fetchData();
-  }, [])
+  }, []);
 
-  return (
-    featuredMovieItem[0] ? 
+  return featuredMovieItem[0] ? (
     <>
-      <Animatable.View 
-      style={styles.coverImageContainer} 
-      animation='fadeIn'
-      duration={900}
-      delay={50}
-    >
-      <ImageBackground 
-        style={styles.coverImage}
-        source={{ uri: featuredMovieItem[0].imageUrl }}
-        resizeMode="cover"
-      >
-
-        <LinearGradient 
-          colors={['rgba(29,29,39,1)', 'rgba(29,29,39,0)']} 
-          
-          style={styles.linearGradient}
+      <Animatable.View
+        style={styles.coverImageContainer}
+        animation="fadeIn"
+        duration={900}
+        delay={50}>
+        <MovieModal
+          movieModalVisible={movieModalVisible}
+          hideMovieModal={() => setMovieModalVisible(false)}
+          passedMovie={featuredMovieItem[0]}
         />
-        
-        <LinearGradient 
-          colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']} 
-          
-          style={styles.linearGradient}
-          
-        >
-        
-          <MovieModal 
-            movieModalVisible={movieModalVisible}
-            setMovieModalVisible={() => setMovieModalVisible(false)}
-            passedMovie={featuredMovieItem[0]}
-          />
-          
-        </LinearGradient>
-        <TouchableOpacity 
+        <ImageBackground
+          style={styles.coverImage}
+          source={{ uri: featuredMovieItem[0].imageUrl }}
+          resizeMode="cover">
+          <TouchableOpacity
             style={styles.linkContainer}
-            onPress={() =>
-              setMovieModalVisible(true)
-            }
-          >
-            <Text style={styles.linkText}>Læs mere om {featuredMovieItem[0].danishTitle}</Text>
+            onPress={() => setMovieModalVisible(true)}>
+            <Text style={styles.linkText}>
+              Læs mere om {featuredMovieItem[0].danishTitle}
+            </Text>
           </TouchableOpacity>
-      </ImageBackground>
+        </ImageBackground>
       </Animatable.View>
     </>
-    : null 
-  )
-}
+  ) : null;
+};
 
 const styles = StyleSheet.create({
 
@@ -99,16 +83,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   linkContainer: {
     padding: 15,
     borderRadius: 10,
-    backgroundColor: rgba(0, 0, 0, 0.5),
-    
-    
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
   },
   linkText: {
     color: COLORS.white,
-    
     ...FONTS.h2
   }
 })

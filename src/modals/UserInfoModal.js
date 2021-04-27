@@ -39,6 +39,8 @@ const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
           </View>
           <TouchableOpacity 
             onPress={async() => {
+              // Do we need both?
+              runAfterDismiss()
               setModalVisible(false);
               await analytics().logScreenView({
                 screen_class: 'UserInfoModal',
@@ -66,35 +68,35 @@ const styles = StyleSheet.create({
     height: 400,
     width: 300,
     borderRadius: 15,
-    justifyContent: "space-around"
+    justifyContent: 'space-around',
   },
   modalTextContainer: {
-    padding: 15, 
-  }, 
+    padding: 15,
+  },
   headerText: {
     textAlign: "center",
     marginBottom: 25,
     ...FONTS.h1
   }, 
   bodyText: {
-    fontFamily: "SourceSansPro-Bold",
-    color: "black",
+    fontFamily: 'SourceSansPro-Bold',
+    color: 'black',
     lineHeight: 20,
-    fontSize: 15
+    fontSize: 15,
   },
   modalOkButtonContainer: {
     padding: 10,
-    backgroundColor: "tomato",
+    backgroundColor: 'tomato',
     marginRight: 15,
     marginLeft: 15,
-    borderRadius: 5
-  }, 
+    borderRadius: 5,
+  },
   modalOkButton: {
-    fontFamily: "SourceSansPro-Bold",
-    color: "black",
+    fontFamily: 'SourceSansPro-Bold',
+    color: 'black',
     fontSize: 15,
-    textAlign: "center"
-  }
-})
+    textAlign: 'center',
+  },
+});
 
 export default UserInfoModal;

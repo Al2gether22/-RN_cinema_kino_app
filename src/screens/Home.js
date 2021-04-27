@@ -5,7 +5,7 @@ import {Context as CinemaContext} from '../context/CinemaContext';
 import {Context as MoviesContext} from '../context/MoviesContext';
 import _ from 'lodash';
 import UserInfoModal from '../modals/UserInfoModal';
-import FeaturedMovie from '../components/shared/FeaturedMovie2';
+import FeaturedMovie from '../components/shared/FeaturedMovie';
 import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
@@ -14,6 +14,7 @@ import analytics from '@react-native-firebase/analytics';
 import { firebase } from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
 
+import {Platform} from 'react-native';
 
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
@@ -23,6 +24,10 @@ const Home = () => {
   const [currentLongitude, setCurrentLongitude] = useState('');
   const [currentLatitude, setCurrentLatitude] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const platformPermission =
+    Platform.OS === 'ios'
+      ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
+      : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
 
   useEffect(() => {  
     checkPermissions();
@@ -86,7 +91,7 @@ const Home = () => {
 
   const requestPermissions = async () => {
     try {
-      const result = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+      const result = await request(platformPermission);
       console.log('requestPermissions result ' + result);
       checkPermissions();
     } catch (err) {
@@ -110,7 +115,7 @@ const Home = () => {
         console.error(error);
       },
       {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         timeout: 30000,
         maximumAge: 1000,
       },
@@ -129,7 +134,7 @@ const Home = () => {
         setModalVisible={() => setModalVisible(false)}
         requestPermissions={requestPermissions}
       />
-      
+
       <View style={styles.container}>
         <View style={styles.featuredMovieContainer}>
           <FeaturedMovie />
@@ -158,7 +163,7 @@ const styles = StyleSheet.create({
   },
   slidersContainer: {
     marginTop: 20,
-    
+    backgroundColor: '#1d1d27',
   },
 });
 
