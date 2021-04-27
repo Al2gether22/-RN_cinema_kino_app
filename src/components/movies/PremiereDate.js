@@ -1,6 +1,6 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
-import { COLORS, FONTS, SIZES} from "../../constants/theme"
+import { COLORS, FONTS} from "../../constants/theme"
 
 
 const PremiereDate = ({ PremiereDate }) => {
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     ...FONTS.h4,
     fontSize: 12,
-    lineHeight: 0
   }
 })
 

@@ -60,6 +60,7 @@ const MovieBackgroundImage = ({
             style={styles.LinearGradientLower}
           />
         </ImageBackground>
+      </SharedElement>
         {!!movie.video_markup && (
           // checks to see if there is a trailer before rendering the play button
           <TouchableOpacity
@@ -91,7 +92,7 @@ const MovieBackgroundImage = ({
             />
           </TouchableOpacity>
         )}
-      </SharedElement>
+      
 
       <SharedElement id={titleFallback}>
         <Text

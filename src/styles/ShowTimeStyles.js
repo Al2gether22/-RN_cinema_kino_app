@@ -16,16 +16,12 @@ const styles = StyleSheet.create({
     marginTop: 5,
     ...FONTS.h3,
     fontSize: 18,
-    
   },
   showTimesContainer: {
-    marginBottom: 5,  
-    
-    
+    marginBottom: 5, 
   },
 
   showTime: {
-    
     backgroundColor: "limegreen",
     padding: 8,
     marginRight: 15,

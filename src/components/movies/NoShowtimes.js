@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
   nextShowtimeText: {
     color: COLORS.white,
     ...FONTS.h4,
-    lineHeight: 0
   },
 });
 
