@@ -5,7 +5,7 @@ import {Context as CinemaContext} from '../context/CinemaContext';
 import {Context as MoviesContext} from '../context/MoviesContext';
 import _ from 'lodash';
 import UserInfoModal from '../modals/UserInfoModal';
-import FeaturedMovie from '../components/shared/FeaturedMovie';
+import FeaturedMovie from '../components/shared/FeaturedMovie2';
 import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';

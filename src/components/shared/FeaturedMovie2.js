@@ -1,10 +1,9 @@
 
 import React, { useEffect, useState } from "react";
 import { ImageBackground, Text, StyleSheet, TouchableOpacity } from "react-native"
-import LinearGradient from 'react-native-linear-gradient';
 import MovieModal from "../../modals/MovieModal"
 import * as Animatable from 'react-native-animatable';
-import { FONTS, SIZES, COLORS} from "../../constants/theme"
+import { FONTS, COLORS} from "../../constants/theme"
 import crashlytics from '@react-native-firebase/crashlytics';
 import Toast from 'react-native-toast-message';
 
@@ -30,7 +29,6 @@ const FeaturedMovie2 = () => {
             autoHide: false,
         })))
     }
-
     fetchData();
   }, [])
 
@@ -43,14 +41,14 @@ const FeaturedMovie2 = () => {
         duration={900}
         delay={50}
       >
-      <MovieModal 
+      <MovieModal
         movieModalVisible={movieModalVisible}
-        setMovieModalVisible={() => setMovieModalVisible(false)}
+        hideMovieModal={() => setMovieModalVisible(false)}
         passedMovie={featuredMovieItem[0]}
-        />
+      />
       <ImageBackground 
         style={styles.coverImage}
-        source={{ uri: "https://www.kino.dk/sites/default/files/featured-images/pagten1280_0.jpg" }}
+        source={{ uri: featuredMovieItem[0].imageUrl }}
         resizeMode="cover"
       >
         <TouchableOpacity 
