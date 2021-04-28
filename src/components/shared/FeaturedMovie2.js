@@ -71,7 +71,13 @@ const FeaturedMovie2 = ({ movies, featuredMovies }) => {
       }
       
     </View>
-    : null  // Set fallback image
+    : 
+    <ImageBackground 
+      style={styles.coverImage}
+      source={require('../../../assets/images/featured-movie-fallback.jpg')}
+      resizeMode="cover"
+    >
+    </ImageBackground>
   )
 }
 
