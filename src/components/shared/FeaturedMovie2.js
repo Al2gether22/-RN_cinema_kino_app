@@ -25,29 +25,33 @@ const FeaturedMovie2 = ({ movies, featuredMovies }) => {
         passedMovie={featuredMovie ? featuredMovie : featuredMovies[0]}
       />
       {featuredMovies[0].videoUrl ? 
-      <>
-        <Video source={{uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}}   
-          
+      <TouchableOpacity 
+        onPress={() =>
+          setMovieModalVisible(true)
+        }
+      >
+        
+        <Video  
+          source={{uri: `${featuredMovies[0].videoUrl}?t=qwe`}}
           style={styles.coverVideo}
           muted={true}
           repeat={true}
           resizeMode={"cover"}
           controls={false}
           rate={1.0}
-          ignoreSilentSwitch={"obey"}
           poster={featuredMovies[0].imageUrl}
           posterResizeMode={"cover"}
-          
+          onError={console.log("Error loading")}
+          onBuffer={console.log("Buffing..")}
         />
-        <TouchableOpacity 
-            style={styles.linkContainer}
-            onPress={() =>
-              setMovieModalVisible(true)
-            }
-          >
-            <Text style={styles.linkText}>{featuredMovies[0].danishTitle}</Text>
-        </TouchableOpacity>
-      </>
+        
+        <View 
+          style={styles.linkContainer}
+        >
+          <Text style={styles.linkText}>{featuredMovies[0].danishTitle}</Text>
+        </View>
+       
+      </TouchableOpacity>
       :
       <ImageBackground 
         style={styles.coverImage}
@@ -65,8 +69,9 @@ const FeaturedMovie2 = ({ movies, featuredMovies }) => {
 
       </ImageBackground>
       }
+      
     </View>
-    : null 
+    : null  // Set fallback image
   )
 }
 
@@ -83,8 +88,7 @@ const styles = StyleSheet.create({
   coverImage: {
     height: "100%",
     width: "100%",
-  }, 
-  
+  },   
   linkContainer: {
     padding: 15,
     borderRadius: 10,
@@ -96,7 +100,6 @@ const styles = StyleSheet.create({
   linkText: {
     color: COLORS.white, 
     ...FONTS.h3
-   
   }
 })
 
