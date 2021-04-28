@@ -7,7 +7,7 @@ import { Context as AuthContext } from "../../context/AuthContext"
 const FetchData = () => {
   const appState = useRef(AppState.currentState);
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
-  const { getMovies, getVersions, getUpcomingMovies } = useContext(MovieContext)
+  const { getMovies, getVersions, getUpcomingMovies, getFeaturedMovies } = useContext(MovieContext)
   const { state, getCinemas } = useContext(CinemaContext)
   const { tryLocalSignin } = useContext(AuthContext)
   
@@ -19,6 +19,7 @@ const FetchData = () => {
     
     getMovies();
     getUpcomingMovies();
+    getFeaturedMovies();
     getVersions();
     tryLocalSignin();
     
@@ -38,6 +39,7 @@ const FetchData = () => {
 
         getMovies();
         getUpcomingMovies();
+        getFeaturedMovies();
         getVersions();
         tryLocalSignin();
     }

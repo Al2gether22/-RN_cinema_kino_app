@@ -1,54 +1,57 @@
-
 import React, { useEffect, useState } from "react";
-import { ImageBackground, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { ImageBackground, Text, StyleSheet, TouchableOpacity, View } from "react-native"
+import Video from "react-native-video"
 import MovieModal from "../../modals/MovieModal"
-import * as Animatable from 'react-native-animatable';
-import { FONTS, COLORS} from "../../constants/theme"
-import crashlytics from '@react-native-firebase/crashlytics';
-import Toast from 'react-native-toast-message';
+import { FONTS, COLORS, SIZES} from "../../constants/theme"
 
-const FeaturedMovie2 = () => {
+const FeaturedMovie2 = ({ movies, featuredMovies }) => {
 
-  const [featuredMovieItem, setFeaturedMovieItem] = useState({});
   const [movieModalVisible, setMovieModalVisible] = useState(false);
+  const [featuredMovie, setFeaturedMovie] = useState();
 
+  // Do a lookup in movies with the movie id and find the movie and pass it to movie modal
+  // This needs to be refactored if we need more elements in the featuredMovies component
   useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("https://www.kino.dk/appservices/featured-movies");
-      res
-        .json()
-        .then(res => setFeaturedMovieItem(res))
-        .catch(error => (
-          crashlytics().recordError(error),
-          Toast.show({
-            text1: 'Noget gik galt!',
-            text2: 'Prøv at lukke appen og start den igen',
-            position: 'bottom',
-            bottomOffset: 300,
-            type: "error",
-            autoHide: false,
-        })))
-    }
-    fetchData();
+    const movie = movies.find(el => el.id === featuredMovies[0].id)
+    setFeaturedMovie(movie)    
   }, [])
-
+  
   return (
-    featuredMovieItem[0] ? 
-    <>
-      <Animatable.View 
-        style={styles.coverImageContainer} 
-        animation='fadeIn'
-        duration={900}
-        delay={50}
-      >
+    featuredMovie ? 
+    <View style={styles.coverImageContainer} >
       <MovieModal
         movieModalVisible={movieModalVisible}
         hideMovieModal={() => setMovieModalVisible(false)}
-        passedMovie={featuredMovieItem[0]}
+        passedMovie={featuredMovie ? featuredMovie : featuredMovies[0]}
       />
+      {featuredMovies[0].videoUrl ? 
+      <>
+        <Video source={{uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}}   
+          
+          style={styles.coverVideo}
+          muted={true}
+          repeat={true}
+          resizeMode={"cover"}
+          controls={false}
+          rate={1.0}
+          ignoreSilentSwitch={"obey"}
+          poster={featuredMovies[0].imageUrl}
+          posterResizeMode={"cover"}
+          
+        />
+        <TouchableOpacity 
+            style={styles.linkContainer}
+            onPress={() =>
+              setMovieModalVisible(true)
+            }
+          >
+            <Text style={styles.linkText}>{featuredMovies[0].danishTitle}</Text>
+        </TouchableOpacity>
+      </>
+      :
       <ImageBackground 
         style={styles.coverImage}
-        source={{ uri: featuredMovieItem[0].imageUrl }}
+        source={{ uri: featuredMovies[0].imageUrl }}
         resizeMode="cover"
       >
         <TouchableOpacity 
@@ -57,12 +60,12 @@ const FeaturedMovie2 = () => {
               setMovieModalVisible(true)
             }
           >
-            <Text style={styles.linkText}>Læs mere om {featuredMovieItem[0].danishTitle}</Text>
-          </TouchableOpacity>
+            <Text style={styles.linkText}>{featuredMovies[0].danishTitle}</Text>
+        </TouchableOpacity>
 
       </ImageBackground>
-      </Animatable.View>
-    </>
+      }
+    </View>
     : null 
   )
 }
@@ -73,6 +76,10 @@ const styles = StyleSheet.create({
     height: "100%",
     marginBottom: 50,
   },
+  coverVideo: {
+    height: "100%",
+    width: SIZES.width
+  },
   coverImage: {
     height: "100%",
     width: "100%",
@@ -81,14 +88,14 @@ const styles = StyleSheet.create({
   linkContainer: {
     padding: 15,
     borderRadius: 10,
-    backgroundColor: "black",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
     position: "absolute", 
-    bottom: 10,
+    bottom: -15,
     left: 10,
   },
   linkText: {
     color: COLORS.white, 
-    ...FONTS.h2
+    ...FONTS.h3
    
   }
 })

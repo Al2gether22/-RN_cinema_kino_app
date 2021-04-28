@@ -111,7 +111,7 @@ const MovieModal = ({movieModalVisible, hideMovieModal, passedMovie, showtimes})
                 { showtimes === false ? null : 
                 <ShowTimes
                   id={passedMovie.id}
-                  movieVersions={passedMovie.versions}
+                  movieVersions={passedMovie.versions ? passedMovie.versions : null}
                   nextShowtime={passedMovie.next_showtime}
                   backgroundColor={backgroundColor}
                   primaryFontColor={primaryFontColor}

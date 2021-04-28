@@ -19,11 +19,11 @@ import {Platform} from 'react-native';
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
   const {
-    state: {movies},
+    state: {movies, featuredMovies},
   } = useContext(MoviesContext);
   const [currentLongitude, setCurrentLongitude] = useState('');
   const [currentLatitude, setCurrentLatitude] = useState('');
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const platformPermission =
     Platform.OS === 'ios'
       ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
@@ -137,7 +137,7 @@ const Home = () => {
 
       <View style={styles.container}>
         <View style={styles.featuredMovieContainer}>
-          <FeaturedMovie />
+          <FeaturedMovie movies={movies} featuredMovies={featuredMovies} />
         </View>
         <View style={styles.slidersContainer}>
           <Top10Movies movies={movies} />
@@ -154,12 +154,10 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     backgroundColor: COLORS.backgroundColor,
-    flex: 1,
-    alignContent: "flex-start",
   },
   featuredMovieContainer: {
     maxHeight: "30%",
-    
+    width: SIZES.width
   },
   slidersContainer: {
     marginTop: 20,

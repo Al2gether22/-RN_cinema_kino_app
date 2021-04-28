@@ -338,6 +338,11 @@ PODS:
     - React
   - react-native-safe-area-context (3.1.9):
     - React-Core
+  - react-native-video (5.1.1):
+    - React-Core
+    - react-native-video/Video (= 5.1.1)
+  - react-native-video/Video (5.1.1):
+    - React-Core
   - react-native-webview (11.2.3):
     - React-Core
   - React-perflogger (0.64.0-rc.4)
@@ -481,6 +486,7 @@ DEPENDENCIES:
   - "react-native-cookies (from `../node_modules/@react-native-cookies/cookies`)"
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-video (from `../node_modules/react-native-video`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -577,6 +583,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-video:
+    :path: "../node_modules/react-native-video"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-perflogger:
@@ -674,6 +682,7 @@ SPEC CHECKSUMS:
   react-native-cookies: 3b5b182d008b714fefc337df15b787f00385a598
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
+  react-native-video: 1574074179ecaf6a9dd067116c8f31bf9fec15c8
   react-native-webview: 6520e3e7b4933de76b95ef542c8d7115cf45b68e
   React-perflogger: 22385ffdf9f2ce78ba0251c260924c6bbefbe916
   React-RCTActionSheet: 6337f324f825b15a506bfc18f1ac08592f8ef78f
@@ -702,6 +711,6 @@ SPEC CHECKSUMS:
   Yoga: 3745b5c8e01456f8cfffb5f1257da5f5022f8c5d
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: ed3e039fa2209f3a0e63326290cde1902c35c84a
+PODFILE CHECKSUM: 1b2cc2a33342bf378ea19939ccd1c184520707bb
 
 COCOAPODS: 1.10.1
