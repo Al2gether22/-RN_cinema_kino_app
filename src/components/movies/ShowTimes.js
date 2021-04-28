@@ -12,11 +12,10 @@ import styles from '../../styles/ShowTimeStyles';
 import {create1MonthDates} from '../../helpers/date.utils';
 import {scrollToIndex} from '../../helpers/datepicker.utils';
 import moment from 'moment';
-import { SIZES } from "../../constants/theme"
+import {SIZES} from '../../constants/theme';
 import Toast from 'react-native-toast-message';
 import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
-
 
 const ShowTimes = ({
   id,
@@ -26,12 +25,10 @@ const ShowTimes = ({
   primaryFontColor,
   secondaryFontColor,
   active,
-  title
+  title,
 }) => {
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
-  const [sessionName, setSessionName] = useState('');
-  const [sessionId, setSessionId] = useState('');
   const [showtimeId, setShowtimeId] = useState([]);
   const [monthOfDates, setMonthOfDates] = useState(
     create1MonthDates(nextShowtime),
@@ -40,17 +37,6 @@ const ShowTimes = ({
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const {state} = useContext(CinemaContext);
-  const {
-    state: {user},
-  } = useContext(AuthContext);
-
-  // Find a way to get user with the fetch user component
-  useEffect(() => {
-    user
-      ? setSessionId(JSON.parse(user).session_id) &&
-        setSessionName(JSON.parse(user).session_name)
-      : null;
-  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -68,16 +54,19 @@ const ShowTimes = ({
           setShowtimes(mergeArrays(json, state.cinemas));
         }
       })
-      .catch(error => (
-        crashlytics().recordError(error),
-        Toast.show({
-          text1: 'Noget gik galt!',
-          text2: 'Prøv at lukke appen og start den igen',
-          position: 'bottom',
-          bottomOffset: 300,
-          type: "error",
-          autoHide: false,
-      })))
+      .catch(
+        error => (
+          crashlytics().recordError(error),
+          Toast.show({
+            text1: 'Noget gik galt!',
+            text2: 'Prøv at lukke appen og start den igen',
+            position: 'bottom',
+            bottomOffset: 300,
+            type: 'error',
+            autoHide: false,
+          })
+        ),
+      )
       .finally(() => {
         if (isMounted) {
           setLoading(false);
@@ -135,8 +124,6 @@ const ShowTimes = ({
         modalVisible={modalVisible}
         setModalVisible={() => setModalVisible(false)}
         url={`https://kino.dk/ticketflow/${showtimeId}`}
-        cookieName={sessionName}
-        cookieValue={sessionId}
       />
 
       <DatePicker
@@ -190,7 +177,6 @@ const ShowTimes = ({
                       id={item[0].movie_version_id}
                       movieVersions={movieVersions}
                     />
-                    
                   </Text>
                   <FlatList
                     keyboardShouldPersistTaps="always"
@@ -204,14 +190,19 @@ const ShowTimes = ({
                         tension={50}
                         friction={7}
                         useNativeDriver
-                        onPress={async() => {
+                        onPress={() => {
                           setModalVisible(true),
-                          setShowtimeId(item.showtime_id),
-                          await analytics().logScreenView({
-                            screen_class: 'Spilletidsvisning_film',
-                            screen_name: 'Spilletidsvisning_film',
-                          })
-                          await analytics().logEvent("Spilletidsvisning_film", { Title: title, id: id, showtime_id: showtimeId, cinema_id: item.cinema_nid });
+                            setShowtimeId(item.showtime_id),
+                            analytics().logScreenView({
+                              screen_class: 'Spilletidsvisning_film',
+                              screen_name: 'Spilletidsvisning_film',
+                            });
+                          analytics().logEvent('Spilletidsvisning_film', {
+                            Title: title,
+                            id: id,
+                            showtime_id: showtimeId,
+                            cinema_id: item.cinema_nid,
+                          });
                         }}
                         style={styles.showTime}>
                         <Text style={styles.showTimeText}>
