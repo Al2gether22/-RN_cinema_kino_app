@@ -1,27 +1,23 @@
-import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native"
-import styles from "../../styles/ProfileStyles";
-import WebViewModal from "../../modals/WebViewModal"
+import React, {useState} from 'react';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
+import styles from '../../styles/ProfileStyles';
+import WebViewModal from '../../modals/WebViewModal';
 
-const UserMetaData = ({ userData, userObject, signout }) => {
-
+const UserMetaData = ({userData, userObject, signout}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
 
   return (
     <View style={styles.container}>
       <WebViewModal
         modalVisible={modalVisible}
-        setModalVisible={() => setModalVisible(false)}
+        hideModal={() => setModalVisible(false)}
         url={url}
         cookieName={userObject.session_name}
         cookieValue={userObject.session_id}
       />
       <View style={styles.userDataContainer}>
-        <Image
-          style={styles.profilePic}
-          source={{ uri: userData.image }}
-        ></Image>
+        <Image style={styles.profilePic} source={{uri: userData.image}} />
         <View style={styles.userData}>
           {userData.displayname ? (
             <Text style={styles.userDataText}>{userData.displayname}</Text>
@@ -38,8 +34,7 @@ const UserMetaData = ({ userData, userObject, signout }) => {
           onPress={() => [
             setModalVisible(true),
             setUrl(`https://www.kino.dk/user/${userData.uid}`),
-          ]}
-        >
+          ]}>
           <Text style={styles.editButtonText}>Rediger Profil</Text>
         </TouchableOpacity>
 
@@ -47,15 +42,12 @@ const UserMetaData = ({ userData, userObject, signout }) => {
           style={styles.button}
           onPress={() => {
             signout();
-            
-          }}
-        >
+          }}>
           <Text style={styles.buttonText}>Log ud</Text>
         </TouchableOpacity>
       </View>
-      
     </View>
-  )
-}
+  );
+};
 
-export default UserMetaData
+export default UserMetaData;

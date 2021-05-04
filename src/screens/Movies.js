@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect } from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import _ from 'lodash';
 import {Context} from '../context/MoviesContext';
@@ -28,7 +28,7 @@ const Movies = () => {
       await analytics().logScreenView({
         screen_class: 'Film oversigt',
         screen_name: 'Film oversigt',
-      })
+      });
     }
     // Execute the created function directly
     trackData();
@@ -56,7 +56,7 @@ const Movies = () => {
         useNativeDriver
         onPress={async () => {
           const imgColors = await fetchImageColors(item.imageUrl);
-          navigation.navigate('Movie', {
+          navigation.navigate('Film', {
             item,
             imgColors,
             lastScreen: 'Film',
@@ -72,7 +72,7 @@ const Movies = () => {
         <View style={styles.titleContainer}>
           <SharedElement id={item.danishTitle}>
             <Text style={styles.cardTitle}>
-              {item.title ? item.danishTitle: item.title}
+              {item.title ? item.danishTitle : item.title}
             </Text>
           </SharedElement>
         </View>

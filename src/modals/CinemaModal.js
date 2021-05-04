@@ -18,7 +18,7 @@ import crashlytics from '@react-native-firebase/crashlytics';
 const CinemaModal = ({
   cinemaModalVisible,
   setCinemaModalVisible,
-  passedCinema,
+  passedCinema, //Why is there both a passedCinema and cinema variable? Confusing
 }) => {
   const [cinema, setCinema] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,22 +33,25 @@ const CinemaModal = ({
     fetch(`https://www.kino.dk/appservices/cinema/${passedCinema.id}`, {
       mode: 'no-cors',
     })
-      .then((response) => response.json())
+      .then(response => response.json())
       .then(json => {
         if (isMounted) {
           setCinema(json);
         }
       })
-      .catch((error) => (
-        crashlytics().recordError(error),
-        Toast.show({
-          text1: 'Noget gik galt!',
-          text2: 'Prøv at lukke appen og start den igen',
-          position: 'bottom',
-          bottomOffset: 300,
-          type: "error",
-          autoHide: false,
-      })))
+      .catch(
+        error => (
+          crashlytics().recordError(error),
+          Toast.show({
+            text1: 'Noget gik galt!',
+            text2: 'Prøv at lukke appen og start den igen',
+            position: 'bottom',
+            bottomOffset: 300,
+            type: 'error',
+            autoHide: false,
+          })
+        ),
+      )
       .finally(() => {
         if (isMounted) {
           setLoading(false);
@@ -60,15 +63,20 @@ const CinemaModal = ({
   useEffect(() => {
     // Create an scoped async function in the hook
     async function trackData() {
+      if (!passedCinema.name) return;
+      console.log('cinema modal trackData', passedCinema.name);
       await analytics().logScreenView({
         screen_class: 'Biograf',
         screen_name: 'Biograf',
-      })
-      await analytics().logEvent("Biograf", { Title: passedCinema.name, id: passedCinema.id});
+      });
+      await analytics().logEvent('Biograf', {
+        Title: passedCinema.name,
+        id: passedCinema.id,
+      });
     }
     // Execute the created function directly
     trackData();
-  }, []);
+  }, [passedCinema]);
 
   if (loading) {
     return null;

@@ -1,55 +1,55 @@
-import React from "react";
-import { HeaderBackButton } from "@react-navigation/stack";
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import React from 'react';
+import {HeaderBackButton} from '@react-navigation/stack';
+import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 
-import Cinemas from "../screens/Cinemas";
-import Cinema from "../screens/Cinema";
+import Cinemas from '../screens/Cinemas';
+import Cinema from '../screens/Cinema';
 
 const Stack = createSharedElementStackNavigator();
 
-
-export default function CinemasStackScreen({ navigation }){
+export default function CinemasStackScreen({navigation}) {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Cinemas" component={Cinemas} 
+      <Stack.Screen
+        name="Biografer"
+        component={Cinemas}
         options={{
-          title: "Biografer",
-          headerBackTitle: "Tilbage",
-          headerLeft: (props) => (
-            <HeaderBackButton 
-              {...props}
-              onPress={navigation.goBack}
-            />
-          ), 
+          title: 'Biografer',
+          headerBackTitle: 'Tilbage',
+          headerLeft: props => (
+            <HeaderBackButton {...props} onPress={navigation.goBack} />
+          ),
           headerStyle: {
-            backgroundColor: "#1d1d27",
-            shadowColor: "transparent",
+            backgroundColor: '#1d1d27',
+            shadowColor: 'transparent',
           },
-          headerTintColor: "#fffdfd",
+          headerTintColor: '#fffdfd',
           headerTitleStyle: {
-            fontFamily: "SourceSansPro-Bold",
-            fontSize: 18
-          }, 
+            fontFamily: 'SourceSansPro-Bold',
+            fontSize: 18,
+          },
           headerBackTitleStyle: {
             fontSize: 18,
-            color: "#fffdfd",
-            fontFamily: "SourceSansPro-Bold",
-          }
+            color: '#fffdfd',
+            fontFamily: 'SourceSansPro-Bold',
+          },
         }}
       />
 
-      <Stack.Screen name="Cinema" component={Cinema}
-        options={({ route }) => ({
+      <Stack.Screen
+        name="Biograf"
+        component={Cinema}
+        options={({route}) => ({
           headerShown: false,
-          cardStyleInterpolator: ({ current: { progress } }) => {
+          cardStyleInterpolator: ({current: {progress}}) => {
             return {
               cardStyle: {
-                opacity: progress
-              }
+                opacity: progress,
+              },
             };
-          }         
+          },
         })}
       />
     </Stack.Navigator>
-  )
+  );
 }

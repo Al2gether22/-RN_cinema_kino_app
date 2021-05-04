@@ -9,9 +9,9 @@ import FeaturedMovie from '../components/shared/FeaturedMovie2';
 import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
-import { COLORS, SIZES } from "../constants/theme"
+import {COLORS, SIZES} from '../constants/theme';
 import analytics from '@react-native-firebase/analytics';
-import { firebase } from '@react-native-firebase/analytics';
+import {firebase} from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
 
 import {Platform} from 'react-native';
@@ -29,23 +29,20 @@ const Home = () => {
       ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
       : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
 
-  useEffect(() => {  
+  useEffect(() => {
     checkPermissions();
   }, []);
 
   useEffect(() => {
-    // Create an scoped async function in the hook
     async function trackData() {
       await firebase.analytics().setAnalyticsCollectionEnabled(true),
-      await analytics().logScreenView({
-        screen_class: 'Hjem',
-        screen_name: 'Hjem',
-      })
+        await analytics().logScreenView({
+          screen_class: 'Hjem',
+          screen_name: 'Hjem',
+        });
     }
-    // Execute the created function directly
     trackData();
   }, []);
-
 
   const checkPermissions = () => {
     console.log('checkPermissions()');
@@ -95,7 +92,7 @@ const Home = () => {
       console.log('requestPermissions result ' + result);
       checkPermissions();
     } catch (err) {
-      crashlytics().recordError(err)
+      crashlytics().recordError(err);
       console.error(err);
     }
   };
@@ -126,7 +123,6 @@ const Home = () => {
     return <ActivityIndicator size="large" style={{marginTop: 200}} />;
   }
 
-
   return (
     <>
       <UserInfoModal
@@ -152,12 +148,15 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    height: '100%',
     backgroundColor: COLORS.backgroundColor,
   },
   featuredMovieContainer: {
     maxHeight: "30%",
     width: SIZES.width
+  },
+  featuredMovieContainer: {
+    maxHeight: '30%',
   },
   slidersContainer: {
     marginTop: 20,
