@@ -16,11 +16,7 @@
 		531928282CA94918A8E4DF3B /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A60306E4FD124714A9A17BD6 /* SourceSansPro-Light.ttf */; };
 		71628A1F871B4062B3E1547E /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB164675004D43008C1BF2CD /* SourceSansPro-Regular.ttf */; };
 		8695C71425E69AAC00D74D08 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8695C71325E69AAC00D74D08 /* Images-2.xcassets */; };
-<<<<<<< HEAD
-		86BDD07E262CB90C0020AE39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 86BDD07D262CB90B0020AE39 /* GoogleService-Info.plist */; };
 		86ED42112639EC02002B8FD3 /* featured-movie-fallback.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 86ED42102639EC02002B8FD3 /* featured-movie-fallback.jpg */; };
-=======
->>>>>>> 3fe1d579372df4059f379d1c656173b0b508563c
 		EE4625C6AFCDCEBF47E3B074 /* libPods-KinoApp-KinoAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59393621CECBB9B90C3FB02C /* libPods-KinoApp-KinoAppTests.a */; };
 		F879183E2600ADBA00B06245 /* BasierSquare-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F879183D2600ADAE00B06245 /* BasierSquare-Regular.otf */; };
 		F87918412600ADC100B06245 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5675BCDCC5846029E63EF42 /* SourceSansPro-Bold.ttf */; };
@@ -73,11 +69,7 @@
 		690F036D2F894980808867A3 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
 		73A28D2D3B04496082CF02A4 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = ../assets/fonts/SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		8695C71325E69AAC00D74D08 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "KinoApp/Images-2.xcassets"; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		86BDD07D262CB90B0020AE39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		86ED42102639EC02002B8FD3 /* featured-movie-fallback.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "featured-movie-fallback.jpg"; path = "../assets/images/featured-movie-fallback.jpg"; sourceTree = "<group>"; };
-=======
->>>>>>> 3fe1d579372df4059f379d1c656173b0b508563c
 		8DFDB03D4E6C4A43A93C0F3B /* BureauGrotCond-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BureauGrotCond-Light.ttf"; path = "../assets/fonts/BureauGrotCond-Light.ttf"; sourceTree = "<group>"; };
 		8F04E7E26C6CB4D98943EA23 /* Pods-KinoApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-KinoApp-tvOS/Pods-KinoApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9872D640EDED55E5E0B4744B /* Pods-KinoApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-KinoApp-tvOSTests/Pods-KinoApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
