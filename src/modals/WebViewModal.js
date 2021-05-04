@@ -56,10 +56,22 @@ const WebViewModal = ({modalVisible, setModalVisible, url}) => {
             style={{
               textAlign: 'right',
               color: 'white',
-              marginTop: 10,
               marginRight: 10,
+              
             }}
             name="close-circle"
+            size={30}
+          />
+          <MaterialCommunityIcons
+            style={{
+              textAlign: 'right',
+              color: 'black',
+              marginRight: 10,
+              top: 0,
+              right: 0,
+              position: "absolute"
+            }}
+            name="close-circle-outline"
             size={30}
           />
         </TouchableOpacity>
