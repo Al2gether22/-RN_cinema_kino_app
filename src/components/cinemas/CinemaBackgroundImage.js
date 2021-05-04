@@ -1,40 +1,37 @@
-import React from "react";
-import { View, ImageBackground, Text, TouchableOpacity } from "react-native"
+import React from 'react';
+import {View, ImageBackground, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { SharedElement } from 'react-navigation-shared-element';
-import { useNavigation } from "@react-navigation/native";
+import {SharedElement} from 'react-navigation-shared-element';
+import {useNavigation} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import styles from '../../styles/CinemaBackgroundStyles';
 
-import styles from "../../styles/CinemaBackgroundStyles";
-
-const CinemaBackgroundImage = ({ name, img, modal }) => {
-
+//This component is a lot more than a background image, needs renaming or destructering
+const CinemaBackgroundImage = ({name, img, modal}) => {
   const navigation = useNavigation();
 
   return (
     <>
       <View style={styles.imageContainer}>
-      { modal ? null : 
-      <TouchableOpacity
-        onPress={navigation.goBack}
-        style={styles.goBackContainer}
-      >
-        <Text style={styles.goBack}>
-          <MaterialCommunityIcons name="arrow-left-circle" size={35} color={"white"} />
-        </Text>
-      </TouchableOpacity>}
+        {!modal && Platform.OS === 'ios' && (
+          <TouchableOpacity
+            onPress={navigation.goBack}
+            style={styles.goBackContainer}>
+            <Text style={styles.goBack}>
+              <MaterialCommunityIcons
+                name="arrow-left-circle"
+                size={35}
+                color={'white'}
+              />
+            </Text>
+          </TouchableOpacity>
+        )}
 
         <SharedElement id={img}>
-          <ImageBackground
-            style={styles.coverImage}
-            source={{ uri: img }}
-          >
-  
-
-            <LinearGradient 
-              colors={['rgba(29,29,39,0)', 'rgba(29,29,39,1)']} 
-              
+          <ImageBackground style={styles.coverImage} source={{uri: img}}>
+            <LinearGradient
+              colors={['rgba(29,29,39,0)', 'rgba(29,29,39,1)']}
               style={styles.LinearGradientLower}
             />
           </ImageBackground>
@@ -44,10 +41,8 @@ const CinemaBackgroundImage = ({ name, img, modal }) => {
           <Text style={styles.cinemaTitle}>{name}</Text>
         </SharedElement>
       </View>
-      
-      
     </>
-  )
-}
+  );
+};
 
 export default CinemaBackgroundImage;

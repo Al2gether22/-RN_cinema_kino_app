@@ -1,73 +1,79 @@
-import React, { useState, useEffect } from "react";
-import { Modal, TouchableOpacity, SafeAreaView } from "react-native";
+import React, {useState, useEffect, useContext} from 'react';
+import {Modal, TouchableOpacity, SafeAreaView} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { WebView } from 'react-native-webview';
+import {WebView} from 'react-native-webview';
+import {Context as AuthContext} from '../context/AuthContext';
 import CookieManager from '@react-native-cookies/cookies';
 
-
-const WebViewModal = ({ modalVisible, setModalVisible, url, cookieName, cookieValue }) => {
-
-// Check out the documentation for webview: https://github.com/react-native-webview/react-native-webview/blob/master/docs/Guide.md
-// you can use injectedJavaScript to maybe remove some html elments?
-
+const WebViewModal = ({modalVisible, setModalVisible, url}) => {
   const [hasSetCookies, setHasSetCookies] = useState(false);
+  const {state} = useContext(AuthContext);
 
   useEffect(() => {
+    if (!state.user) {
+      setHasSetCookies(true);
+      return;
+    }
+    const user = JSON.parse(state.user);
+    debugger;
     CookieManager.set('https://kino.dk', {
-      name: cookieName ? cookieName : "",
-      value: cookieValue ? cookieValue : "",
+      name: user.session_name,
+      value: user.session_id,
       domain: '.kino.dk',
       path: '/',
       secure: true,
       httpOnly: true,
-    }).then((done) => {
-      console.log('CookieManager.set =>', setHasSetCookies(true));
-      CookieManager.getAll().then((cookies) => {
-        console.log('CookieManager.getAll =>', cookies);
-      });
-    });
-  }, []);
+    })
+      .then(done => {
+        console.log('CookieManager.set =>', setHasSetCookies(true));
+        CookieManager.getAll().then(cookies => {
+          console.log('CookieManager.getAll =>', cookies);
+        });
+      })
+      .catch(err => console.error(err));
+  }, [state.user]);
 
   if (!hasSetCookies) return null;
+  console.log('webview url', url);
 
-  return(
+  return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={modalVisible}
       onRequestClose={() => setModalVisible(false)}
       onDismiss={() => setModalVisible(false)}
-      presentationStyle={"overFullScreen"}
+      presentationStyle={'overFullScreen'}
       swipeDirection="down"
-      onSwipe={() => setModalVisible(false)}
-    >
+      onSwipe={() => setModalVisible(false)}>
       <SafeAreaView>
-      <TouchableOpacity
-        style={{ backgroundColor: 'transparent' }}
-        onPress={() => {
-          setModalVisible(false);
-        }}>
-        <MaterialCommunityIcons  
-          style={{ textAlign: "right", color: "white", marginTop: 10, marginRight: 10}}
-          name="close-circle" 
-          size={30} 
-        />
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={{backgroundColor: 'transparent'}}
+          onPress={() => {
+            setModalVisible(false);
+          }}>
+          <MaterialCommunityIcons
+            style={{
+              textAlign: 'right',
+              color: 'white',
+              marginTop: 10,
+              marginRight: 10,
+            }}
+            name="close-circle"
+            size={30}
+          />
+        </TouchableOpacity>
       </SafeAreaView>
-      <WebView 
+      <WebView
         originWhitelist={['*']}
         javaScriptEnabled={true}
-        
-      
-        source={{ 
+        source={{
           uri: `${url}`,
-      
-        }}  
-        sharedCookiesEnabled={true}          
+        }}
+        sharedCookiesEnabled={true}
       />
     </Modal>
-    )
-
-}
+  );
+};
 
 export default WebViewModal;
