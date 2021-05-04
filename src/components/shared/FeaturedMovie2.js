@@ -41,8 +41,8 @@ const FeaturedMovie2 = ({ movies, featuredMovies }) => {
           rate={1.0}
           poster={featuredMovies[0].imageUrl}
           posterResizeMode={"cover"}
-          onError={console.log("Error loading")}
-          onBuffer={console.log("Buffing..")}
+          //onError={console.log("Error loading")}
+          //onBuffer={console.log("Buffing..")}
         />
         
         <View 
