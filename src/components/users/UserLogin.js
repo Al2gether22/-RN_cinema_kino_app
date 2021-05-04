@@ -35,7 +35,7 @@ const UserLogin = ({state, animation}) => {
     <View style={styles.container}>
       <WebViewModal
         modalVisible={modalVisible}
-        hideModal={() => setModalVisible(false)}
+        setModalVisible={() => setModalVisible(false)}
         url={url}
       />
       <Text style={styles.header}>Log ind med din Kino profil</Text>

@@ -106,7 +106,7 @@ const ShowTimes = ({id}) => {
 
       <WebViewModal
         modalVisible={modalVisible}
-        hideMovieModal={() => setWebViewModalVisible(false)}
+        setModalVisible={() => setWebViewModalVisible(false)}
         url={`https://kino.dk/ticketflow/${showtimeId}`}
         cookieName={sessionName}
         cookieValue={sessionId}

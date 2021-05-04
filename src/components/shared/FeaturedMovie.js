@@ -34,7 +34,6 @@ const FeaturedMovie = () => {
             autoHide: false,
         })))
     }
-
     fetchData();
   }, []);
 
@@ -56,7 +55,9 @@ const FeaturedMovie = () => {
           resizeMode="cover">
           <TouchableOpacity
             style={styles.linkContainer}
-            onPress={() => setMovieModalVisible(true)}>
+            onPress={() => setMovieModalVisible(true)}
+            
+          >
             <Text style={styles.linkText}>
               Læs mere om {featuredMovieItem[0].danishTitle}
             </Text>

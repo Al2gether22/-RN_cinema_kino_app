@@ -11,7 +11,7 @@ const UserMetaData = ({userData, userObject, signout}) => {
     <View style={styles.container}>
       <WebViewModal
         modalVisible={modalVisible}
-        hideModal={() => setModalVisible(false)}
+        setModalVisible={() => setModalVisible(false)}
         url={url}
         cookieName={userObject.session_name}
         cookieValue={userObject.session_id}

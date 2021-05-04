@@ -3,6 +3,8 @@ import { ImageBackground, Text, StyleSheet, TouchableOpacity, View } from "react
 import Video from "react-native-video"
 import MovieModal from "../../modals/MovieModal"
 import { FONTS, COLORS, SIZES} from "../../constants/theme"
+import analytics from '@react-native-firebase/analytics';
+
 
 const FeaturedMovie2 = ({ movies, featuredMovies }) => {
 
@@ -26,8 +28,13 @@ const FeaturedMovie2 = ({ movies, featuredMovies }) => {
       />
       {featuredMovies[0].videoUrl ? 
       <TouchableOpacity 
-        onPress={() =>
-          setMovieModalVisible(true)
+        onPress={() => {
+          setMovieModalVisible(true),
+          analytics().logEvent('featured_movie', {
+            Title: featuredMovie.danishTitle,
+            id: featuredMovie.id,
+          });
+          }
         }
       >
         
@@ -59,11 +66,15 @@ const FeaturedMovie2 = ({ movies, featuredMovies }) => {
         resizeMode="cover"
       >
         <TouchableOpacity 
-            style={styles.linkContainer}
-            onPress={() =>
-              setMovieModalVisible(true)
+          onPress={() => {
+            setMovieModalVisible(true),
+            analytics().logEvent('featured_movie', {
+              Title: featuredMovie.danishTitle,
+              id: featuredMovie.id,
+            });
             }
-          >
+          }
+        >
             <Text style={styles.linkText}>{featuredMovies[0].danishTitle}</Text>
         </TouchableOpacity>
 
