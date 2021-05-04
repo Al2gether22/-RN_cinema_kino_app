@@ -32,7 +32,7 @@ const FeaturedMovie2 = ({ movies, featuredMovies }) => {
       >
         
         <Video  
-          source={{uri: `${featuredMovies[0].videoUrl}?t=qwe`}}
+          source={{uri: `${featuredMovies[0].videoUrl}`}}
           style={styles.coverVideo}
           muted={true}
           repeat={true}

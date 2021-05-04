@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar, View, Text } from "react-native";
 import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
 import { Provider as MovieProvider } from "./src/context/MoviesContext";
@@ -8,8 +8,15 @@ import { Provider as AuthProvider } from "./src/context/AuthContext";
 import FetchData from "./src/components/shared/FetchData"
 import Toast, { BaseToast } from 'react-native-toast-message';
 import { SIZES, FONTS, COLORS } from "./src/constants/theme"
+import SplashScreen from  "react-native-splash-screen";
+
 
 const App = () => {
+
+  //Hide Splash screen on app load.
+  React.useEffect(() => {
+    SplashScreen.hide();
+  });
 
   const toastConfig = {
     
