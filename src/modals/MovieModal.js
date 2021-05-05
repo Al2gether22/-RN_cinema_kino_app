@@ -104,6 +104,7 @@ const MovieModal = ({
                 />
               </>
             }
+            ListFooterComponentStyle={{marginBottom: 30}}
             ListFooterComponent={
               <>
                 <TabViewComponent
