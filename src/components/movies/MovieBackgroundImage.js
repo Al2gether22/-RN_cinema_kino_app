@@ -86,7 +86,7 @@ const MovieBackgroundImage = ({
             </Animatable.View>
             <MovieTrailerModal
               modalVisible={modalVisible}
-              setModalVisible={() => setModalVisible(false)}
+              hideModal={() => setModalVisible(false)}
               video_markup={movie.video_markup}
               movie={movie}
             />
