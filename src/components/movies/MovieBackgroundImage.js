@@ -32,7 +32,7 @@ const MovieBackgroundImage = ({
       {!modal && Platform.OS === 'ios' && (
         <TouchableOpacity
           onPress={() => {
-            navigation.goBack();
+            navigation.goBack()
           }}
           style={styles.goBackContainer}>
           <Text style={styles.goBack}>

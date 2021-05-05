@@ -44,7 +44,6 @@ export default function MoviesStackScreen({navigation}) {
 
         options={({route}) => ({
           headerShown: false,
-
           cardStyleInterpolator: ({current: {progress}}) => {
             return {
               cardStyle: {
