@@ -26,14 +26,13 @@ const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
               Tak fordi du downloadede vores nye app.
             </Text>
             <Text style={styles.bodyText}>
-              Om lidt vil vi spørge dig om vi må bruge din telefons GPS. Det
-              anbefaler vi du siger ja til, da det vil forbedre din
-              brugeroplevelse.
+              Vi vil rigtig gerne give dig den bedst mulige oplevelse og præsentere de mest relevante biografer for dig. Derfor vil vi om lidt spørge dig, om vi må bruge din telefons GPS. Det anbefaler vi, at du siger ja til, så vi kan vise de biografer, der er tættest på dig, først i en rangering.
             </Text>
             <Text style={styles.bodyText}>
-              Din lokation og GPS koordinater er ikke noget data vi gemmer, men
-              blot noget APP'en bruger i real-tid til den bedst mulige sortering
-              af biograferne.
+              Din lokation og GPS-koordinater bliver ikke gemt, men bruges blot i realtid, så vi kan sortere biografern
+            </Text>
+            <Text style={styles.bodyText}>
+              God fornøjelse med den nye kino.dk-app.
             </Text>
           </View>
           <TouchableOpacity
@@ -79,6 +78,7 @@ const styles = StyleSheet.create({
     color: 'black',
     lineHeight: 20,
     fontSize: 15,
+    marginBottom: 10
   },
   modalOkButtonContainer: {
     padding: 10,
