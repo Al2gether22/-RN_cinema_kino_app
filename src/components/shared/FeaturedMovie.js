@@ -25,8 +25,6 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
   }, []);
 
   const goToFeaturedMovie = async () => {
-    console.log('pressed GoToFeatuedMovie');
-    console.log(featuredMovie);
     const imgColors = await fetchImageColors(featuredMovie.imageUrl);
 
     navigation.navigate('Film oversigt', {
@@ -41,7 +39,6 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
       Title: featuredMovie.danishTitle,
       id: featuredMovie.id,
     });
-    console.log('done');
   };
 
   if (!featuredMovie)

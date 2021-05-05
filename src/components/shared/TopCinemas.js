@@ -1,24 +1,17 @@
-import React, { useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native"
-import _ from "lodash";
-import { ImageBackground } from "react-native";
+import React from 'react';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
+import _ from 'lodash';
+import {ImageBackground} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
-import CinemaModal from "../../modals/CinemaModal"
-import { useNavigation } from "@react-navigation/native";
-import { COLORS, FONTS, SIZES } from "../../constants/theme"
+import {useNavigation} from '@react-navigation/native';
+import {COLORS, FONTS, SIZES} from '../../constants/theme';
 
-
-const Top10Movies = ({ cinemas }) => {
-
+const Top10Movies = ({cinemas}) => {
   const navigation = useNavigation();
-  const [cinemaModalVisible, setCinemaModalVisible] = useState(false);
-  const [cinema, setCinema] = useState({})
 
-  const Item = (item) => {
-
+  const Item = item => {
     return (
-
       <View style={styles.itemContainer}>
         <TouchableScale
           activeScale={0.9}
@@ -26,41 +19,28 @@ const Top10Movies = ({ cinemas }) => {
           friction={7}
           useNativeDriver
           onPress={() => {
-            setCinemaModalVisible(true), 
-            setCinema(item)
-          }}
-        >
+            navigation.navigate('Biografer', {item});
+          }}>
           <ImageBackground
             style={styles.img}
             source={{
-            uri: item.imageUrl,
-            }}
-          >
+              uri: item.imageUrl,
+            }}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{item.name}</Text>
             </View>
           </ImageBackground>
         </TouchableScale>
       </View>
-     
     );
-  }
+  };
 
   return (
-
-    <Animatable.View 
+    <Animatable.View
       style={styles.container}
-      animation='fadeIn'
+      animation="fadeIn"
       duration={900}
-      delay={30}
-    >
-
-      <CinemaModal 
-        cinemaModalVisible={cinemaModalVisible}
-        setCinemaModalVisible={() => setCinemaModalVisible(false)}
-        passedCinema={cinema}
-      />  
-    
+      delay={30}>
       <View style={styles.headLineContainer}>
         <Text style={styles.headLine}>Biografer</Text>
         <TouchableScale
@@ -70,35 +50,30 @@ const Top10Movies = ({ cinemas }) => {
           useNativeDriver
           onPress={() => {
             navigation.navigate('Biografer');
-          }}
-        >
-          <Text style={styles.headLineLink}>Alle biografer</Text> 
+          }}>
+          <Text style={styles.headLineLink}>Alle biografer</Text>
         </TouchableScale>
-        
       </View>
-      
-      <FlatList 
+
+      <FlatList
         keyboardShouldPersistTaps="always"
         data={cinemas.slice(0, 5)}
-        renderItem={({ item }) => Item(item)}
-        keyExtractor={(item) => item.id}
+        renderItem={({item}) => Item(item)}
+        keyExtractor={item => item.id}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
       />
     </Animatable.View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    
-  }, 
+  container: {},
   headLineContainer: {
-    color: "white",
-    backgroundColor: "rgba(29,29,39,0.8)",
-    flexDirection: "row",
-    alignItems: "center",
-    
+    color: 'white',
+    backgroundColor: 'rgba(29,29,39,0.8)',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   headLine: {
     color: COLORS.white,
@@ -106,42 +81,41 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     flex: 1,
-    ...FONTS.h3
-  }, 
+    ...FONTS.h3,
+  },
   headLineLink: {
     color: COLORS.white,
     marginRight: 10,
     textDecorationLine: 'underline',
-    ...FONTS.h4
+    ...FONTS.h4,
   },
   itemContainer: {
     margin: 5,
     borderRadius: 7,
-    borderColor: "black",
+    borderColor: 'black',
     borderWidth: 2,
-    height: (SIZES.width / 4),
-    maxWidth: (SIZES.height / 3 ),
+    height: SIZES.width / 4,
+    maxWidth: SIZES.height / 3,
   },
   img: {
     aspectRatio: 5 / 3,
-    height: "100%",
-    width: "100%",
-    borderRadius: 7, 
+    height: '100%',
+    width: '100%',
+    borderRadius: 7,
   },
   titleContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: -4,
     left: -2,
     borderBottomLeftRadius: 7,
-    backgroundColor: "black",
+    backgroundColor: 'black',
     padding: 5,
   },
   title: {
     borderRadius: 7,
     color: COLORS.white,
     ...FONTS.h5,
-    
-  }
-})
+  },
+});
 
-export default Top10Movies
+export default Top10Movies;
