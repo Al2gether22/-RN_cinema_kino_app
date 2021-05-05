@@ -10,14 +10,16 @@ const styles = StyleSheet.create({
   },
 
   playButtomViewWrapper: {
-    zIndex: 1,
-    position: 'absolute',
-    left: '50%',
-    top: -350,
+    
+    position: "absolute",
+    top: 250,
+    width: "100%",
+    
   },
   playButton: {
-    position: 'relative',
-    left: '-50%',
+    textAlign: "center"
+    
+    
   },
 
   movieTitle: {
