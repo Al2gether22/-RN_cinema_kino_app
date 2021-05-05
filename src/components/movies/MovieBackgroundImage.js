@@ -10,7 +10,6 @@ import analytics from '@react-native-firebase/analytics';
 import styles from '../../styles/MovieBackgroundImageStyles';
 import {Platform} from 'react-native';
 
-
 const MovieBackgroundImage = ({
   movie,
   image,
@@ -61,38 +60,40 @@ const MovieBackgroundImage = ({
           />
         </ImageBackground>
       </SharedElement>
-        {!!movie.video_markup && (
-          // checks to see if there is a trailer before rendering the play button
-          <TouchableOpacity
-            onPress={async() => {
-              setModalVisible(true);
-              await analytics().logScreenView({
-                screen_class: 'Trailervisning',
-                screen_name: 'Trailervisning',
-              })
-              await analytics().logEvent("Trailervisning", { Title: movie.danishTitle, id: movie.id});
-            }}>
-            <Animatable.View
-              style={styles.playButtomViewWrapper}
-              animation="zoomIn"
-              duration={900}
-              delay={100}>
-              <MaterialCommunityIcons
-                style={styles.playButton}
-                color={primaryFontColor}
-                name="play-circle"
-                size={60}
-              />
-            </Animatable.View>
-            <MovieTrailerModal
-              modalVisible={modalVisible}
-              setModalVisible={() => setModalVisible(false)}
-              video_markup={movie.video_markup}
-              movie={movie}
+      {!!movie.video_markup && (
+        // checks to see if there is a trailer before rendering the play button
+        <TouchableOpacity
+          onPress={async () => {
+            setModalVisible(true);
+            await analytics().logScreenView({
+              screen_class: 'Trailervisning',
+              screen_name: 'Trailervisning',
+            });
+            await analytics().logEvent('Trailervisning', {
+              Title: movie.danishTitle,
+              id: movie.id,
+            });
+          }}>
+          <Animatable.View
+            style={styles.playButtomViewWrapper}
+            animation="zoomIn"
+            duration={900}
+            delay={100}>
+            <MaterialCommunityIcons
+              style={styles.playButton}
+              color={primaryFontColor}
+              name="play-circle"
+              size={60}
             />
-          </TouchableOpacity>
-        )}
-      
+          </Animatable.View>
+          <MovieTrailerModal
+            modalVisible={modalVisible}
+            hideModal={() => setModalVisible(false)}
+            video_markup={movie.video_markup}
+            movie={movie}
+          />
+        </TouchableOpacity>
+      )}
 
       <SharedElement id={titleFallback}>
         <Text

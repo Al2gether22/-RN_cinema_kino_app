@@ -1,4 +1,5 @@
 import React, {useRef, useState} from 'react';
+import PropTypes from 'prop-types';
 import {ActivityIndicator, Modal, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import YoutubePlayer from 'react-native-youtube-iframe';
@@ -82,6 +83,10 @@ const MovieTrailerModal = ({modalVisible, hideModal, video_markup}) => {
       </View>
     </Modal>
   );
+};
+
+MovieTrailerModal.propTypes = {
+  hideModal: PropTypes.func.isRequired,
 };
 
 export default MovieTrailerModal;
