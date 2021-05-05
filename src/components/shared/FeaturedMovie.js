@@ -4,98 +4,113 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import * as Animatable from 'react-native-animatable';
+import Video from 'react-native-video';
+import analytics from '@react-native-firebase/analytics';
 import {useNavigation} from '@react-navigation/native';
-import Toast from 'react-native-toast-message';
-import crashlytics from '@react-native-firebase/crashlytics';
-import {COLORS, FONTS} from '../../constants/theme';
+import {FONTS, COLORS, SIZES} from '../../constants/theme';
 import fetchImageColors from '../../helpers/fetchImageColors';
 
-const FeaturedMovie = () => {
-  const [featuredMovieItem, setFeaturedMovieItem] = useState({});
+const FeaturedMovie = ({movies, featuredMovies}) => {
+  const [featuredMovie, setFeaturedMovie] = useState();
+
   const navigation = useNavigation();
 
+  // Do a lookup in movies with the movie id and find the movie and pass it to movie modal
+  // This needs to be refactored if we need more elements in the featuredMovies component
   useEffect(() => {
-    async function fetchData() {
-      const res = await fetch(
-        'https://www.kino.dk/appservices/featured-movies',
-      );
-      res
-        .json()
-        .then(res => setFeaturedMovieItem(res))
-        .catch(
-          error => (
-            crashlytics().recordError(error),
-            Toast.show({
-              text1: 'Noget gik galt!',
-              text2: 'Prøv at lukke appen og start den igen',
-              position: 'bottom',
-              bottomOffset: 300,
-              type: 'error',
-              autoHide: false,
-            })
-          ),
-        );
-    }
-    fetchData();
+    const movie = movies.find(el => el.id === featuredMovies[0].id);
+    setFeaturedMovie(movie);
   }, []);
 
-  return featuredMovieItem[0] ? (
-    <>
-      <Animatable.View
-        style={styles.coverImageContainer}
-        animation="fadeIn"
-        duration={900}
-        delay={50}>
+  const goToFeaturedMovie = async () => {
+    console.log('pressed GoToFeatuedMovie');
+    console.log(featuredMovie);
+    const imgColors = await fetchImageColors(featuredMovie.imageUrl);
+
+    navigation.navigate('Film oversigt', {
+      screen: 'Film',
+      params: {
+        item: featuredMovie,
+        imgColors,
+        lastScreen: 'Hjem',
+      },
+    });
+    analytics().logEvent('featured_movie', {
+      Title: featuredMovie.danishTitle,
+      id: featuredMovie.id,
+    });
+    console.log('done');
+  };
+
+  if (!featuredMovie)
+    return (
+      <ImageBackground
+        style={styles.coverImage}
+        source={require('../../../assets/images/featured-movie-fallback.jpg')}
+        resizeMode="cover"
+      />
+    );
+
+  return (
+    <View style={styles.coverImageContainer}>
+      {featuredMovies[0].videoUrl ? (
+        <TouchableOpacity onPress={() => goToFeaturedMovie()}>
+          <Video
+            source={{uri: featuredMovies[0].videoUrl}}
+            style={styles.coverVideo}
+            muted={true}
+            repeat={true}
+            resizeMode={'cover'}
+            controls={false}
+            rate={1.0}
+            poster={featuredMovies[0].imageUrl}
+            posterResizeMode={'cover'}
+          />
+
+          <View style={styles.linkContainer}>
+            <Text style={styles.linkText}>{featuredMovies[0].danishTitle}</Text>
+          </View>
+        </TouchableOpacity>
+      ) : (
         <ImageBackground
           style={styles.coverImage}
-          source={{uri: featuredMovieItem[0].imageUrl}}
+          source={{uri: featuredMovies[0].imageUrl}}
           resizeMode="cover">
-          <TouchableOpacity
-            style={styles.linkContainer}
-            onPress={() => {
-              const imgColors = await fetchImageColors(featuredMovieItem.imageUrl);
-
-              navigation.navigate('Film', {
-                params: {
-                  item: featuredMovieItem,
-                  imgColors,
-                },
-              })
-            }
-            }>
-            <Text style={styles.linkText}>
-              Læs mere om {featuredMovieItem[0].danishTitle}
-            </Text>
+          <TouchableOpacity onPress={() => goToFeaturedMovie()}>
+            <Text style={styles.linkText}>{featuredMovies[0].danishTitle}</Text>
           </TouchableOpacity>
         </ImageBackground>
-      </Animatable.View>
-    </>
-  ) : null;
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-  coverImageContainer: {},
+  coverImageContainer: {
+    height: '100%',
+    marginBottom: 50,
+  },
+  coverVideo: {
+    height: '100%',
+    width: SIZES.width,
+  },
   coverImage: {
     height: '100%',
     width: '100%',
-    zIndex: -999,
   },
-  linearGradient: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
   linkContainer: {
     padding: 15,
     borderRadius: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    position: 'absolute',
+    bottom: -15,
+    left: 10,
   },
   linkText: {
     color: COLORS.white,
-    ...FONTS.h2,
+    ...FONTS.h3,
   },
 });
 

@@ -5,7 +5,7 @@ import {Context as CinemaContext} from '../context/CinemaContext';
 import {Context as MoviesContext} from '../context/MoviesContext';
 import _ from 'lodash';
 import UserInfoModal from '../modals/UserInfoModal';
-import FeaturedMovie from '../components/shared/FeaturedMovie2';
+import FeaturedMovie from '../components/shared/FeaturedMovie';
 import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
@@ -152,8 +152,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.backgroundColor,
   },
   featuredMovieContainer: {
-    maxHeight: "30%",
-    width: SIZES.width
+    maxHeight: '30%',
+    width: SIZES.width,
   },
   featuredMovieContainer: {
     maxHeight: '30%',
