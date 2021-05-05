@@ -99,7 +99,7 @@ export default function BottomTabNavigator() {
           options={{unmountOnBlur: true, tabBarLabel: 'Film'}}
           listeners={({navigation}) => ({
             tabPress: () => {
-              navigation.navigate('Film oversigt');
+              navigation.navigate('Film oversigt', {screen: 'Film oversigt'});
             },
           })}
         />

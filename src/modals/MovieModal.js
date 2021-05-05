@@ -18,9 +18,9 @@ const MovieModal = ({
   movieModalVisible,
   hideMovieModal,
   passedMovie,
-  showtimes,
+  hideShowTimes,
 }) => {
-  const [active, setActive] = useState(showtimes === false ? 1 : 0);
+  const [active, setActive] = useState(hideShowTimes ? 1 : 0);
   const {movie, isLoading} = useMovieJson(passedMovie);
   const {imgColors, isLoadingColors} = usePosterColors(passedMovie.imageUrl);
 
@@ -112,19 +112,22 @@ const MovieModal = ({
                   backgroundColor={secondaryFontColor}
                   primaryFontColor={primaryFontColor}
                   secondaryFontColor={backgroundColor}
-                  showtimes={showtimes}
+                  hideShowTimes={hideShowTimes}
                 />
-                
-                { showtimes === false ? null : 
-                <ShowTimes
-                  id={passedMovie.id}
-                  movieVersions={passedMovie.versions ? passedMovie.versions : null}
-                  nextShowtime={passedMovie.next_showtime}
-                  backgroundColor={backgroundColor}
-                  primaryFontColor={primaryFontColor}
-                  secondaryFontColor={secondaryFontColor}
-                  active={active === 0 ? 'flex' : 'none'}
-                /> }
+
+                {hideShowTimes ? null : (
+                  <ShowTimes
+                    id={passedMovie.id}
+                    movieVersions={
+                      passedMovie.versions ? passedMovie.versions : null
+                    }
+                    nextShowtime={passedMovie.next_showtime}
+                    backgroundColor={backgroundColor}
+                    primaryFontColor={primaryFontColor}
+                    secondaryFontColor={secondaryFontColor}
+                    active={active === 0 ? 'flex' : 'none'}
+                  />
+                )}
 
                 {movie && (
                   <MovieResume

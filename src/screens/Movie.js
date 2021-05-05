@@ -12,10 +12,10 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import useMovieJson from '../hooks/useMovieJson';
 
 const Movie = ({route}) => {
-  const {item, imgColors} = route.params;
+  const {item, imgColors, hideShowTimes} = route.params;
   const {movie, isLoading} = useMovieJson(item);
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(hideShowTimes ? 1 : 0);
   const navigation = useNavigation();
   const config = {
     velocityThreshold: 0.8,
@@ -71,18 +71,20 @@ const Movie = ({route}) => {
               backgroundColor={secondaryFontColor}
               primaryFontColor={primaryFontColor}
               secondaryFontColor={backgroundColor}
+              hideShowTimes={hideShowTimes}
             />
-
-            <ShowTimes
-              id={movie.nid}
-              movieVersions={item.versions}
-              nextShowtime={item.next_showtime}
-              backgroundColor={backgroundColor}
-              primaryFontColor={primaryFontColor}
-              secondaryFontColor={secondaryFontColor}
-              active={active === 0 ? 'flex' : 'none'}
-              title={item.danishTitle}
-            />
+            {hideShowTimes ? null : (
+              <ShowTimes
+                id={movie.nid}
+                movieVersions={item.versions ? item.versions : null}
+                nextShowtime={item.next_showtime}
+                backgroundColor={backgroundColor}
+                primaryFontColor={primaryFontColor}
+                secondaryFontColor={secondaryFontColor}
+                active={active === 0 ? 'flex' : 'none'}
+                title={item.danishTitle}
+              />
+            )}
 
             <GestureRecognizer
               onSwipeLeft={() => setActive(2)}

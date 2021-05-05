@@ -31,7 +31,6 @@ const Top10Movies = ({movies}) => {
                 params: {
                   item,
                   imgColors,
-                  lastScreen: 'Hjem',
                 },
               });
             }}>

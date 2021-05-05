@@ -32,7 +32,6 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
       params: {
         item: featuredMovie,
         imgColors,
-        lastScreen: 'Hjem',
       },
     });
     analytics().logEvent('featured_movie', {
