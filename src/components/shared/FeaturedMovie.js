@@ -49,12 +49,16 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
       />
     );
 
+  console.log('featuredMovies[0].videoUrl', featuredMovies[0].videoUrl);
+
   return (
     <View style={styles.coverImageContainer}>
       {featuredMovies[0].videoUrl ? (
         <TouchableOpacity onPress={() => goToFeaturedMovie()}>
           <Video
-            source={{uri: featuredMovies[0].videoUrl}}
+            source={{
+              uri: featuredMovies[0].videoUrl,
+            }}
             style={styles.coverVideo}
             muted={true}
             repeat={true}
