@@ -15,8 +15,6 @@ import {COLORS, SIZES, FONTS} from '../constants/theme';
 import analytics from '@react-native-firebase/analytics';
 import {firebase} from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
-
-
 import {Platform} from 'react-native';
 
 const Home = () => {
@@ -48,30 +46,25 @@ const Home = () => {
   }, []);
 
   const checkPermissions = () => {
-    console.log('checkPermissions()');
     check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
       .then(result => {
         switch (result) {
           case RESULTS.UNAVAILABLE:
-            console.log(
-              'This feature is not available (on this device / in this context)',
-            );
+            analytics().logEvent("GeoTracking", { Status: "Unavailable"});
             break;
           case RESULTS.DENIED:
             setModalVisible(true);
-            console.log(
-              'The permission has not been requested / is denied but requestable',
-            );
+            analytics().logEvent("GeoTracking", { Status: "Denied"});
             break;
           case RESULTS.LIMITED:
-            console.log('The permission is limited: some actions are possible');
+            analytics().logEvent("GeoTracking", { Status: "Limited"});
             break;
           case RESULTS.GRANTED:
-            console.log('The permission is granted');
+            analytics().logEvent("GeoTracking", { Status: "Granted"});
             getOneTimeLocation();
             break;
           case RESULTS.BLOCKED:
-            console.log('The permission is denied and not requestable anymore');
+            analytics().logEvent("GeoTracking", { Status: "Blocked"});
             break;
         }
       })
@@ -81,38 +74,30 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log('updateCinemas() useEffect');
     if (state.isCinemasFetched && currentLatitude !== '') {
       updateCinemas(state.cinemas, currentLatitude, currentLongitude);
     }
-    console.log('Updated cinemas called from HOME');
-    console.log(`currentLatitide ${currentLatitude}`);
   }, [state.isCinemasFetched, currentLatitude]);
 
   const requestPermissions = async () => {
     try {
       const result = await request(platformPermission);
-      console.log('requestPermissions result ' + result);
       checkPermissions();
     } catch (err) {
       crashlytics().recordError(err);
-      console.error(err);
     }
   };
 
   const getOneTimeLocation = () => {
-    console.log('getOneTimeLocation');
     Geolocation.getCurrentPosition(
       position => {
-        console.log('position');
-        console.log(position);
         const currentLongitude = JSON.stringify(position.coords.longitude);
         const currentLatitude = JSON.stringify(position.coords.latitude);
         setCurrentLongitude(currentLongitude);
         setCurrentLatitude(currentLatitude);
       },
       error => {
-        console.error(error);
+        crashlytics().recordError(error);
       },
       {
         enableHighAccuracy: true,

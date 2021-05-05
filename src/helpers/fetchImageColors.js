@@ -17,10 +17,7 @@ async function fetchImageColors(img, setImgColors) {
       primaryFontColor: colors.primary,
       secondaryFontColor: colors.secondary,
     };
-    console.log('fetchImageColors');
-    for (const [key, value] of Object.entries(colors)) {
-      console.log(`%c ${key}: ${value}`, `color: ${value}`);
-    }
+   
     if (colors.platform === 'android') {
       result = {
         backgroundColor: colors.darkMuted,

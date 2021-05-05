@@ -25,7 +25,6 @@ export default function BottomTabNavigator() {
     const route = navigationRef.current?.getCurrentRoute();
     const {name, params} = route;
     if (name === 'Hjem') return; //Already logged inside component
-    console.log('log screenView route.name', name);
     analytics().logScreenView({
       screen_class: name,
       screen_name: name,
@@ -35,16 +34,12 @@ export default function BottomTabNavigator() {
         Title: params.item.danishTitle,
         id: params.item.id,
       });
-      console.log('log analytics movie', params.item.danishTitle);
-      console.log('log analytics movie', params.item.id);
     }
     if (name === 'Biograf') {
       analytics().logEvent('Biograf', {
         Title: params.item.name,
         id: params.item.id,
       });
-      console.log('log analytics cinema', params.item.name);
-      console.log('log analytics cinema', params.item.id);
     }
   };
 

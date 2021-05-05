@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import {ActivityIndicator, Modal, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import YoutubePlayer from 'react-native-youtube-iframe';
+import crashlytics from '@react-native-firebase/crashlytics';
 import styles from '../styles/MovieTrailerModalStyles';
 
 const MovieTrailerModal = ({modalVisible, hideModal, video_markup}) => {
@@ -20,8 +21,6 @@ const MovieTrailerModal = ({modalVisible, hideModal, video_markup}) => {
 
     return videoId;
   };
-
-  console.log('modalVisible MovieTrailerModal', modalVisible);
 
   return (
     <Modal
@@ -69,8 +68,7 @@ const MovieTrailerModal = ({modalVisible, hideModal, video_markup}) => {
           width={'100%'}
           videoId={extractVideoIdFromYouTubeUrl(video_markup)}
           play={playing}
-          //onError={e => console.log(e)}
-          onPlaybackQualityChange={q => console.log(q)}
+          onError={e => crashlytics().recordError(e)}
           volume={50}
           playbackRate={1}
           initialPlayerParams={{

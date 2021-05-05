@@ -25,8 +25,8 @@ const MovieModal = ({
 
   useEffect(() => {
     // Create an scoped async function in the hook
+   
     async function trackData() {
-      console.log('movie modal trackData', passedMovie);
       await analytics().logScreenView({
         screen_class: 'Film',
         screen_name: 'Film',
@@ -37,8 +37,10 @@ const MovieModal = ({
       });
     }
     // Execute the created function directly
-    trackData();
-  }, []);
+    movieModalVisible == true ?
+    trackData() : null
+    
+  }, [movieModalVisible]);
 
   if (isLoading || isLoadingColors) {
     return null;

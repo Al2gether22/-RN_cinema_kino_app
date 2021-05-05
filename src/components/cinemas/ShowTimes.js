@@ -187,12 +187,13 @@ const ShowTimes = ({id}) => {
                                 analytics().logScreenView({
                                   screen_class: 'Spilletidsvisning_biograf',
                                   screen_name: 'Spilletidsvisning_biograf',
-                                });
+                                });                              
                               analytics().logEvent(
                                 'Spilletidsvisning_biograf',
                                 {
-                                  Title: movie.danishTitle,
-                                  id: movie.id,
+                                  Title: item.movie_title,
+                                  id: item.movie_nid,
+                                  showtime_date: item.start_time,
                                   showtime_id: item.showtime_id,
                                   cinema_id: id,
                                 },

@@ -200,7 +200,8 @@ const ShowTimes = ({
                           analytics().logEvent('Spilletidsvisning_film', {
                             Title: title,
                             id: id,
-                            showtime_id: showtimeId,
+                            showtime_date: item.start_time,
+                            showtime_id: item.showtime_id,
                             cinema_id: item.cinema_nid,
                           });
                         }}

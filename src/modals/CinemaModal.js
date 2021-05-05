@@ -58,7 +58,6 @@ const CinemaModal = ({
     // Create an scoped async function in the hook
     async function trackData() {
       if (!passedCinema.name) return;
-      console.log('cinema modal trackData', passedCinema.name);
       await analytics().logScreenView({
         screen_class: 'Biograf',
         screen_name: 'Biograf',

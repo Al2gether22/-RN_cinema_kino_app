@@ -34,7 +34,6 @@ const WebViewModal = ({modalVisible, setModalVisible, url}) => {
   }, [state.user]);
 
   if (!hasSetCookies) return null;
-  console.log('webview url', url);
 
   return (
     <Modal
