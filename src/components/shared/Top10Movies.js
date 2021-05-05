@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {View, Text, Image, FlatList, StyleSheet} from 'react-native';
 import _ from 'lodash';
 import * as Animatable from 'react-native-animatable';
