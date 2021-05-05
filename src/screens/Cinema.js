@@ -3,8 +3,6 @@ import {FlatList, StyleSheet, StatusBar} from 'react-native';
 import CinemaBackgroundImage from '../components/cinemas/CinemaBackgroundImage';
 import CinemaMetaData from '../components/cinemas/CinemaMetaData';
 import ShowTimes from '../components/cinemas/ShowTimes';
-import GestureRecognizer from 'react-native-swipe-gestures';
-import {useNavigation} from '@react-navigation/native';
 import {Platform} from 'react-native';
 import crashlytics from '@react-native-firebase/crashlytics';
 
@@ -12,12 +10,6 @@ const Cinema = ({route}) => {
   const {item} = route.params;
   const [cinema, setCinema] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigation = useNavigation();
-  const config = {
-    velocityThreshold: 0.8,
-    directionalOffsetThreshold: 150,
-    gestureIsClickThreshold: 10,
-  };
 
   // fetches cinema data
   useEffect(() => {
@@ -38,19 +30,11 @@ const Cinema = ({route}) => {
         keyExtractor={index => index.toString()}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
-          <GestureRecognizer
-            onSwipeDown={() => navigation.goBack()}
-            config={config}
-            style={{
-              flex: 1,
-              backgroundColor: 'transparent',
-              width: '100%',
-              zIndex: 999999,
-            }}>
+          <>
             <StatusBar hidden={true} />
             <CinemaBackgroundImage name={item.name} img={item.imageUrl} />
             {loading ? null : <CinemaMetaData cinema={cinema} />}
-          </GestureRecognizer>
+          </>
         }
         ListFooterComponentStyle={{marginBottom: 50}}
         ListFooterComponent={

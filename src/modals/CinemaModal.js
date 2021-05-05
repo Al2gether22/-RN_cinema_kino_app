@@ -10,7 +10,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import CinemaBackgroundImage from '../components/cinemas/CinemaBackgroundImage';
 import CinemaMetaData from '../components/cinemas/CinemaMetaData';
 import ShowTimes from '../components/cinemas/ShowTimes';
-import GestureRecognizer from 'react-native-swipe-gestures';
 import Toast from 'react-native-toast-message';
 import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
@@ -22,11 +21,6 @@ const CinemaModal = ({
 }) => {
   const [cinema, setCinema] = useState([]);
   const [loading, setLoading] = useState(true);
-  const config = {
-    velocityThreshold: 0.8,
-    directionalOffsetThreshold: 150,
-    gestureIsClickThreshold: 10,
-  };
 
   useEffect(() => {
     let isMounted = true;
@@ -83,60 +77,53 @@ const CinemaModal = ({
   }
 
   return (
-    <GestureRecognizer
-      onSwipeDown={() => setCinemaModalVisible(!cinemaModalVisible)}
-      config={config}
-      style={{
-        flex: 1,
-        backgroundColor: 'transparent',
-      }}>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={cinemaModalVisible}
-        onRequestClose={() => setCinemaModalVisible(!cinemaModalVisible)}
-        onDismiss={() => setCinemaModalVisible(!cinemaModalVisible)}
-        presentationStyle={'overFullScreen'}
-        swipeDirection="down"
-        onSwipe={() => setCinemaModalVisible(!cinemaModalVisible)}>
-        <>
-          <FlatList
-            keyboardShouldPersistTaps="always"
-            style={styles.container}
-            keyExtractor={index => index.toString()}
-            showsVerticalScrollIndicator={false}
-            ListHeaderComponent={
-              <>
-                <StatusBar hidden={true} />
-                <TouchableOpacity
-                  style={styles.goBackContainer}
-                  onPress={() => {
-                    setCinemaModalVisible(!cinemaModalVisible);
-                  }}>
-                  <MaterialCommunityIcons
-                    name="arrow-left-circle"
-                    size={35}
-                    color={'white'}
-                  />
-                </TouchableOpacity>
-
-                <CinemaBackgroundImage
-                  name={passedCinema.name}
-                  img={passedCinema.imageUrl}
-                  modal={true}
+    <Modal
+      animationType="fade"
+      transparent={true}
+      visible={cinemaModalVisible}
+      onRequestClose={() => setCinemaModalVisible(!cinemaModalVisible)}
+      onDismiss={() => setCinemaModalVisible(!cinemaModalVisible)}
+      presentationStyle={'overFullScreen'}
+      swipeDirection="down"
+      onSwipe={() => setCinemaModalVisible(!cinemaModalVisible)}>
+      <>
+        <FlatList
+          keyboardShouldPersistTaps="always"
+          style={styles.container}
+          keyExtractor={index => index.toString()}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={
+            <>
+              <StatusBar hidden={true} />
+              <TouchableOpacity
+                style={styles.goBackContainer}
+                onPress={() => {
+                  setCinemaModalVisible(!cinemaModalVisible);
+                }}>
+                <MaterialCommunityIcons
+                  name="arrow-left-circle"
+                  size={35}
+                  color={'white'}
                 />
-                {!cinema ? null : <CinemaMetaData cinema={cinema} />}
-              </>
-            }
-            ListFooterComponent={
-              loading ? null : (
-                <ShowTimes id={cinema.nid} movieVersions={cinema.versions} />
-              )
-            }
-          />
-        </>
-      </Modal>
-    </GestureRecognizer>
+              </TouchableOpacity>
+
+              <CinemaBackgroundImage
+                name={passedCinema.name}
+                img={passedCinema.imageUrl}
+                modal={true}
+              />
+              {!cinema ? null : <CinemaMetaData cinema={cinema} />}
+            </>
+          }
+          ListFooterComponent={
+            loading ? null : (
+              <ShowTimes id={cinema.nid} movieVersions={cinema.versions} />
+            )
+          }
+        />
+      </>
+    </Modal>
+    
   );
 };
 

@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import {StatusBar, FlatList} from 'react-native';
 import MovieBackgroundImage from '../components/movies/MovieBackgroundImage';
-import {useNavigation} from '@react-navigation/native';
 import MovieMetaData from '../components/movies/MovieMetaData';
 import ShowTimes from '../components/movies/ShowTimes';
 import MovieResume from '../components/movies/MovieResume';
 import MovieCast from '../components/movies/MovieCast';
 import styles from '../styles/MovieStyles';
 import TabViewComponent from '../components/movies/TabViewComponent';
-import GestureRecognizer from 'react-native-swipe-gestures';
 import useMovieJson from '../hooks/useMovieJson';
 
 const Movie = ({route}) => {
@@ -16,12 +14,6 @@ const Movie = ({route}) => {
   const {movie, isLoading} = useMovieJson(item);
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
   const [active, setActive] = useState(0);
-  const navigation = useNavigation();
-  const config = {
-    velocityThreshold: 0.8,
-    directionalOffsetThreshold: 150,
-    gestureIsClickThreshold: 10,
-  };
 
   return (
     // Need to render everything inside a flatlist because we cant nest flatlists inside a scroll view
@@ -30,15 +22,7 @@ const Movie = ({route}) => {
       style={[styles.container, {backgroundColor}]}
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={
-        <GestureRecognizer
-          onSwipeDown={() => navigation.goBack()}
-          config={config}
-          style={{
-            flex: 1,
-            backgroundColor: 'transparent',
-            width: '100%',
-            zIndex: 999999,
-          }}>
+        <>
           <StatusBar hidden={true} />
 
           <MovieBackgroundImage
@@ -59,7 +43,7 @@ const Movie = ({route}) => {
               secondaryFontColor={secondaryFontColor}
             />
           )}
-        </GestureRecognizer>
+        </>
       }
       ListFooterComponentStyle={{marginBottom: 50}}
       ListFooterComponent={
@@ -84,36 +68,20 @@ const Movie = ({route}) => {
               title={item.danishTitle}
             />
 
-            <GestureRecognizer
-              onSwipeLeft={() => setActive(2)}
-              onSwipeRight={() => setActive(0)}
-              config={config}
-              style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-              }}>
-              <MovieResume
-                resume={movie.body}
-                primaryFontColor={primaryFontColor}
-                secondaryFontColor={backgroundColor}
-                active={active === 1 ? 'flex' : 'none'}
-              />
-            </GestureRecognizer>
-
-            <GestureRecognizer
-              onSwipeRight={() => setActive(1)}
-              config={config}
-              style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-              }}>
-              <MovieCast
-                movie={movie}
-                primaryFontColor={primaryFontColor}
-                secondaryFontColor={secondaryFontColor}
-                active={active === 2 ? 'flex' : 'none'}
-              />
-            </GestureRecognizer>
+            <MovieResume
+              resume={movie.body}
+              primaryFontColor={primaryFontColor}
+              secondaryFontColor={backgroundColor}
+              active={active === 1 ? 'flex' : 'none'}
+            />
+          
+            <MovieCast
+              movie={movie}
+              primaryFontColor={primaryFontColor}
+              secondaryFontColor={secondaryFontColor}
+              active={active === 2 ? 'flex' : 'none'}
+            />
+           
           </>
         )
       }

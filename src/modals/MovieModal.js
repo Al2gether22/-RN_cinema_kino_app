@@ -9,7 +9,6 @@ import ShowTimes from '../components/movies/ShowTimes';
 import MovieResume from '../components/movies/MovieResume';
 import MovieCast from '../components/movies/MovieCast';
 import TabViewComponent from '../components/movies/TabViewComponent';
-import GestureRecognizer from 'react-native-swipe-gestures';
 import useMovieJson from '../hooks/useMovieJson';
 import usePosterColors from '../hooks/usePosterColors';
 import analytics from '@react-native-firebase/analytics';
@@ -41,113 +40,99 @@ const MovieModal = ({
     trackData();
   }, []);
 
-  const config = {
-    velocityThreshold: 0.8,
-    directionalOffsetThreshold: 150,
-    gestureIsClickThreshold: 10,
-  };
-
   if (isLoading || isLoadingColors) {
     return null;
   }
 
   const {backgroundColor, primaryFontColor, secondaryFontColor} = imgColors;
   return (
-    <GestureRecognizer
-      onSwipeDown={() => hideMovieModal()}
-      config={config}
-      style={{
-        flex: 1,
-        backgroundColor: 'transparent',
-      }}>
-      <Modal
-        onRequestClose={() => hideMovieModal()}
-        animationType="fade"
-        presentationStyle={'fullScreen'}
-        visible={movieModalVisible}>
-        <>
-          <FlatList
-            keyboardShouldPersistTaps="always"
-            style={[styles.container, {backgroundColor}]}
-            showsVerticalScrollIndicator={false}
-            ListHeaderComponent={
-              <>
-                <StatusBar hidden />
-                <TouchableOpacity
-                  style={styles.goBackContainer}
-                  onPress={() => {
-                    hideMovieModal();
-                    setActive(0);
-                  }}>
-                  <MaterialCommunityIcons
-                    name="arrow-left-circle"
-                    size={35}
-                    color={primaryFontColor}
-                  />
-                </TouchableOpacity>
+    <Modal
+      onRequestClose={() => hideMovieModal()}
+      animationType="fade"
+      presentationStyle={'fullScreen'}
+      visible={movieModalVisible}>
+      <>
+        <FlatList
+          keyboardShouldPersistTaps="always"
+          style={[styles.container, {backgroundColor}]}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={
+            <>
+              <StatusBar hidden />
+              <TouchableOpacity
+                style={styles.goBackContainer}
+                onPress={() => {
+                  hideMovieModal();
+                  setActive(0);
+                }}>
+                <MaterialCommunityIcons
+                  name="arrow-left-circle"
+                  size={35}
+                  color={primaryFontColor}
+                />
+              </TouchableOpacity>
 
-                <MovieBackgroundImage
+              <MovieBackgroundImage
+                movie={movie}
+                image={passedMovie.imageUrl}
+                danishTitle={passedMovie.title}
+                modal={true}
+                backgroundColor={backgroundColor}
+                primaryFontColor={primaryFontColor}
+                secondaryFontColor={secondaryFontColor}
+              />
+
+              <MovieMetaData
+                movie={movie}
+                backgroundColor={backgroundColor}
+                primaryFontColor={primaryFontColor}
+                secondaryFontColor={secondaryFontColor}
+              />
+            </>
+          }
+          ListFooterComponentStyle={{marginBottom: 30}}
+          ListFooterComponent={
+            <>
+              <TabViewComponent
+                setActive={setActive}
+                active={active}
+                backgroundColor={secondaryFontColor}
+                primaryFontColor={primaryFontColor}
+                secondaryFontColor={backgroundColor}
+                showtimes={showtimes}
+              />
+              
+              { showtimes === false ? null : 
+              <ShowTimes
+                id={passedMovie.id}
+                movieVersions={passedMovie.versions ? passedMovie.versions : null}
+                nextShowtime={passedMovie.next_showtime}
+                backgroundColor={backgroundColor}
+                primaryFontColor={primaryFontColor}
+                secondaryFontColor={secondaryFontColor}
+                active={active === 0 ? 'flex' : 'none'}
+              /> }
+
+              {movie && (
+                <MovieResume
+                  resume={movie.body}
+                  primaryFontColor={primaryFontColor}
+                  active={active === 1 ? 'flex' : 'none'}
+                />
+              )}
+              {movie && (
+                <MovieCast
                   movie={movie}
-                  image={passedMovie.imageUrl}
-                  danishTitle={passedMovie.title}
-                  modal={true}
-                  backgroundColor={backgroundColor}
                   primaryFontColor={primaryFontColor}
                   secondaryFontColor={secondaryFontColor}
+                  active={active === 2 ? 'flex' : 'none'}
                 />
-
-                <MovieMetaData
-                  movie={movie}
-                  backgroundColor={backgroundColor}
-                  primaryFontColor={primaryFontColor}
-                  secondaryFontColor={secondaryFontColor}
-                />
-              </>
-            }
-            ListFooterComponentStyle={{marginBottom: 30}}
-            ListFooterComponent={
-              <>
-                <TabViewComponent
-                  setActive={setActive}
-                  active={active}
-                  backgroundColor={secondaryFontColor}
-                  primaryFontColor={primaryFontColor}
-                  secondaryFontColor={backgroundColor}
-                  showtimes={showtimes}
-                />
-                
-                { showtimes === false ? null : 
-                <ShowTimes
-                  id={passedMovie.id}
-                  movieVersions={passedMovie.versions ? passedMovie.versions : null}
-                  nextShowtime={passedMovie.next_showtime}
-                  backgroundColor={backgroundColor}
-                  primaryFontColor={primaryFontColor}
-                  secondaryFontColor={secondaryFontColor}
-                  active={active === 0 ? 'flex' : 'none'}
-                /> }
-
-                {movie && (
-                  <MovieResume
-                    resume={movie.body}
-                    primaryFontColor={primaryFontColor}
-                    active={active === 1 ? 'flex' : 'none'}
-                  />
-                )}
-                {movie && (
-                  <MovieCast
-                    movie={movie}
-                    primaryFontColor={primaryFontColor}
-                    secondaryFontColor={secondaryFontColor}
-                    active={active === 2 ? 'flex' : 'none'}
-                  />
-                )}
-              </>
-            }
-          />
-        </>
-      </Modal>
-    </GestureRecognizer>
+              )}
+            </>
+          }
+        />
+      </>
+    </Modal>
   );
 };
 
