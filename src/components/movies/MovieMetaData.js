@@ -11,7 +11,7 @@ const MovieMetaData = ({ movie, backgroundColor, primaryFontColor, secondaryFont
   return (
  
     <Animatable.View 
-      style={[styles.metaDataContainer, { borderBottomColor: primaryFontColor, borderTopColor: primaryFontColor}]} 
+      style={[styles.metaDataContainer, { borderBottomColor: primaryFontColor, borderTopColor: primaryFontColor, borderBottomWidth: 0.4, borderTopWidth: 0.4}]} 
       animation='fadeIn'
       duration={600}
       delay={300}

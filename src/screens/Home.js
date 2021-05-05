@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
+import * as Animatable from 'react-native-animatable';
 import {Context as CinemaContext} from '../context/CinemaContext';
 import {Context as MoviesContext} from '../context/MoviesContext';
 import _ from 'lodash';
@@ -27,7 +28,7 @@ const Home = () => {
   const platformPermission =
     Platform.OS === 'ios'
       ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
-      : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
+      : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;;
 
   useEffect(() => {
     checkPermissions();
@@ -119,10 +120,6 @@ const Home = () => {
     );
   };
 
-  if (state.cinemas.length === 0 || movies.length == 0) {
-    return <ActivityIndicator size="large" style={{marginTop: 200}} />;
-  }
-
   return (
     <>
       <UserInfoModal
@@ -130,17 +127,33 @@ const Home = () => {
         setModalVisible={() => setModalVisible(false)}
         requestPermissions={requestPermissions}
       />
+ 
 
       <View style={styles.container}>
-        <View style={styles.featuredMovieContainer}>
+        <Animatable.View 
+          style={styles.featuredMovieContainer}
+          animation='fadeIn'
+          duration={600}
+          delay={0}
+        >
           <FeaturedMovie movies={movies} featuredMovies={featuredMovies} />
-        </View>
-        <View style={styles.slidersContainer}>
+        </Animatable.View>
+        <Animatable.View 
+          style={styles.slidersContainer}
+          animation='fadeIn'
+          duration={600}
+          delay={200}
+        >
           <Top10Movies movies={movies} />
-        </View>
-        <View style={styles.slidersContainer}>
+        </Animatable.View>
+        <Animatable.View 
+          style={styles.slidersContainer}
+          animation='fadeIn'
+          duration={600}
+          delay={400}
+        >
           <TopCinemas cinemas={state.cinemas} />
-        </View>
+        </Animatable.View>
       </View>
     </>
   );

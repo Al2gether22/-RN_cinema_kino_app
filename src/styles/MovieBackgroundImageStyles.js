@@ -18,13 +18,11 @@ const styles = StyleSheet.create({
   },
   playButton: {
     textAlign: "center"
-    
-    
   },
 
   movieTitle: {
     color: COLORS.white,
-    marginTop: -30,
+    marginTop: -40,
     marginLeft: '5%',
     marginRight: '20%',
     ...FONTS.h1,

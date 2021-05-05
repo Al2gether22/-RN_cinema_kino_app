@@ -15,8 +15,8 @@ const App = () => {
 
   //Hide Splash screen on app load.
   React.useEffect(() => {
-    SplashScreen.hide();
-  });
+    SplashScreen.hide()
+  })
 
   const toastConfig = {
     
@@ -42,10 +42,6 @@ const App = () => {
       />
     ),
     
-    /* 
-      or create a completely new type - `my_custom_type`,
-      building the layout from scratch
-    */
     my_custom_type: ({ text1, props, ...rest }) => (
       <View style={{ height: 60, width: '100%', backgroundColor: 'tomato' }}>
         <Text>{text1}</Text>

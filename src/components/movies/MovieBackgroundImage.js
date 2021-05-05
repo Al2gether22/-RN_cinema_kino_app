@@ -75,7 +75,6 @@ const MovieBackgroundImage = ({
             await analytics().logEvent("Trailervisning", { Title: movie.danishTitle, id: movie.id});
           }}>
           <Animatable.View
-            
             animation="zoomIn"
             duration={900}
             delay={100}>

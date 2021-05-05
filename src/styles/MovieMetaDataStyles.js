@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
     padding: 5,
     marginBottom: 20,
     borderBottomColor: COLORS.white,
-    borderBottomWidth: 0.2,
+    borderBottomWidth: 0.4,
     borderTopColor: COLORS.white,
-    borderTopWidth: 0.2,
+    borderTopWidth: 0.4,
     marginTop: 25
   },
 

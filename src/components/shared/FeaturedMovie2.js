@@ -16,7 +16,7 @@ const FeaturedMovie2 = ({ movies, featuredMovies }) => {
   useEffect(() => {
     const movie = movies.find(el => el.id === featuredMovies[0].id)
     setFeaturedMovie(movie)    
-  }, [])
+  })
   
   return (
     featuredMovie ? 
