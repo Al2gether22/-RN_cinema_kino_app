@@ -3,20 +3,13 @@ import {View, Text, Image, FlatList, StyleSheet} from 'react-native';
 import _ from 'lodash';
 import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
-import MovieModal from '../../modals/MovieModal';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS, FONTS, SIZES} from '../../constants/theme';
+import {TouchableOpacity} from 'react-native';
+import fetchImageColors from '../../helpers/fetchImageColors';
 
 const Top10Movies = ({movies}) => {
   const navigation = useNavigation();
-  const [movieModalVisible, setMovieModalVisible] = useState(false);
-  const [movie, setMovie] = useState({});
-
-  useEffect(() => {
-    if (movie.title) {
-      setMovieModalVisible(true);
-    }
-  }, [movie]);
 
   const Item = item => {
     return (
@@ -29,12 +22,26 @@ const Top10Movies = ({movies}) => {
           onPress={() => {
             setMovie(item);
           }}>
-          <Image
-            style={styles.img}
-            source={{
-              uri: item.imageUrl,
-            }}
-          />
+          <TouchableOpacity
+            onPress={async () => {
+              const imgColors = await fetchImageColors(item.imageUrl);
+
+              navigation.navigate('Film oversigt', {
+                screen: 'Film',
+                params: {
+                  item,
+                  imgColors,
+                  lastScreen: 'Hjem',
+                },
+              });
+            }}>
+            <Image
+              style={styles.img}
+              source={{
+                uri: item.imageUrl,
+              }}
+            />
+          </TouchableOpacity>
         </TouchableScale>
       </View>
     );
@@ -46,12 +53,6 @@ const Top10Movies = ({movies}) => {
       animation="fadeIn"
       duration={900}
       delay={40}>
-      <MovieModal
-        movieModalVisible={movieModalVisible}
-        hideMovieModal={() => setMovieModalVisible(false)}
-        passedMovie={movie}
-      />
-
       <View style={styles.headLineContainer}>
         <Text style={styles.headLine}>Populære Film</Text>
         <TouchableScale
