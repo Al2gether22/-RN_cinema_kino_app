@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text } from 'react-native';
+import { PacmanIndicator } from 'react-native-indicators';
 import Geolocation from '@react-native-community/geolocation';
 import * as Animatable from 'react-native-animatable';
 import {Context as CinemaContext} from '../context/CinemaContext';
@@ -10,10 +11,11 @@ import FeaturedMovie from '../components/shared/FeaturedMovie2';
 import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
-import {COLORS, SIZES} from '../constants/theme';
+import {COLORS, SIZES, FONTS} from '../constants/theme';
 import analytics from '@react-native-firebase/analytics';
 import {firebase} from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
+
 
 import {Platform} from 'react-native';
 
@@ -119,6 +121,15 @@ const Home = () => {
       },
     );
   };
+
+  if (state.cinemas.length === 0 || movies.length == 0) {
+    return (
+      <View style={{height: "100%", backgroundColor: COLORS.backgroundColor }}>
+        <PacmanIndicator color="white" size={75} />
+        <Text style={{fontSize: 25, textAlign: "center", color: "white", flex: 1, ...FONTS.h2}}>Loading...</Text>
+      </View>
+    )
+  }
 
   return (
     <>

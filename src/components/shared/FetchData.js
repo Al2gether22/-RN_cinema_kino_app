@@ -16,7 +16,7 @@ const FetchData = () => {
     if ( state.cinemas.length === 0 ) {
       getCinemas();
     }
-    
+
     getMovies();
     getUpcomingMovies();
     getFeaturedMovies();

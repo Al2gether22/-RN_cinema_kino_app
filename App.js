@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StatusBar, View, Text } from "react-native";
 import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
 import { Provider as MovieProvider } from "./src/context/MoviesContext";
@@ -7,7 +7,7 @@ import { Provider as CinemaProvider } from "./src/context/CinemaContext";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import FetchData from "./src/components/shared/FetchData"
 import Toast, { BaseToast } from 'react-native-toast-message';
-import { SIZES, FONTS, COLORS } from "./src/constants/theme"
+import { FONTS } from "./src/constants/theme"
 import SplashScreen from  "react-native-splash-screen";
 
 
