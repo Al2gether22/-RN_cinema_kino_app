@@ -13,8 +13,6 @@ const UserMetaData = ({userData, userObject, signout}) => {
         modalVisible={modalVisible}
         setModalVisible={() => setModalVisible(false)}
         url={url}
-        cookieName={userObject.session_name}
-        cookieValue={userObject.session_id}
       />
       <View style={styles.userDataContainer}>
         <Image style={styles.profilePic} source={{uri: userData.image}} />

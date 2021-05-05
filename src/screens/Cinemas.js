@@ -12,6 +12,9 @@ const Cinemas = () => {
   const {state} = useContext(Context);
   const [cinemas, setCinemas] = useState(state.cinemas);
 
+  let navState = navigation.dangerouslyGetState();
+  console.log('nav state', navState);
+
   function Item(item) {
     return (
       <TouchableScale
@@ -20,7 +23,9 @@ const Cinemas = () => {
         friction={7}
         useNativeDriver
         style={styles.cinemaOverview}
-        onPress={() => navigation.navigate('Biograf', {item})}>
+        onPress={() => {
+          navigation.navigate('Biograf', {item});
+        }}>
         <SharedElement id={item.imageUrl}>
           <ImageBackground
             style={styles.cinemaImage}

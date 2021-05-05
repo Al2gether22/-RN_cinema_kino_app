@@ -2,7 +2,6 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
 import {Context as CinemaContext} from '../../context/CinemaContext';
-import {Context as AuthContext} from '../../context/AuthContext';
 import WebViewModal from '../../modals/WebViewModal';
 import DatePicker from '../shared/DatePicker';
 import NoShowtimes from '../movies/NoShowtimes';

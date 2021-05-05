@@ -15,7 +15,7 @@ const WebViewModal = ({modalVisible, setModalVisible, url}) => {
       return;
     }
     const user = JSON.parse(state.user);
-    debugger;
+    console.log('Setting cookies', user);
     CookieManager.set('https://kino.dk', {
       name: user.session_name,
       value: user.session_id,
@@ -56,7 +56,6 @@ const WebViewModal = ({modalVisible, setModalVisible, url}) => {
               textAlign: 'right',
               color: 'white',
               marginRight: 10,
-              
             }}
             name="close-circle"
             size={30}
@@ -68,7 +67,7 @@ const WebViewModal = ({modalVisible, setModalVisible, url}) => {
               marginRight: 10,
               top: 0,
               right: 0,
-              position: "absolute"
+              position: 'absolute',
             }}
             name="close-circle-outline"
             size={30}

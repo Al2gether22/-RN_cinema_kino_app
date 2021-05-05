@@ -9,7 +9,6 @@ import styles from '../styles/MoviesStyles';
 import PremiereDate from '../components/movies/PremiereDate';
 import SearchFilterFunction from '../components/shared/SearchFilterFunction';
 import FilterMovies from '../components/movies/FilterMovies';
-import usePosterColors from '../hooks/usePosterColors';
 import fetchImageColors from '../helpers/fetchImageColors';
 import analytics from '@react-native-firebase/analytics';
 

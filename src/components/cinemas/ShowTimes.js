@@ -1,20 +1,20 @@
-import React, {useEffect, useState, useRef, useContext} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {View, Text, FlatList, ActivityIndicator, Image} from 'react-native';
 import _ from 'lodash';
-import {Context as AuthContext} from '../../context/AuthContext';
-import DatePicker from '../shared/DatePicker';
-import MovieModal from '../../modals/MovieModal';
-import WebViewModal from '../../modals/WebViewModal';
-import styles from '../../styles/ShowTimeStyles';
 import moment from 'moment';
 import TouchableScale from 'react-native-touchable-scale';
-import {scrollToIndex} from '../../helpers/datepicker.utils';
-import {create1MonthDates} from '../../helpers/date.utils';
 import MovieVersionLookup from '../shared/MovieVersionLookup';
-import {SIZES} from '../../constants/theme';
 import Toast from 'react-native-toast-message';
 import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
+import {useNavigation} from '@react-navigation/native';
+import DatePicker from '../shared/DatePicker';
+import WebViewModal from '../../modals/WebViewModal';
+import styles from '../../styles/ShowTimeStyles';
+import {SIZES} from '../../constants/theme';
+import {scrollToIndex} from '../../helpers/datepicker.utils';
+import {create1MonthDates} from '../../helpers/date.utils';
+import MovieModal from '../../modals/MovieModal';
 
 //We need versions, they are inside item.versions
 const now = moment();
@@ -23,23 +23,14 @@ const ShowTimes = ({id}) => {
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [monthOfDates, setMonthOfDates] = useState(create1MonthDates(now));
+  const [monthOfDates] = useState(create1MonthDates(now));
   const [selectedDate, setSelectedDate] = useState(monthOfDates[0]);
-  const [movieModalVisible, setMovieModalVisible] = useState(false);
   const [modalVisible, setWebViewModalVisible] = useState(false);
   const [movie, setMovie] = useState({});
   const [showtimeId, setShowtimeId] = useState();
-  const [sessionName, setSessionName] = useState('');
-  const [sessionId, setSessionId] = useState('');
   const [movieVersions, setMovieVersions] = useState([]);
-  const {state} = useContext(AuthContext);
-
-  useEffect(() => {
-    state.user
-      ? setSessionId(JSON.parse(state.user).session_id) &&
-        setSessionName(JSON.parse(state.user).session_name)
-      : null;
-  }, []);
+  const navigation = useNavigation();
+  const [movieModalVisible, setMovieModalVisible] = useState(false);
 
   useEffect(() => {
     const url = `https://www.kino.dk/appservices/cinema/${id}/${selectedDate.format(
@@ -82,7 +73,7 @@ const ShowTimes = ({id}) => {
     // Loop through each showtimes.version and push object values to movieVersions
     let versions = [];
 
-    Object.entries(showtimes).forEach(([key, val]) => {
+    Object.entries(showtimes).forEach(([, val]) => {
       Object.values(val.versions).map(el => versions.push(el));
 
       // Save in variable and then once done push it to setMovieVersions
@@ -96,20 +87,17 @@ const ShowTimes = ({id}) => {
 
   return (
     <View style={styles.container}>
-      <MovieModal
-        movieModalVisible={movieModalVisible}
-        hideMovieModal={() => setMovieModalVisible(false)}
-        passedMovie={movie}
-        showtimes={false}
-        showShowtimes={false}
-      />
-
       <WebViewModal
         modalVisible={modalVisible}
         setModalVisible={() => setWebViewModalVisible(false)}
         url={`https://kino.dk/ticketflow/${showtimeId}`}
-        cookieName={sessionName}
-        cookieValue={sessionId}
+      />
+
+      <MovieModal
+        movieModalVisible={movieModalVisible}
+        hideMovieModal={() => setMovieModalVisible(false)}
+        passedMovie={movie}
+        hideShowTimes={true}
       />
 
       <DatePicker
@@ -143,8 +131,11 @@ const ShowTimes = ({id}) => {
                 tension={50}
                 friction={7}
                 useNativeDriver
-                onPress={() => {
-                  setMovieModalVisible(true), setMovie(item);
+                onPress={async () => {
+                  setMovie(item); //This should not really be used,
+                  //Item/Movie should be passed down to the child flatlist
+                  //or else tracking below is not actual
+                  setMovieModalVisible(true);
                 }}>
                 <View style={styles.moviePosterContainer}>
                   <Image source={{uri: item.imageUrl}} style={styles.poster} />

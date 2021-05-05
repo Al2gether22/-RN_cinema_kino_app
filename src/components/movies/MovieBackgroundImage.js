@@ -10,7 +10,6 @@ import analytics from '@react-native-firebase/analytics';
 import styles from '../../styles/MovieBackgroundImageStyles';
 import {Platform} from 'react-native';
 
-
 const MovieBackgroundImage = ({
   movie,
   image,
