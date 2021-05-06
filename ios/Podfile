@@ -2,7 +2,7 @@ platform :ios, '10.0'
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'KinoApp' do
+target 'Kino' do
   config = use_native_modules!
 
   use_react_native!(
@@ -15,7 +15,7 @@ target 'KinoApp' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
-  target 'KinoAppTests' do
+  target 'KinoTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -35,10 +35,10 @@ target 'KinoApp' do
   # https://firebase.google.com/docs/ios/setup#available-pods
   end
 
-# target 'KinoApp-tvOS' do
-#   # Pods for KinoApp-tvOS
+# target 'Kino-tvOS' do
+#   # Pods for Kino-tvOS
 
-#   target 'KinoApp-tvOSTests' do
+#   target 'Kino-tvOSTests' do
 #     inherit! :search_paths
 #     # Pods for testing
 #   end

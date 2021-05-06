@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, StyleSheet, Text } from 'react-native';
+import {View, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import { PacmanIndicator } from 'react-native-indicators';
 import Geolocation from '@react-native-community/geolocation';
 import * as Animatable from 'react-native-animatable';
@@ -107,7 +107,7 @@ const Home = () => {
     );
   };
 
-  if (state.cinemas.length === 0 || movies.length == 0) {
+  if (state.cinemas.length == 0 || movies.length == 0) {
     return (
       <View style={{height: "100%", flex: 1, justifyContent: "center", backgroundColor: COLORS.backgroundColor }}>
         <PacmanIndicator color="white" size={75} />
