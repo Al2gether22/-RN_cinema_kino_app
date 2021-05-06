@@ -19,7 +19,10 @@ const Top10Movies = ({cinemas}) => {
           friction={7}
           useNativeDriver
           onPress={() => {
-            navigation.navigate('Biografer', {item});
+            navigation.navigate('Biografer', {
+              screen: 'Biograf',
+              params: {item},
+            });
           }}>
           <ImageBackground
             style={styles.img}
