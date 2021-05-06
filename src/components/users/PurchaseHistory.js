@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { View, ActivityIndicator, FlatList, Image, Text } from "react-native";
+import { View, ActivityIndicator, FlatList, Text } from "react-native";
+import FastImage from 'react-native-fast-image'
 import Toast from 'react-native-toast-message';
 import crashlytics from '@react-native-firebase/crashlytics';
 
@@ -60,7 +61,7 @@ const PurchaseHistory = ({ user }) => {
 
       <View style={styles.itemContainer}>
         <View style={styles.posterImgContainer}>
-          <Image
+          <FastImage
             style={styles.posterImg}
             source={{
             uri: item.imageUrl,

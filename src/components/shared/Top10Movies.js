@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, Image, FlatList, StyleSheet} from 'react-native';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
+import FastImage from 'react-native-fast-image'
 import _ from 'lodash';
 import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
@@ -34,7 +35,7 @@ const Top10Movies = ({movies}) => {
                 },
               });
             }}>
-            <Image
+            <FastImage
               style={styles.img}
               source={{
                 uri: item.imageUrl,
