@@ -21,12 +21,8 @@ const Top10Movies = ({cinemas}) => {
           onPress={() => {
             navigation.navigate('Biografer', {
               screen: 'Biograf',
-              params: {
-                item,
-                
-              },
+              params: {item},
             });
-            navigation.navigate('Biografer', {item});
           }}>
           <ImageBackground
             style={styles.img}

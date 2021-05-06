@@ -104,7 +104,7 @@ export default function BottomTabNavigator() {
           options={{unmountOnBlur: true}}
           listeners={({navigation}) => ({
             tabPress: () => {
-              navigation.navigate('Biografer');
+              navigation.navigate('Biografer', {screen: 'Film oversigt'});
             },
           })}
         />
