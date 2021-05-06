@@ -2,7 +2,8 @@ import React, {useContext, useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import _ from 'lodash';
 import {Context} from '../context/MoviesContext';
-import {View, Text, FlatList, Image} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
+import FastImage from 'react-native-fast-image'
 import TouchableScale from 'react-native-touchable-scale';
 import {SharedElement} from 'react-navigation-shared-element';
 import styles from '../styles/MoviesStyles';
@@ -62,7 +63,7 @@ const Movies = () => {
           });
         }}>
         <SharedElement id={item.imageUrl}>
-          <Image style={styles.coverImage} source={{uri: item.imageUrl}} />
+          <FastImage style={styles.coverImage} source={{uri: item.imageUrl}} />
         </SharedElement>
 
         {parsedDate(item.danishPremiere) > currentDate && (
