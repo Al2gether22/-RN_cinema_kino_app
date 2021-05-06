@@ -14,11 +14,11 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="1TO-Cy-jBK">
-                    <rect key="frame" x="43.333333333333371" y="292.33333333333337" width="341.33333333333326" height="341.33333333333337"/>
+                    <rect key="frame" x="43.333333333333343" y="292.33333333333337" width="341.33333333333326" height="341.33333333333337"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" red="0.117733486" green="0.11709066479999999" blue="0.15294590590000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="1TO-Cy-jBK" firstAttribute="centerX" secondItem="u61-ef-NYc" secondAttribute="centerX" id="aSf-mk-99O"/>
                 <constraint firstItem="1TO-Cy-jBK" firstAttribute="centerY" secondItem="u61-ef-NYc" secondAttribute="centerY" id="ekI-ZR-ZZE"/>
