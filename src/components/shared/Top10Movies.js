@@ -60,7 +60,7 @@ const Top10Movies = ({movies}) => {
           friction={7}
           useNativeDriver
           onPress={() => {
-            navigation.navigate('Film oversigt');
+            navigation.navigate('Film oversigt', {screen: 'Film oversigt'});
           }}>
           <Text style={styles.headLineLink}>Alle Film</Text>
         </TouchableScale>
