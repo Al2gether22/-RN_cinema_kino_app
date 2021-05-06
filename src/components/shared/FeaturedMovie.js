@@ -14,7 +14,7 @@ import fetchImageColors from '../../helpers/fetchImageColors';
 
 const FeaturedMovie = ({movies, featuredMovies}) => {
   const [featuredMovie, setFeaturedMovie] = useState();
-
+  const [videoPaused, setVideoPaused] = useState(true)
   const navigation = useNavigation();
 
   // Do a lookup in movies with the movie id and find the movie and pass it to movie modal
@@ -51,6 +51,7 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
 
   console.log('featuredMovies[0].videoUrl', featuredMovies[0].videoUrl);
 
+
   return (
     <View style={styles.coverImageContainer}>
       {featuredMovies[0].videoUrl ? (
@@ -62,11 +63,13 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
             style={styles.coverVideo}
             muted={true}
             repeat={true}
+            paused={videoPaused}
             resizeMode={'cover'}
             controls={false}
             rate={1.0}
             poster={featuredMovies[0].imageUrl}
             posterResizeMode={'cover'}
+            onLoad={() => {setVideoPaused(false)}}
           />
 
           <View style={styles.linkContainer}>
