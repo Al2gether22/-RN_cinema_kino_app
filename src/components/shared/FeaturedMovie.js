@@ -63,13 +63,13 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
             style={styles.coverVideo}
             muted={true}
             repeat={true}
-            paused={videoPaused}
+            paused={false}
             resizeMode={'cover'}
             controls={false}
             rate={1.0}
             poster={featuredMovies[0].imageUrl}
             posterResizeMode={'cover'}
-            onLoad={() => {setVideoPaused(false)}}
+            
           />
 
           <View style={styles.linkContainer}>
