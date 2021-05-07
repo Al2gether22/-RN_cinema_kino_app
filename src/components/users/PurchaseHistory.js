@@ -51,7 +51,11 @@ const PurchaseHistory = ({ user }) => {
 
   if (!userHistoryData) {
     return(
-      <Text>Ingen Købshistorik tilgængelig</Text>
+      <View style={styles.purchaseHistoryContainer}>
+        <Text style={styles.purchaseHistoryHeadline}>Ingen Købshistorik tilgængelig</Text>
+        <Text style={styles.purchaseHistoryHeadline}>Prøv evt. at logge ud og logge ind igen.</Text>
+      </View>
+      
     )
   }
   
