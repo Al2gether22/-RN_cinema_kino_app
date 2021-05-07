@@ -15,6 +15,7 @@
 		515FFAE77AF805565E23C018 /* libPods-Kino.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA4CD5578C258DA28D7B69C /* libPods-Kino.a */; };
 		531928282CA94918A8E4DF3B /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A60306E4FD124714A9A17BD6 /* SourceSansPro-Light.ttf */; };
 		71628A1F871B4062B3E1547E /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB164675004D43008C1BF2CD /* SourceSansPro-Regular.ttf */; };
+		8612058226453D1100D0CF45 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8612058126453D1100D0CF45 /* AppCenter-Config.plist */; };
 		8695C71425E69AAC00D74D08 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8695C71325E69AAC00D74D08 /* Images-2.xcassets */; };
 		86ED42112639EC02002B8FD3 /* featured-movie-fallback.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 86ED42102639EC02002B8FD3 /* featured-movie-fallback.jpg */; };
 		EE4625C6AFCDCEBF47E3B074 /* libPods-Kino-KinoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59393621CECBB9B90C3FB02C /* libPods-Kino-KinoTests.a */; };
@@ -68,6 +69,7 @@
 		5FB791DFDF8641D9B8007CD7 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
 		690F036D2F894980808867A3 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
 		73A28D2D3B04496082CF02A4 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = ../assets/fonts/SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		8612058126453D1100D0CF45 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		8695C71325E69AAC00D74D08 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "Kino/Images-2.xcassets"; sourceTree = "<group>"; };
 		86ED42102639EC02002B8FD3 /* featured-movie-fallback.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "featured-movie-fallback.jpg"; path = "../assets/images/featured-movie-fallback.jpg"; sourceTree = "<group>"; };
 		8DFDB03D4E6C4A43A93C0F3B /* BureauGrotCond-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BureauGrotCond-Light.ttf"; path = "../assets/fonts/BureauGrotCond-Light.ttf"; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		13B07FAE1A68108700A75B9A /* Kino */ = {
 			isa = PBXGroup;
 			children = (
+				8612058126453D1100D0CF45 /* AppCenter-Config.plist */,
 				F88261582638B87C009B42D7 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -336,6 +339,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				F879183E2600ADBA00B06245 /* BasierSquare-Regular.otf in Resources */,
 				86ED42112639EC02002B8FD3 /* featured-movie-fallback.jpg in Resources */,
+				8612058226453D1100D0CF45 /* AppCenter-Config.plist in Resources */,
 				F87918442600AE0300B06245 /* BureauGrotComp-Medium.ttf in Resources */,
 				F87918412600ADC100B06245 /* SourceSansPro-Bold.ttf in Resources */,
 				F879184A2600AE7200B06245 /* SourceSansPro-Black.ttf in Resources */,
