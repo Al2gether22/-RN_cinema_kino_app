@@ -1,4 +1,4 @@
-package com.kiloo.kinodk;
+package com.kiloo.KinoDK;
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen; 

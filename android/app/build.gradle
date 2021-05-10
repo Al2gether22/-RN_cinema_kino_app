@@ -132,10 +132,10 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.kiloo.kinodk"
+        applicationId "com.kiloo.KinoDK"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
+        versionCode 301
         versionName "3.0"
     }
     splits {
