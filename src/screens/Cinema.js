@@ -7,7 +7,6 @@ import {Platform} from 'react-native';
 import crashlytics from '@react-native-firebase/crashlytics';
 
 const Cinema = ({route}) => {
-  console.log('CINEMA SCREEN');
   const {item} = route.params;
   const [cinema, setCinema] = useState([]);
   const [loading, setLoading] = useState(true);

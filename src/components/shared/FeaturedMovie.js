@@ -49,9 +49,6 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
       />
     );
 
-  console.log('featuredMovies[0].videoUrl', featuredMovies[0].videoUrl);
-
-
   return (
     <View style={styles.coverImageContainer}>
       {featuredMovies[0].videoUrl ? (

@@ -13,7 +13,6 @@ const Cinemas = () => {
   const [cinemas, setCinemas] = useState(state.cinemas);
 
   let navState = navigation.dangerouslyGetState();
-  console.log('nav state', navState);
 
   function Item(item) {
     return (
