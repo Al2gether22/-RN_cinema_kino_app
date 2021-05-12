@@ -34,7 +34,6 @@ const Movies = () => {
     trackData();
   }, []);
 
-  console.log(movies[0])
 
   function Item(item) {
     // Formatting date to compare it to date today

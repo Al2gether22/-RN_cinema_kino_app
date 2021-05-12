@@ -9,8 +9,29 @@ const FilterMovies = ({ state, setFilteredMovies }) => {
   const [activeButton, setActiveButton] = useState(1);
 
   const filterByCurrent = () => {
-    const currentMovies = state.movies.filter(movie => movie.status === "current")
-    setFilteredMovies(_.orderBy(currentMovies, "danishPremiere"))
+    // const currentMovies = state.movies.filter(movie => movie.status === "current")
+    // checkEmptyContent(currentMovies)
+    // const currentMoviesSorted = currentMovies.sort((a, b) => {
+    //   const 
+    //       dateA = new Date(a.danishPremiere),
+    //       dateB = new Date(b.danishPremiere);
+    
+    //   return !a.danishPremiere - !b.danishPremiere
+    //       || dateA - dateB;
+    // })
+    
+    //setFilteredMovies(_.orderBy(currentMovies, "danishPremiere"))
+    
+    // function checkEmptyContent(data){
+    //   data.forEach((item)=>{
+    //     item.danishPremiere == null ? item.danishPremiere = item.next_showtime : item.danishPremiere
+         
+    //   });
+    // }
+
+    setFilteredMovies(state.movies.filter(movie => movie.status === "current"))
+    
+    
   }
 
   const filterByUpcoming = () => {
