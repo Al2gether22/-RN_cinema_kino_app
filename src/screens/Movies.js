@@ -34,6 +34,8 @@ const Movies = () => {
     trackData();
   }, []);
 
+  console.log(movies[0])
+
   function Item(item) {
     // Formatting date to compare it to date today
 
@@ -72,7 +74,7 @@ const Movies = () => {
         <View style={styles.titleContainer}>
           <SharedElement id={item.danishTitle}>
             <Text style={styles.cardTitle}>
-              {item.title ? item.danishTitle : item.title}
+              {item.danishTitle ? item.danishTitle : item.title}
             </Text>
           </SharedElement>
         </View>
