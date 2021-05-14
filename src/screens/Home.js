@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, StyleSheet, Text, ActivityIndicator } from 'react-native';
-import { PacmanIndicator } from 'react-native-indicators';
+import {View, StyleSheet, Text, ActivityIndicator} from 'react-native';
+import {PacmanIndicator} from 'react-native-indicators';
 import Geolocation from '@react-native-community/geolocation';
 import * as Animatable from 'react-native-animatable';
 import {Context as CinemaContext} from '../context/CinemaContext';
@@ -28,7 +28,7 @@ const Home = () => {
   const platformPermission =
     Platform.OS === 'ios'
       ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
-      : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;;
+      : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
 
   useEffect(() => {
     checkPermissions();
@@ -46,25 +46,25 @@ const Home = () => {
   }, []);
 
   const checkPermissions = () => {
-    check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
+    check(platformPermission)
       .then(result => {
         switch (result) {
           case RESULTS.UNAVAILABLE:
-            analytics().logEvent("GeoTracking", { Status: "Unavailable"});
+            analytics().logEvent('GeoTracking', {Status: 'Unavailable'});
             break;
           case RESULTS.DENIED:
             setModalVisible(true);
-            analytics().logEvent("GeoTracking", { Status: "Denied"});
+            analytics().logEvent('GeoTracking', {Status: 'Denied'});
             break;
           case RESULTS.LIMITED:
-            analytics().logEvent("GeoTracking", { Status: "Limited"});
+            analytics().logEvent('GeoTracking', {Status: 'Limited'});
             break;
           case RESULTS.GRANTED:
-            analytics().logEvent("GeoTracking", { Status: "Granted"});
+            analytics().logEvent('GeoTracking', {Status: 'Granted'});
             getOneTimeLocation();
             break;
           case RESULTS.BLOCKED:
-            analytics().logEvent("GeoTracking", { Status: "Blocked"});
+            analytics().logEvent('GeoTracking', {Status: 'Blocked'});
             break;
         }
       })
@@ -109,11 +109,26 @@ const Home = () => {
 
   if (state.cinemas.length == 0 || movies.length == 0) {
     return (
-      <View style={{height: "100%", flex: 1, justifyContent: "center", backgroundColor: COLORS.backgroundColor }}>
+      <View
+        style={{
+          height: '100%',
+          flex: 1,
+          justifyContent: 'center',
+          backgroundColor: COLORS.backgroundColor,
+        }}>
         <PacmanIndicator color="white" size={75} />
-        <Text style={{fontSize: 25, textAlign: "center", color: "white", flex: 1, ...FONTS.h2}}>Loading...</Text>
+        <Text
+          style={{
+            fontSize: 25,
+            textAlign: 'center',
+            color: 'white',
+            flex: 1,
+            ...FONTS.h2,
+          }}>
+          Loading...
+        </Text>
       </View>
-    )
+    );
   }
 
   return (
@@ -123,31 +138,27 @@ const Home = () => {
         setModalVisible={() => setModalVisible(false)}
         requestPermissions={requestPermissions}
       />
- 
 
       <View style={styles.container}>
-        <Animatable.View 
+        <Animatable.View
           style={styles.featuredMovieContainer}
-          animation='fadeIn'
+          animation="fadeIn"
           duration={600}
-          delay={0}
-        >
+          delay={0}>
           <FeaturedMovie movies={movies} featuredMovies={featuredMovies} />
         </Animatable.View>
-        <Animatable.View 
+        <Animatable.View
           style={styles.slidersContainer}
-          animation='fadeIn'
+          animation="fadeIn"
           duration={600}
-          delay={200}
-        >
+          delay={200}>
           <Top10Movies movies={movies} />
         </Animatable.View>
-        <Animatable.View 
+        <Animatable.View
           style={styles.slidersContainer}
-          animation='fadeIn'
+          animation="fadeIn"
           duration={600}
-          delay={400}
-        >
+          delay={400}>
           <TopCinemas cinemas={state.cinemas} />
         </Animatable.View>
       </View>
