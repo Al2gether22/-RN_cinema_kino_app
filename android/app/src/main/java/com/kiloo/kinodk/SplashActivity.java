@@ -1,4 +1,4 @@
-package com.kiloo.KinoDK;
+package com.kiloo.kinodk;
 
 import android.content.Intent;
 import android.os.Bundle;
