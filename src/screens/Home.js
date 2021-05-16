@@ -102,7 +102,7 @@ const Home = () => {
       {
         enableHighAccuracy: true,
         timeout: 30000,
-        maximumAge: 1000,
+        maximumAge: 3600000,
       },
     );
   };
