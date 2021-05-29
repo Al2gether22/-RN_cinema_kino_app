@@ -122,7 +122,6 @@ const CinemaModal = ({
         />
       </>
     </Modal>
-    
   );
 };
 

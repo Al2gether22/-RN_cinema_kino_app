@@ -12,8 +12,45 @@ const cinemaReducer = (state, action) => {
       return {...state, cinemas: action.payload, isCinemasFetched: true};
     case 'update_cinemas':
       return {...state, cinemas: action.payload, cinemasSorted: true};
+    case 'toggle_favorite_cinema':
+      console.log('reducer toggle_favorite_cinema');
+      const favoriteCinemas = state.favoriteCinemas;
+      console.log(favoriteCinemas);
+      console.log(action.payload);
+      if (favoriteCinemas.includes(action.payload)) {
+        return {
+          ...state,
+          favoriteCinemas: favoriteCinemas.filter(c => c !== action.payload),
+        };
+      }
+      return {...state, favoriteCinemas: [...favoriteCinemas, action.payload]};
     default:
       return state;
+  }
+};
+
+const toggleFavoriteCinema = dispatch => async cinemaId => {
+  console.log('cinemaId', cinemaId);
+  try {
+    dispatch({
+      type: 'toggle_favorite_cinema',
+      payload: cinemaId,
+    });
+  } catch (err) {
+    crashlytics().recordError(err);
+    console.error(err);
+    Toast.show({
+      text1: 'Noget gik galt!',
+      text2: 'Prøv at lukke appen og start den igen',
+      position: 'bottom',
+      bottomOffset: 300,
+      type: 'error',
+      autoHide: false,
+    });
+    dispatch({
+      type: 'add_error',
+      payload: 'Something went wrong with the cinemas',
+    });
   }
 };
 
@@ -34,7 +71,7 @@ const getCinemas = dispatch => async () => {
       text2: 'Prøv at lukke appen og start den igen',
       position: 'bottom',
       bottomOffset: 300,
-      type: "error",
+      type: 'error',
       autoHide: false,
     });
     dispatch({
@@ -56,7 +93,7 @@ const updateCinemas = dispatch => {
       };
     });
     const orderedCinemas = _.orderBy(cinemasWithDistance, 'distance');
-    
+
     dispatch({type: 'update_cinemas', payload: orderedCinemas});
     // Update cinemas is called with cinemas array and user coordinates
     // A distance value is added to each cinema based on user coords and cinema cords
@@ -67,9 +104,10 @@ const updateCinemas = dispatch => {
 
 export const {Context, Provider} = dataContext(
   cinemaReducer,
-  {updateCinemas, getCinemas},
+  {updateCinemas, getCinemas, toggleFavoriteCinema},
   {
     cinemas: [],
+    favoriteCinemas: [],
     errorMessage: '',
     cinemasSorted: false,
     isCinemasFetched: false,
