@@ -21,17 +21,17 @@ const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
       <View style={styles.container}>
         <View style={styles.modalContainer}>
           <View style={styles.modalTextContainer}>
-            <Text style={styles.headerText}>Velkommen!</Text>
-            <Text style={styles.bodyText}>
+            <Text allowFontScaling={false} style={styles.headerText}>Velkommen!</Text>
+            <Text allowFontScaling={false} style={styles.bodyText}>
               Tak fordi du downloadede vores nye app.
             </Text>
-            <Text style={styles.bodyText}>
+            <Text allowFontScaling={false} style={styles.bodyText}>
               Vi vil rigtig gerne give dig den bedst mulige oplevelse og præsentere de mest relevante biografer for dig. Derfor vil vi om lidt spørge dig, om vi må bruge din telefons GPS. Det anbefaler vi, at du siger ja til, så vi kan vise de biografer, der er tættest på dig, først i en rangering.
             </Text>
-            <Text style={styles.bodyText}>
+            <Text allowFontScaling={false} style={styles.bodyText}>
               Din lokation og GPS-koordinater bliver ikke gemt, men bruges blot i realtid, så vi kan sortere biografern
             </Text>
-            <Text style={styles.bodyText}>
+            <Text allowFontScaling={false} style={styles.bodyText}>
               God fornøjelse med den nye kino.dk-app.
             </Text>
           </View>
@@ -44,7 +44,7 @@ const UserInfoModal = ({modalVisible, setModalVisible, requestPermissions}) => {
               });
             }}>
             <View style={styles.modalOkButtonContainer}>
-              <Text style={styles.modalOkButton}>OK</Text>
+              <Text allowFontScaling={false} style={styles.modalOkButton}>OK</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     fontFamily: 'SourceSansPro-Bold',
     color: 'black',
     lineHeight: 20,
-    fontSize: 15,
-    marginBottom: 10
+    marginBottom: 10,
+    ...FONTS.h3,
   },
   modalOkButtonContainer: {
     padding: 10,
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
   modalOkButton: {
     fontFamily: 'SourceSansPro-Bold',
     color: 'black',
-    fontSize: 15,
     textAlign: 'center',
+    ...FONTS.h3,
   },
 });
 
