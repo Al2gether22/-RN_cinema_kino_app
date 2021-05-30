@@ -143,7 +143,7 @@ const ShowTimes = ({id}) => {
               </TouchableScale>
 
               <View>
-                <Text style={styles.sectionHeader}>{item.danishTitle}</Text>
+                <Text numberOfLines={1} style={styles.sectionHeader}>{item.danishTitle}</Text>
 
                 <FlatList
                   keyboardShouldPersistTaps="always"

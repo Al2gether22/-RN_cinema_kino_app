@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     ...FONTS.h3,
     fontSize: 18,
+    maxWidth: SIZES.width - 100
   },
   showTimesContainer: {
     marginBottom: 5,
