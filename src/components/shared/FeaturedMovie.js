@@ -66,7 +66,8 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
             rate={1.0}
             poster={featuredMovies[0].imageUrl}
             posterResizeMode={'cover'}
-            
+            disableFocus={true}
+            mixWithOthers={"mix"}
           />
 
           <View style={styles.linkContainer}>
