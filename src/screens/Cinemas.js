@@ -54,6 +54,7 @@ const Cinemas = () => {
       <FlatList
         keyboardShouldPersistTaps="always"
         data={cinemas}
+        showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => Item(item)}
       />
