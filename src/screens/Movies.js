@@ -86,7 +86,7 @@ const Movies = () => {
       <SearchFilterFunction
         data={filteredMovies}
         filteredData={setFilteredMovies}
-        filterValue="title"
+        filterValue="danishTitle"
       />
 
       <FilterMovies state={state} setFilteredMovies={setFilteredMovies} />
