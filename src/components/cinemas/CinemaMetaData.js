@@ -28,30 +28,7 @@ const CinemaMetaData = ({cinema}) => {
 
   const openMap = createOpenLink({query: cinema.address});
 
-  async function favoriteCinemaToggle(cinemaId) {
-    try {
-      console.log(cinemaId);
-      let favorites = JSON.parse(await AsyncStorage.getItem('favoriteCinemas'));
-      if (!favorites) {
-        favorites = [];
-      }
-      console.log(favorites);
-      if (favorites.includes(cinemaId)) {
-        favorites = favorites.filter(item => item !== cinemaId);
-        await AsyncStorage.setItem(
-          'favoriteCinemas',
-          JSON.stringify(favorites),
-        );
-        return;
-      }
-      await AsyncStorage.setItem(
-        'favoriteCinemas',
-        JSON.stringify([...favorites, cinemaId]),
-      );
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  console.log(state.favoriteCinemas);
 
   return (
     <>
@@ -90,7 +67,7 @@ const CinemaMetaData = ({cinema}) => {
           <Text style={styles.cinemaMetaHeader}>
             <MaterialCommunityIcons
               name={
-                state.favoriteCinemas.includes(cinema.nid)
+                state.favoriteCinemas.includes(parseInt(cinema.nid))
                   ? 'star'
                   : 'star-outline'
               }

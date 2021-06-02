@@ -11,30 +11,56 @@ const cinemaReducer = (state, action) => {
     case 'get_cinemas':
       return {...state, cinemas: action.payload, isCinemasFetched: true};
     case 'update_cinemas':
-      return {...state, cinemas: action.payload, cinemasSorted: true};
+      const orderCinemasWithFavoritesOnTop = sortFavoritesToTop(
+        action.payload,
+        state.favoriteCinemas,
+      );
+      return {
+        ...state,
+        cinemas: orderCinemasWithFavoritesOnTop,
+        cinemasSorted: true,
+      };
+
     case 'toggle_favorite_cinema':
-      console.log('reducer toggle_favorite_cinema');
-      const favoriteCinemas = state.favoriteCinemas;
-      console.log(favoriteCinemas);
-      console.log(action.payload);
-      if (favoriteCinemas.includes(action.payload)) {
+      //If cinema is already favorite, remove it from favorites
+      if (state.favoriteCinemas.includes(action.payload)) {
         return {
           ...state,
-          favoriteCinemas: favoriteCinemas.filter(c => c !== action.payload),
+          favoriteCinemas: [
+            ...state.favoriteCinemas.filter(c => c !== action.payload),
+          ],
         };
       }
-      return {...state, favoriteCinemas: [...favoriteCinemas, action.payload]};
+
+      const favoriteCinemas = [...state.favoriteCinemas, action.payload];
+      const cinemas = sortFavoritesToTop([...state.cinemas], favoriteCinemas);
+
+      return {
+        ...state,
+        favoriteCinemas: [...state.favoriteCinemas, action.payload],
+        cinemas,
+      };
     default:
       return state;
   }
 };
 
+function sortFavoritesToTop(cinemas, favoriteCinemas) {
+  cinemas.sort(function(a, b) {
+    return favoriteCinemas.includes(a.id)
+      ? -1
+      : favoriteCinemas.includes(b.id)
+      ? 1
+      : 0;
+  });
+  return cinemas;
+}
+
 const toggleFavoriteCinema = dispatch => async cinemaId => {
-  console.log('cinemaId', cinemaId);
   try {
     dispatch({
       type: 'toggle_favorite_cinema',
-      payload: cinemaId,
+      payload: parseInt(cinemaId),
     });
   } catch (err) {
     crashlytics().recordError(err);
@@ -94,7 +120,7 @@ const updateCinemas = dispatch => {
     });
     const orderedCinemas = _.orderBy(cinemasWithDistance, 'distance');
 
-    dispatch({type: 'update_cinemas', payload: orderedCinemas});
+    dispatch({type: 'update_cinemas', payload: orderedCinemas}); //We order cinemas with favs on top in reducer later
     // Update cinemas is called with cinemas array and user coordinates
     // A distance value is added to each cinema based on user coords and cinema cords
     // cinemas are sorted by distance
