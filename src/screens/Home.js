@@ -81,7 +81,7 @@ const Home = () => {
 
   const requestPermissions = async () => {
     try {
-      const result = await request(platformPermission);
+      await request(platformPermission);
       checkPermissions();
     } catch (err) {
       crashlytics().recordError(err);

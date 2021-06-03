@@ -32,6 +32,7 @@ const cinemaReducer = (state, action) => {
         const favoriteCinemas = [
           ...state.favoriteCinemas.filter(c => c !== action.payload),
         ];
+
         AsyncStorage.setItem(
           '@FavoriteCinemas',
           JSON.stringify(favoriteCinemas),
@@ -143,7 +144,6 @@ const updateCinemas = dispatch => {
 };
 
 const restoreFavoriteCinemas = dispatch => async () => {
-  console.log('restore favs');
   const favoriteCinemas = await AsyncStorage.getItem('@FavoriteCinemas');
   if (favoriteCinemas) {
     dispatch({

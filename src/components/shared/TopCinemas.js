@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useRef} from 'react';
 import {View, Text, FlatList, StyleSheet} from 'react-native';
 import _ from 'lodash';
 import {ImageBackground} from 'react-native';
@@ -6,9 +6,14 @@ import * as Animatable from 'react-native-animatable';
 import TouchableScale from 'react-native-touchable-scale';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS, FONTS, SIZES} from '../../constants/theme';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Context as CinemaContext} from '../../context/CinemaContext';
+import {TouchableOpacity} from 'react-native';
 
 const Top10Movies = ({cinemas}) => {
   const navigation = useNavigation();
+  const flatListRef = useRef(null);
+  const {state, toggleFavoriteCinema} = useContext(CinemaContext);
 
   const Item = item => {
     return (
@@ -29,6 +34,23 @@ const Top10Movies = ({cinemas}) => {
             source={{
               uri: item.imageUrl,
             }}>
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  toggleFavoriteCinema(item.id);
+                  flatListRef.current.scrollToIndex({index: 0});
+                }}>
+                <MaterialCommunityIcons
+                  name={
+                    state.favoriteCinemas.includes(parseInt(item.id))
+                      ? 'star'
+                      : 'star-outline'
+                  }
+                  size={25}
+                  color="white"
+                />
+              </TouchableOpacity>
+            </View>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{item.name}</Text>
             </View>
@@ -59,6 +81,7 @@ const Top10Movies = ({cinemas}) => {
       </View>
 
       <FlatList
+        ref={ref => (flatListRef.current = ref)}
         keyboardShouldPersistTaps="always"
         data={cinemas.slice(0, 5)}
         renderItem={({item}) => Item(item)}

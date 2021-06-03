@@ -1,18 +1,25 @@
 import React, {useContext, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Context} from '../context/CinemaContext';
-import {View, Text, FlatList, ImageBackground} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import {SharedElement} from 'react-navigation-shared-element';
 import TouchableScale from 'react-native-touchable-scale';
 import styles from '../styles/CinemasStyles';
 import SearchFilterFunction from '../components/shared/SearchFilterFunction';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Context as CinemaContext} from '../context/CinemaContext';
 
 const Cinemas = () => {
   const navigation = useNavigation();
   const {state} = useContext(Context);
+  const {toggleFavoriteCinema} = useContext(CinemaContext);
   const [cinemas, setCinemas] = useState(state.cinemas);
-
-  let navState = navigation.dangerouslyGetState();
 
   function Item(item) {
     return (
@@ -38,6 +45,19 @@ const Cinemas = () => {
                 {item.distance ? `${item.distance.toFixed(1)} km` : ''}
               </Text>
             </View>
+            <TouchableOpacity onPress={() => toggleFavoriteCinema(item.id)}>
+              <Text>
+                <MaterialCommunityIcons
+                  name={
+                    state.favoriteCinemas.includes(parseInt(item.id))
+                      ? 'star'
+                      : 'star-outline'
+                  }
+                  size={25}
+                  color="white"
+                />
+              </Text>
+            </TouchableOpacity>
           </ImageBackground>
         </SharedElement>
       </TouchableScale>
