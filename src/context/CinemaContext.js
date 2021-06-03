@@ -3,6 +3,7 @@ import _ from 'lodash';
 import {computeDistance} from '../helpers/computeDistance';
 import Toast from 'react-native-toast-message';
 import crashlytics from '@react-native-firebase/crashlytics';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const cinemaReducer = (state, action) => {
   switch (action.type) {
@@ -21,19 +22,30 @@ const cinemaReducer = (state, action) => {
         cinemasSorted: true,
       };
 
+    case 'restore_fav_cinemas':
+      return {...state, favoriteCinemas: action.payload};
+
     case 'toggle_favorite_cinema':
       //If cinema is already favorite, remove it from favorites
+      if (!state.favoriteCinemas) return state;
       if (state.favoriteCinemas.includes(action.payload)) {
+        const favoriteCinemas = [
+          ...state.favoriteCinemas.filter(c => c !== action.payload),
+        ];
+        AsyncStorage.setItem(
+          '@FavoriteCinemas',
+          JSON.stringify(favoriteCinemas),
+        );
         return {
           ...state,
-          favoriteCinemas: [
-            ...state.favoriteCinemas.filter(c => c !== action.payload),
-          ],
+          favoriteCinemas,
         };
       }
 
       const favoriteCinemas = [...state.favoriteCinemas, action.payload];
       const cinemas = sortFavoritesToTop([...state.cinemas], favoriteCinemas);
+
+      AsyncStorage.setItem('@FavoriteCinemas', JSON.stringify(favoriteCinemas));
 
       return {
         ...state,
@@ -46,6 +58,7 @@ const cinemaReducer = (state, action) => {
 };
 
 function sortFavoritesToTop(cinemas, favoriteCinemas) {
+  if (!favoriteCinemas) return cinemas;
   cinemas.sort(function(a, b) {
     return favoriteCinemas.includes(a.id)
       ? -1
@@ -57,6 +70,7 @@ function sortFavoritesToTop(cinemas, favoriteCinemas) {
 }
 
 const toggleFavoriteCinema = dispatch => async cinemaId => {
+  console.log('toggle cinema');
   try {
     dispatch({
       type: 'toggle_favorite_cinema',
@@ -128,9 +142,20 @@ const updateCinemas = dispatch => {
   };
 };
 
+const restoreFavoriteCinemas = dispatch => async () => {
+  console.log('restore favs');
+  const favoriteCinemas = await AsyncStorage.getItem('@FavoriteCinemas');
+  if (favoriteCinemas) {
+    dispatch({
+      type: 'restore_fav_cinemas',
+      payload: JSON.parse(favoriteCinemas),
+    });
+  }
+};
+
 export const {Context, Provider} = dataContext(
   cinemaReducer,
-  {updateCinemas, getCinemas, toggleFavoriteCinema},
+  {updateCinemas, getCinemas, toggleFavoriteCinema, restoreFavoriteCinemas},
   {
     cinemas: [],
     favoriteCinemas: [],
