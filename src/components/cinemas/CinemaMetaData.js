@@ -1,20 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Platform} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {TouchableOpacity} from 'react-native';
-import {Text, StyleSheet, Linking} from 'react-native';
+import {Text, StyleSheet, Linking, View} from 'react-native';
 import {createOpenLink} from 'react-native-open-maps';
 import HTML from 'react-native-render-html';
 import {IGNORED_TAGS} from 'react-native-render-html';
 import * as Animatable from 'react-native-animatable';
 import {COLORS, FONTS} from '../../constants/theme';
-import {Context as CinemaContext} from '../../context/CinemaContext';
+import StarFavorite from '../cinemas/StarFavorite';
 
 const CinemaMetaData = ({cinema}) => {
-  const {state, toggleFavoriteCinema} = useContext(CinemaContext);
-
-  callCinema = () => {
+  const callCinema = () => {
     let phoneNumber = '';
 
     if (Platform.OS === 'android') {
@@ -27,8 +24,6 @@ const CinemaMetaData = ({cinema}) => {
   };
 
   const openMap = createOpenLink({query: cinema.address});
-
-  console.log(state.favoriteCinemas);
 
   return (
     <>
@@ -61,21 +56,11 @@ const CinemaMetaData = ({cinema}) => {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => toggleFavoriteCinema(cinema.nid)}
-          style={styles.cinemaMetaDataContainer}>
-          <Text style={styles.cinemaMetaHeader}>
-            <MaterialCommunityIcons
-              name={
-                state.favoriteCinemas.includes(parseInt(cinema.nid))
-                  ? 'star'
-                  : 'star-outline'
-              }
-              size={25}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.cinemaMetaDataContainer}>
+          <View style={styles.cinemaMetaHeader}>
+            <StarFavorite cinemaId={parseInt(cinema.nid)} hideBackground />
+          </View>
+        </View>
       </Animatable.View>
       <Animatable.View
         style={styles.cinemaDescriptionContainer}
@@ -118,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 3,
   },
   cinemaMetaHeader: {
-    textAlign: 'center',
+    alignSelf: 'center',
     marginBottom: 5,
   },
 
