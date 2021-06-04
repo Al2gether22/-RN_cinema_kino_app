@@ -15,6 +15,7 @@ import {SIZES} from '../../constants/theme';
 import Toast from 'react-native-toast-message';
 import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
+import sortFavoritesToTop from '../../helpers/sortFavoriteCinemasToTop';
 
 const ShowTimes = ({
   id,
@@ -95,7 +96,10 @@ const ShowTimes = ({
       element.showtimes = _.groupBy(element.showtimes, 'movie_version_id');
     }
 
-    return _.orderBy(merged, 'distance');
+    return sortFavoritesToTop(
+      _.orderBy(merged, 'distance'),
+      state.favoriteCinemas,
+    );
   }
 
   const onPressNextShowtime = () => {

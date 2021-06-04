@@ -4,6 +4,7 @@ import {computeDistance} from '../helpers/computeDistance';
 import Toast from 'react-native-toast-message';
 import crashlytics from '@react-native-firebase/crashlytics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import sortFavoritesToTop from '../helpers/sortFavoriteCinemasToTop';
 
 const cinemaReducer = (state, action) => {
   switch (action.type) {
@@ -57,18 +58,6 @@ const cinemaReducer = (state, action) => {
       return state;
   }
 };
-
-function sortFavoritesToTop(cinemas, favoriteCinemas) {
-  if (!favoriteCinemas) return cinemas;
-  cinemas.sort(function(a, b) {
-    return favoriteCinemas.includes(a.id)
-      ? -1
-      : favoriteCinemas.includes(b.id)
-      ? 1
-      : 0;
-  });
-  return cinemas;
-}
 
 const toggleFavoriteCinema = dispatch => async cinemaId => {
   console.log('toggle cinema');
