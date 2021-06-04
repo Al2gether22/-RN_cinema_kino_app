@@ -178,7 +178,7 @@ const ShowTimes = ({id}) => {
                                 analytics().logScreenView({
                                   screen_class: 'Spilletidsvisning_biograf',
                                   screen_name: 'Spilletidsvisning_biograf',
-                                });                              
+                                });
                               analytics().logEvent(
                                 'Spilletidsvisning_biograf',
                                 {

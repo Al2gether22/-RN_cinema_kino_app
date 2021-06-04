@@ -6,13 +6,12 @@ import {SharedElement} from 'react-navigation-shared-element';
 import TouchableScale from 'react-native-touchable-scale';
 import styles from '../styles/CinemasStyles';
 import SearchFilterFunction from '../components/shared/SearchFilterFunction';
+import StarFavorite from '../components/cinemas/StarFavorite';
 
 const Cinemas = () => {
   const navigation = useNavigation();
   const {state} = useContext(Context);
   const [cinemas, setCinemas] = useState(state.cinemas);
-
-  let navState = navigation.dangerouslyGetState();
 
   function Item(item) {
     return (
@@ -38,6 +37,7 @@ const Cinemas = () => {
                 {item.distance ? `${item.distance.toFixed(1)} km` : ''}
               </Text>
             </View>
+            <StarFavorite cinemaId={item.id} />
           </ImageBackground>
         </SharedElement>
       </TouchableScale>
