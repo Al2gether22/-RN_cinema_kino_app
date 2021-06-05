@@ -733,10 +733,10 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CodePush: 9bb93f52a44ee80b72739d89dead9c7e86c3bd3a
+  CodePush: 019289464f0ea035a461334f5d64ae88c16b1e74
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: 5776f027522ce1b2415982c48c8407c95966c60f
-  FBReactNativeSpec: 26117e86f55918d149bec146b69341f6e41c55fa
+  FBReactNativeSpec: 0a3b2628ac539b8fa3cafa0bcfc9361b9baccfd8
   Firebase: fffddd0bab8677d07376538365faa93ff3889b39
   FirebaseAnalytics: 4641d7ae4220174f6ca5626163ffc5de2e90391e
   FirebaseCore: ec566d917b2195fc2610aeb148dae99f57a788f9
@@ -777,7 +777,7 @@ SPEC CHECKSUMS:
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
-  react-native-video: 0bb76b6d6b77da3009611586c7dbf817b947f30e
+  react-native-video: 1574074179ecaf6a9dd067116c8f31bf9fec15c8
   react-native-webview: 6520e3e7b4933de76b95ef542c8d7115cf45b68e
   React-perflogger: 22385ffdf9f2ce78ba0251c260924c6bbefbe916
   React-RCTActionSheet: 6337f324f825b15a506bfc18f1ac08592f8ef78f

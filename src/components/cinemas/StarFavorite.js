@@ -12,6 +12,10 @@ const StarFavorite = ({flatListRef, cinemaId, hideBackground}) => {
         backgroundColor: hideBackground ? null : 'rgba(0, 0, 0, 0.55)',
         width: 28,
         height: 28,
+        position: "absolute",
+        right: 0,
+        top: 0,
+        borderRadius: 25
       }}>
       <TouchableOpacity
         onPress={() => {
@@ -27,7 +31,7 @@ const StarFavorite = ({flatListRef, cinemaId, hideBackground}) => {
               : 'star-outline'
           }
           size={25}
-          color="white"
+          color="#ff321e"
         />
       </TouchableOpacity>
     </View>
