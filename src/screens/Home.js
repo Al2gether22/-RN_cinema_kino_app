@@ -172,14 +172,12 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.backgroundColor,
   },
   featuredMovieContainer: {
-    maxHeight: '30%',
+    height: '30%',
     width: SIZES.width,
   },
-  featuredMovieContainer: {
-    maxHeight: '30%',
-  },
   slidersContainer: {
-    marginTop: 20,
+    marginTop: "5%",
+    height: "30%",
     backgroundColor: '#1d1d27',
   },
 });

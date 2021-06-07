@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(29,29,39,0.8)',
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: "5%"
   },
   headLine: {
     color: COLORS.white,

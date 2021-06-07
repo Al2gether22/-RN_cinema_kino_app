@@ -80,6 +80,7 @@ const UserLogin = ({state, animation}) => {
           autoCapitalize="none"
           autoCorrect={false}
           blurOnSubmit={true}
+          keyboardType={'email-address'}
           textContentType={'password'}
           onFocus={() => handleInputFocus('password')}
           onBlur={() => handleInputBlur('password')}
@@ -155,6 +156,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.8,
     borderColor: '#676d7c',
     borderRadius: 5,
+    textAlignVertical: "center",
     ...FONTS.h3,
   },
   button: {
