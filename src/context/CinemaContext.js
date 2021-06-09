@@ -60,7 +60,6 @@ const cinemaReducer = (state, action) => {
 };
 
 const toggleFavoriteCinema = dispatch => async cinemaId => {
-  console.log('toggle cinema');
   try {
     dispatch({
       type: 'toggle_favorite_cinema',

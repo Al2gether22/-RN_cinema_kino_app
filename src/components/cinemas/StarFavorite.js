@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {View, TouchableOpacity} from 'react-native';
+import analytics from '@react-native-firebase/analytics';
 import PropTypes from 'prop-types';
 import {Context as CinemaContext} from '../../context/CinemaContext';
 
@@ -21,7 +22,10 @@ const StarFavorite = ({flatListRef, cinemaId, hideBackground}) => {
         onPress={() => {
           toggleFavoriteCinema(cinemaId);
           if (flatListRef) {
-            flatListRef.current.scrollToIndex({index: 0, animated: true});
+            flatListRef.current.scrollToIndex({index: 0, animated: true})
+            analytics().logEvent('favorite_cinema', {
+              cinema: cinemaId,
+            });
           }
         }}>
         <MaterialCommunityIcons
