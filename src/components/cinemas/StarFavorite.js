@@ -32,6 +32,7 @@ const StarFavorite = ({flatListRef, cinemaId, hideBackground}) => {
           }
           size={25}
           color="#ff321e"
+          style={{textAlignVertical: "center", textAlign: "center"}}
         />
       </TouchableOpacity>
     </View>

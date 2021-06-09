@@ -68,6 +68,7 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
             posterResizeMode={'cover'}
             disableFocus={true}
             mixWithOthers={"mix"}
+            ignoreSilentSwitch={"ignore"}
           />
 
           <View style={styles.linkContainer}>
