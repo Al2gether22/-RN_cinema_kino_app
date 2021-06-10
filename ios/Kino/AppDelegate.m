@@ -34,7 +34,6 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil]; // allow
 
 #if DEBUG
   InitializeFlipper(application);
