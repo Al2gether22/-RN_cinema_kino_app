@@ -135,7 +135,7 @@ android {
         applicationId "com.kiloo.KinoDK"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3006
+        versionCode 3007
         versionName "3.0"
     }
     splits {
