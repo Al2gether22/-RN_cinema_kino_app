@@ -11,6 +11,7 @@ import * as Animatable from 'react-native-animatable';
 import {Context} from '../../context/AuthContext';
 import {COLORS, SIZES, FONTS} from '../../constants/theme';
 import WebViewModal from '../../modals/WebViewModal';
+import FbLoginButton from './FbLoginButton';
 
 const UserLogin = ({state, animation}) => {
   const [username, setUsername] = useState('');
@@ -124,6 +125,7 @@ const UserLogin = ({state, animation}) => {
             Har du ingen profil? Tryk her
           </Text>
         </TouchableOpacity>
+        <FbLoginButton />
       </View>
     </View>
   );
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.8,
     borderColor: '#676d7c',
     borderRadius: 5,
-    textAlignVertical: "center",
+    textAlignVertical: 'center',
     ...FONTS.h3,
   },
   button: {

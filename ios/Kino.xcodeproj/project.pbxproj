@@ -26,6 +26,7 @@
 		F879184A2600AE7200B06245 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D921D66A5F1149F2ACEA9352 /* SourceSansPro-Black.ttf */; };
 		F879184B2600AE7400B06245 /* SourceSansPro-BlackIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 072AE1DC66784149BAB1E629 /* SourceSansPro-BlackIt.ttf */; };
 		F88261592638B87C009B42D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F88261582638B87C009B42D7 /* GoogleService-Info.plist */; };
+		F8D4FA1826955FFD00DDE053 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D4FA1726955FFD00DDE053 /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,8 @@
 		F648DB8B4ACC4511896299D5 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = ../assets/fonts/AntDesign.ttf; sourceTree = "<group>"; };
 		F879183D2600ADAE00B06245 /* BasierSquare-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierSquare-Regular.otf"; path = "../assets/fonts/BasierSquare-Regular.otf"; sourceTree = "<group>"; };
 		F88261582638B87C009B42D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F8D4FA1626955FFD00DDE053 /* Kino-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kino-Bridging-Header.h"; sourceTree = "<group>"; };
+		F8D4FA1726955FFD00DDE053 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +163,8 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				8695C71325E69AAC00D74D08 /* Images-2.xcassets */,
+				F8D4FA1726955FFD00DDE053 /* File.swift */,
+				F8D4FA1626955FFD00DDE053 /* Kino-Bridging-Header.h */,
 			);
 			name = Kino;
 			sourceTree = "<group>";
@@ -301,7 +306,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -544,6 +549,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				F8D4FA1826955FFD00DDE053 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,6 +581,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E39EBEB94BADE9CF3EFC67BB /* Pods-Kino-KinoTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -609,6 +616,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3C1887E69DD586C23D5934B3 /* Pods-Kino-KinoTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -666,6 +674,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dk.kino.iphoneapp;
 				PRODUCT_NAME = Kino;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Kino-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -698,6 +707,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dk.kino.iphoneapp;
 				PRODUCT_NAME = Kino;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Kino-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
