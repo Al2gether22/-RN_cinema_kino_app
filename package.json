@@ -8,7 +8,13 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "ipad": "react-native run-ios --simulator='iPad Pro (11-inch) (2nd generation)'"
+    "ipad": "react-native run-ios --simulator='iPad Pro (11-inch) (2nd generation)'",
+    "codepush-android-prod": "appcenter codepush release-react -a kiocbr-egmont.com/Kino-1 -d Production",
+    "codepush-ios-prod": "appcenter codepush release-react -a kiocbr-egmont.com/Kino -d Production",
+    "codepush-android": "appcenter codepush release-react -a kiocbr-egmont.com/Kino-1 -d Staging",
+    "codepush-ios": "appcenter codepush release-react -a kiocbr-egmont.com/Kino -d Staging",
+    "codepush-prod": "yarn run codepush-android-prod && yarn run codepush-ios-prod",
+    "codepush": "yarn run codepush-android-staging && yarn run codepush-ios-staging"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
