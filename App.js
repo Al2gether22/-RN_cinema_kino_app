@@ -14,10 +14,10 @@ import {Settings} from 'react-native-fbsdk-next';
 const App = () => {
   //Hide Splash screen on app load.
   React.useEffect(() => {
+    Settings.initializeSDK();
     SplashScreen.hide();
     // Ask for consent first if necessary
     // Possibly only do this for iOS if no need to handle a GDPR-type flow
-    Settings.initializeSDK();
   }, []);
 
   const toastConfig = {
