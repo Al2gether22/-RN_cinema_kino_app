@@ -8,7 +8,13 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "ipad": "react-native run-ios --simulator='iPad Pro (11-inch) (2nd generation)'"
+    "ipad": "react-native run-ios --simulator='iPad Pro (11-inch) (2nd generation)'",
+    "codepush-android-prod": "appcenter codepush release-react -a kiocbr-egmont.com/Kino-1 -d Production",
+    "codepush-ios-prod": "appcenter codepush release-react -a kiocbr-egmont.com/Kino -d Production",
+    "codepush-android": "appcenter codepush release-react -a kiocbr-egmont.com/Kino-1 -d Staging",
+    "codepush-ios": "appcenter codepush release-react -a kiocbr-egmont.com/Kino -d Staging",
+    "codepush-prod": "npm run codepush-android-prod && npm run codepush-ios-prod",
+    "codepush": "npm run codepush-android && npm run codepush-ios"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
@@ -50,7 +56,7 @@
     "react-native-vector-icons": "^8.1.0",
     "react-native-video": "^5.1.1",
     "react-native-webview": "^11.2.3",
-    "react-native-youtube-iframe": "^1.4.1",
+    "react-native-youtube-iframe": "^1.4.2",
     "react-navigation-shared-element": "^5.0.0-alpha1"
   },
   "devDependencies": {
