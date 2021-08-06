@@ -13,8 +13,8 @@
     "codepush-ios-prod": "appcenter codepush release-react -a kiocbr-egmont.com/Kino -d Production",
     "codepush-android": "appcenter codepush release-react -a kiocbr-egmont.com/Kino-1 -d Staging",
     "codepush-ios": "appcenter codepush release-react -a kiocbr-egmont.com/Kino -d Staging",
-    "codepush-prod": "yarn run codepush-android-prod && yarn run codepush-ios-prod",
-    "codepush": "yarn run codepush-android-staging && yarn run codepush-ios-staging"
+    "codepush-prod": "npm run codepush-android-prod && npm run codepush-ios-prod",
+    "codepush": "npm run codepush-android && npm run codepush-ios"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
