@@ -22,6 +22,9 @@ target 'Kino' do
 
   use_flipper!({ 'Flipper-Folly' => '2.5.3', 'Flipper' => '0.87.0', 'Flipper-RSocket' => '1.3.1' })
   post_install do |installer|
+    installer.pods_project.build_configurations.each do |config|
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
     react_native_post_install(installer)
   end
 
@@ -34,7 +37,7 @@ target 'Kino' do
   # add pods for any other desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
   $RNFirebaseAnalyticsWithoutAdIdSupport = true
-  end
+end
 
 # target 'Kino-tvOS' do
 #   # Pods for Kino-tvOS
