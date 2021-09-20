@@ -10,6 +10,7 @@ import Toast, {BaseToast} from 'react-native-toast-message';
 import {FONTS} from './src/constants/theme';
 import SplashScreen from 'react-native-splash-screen';
 import {Settings} from 'react-native-fbsdk-next';
+import codePush from 'react-native-code-push';
 
 const App = () => {
   //Hide Splash screen on app load.
