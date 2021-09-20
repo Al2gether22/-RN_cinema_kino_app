@@ -125,7 +125,7 @@ const UserLogin = ({state, animation}) => {
             Har du ingen profil? Tryk her
           </Text>
         </TouchableOpacity>
-        <FbLoginButton />
+        {/* <FbLoginButton /> */}
       </View>
     </View>
   );
