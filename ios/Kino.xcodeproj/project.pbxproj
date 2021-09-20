@@ -26,6 +26,7 @@
 		F879184A2600AE7200B06245 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D921D66A5F1149F2ACEA9352 /* SourceSansPro-Black.ttf */; };
 		F879184B2600AE7400B06245 /* SourceSansPro-BlackIt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 072AE1DC66784149BAB1E629 /* SourceSansPro-BlackIt.ttf */; };
 		F88261592638B87C009B42D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F88261582638B87C009B42D7 /* GoogleService-Info.plist */; };
+		F8D4FA1826955FFD00DDE053 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D4FA1726955FFD00DDE053 /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,8 @@
 		F70E70B1F60F498A8AD3D285 /* Pods-Kino-KinoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kino-KinoTests.debug.xcconfig"; path = "Target Support Files/Pods-Kino-KinoTests/Pods-Kino-KinoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F879183D2600ADAE00B06245 /* BasierSquare-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BasierSquare-Regular.otf"; path = "../assets/fonts/BasierSquare-Regular.otf"; sourceTree = "<group>"; };
 		F88261582638B87C009B42D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F8D4FA1626955FFD00DDE053 /* Kino-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kino-Bridging-Header.h"; sourceTree = "<group>"; };
+		F8D4FA1726955FFD00DDE053 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +153,8 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				8695C71325E69AAC00D74D08 /* Images-2.xcassets */,
+				F8D4FA1726955FFD00DDE053 /* File.swift */,
+				F8D4FA1626955FFD00DDE053 /* Kino-Bridging-Header.h */,
 			);
 			name = Kino;
 			sourceTree = "<group>";
@@ -289,7 +294,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -532,6 +537,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				F8D4FA1826955FFD00DDE053 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -563,6 +569,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F70E70B1F60F498A8AD3D285 /* Pods-Kino-KinoTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -598,6 +605,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CC839DC2FCB11E198D33C266 /* Pods-Kino-KinoTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -649,8 +657,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.06;
-				ONLY_ACTIVE_ARCH = YES;
+				MARKETING_VERSION = 3.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -659,6 +666,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dk.kino.iphoneapp;
 				PRODUCT_NAME = Kino;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Kino-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -683,8 +691,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.06;
-				ONLY_ACTIVE_ARCH = NO;
+				MARKETING_VERSION = 3.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -693,6 +700,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dk.kino.iphoneapp;
 				PRODUCT_NAME = Kino;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Kino-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -733,8 +741,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				EXCLUDED_ARCHS = "";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -801,8 +808,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				EXCLUDED_ARCHS = "";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

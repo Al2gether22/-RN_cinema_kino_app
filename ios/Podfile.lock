@@ -36,6 +36,20 @@ PODS:
     - React-Core (= 0.64.2)
     - React-jsi (= 0.64.2)
     - ReactCommon/turbomodule/core (= 0.64.2)
+  - FBSDKCoreKit (9.3.0):
+    - FBSDKCoreKit/Basics (= 9.3.0)
+    - FBSDKCoreKit/Core (= 9.3.0)
+  - FBSDKCoreKit/Basics (9.3.0)
+  - FBSDKCoreKit/Core (9.3.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (9.3.0):
+    - FBSDKLoginKit/Login (= 9.3.0)
+  - FBSDKLoginKit/Login (9.3.0):
+    - FBSDKCoreKit (~> 9.3.0)
+  - FBSDKShareKit (9.3.0):
+    - FBSDKShareKit/Share (= 9.3.0)
+  - FBSDKShareKit/Share (9.3.0):
+    - FBSDKCoreKit (~> 9.3.0)
   - Firebase/Analytics (7.10.0):
     - Firebase/Core
   - Firebase/Core (7.10.0):
@@ -380,6 +394,20 @@ PODS:
   - React-jsinspector (0.64.2)
   - react-native-cookies (6.0.4):
     - React-Core
+  - react-native-fbsdk-next (4.3.0):
+    - React-Core
+    - react-native-fbsdk-next/Core (= 4.3.0)
+    - react-native-fbsdk-next/Login (= 4.3.0)
+    - react-native-fbsdk-next/Share (= 4.3.0)
+  - react-native-fbsdk-next/Core (4.3.0):
+    - FBSDKCoreKit (~> 9.3)
+    - React-Core
+  - react-native-fbsdk-next/Login (4.3.0):
+    - FBSDKLoginKit (~> 9.3)
+    - React-Core
+  - react-native-fbsdk-next/Share (4.3.0):
+    - FBSDKShareKit (~> 9.3)
+    - React-Core
   - react-native-geolocation (2.0.2):
     - React
   - react-native-safe-area-context (3.1.9):
@@ -547,6 +575,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - "react-native-cookies (from `../node_modules/@react-native-cookies/cookies`)"
+  - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
@@ -586,6 +615,9 @@ SPEC REPOS:
     - Base64
     - boost-for-react-native
     - CocoaAsyncSocket
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -660,6 +692,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-cookies:
     :path: "../node_modules/@react-native-cookies/cookies"
+  react-native-fbsdk-next:
+    :path: "../node_modules/react-native-fbsdk-next"
   react-native-geolocation:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-safe-area-context:
@@ -733,10 +767,13 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CodePush: 019289464f0ea035a461334f5d64ae88c16b1e74
+  CodePush: 9bb93f52a44ee80b72739d89dead9c7e86c3bd3a
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
-  FBReactNativeSpec: 819d0f27d28eda535f19764148471ef97f704d76
+  FBReactNativeSpec: 2999aff25c8eb319a7198730c4463f8d47a97555
+  FBSDKCoreKit: 0d1ae58388a458b8222f72025804cdc84eb5d0c3
+  FBSDKLoginKit: aea68df6121c5e165ccae2fabfdc83c4644ee40f
+  FBSDKShareKit: 70889c97c62f0c6b3ccb8b999e73a85f19024001
   Firebase: fffddd0bab8677d07376538365faa93ff3889b39
   FirebaseAnalytics: 4641d7ae4220174f6ca5626163ffc5de2e90391e
   FirebaseCore: ec566d917b2195fc2610aeb148dae99f57a788f9
@@ -774,10 +811,11 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 80c46bd381fd06e418e0d4f53672dc1d1945c4c3
   React-jsinspector: cc614ec18a9ca96fd275100c16d74d62ee11f0ae
   react-native-cookies: 3b5b182d008b714fefc337df15b787f00385a598
+  react-native-fbsdk-next: 19e974b071047b7ed1dad86a9dc3fe77dff76b8c
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
-  react-native-video: 1574074179ecaf6a9dd067116c8f31bf9fec15c8
+  react-native-video: 0bb76b6d6b77da3009611586c7dbf817b947f30e
   react-native-webview: 6520e3e7b4933de76b95ef542c8d7115cf45b68e
   React-perflogger: 25373e382fed75ce768a443822f07098a15ab737
   React-RCTActionSheet: af7796ba49ffe4ca92e7277a5d992d37203f7da5

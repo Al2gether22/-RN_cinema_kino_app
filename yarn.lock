@@ -6026,6 +6026,11 @@
   "resolved" "https://registry.npmjs.org/react-native-fast-image/-/react-native-fast-image-8.3.4.tgz"
   "version" "8.3.4"
 
+"react-native-fbsdk-next@^4.3.0":
+  "integrity" "sha512-wJUSgM6hq/gImnp/HflTI5750GNADtxCEEhDD6lXJDPuNfAPfAXi54XcAVa5nbijJMCBr+z3wFZ/gF8PrqdxTQ=="
+  "resolved" "https://registry.npmjs.org/react-native-fbsdk-next/-/react-native-fbsdk-next-4.3.0.tgz"
+  "version" "4.3.0"
+
 "react-native-gesture-handler@^1.10.3":
   "integrity" "sha512-cBGMi1IEsIVMgoox4RvMx7V2r6bNKw0uR1Mu1o7NbuHS6BRSVLq0dP34l2ecnPlC+jpWd3le6Yg1nrdCjby2Mw=="
   "resolved" "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-1.10.3.tgz"
@@ -6173,7 +6178,7 @@
   dependencies:
     "events" "^3.2.0"
 
-"react-native@^0.64.0-rc.4", "react-native@>=0.60":
+"react-native@^0.64.0-rc.4", "react-native@>=0.63.3":
   "integrity" "sha512-Ty/fFHld9DcYsFZujXYdeVjEhvSeQcwuTGXezyoOkxfiGEGrpL/uwUZvMzwShnU4zbbTKDu2PAm/uwuOittRGA=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.64.2.tgz"
   "version" "0.64.2"

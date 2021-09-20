@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {StatusBar, View, Text} from 'react-native';
-import codePush from 'react-native-code-push';
 import BottomTabNavigator from './src/navigation/BottomTabNavigator';
 import {Provider as MovieProvider} from './src/context/MoviesContext';
 import {Provider as CinemaProvider} from './src/context/CinemaContext';
@@ -10,12 +9,16 @@ import FetchData from './src/components/shared/FetchData';
 import Toast, {BaseToast} from 'react-native-toast-message';
 import {FONTS} from './src/constants/theme';
 import SplashScreen from 'react-native-splash-screen';
+import {Settings} from 'react-native-fbsdk-next';
 
 const App = () => {
   //Hide Splash screen on app load.
   React.useEffect(() => {
+    Settings.initializeSDK();
     SplashScreen.hide();
-  });
+    // Ask for consent first if necessary
+    // Possibly only do this for iOS if no need to handle a GDPR-type flow
+  }, []);
 
   const toastConfig = {
     error: ({text1, text2, props, ...rest}) => (
