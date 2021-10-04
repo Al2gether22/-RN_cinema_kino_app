@@ -1,34 +1,28 @@
-import React from "react"
-import { View, Text, StyleSheet } from "react-native"
-import { COLORS, FONTS} from "../../constants/theme"
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {COLORS, FONTS} from '../../constants/theme';
+import 'moment/locale/da';
+import moment from 'moment';
+moment.locale('da');
 
-
-const PremiereDate = ({ PremiereDate }) => {
-
-  const dateOptions = {
-    weekday: 'long',
-    month: 'short',
-    day: 'numeric',
-  };
-
-  const premiereDateString = PremiereDate.split(' ')[0]
-  const parsedPremiereDate = new Date(premiereDateString)
-
+const PremiereDate = ({PremiereDate}) => {
   return (
     <View style={styles.PremiereDateContainer}>
-      <Text style={styles.PremiereDate}>{parsedPremiereDate.toLocaleDateString('da', dateOptions).toString()}</Text>
+      <Text style={styles.PremiereDate}>
+        {moment(PremiereDate).format('dddd Do MMM')}
+      </Text>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   PremiereDateContainer: {
-    position: "absolute",
+    position: 'absolute',
     top: 5,
     right: 0,
-    backgroundColor: "black",
+    backgroundColor: 'black',
     borderTopLeftRadius: 15,
-    borderBottomLeftRadius: 15
+    borderBottomLeftRadius: 15,
   },
   PremiereDate: {
     color: COLORS.white,
@@ -36,10 +30,10 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingLeft: 8,
     paddingRight: 3,
-    textTransform: "capitalize",
+    textTransform: 'capitalize',
     ...FONTS.h4,
     fontSize: 12,
-  }
-})
+  },
+});
 
 export default PremiereDate;
