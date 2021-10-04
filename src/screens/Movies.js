@@ -1,9 +1,9 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState, useEffect, useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import _ from 'lodash';
 import {Context} from '../context/MoviesContext';
 import {View, Text, FlatList} from 'react-native';
-import FastImage from 'react-native-fast-image'
+import FastImage from 'react-native-fast-image';
 import TouchableScale from 'react-native-touchable-scale';
 import {SharedElement} from 'react-navigation-shared-element';
 import styles from '../styles/MoviesStyles';
@@ -21,6 +21,7 @@ const Movies = () => {
   );
   const currentDate = new Date();
   const [filteredMovies, setFilteredMovies] = useState(movies);
+  const movieFlatListRef = useRef(null);
 
   useEffect(() => {
     // Create an scoped async function in the hook
@@ -34,6 +35,9 @@ const Movies = () => {
     trackData();
   }, []);
 
+  function scrollToIndex(index) {
+    movieFlatListRef.current.scrollToIndex({index, animated: true});
+  }
 
   function Item(item) {
     // Formatting date to compare it to date today
@@ -89,7 +93,11 @@ const Movies = () => {
         filterValue="danishTitle"
       />
 
-      <FilterMovies state={state} setFilteredMovies={setFilteredMovies} />
+      <FilterMovies
+        scrollToIndex={scrollToIndex}
+        state={state}
+        setFilteredMovies={setFilteredMovies}
+      />
 
       <FlatList
         keyboardShouldPersistTaps="always"
@@ -99,6 +107,7 @@ const Movies = () => {
         showsVerticalScrollIndicator={false}
         renderItem={({item}) => Item(item)}
         keyExtractor={item => item.id}
+        ref={movieFlatListRef}
       />
     </View>
   );
