@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {View, StyleSheet, Text, ActivityIndicator} from 'react-native';
+import React, {useContext, useEffect, useState, useRef} from 'react';
+import {View, StyleSheet, Text, AppState} from 'react-native';
 import {PacmanIndicator} from 'react-native-indicators';
 import Geolocation from '@react-native-community/geolocation';
 import * as Animatable from 'react-native-animatable';
@@ -22,6 +22,7 @@ const Home = () => {
   const {
     state: {movies, featuredMovies},
   } = useContext(MoviesContext);
+  const appState = useRef(AppState.currentState);
   const [currentLongitude, setCurrentLongitude] = useState('');
   const [currentLatitude, setCurrentLatitude] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -32,6 +33,24 @@ const Home = () => {
 
   useEffect(() => {
     checkPermissions();
+  }, []);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (
+        appState.current.match(/inactive|background/) &&
+        nextAppState === 'active'
+      ) {
+        checkPermissions();
+      }
+      appState.current = nextAppState;
+    });
+
+    return () => {
+      if (subscription && subscription.remove) {
+        subscription.remove();
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -176,8 +195,8 @@ const styles = StyleSheet.create({
     width: SIZES.width,
   },
   slidersContainer: {
-    marginTop: "5%",
-    height: "30%",
+    marginTop: '5%',
+    height: '30%',
     backgroundColor: '#1d1d27',
   },
 });

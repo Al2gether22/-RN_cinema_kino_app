@@ -25,9 +25,6 @@ const App = () => {
     error: ({text1, text2, props, ...rest}) => (
       <BaseToast
         {...rest}
-        // leadingIcon={icons.error}
-        // trailingIcon={error}
-
         onLeadingIconPress={() => Toast.hide()}
         onTrailingIconPress={() => Toast.hide()}
         onPress={() => Toast.hide()}
