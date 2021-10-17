@@ -14,7 +14,7 @@ import fetchImageColors from '../../helpers/fetchImageColors';
 
 const FeaturedMovie = ({movies, featuredMovies}) => {
   const [featuredMovie, setFeaturedMovie] = useState();
-  const [videoPaused, setVideoPaused] = useState(true)
+  const [videoPaused, setVideoPaused] = useState(true);
   const navigation = useNavigation();
 
   // Do a lookup in movies with the movie id and find the movie and pass it to movie modal
@@ -67,8 +67,9 @@ const FeaturedMovie = ({movies, featuredMovies}) => {
             poster={featuredMovies[0].imageUrl}
             posterResizeMode={'cover'}
             disableFocus={true}
-            mixWithOthers={"mix"}
-            ignoreSilentSwitch={"ignore"}
+            mixWithOthers={'mix'}
+            ignoreSilentSwitch={'ignore'}
+            pictureInPicture={false}
           />
 
           <View style={styles.linkContainer}>
