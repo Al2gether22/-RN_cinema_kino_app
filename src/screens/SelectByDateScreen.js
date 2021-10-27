@@ -43,55 +43,28 @@ const SelectByDateScreen = () => {
     trackData();
   }, []);
 
-  // function scrollToIndex(index) {
-  //   movieFlatListRef.current.scrollToIndex({index, animated: true});
-  // }
-
-  function Item(item) {
-    // Formatting date to compare it to date today
-
-    const parsedDate = danishPremiere => {
-      if (danishPremiere !== null) {
-        const premiereDate = danishPremiere.split(' ')[0];
-        const parsedDate = new Date(premiereDate);
-        return parsedDate;
-      } else {
-        return null;
-      }
+  useEffect(() => {
+    const request = async () => {
+      const response = await fetch(
+        'https://www.kino.dk/appservices/date/2021-10-27',
+        {
+          mode: 'no-cors',
+        },
+      );
+      const data = await response.json();
+      console.log(data);
+      setMovies(data);
     };
+    request();
+  }, []);
 
-    return (
-      <TouchableScale
-        style={styles.card}
-        activeScale={0.9}
-        tension={50}
-        friction={7}
-        useNativeDriver
-        onPress={async () => {
-          const imgColors = await fetchImageColors(item.imageUrl);
-          navigation.navigate('Film', {
-            item,
-            imgColors,
-            lastScreen: 'Film',
-          });
-        }}>
-        <SharedElement id={item.imageUrl}>
-          <FastImage style={styles.coverImage} source={{uri: item.imageUrl}} />
-        </SharedElement>
+  const Item = ({title}) => (
+    <View style={styles.item}>
+      <Text style={{color: 'white'}}>{title}</Text>
+    </View>
+  );
 
-        {parsedDate(item.danishPremiere) > currentDate && (
-          <PremiereDate PremiereDate={item.danishPremiere} />
-        )}
-        <View style={styles.titleContainer}>
-          <SharedElement id={item.danishTitle}>
-            <Text style={styles.cardTitle}>
-              {item.danishTitle ? item.danishTitle : item.title}
-            </Text>
-          </SharedElement>
-        </View>
-      </TouchableScale>
-    );
-  }
+  const renderItem = ({item}) => <Item title={item.danishTitle} />;
 
   return (
     <View style={styles.container}>
@@ -103,22 +76,11 @@ const SelectByDateScreen = () => {
         ref={datePickerRef}
       />
 
-      {/* <FilterMovies
-        scrollToIndex={scrollToIndex}
-        state={state}
-        setFilteredMovies={setFilteredMovies}
-      /> */}
-      {/* 
       <FlatList
-        keyboardShouldPersistTaps="always"
-        data={filteredMovies}
-        extraData={filteredMovies}
-        numColumns={3}
-        showsVerticalScrollIndicator={false}
-        renderItem={({item}) => Item(item)}
+        data={movies}
+        renderItem={renderItem}
         keyExtractor={item => item.id}
-        ref={movieFlatListRef}
-      /> */}
+      />
     </View>
   );
 };

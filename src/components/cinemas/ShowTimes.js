@@ -132,9 +132,7 @@ const ShowTimes = ({id}) => {
                 friction={7}
                 useNativeDriver
                 onPress={async () => {
-                  setMovie(item); //This should not really be used,
-                  //Item/Movie should be passed down to the child flatlist
-                  //or else tracking below is not actual
+                  setMovie(item);
                   setMovieModalVisible(true);
                 }}>
                 <View style={styles.moviePosterContainer}>
@@ -143,11 +141,12 @@ const ShowTimes = ({id}) => {
               </TouchableScale>
 
               <View>
-                <Text numberOfLines={1} style={styles.sectionHeader}>{item.danishTitle}</Text>
+                <Text numberOfLines={1} style={styles.sectionHeader}>
+                  {item.danishTitle}
+                </Text>
 
                 <FlatList
                   keyboardShouldPersistTaps="always"
-                  // Here each showtime pr cinema is rendered
                   keyExtractor={item => item.toString()}
                   listKey={item => item.toString()}
                   data={Object.values(item.showtimes)}
