@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {Context} from '../context/AuthContext';
 import HomeStackScreen from './HomeStackScreen';
 import MoviesStackScreen from './MoviesStackScreen';
+import DaySelectStackScreen from './DaySelectStackScreen';
 import CinemasStackScreen from './CinemasStackScreen';
 import UserStackScreen from './UserStackScreen';
 import {COLORS, FONTS, SIZES} from '../constants/theme';
@@ -61,7 +62,10 @@ export default function BottomTabNavigator() {
               iconName = focused ? 'ticket' : 'ticket-outline';
             } else if (route.name === 'Biografer') {
               iconName = focused ? 'movie' : 'movie-outline';
+            } else if (route.name === 'Vælg dag') {
+              iconName = focused ? 'calendar' : 'calendar-outline';
             }
+
             return (
               <MaterialCommunityIcons
                 name={iconName}
@@ -95,6 +99,16 @@ export default function BottomTabNavigator() {
           listeners={({navigation}) => ({
             tabPress: () => {
               navigation.navigate('Film oversigt', {screen: 'Film oversigt'});
+            },
+          })}
+        />
+        <Tab.Screen
+          name="Vælg dag"
+          component={DaySelectStackScreen}
+          options={{unmountOnBlur: true}}
+          listeners={({navigation}) => ({
+            tabPress: () => {
+              navigation.navigate('Biografer', {screen: 'Biografer'});
             },
           })}
         />

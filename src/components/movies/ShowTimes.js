@@ -130,7 +130,6 @@ const ShowTimes = ({
       />
 
       <DatePicker
-        dates={monthOfDates}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
         ref={datePickerRef}

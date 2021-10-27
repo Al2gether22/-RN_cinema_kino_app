@@ -1,16 +1,12 @@
-Stefan:
-- Håndtering af når brugeren tillader geo location, selvom han afviste det i første omgang.  
-Hvis han går ind under settings på sin telefon og vælger at kino app alligevel godt må bruge gps’en.
+SELECT DAY screen
 
+Hvor mange dage skal man kunne vælge i mellem?
+Favorit
+Geolokation
+Filteret med byer (default sortering hvis ingen geolokation)
 
-Charli:
-- Movie poster under purchase history skal være clickable
-- Tilføj “annonce” tekst til toppen af element på home screen
+Samme modal som inde fra biografen
 
+Bruger skal logges ud automatisk hvis købshistorik ikke kan hentes
+Tjek FetchData - checkLocalSignIn
 
-DONE:
-- Facebook login -> Merge til ny branch, men skjul knap indtil vi har opret bruger via Facebook API endpoint oppe at køre
-- Tracking -> Implementer Apples tracking model
-- Fejl på Android -> Tjek anmeldelser
-- Scroll til top når man vælger Aktuelle / kommende / populære film
-- Dates på filmoversigt “premiere dato” er det forkerte format på android
