@@ -2,19 +2,15 @@ import React, {useContext, useState, useEffect, useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import _ from 'lodash';
 import {Context} from '../context/MoviesContext';
-import {View, Text, FlatList} from 'react-native';
-import FastImage from 'react-native-fast-image';
+import {View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {PacmanIndicator} from 'react-native-indicators';
 import moment from 'moment';
-import TouchableScale from 'react-native-touchable-scale';
-import {SharedElement} from 'react-navigation-shared-element';
 import styles from '../styles/MoviesStyles';
-import PremiereDate from '../components/movies/PremiereDate';
 import {scrollToIndex} from '../helpers/datepicker.utils';
 import {create1MonthDates} from '../helpers/date.utils';
-import FilterMovies from '../components/movies/FilterMovies';
 import DatePicker from '../components/shared/DatePicker';
-import fetchImageColors from '../helpers/fetchImageColors';
 import analytics from '@react-native-firebase/analytics';
+import {sortCinemasByDistance} from '../helpers/sortCinemasByDistance';
 
 const now = moment();
 
@@ -24,12 +20,12 @@ const SelectByDateScreen = () => {
   const [movies, setMovies] = useState(
     _.orderBy(state.movies, 'selling_position'),
   );
-  const currentDate = new Date();
   const [filteredMovies, setFilteredMovies] = useState(movies);
   const movieFlatListRef = useRef(null);
   const datePickerRef = useRef();
   const [monthOfDates] = useState(create1MonthDates(now));
   const [selectedDate, setSelectedDate] = useState(monthOfDates[0]);
+  const [currentLocation, setCurrentLocation] = useState(null);
 
   useEffect(() => {
     // Create an scoped async function in the hook
@@ -44,9 +40,11 @@ const SelectByDateScreen = () => {
   }, []);
 
   useEffect(() => {
-    const request = async () => {
+    const requestMoviesOfDay = async () => {
       const response = await fetch(
-        'https://www.kino.dk/appservices/date/2021-10-27',
+        `https://www.kino.dk/appservices/date/${selectedDate.format(
+          'YYYY-MM-DD',
+        )}`,
         {
           mode: 'no-cors',
         },
@@ -54,17 +52,55 @@ const SelectByDateScreen = () => {
       const data = await response.json();
       console.log(data);
       setMovies(data);
+      return data;
     };
-    request();
-  }, []);
+    const requestCinemasAndShowtimes = async (movie, index) => {
+      const response = await fetch(
+        `https://www.kino.dk/appservices/movie/${
+          movie.id
+        }/${selectedDate.format('YYYY-MM-DD')}`,
+        {
+          mode: 'no-cors',
+        },
+      );
+      const cinemas = await response.json();
+      movie.cinemas = cinemas;
+      setMovies(prevState => {
+        let newState = [...prevState];
+        newState[index] = movie;
+        return newState;
+      });
+    };
+    requestMoviesOfDay().then(movies => {
+      movies.forEach((movie, index) =>
+        requestCinemasAndShowtimes(movie, index),
+      );
+    });
+  }, [selectedDate]);
 
-  const Item = ({title}) => (
+  const cinemaList = (cinemas, id) => {
+    const cinemaList = cinemas.map(cinema => (
+      <Text key={`${id}-${cinema.cinema_id}`} style={fontStyle.whiteText}>
+        {cinema.name}
+      </Text>
+    ));
+    return cinemaList;
+  };
+
+  const Item = ({title, cinemas, id}) => (
     <View style={styles.item}>
-      <Text style={{color: 'white'}}>{title}</Text>
+      <Text style={fontStyle.whiteText}>{title}</Text>
+      {cinemas ? (
+        cinemaList(cinemas, id)
+      ) : (
+        <PacmanIndicator size={25} color="white" />
+      )}
     </View>
   );
 
-  const renderItem = ({item}) => <Item title={item.danishTitle} />;
+  const renderItem = ({item}) => (
+    <Item title={item.danishTitle} cinemas={item.cinemas} id={item.id} />
+  );
 
   return (
     <View style={styles.container}>
@@ -80,9 +116,16 @@ const SelectByDateScreen = () => {
         data={movies}
         renderItem={renderItem}
         keyExtractor={item => item.id}
+        extraData={movies}
       />
     </View>
   );
+};
+
+const fontStyle = {
+  whiteText: {
+    color: 'white',
+  },
 };
 
 export default SelectByDateScreen;
