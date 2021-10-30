@@ -2,19 +2,16 @@ import React, {useEffect, useState, useRef} from 'react';
 import {View, Text, FlatList, ActivityIndicator, Image} from 'react-native';
 import _ from 'lodash';
 import moment from 'moment';
-import TouchableScale from 'react-native-touchable-scale';
-import MovieVersionLookup from '../shared/MovieVersionLookup';
 import Toast from 'react-native-toast-message';
-import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
 import {useNavigation} from '@react-navigation/native';
 import DatePicker from '../shared/DatePicker';
 import WebViewModal from '../../modals/WebViewModal';
 import styles from '../../styles/ShowTimeStyles';
-import {SIZES} from '../../constants/theme';
 import {scrollToIndex} from '../../helpers/datepicker.utils';
 import {create1MonthDates} from '../../helpers/date.utils';
 import MovieModal from '../../modals/MovieModal';
+import MovieMultipleCinemaShowTimes from '../shared/MovieMultipleCinemaShowTimes';
 
 //We need versions, they are inside item.versions
 const now = moment();
@@ -108,102 +105,11 @@ const ShowTimes = ({id}) => {
         ref={datePickerRef}
       />
 
-      {showtimes.length === 0 ? (
-        <View style={styles.noShowtimesContainer}>
-          <Text style={styles.sectionHeader}>
-            Der er ingen spilletider på den valgte dato
-          </Text>
-        </View>
-      ) : (
-        <FlatList
-          keyboardShouldPersistTaps="always"
-          keyExtractor={showtimes => showtimes.movie_id.toString()}
-          listKey={showtimes => showtimes.movie_id.toString()}
-          data={showtimes}
-          extraData={selectedDate}
-          ItemSeparatorComponent={() => {
-            return <View style={styles.itemSeperator} />;
-          }}
-          renderItem={({item}) => (
-            <View style={styles.movieShowTimeContainer}>
-              <TouchableScale
-                activeScale={0.9}
-                tension={50}
-                friction={7}
-                useNativeDriver
-                onPress={async () => {
-                  setMovie(item);
-                  setMovieModalVisible(true);
-                }}>
-                <View style={styles.moviePosterContainer}>
-                  <Image source={{uri: item.imageUrl}} style={styles.poster} />
-                </View>
-              </TouchableScale>
-
-              <View>
-                <Text numberOfLines={1} style={styles.sectionHeader}>
-                  {item.danishTitle}
-                </Text>
-
-                <FlatList
-                  keyboardShouldPersistTaps="always"
-                  keyExtractor={item => item.toString()}
-                  listKey={item => item.toString()}
-                  data={Object.values(item.showtimes)}
-                  renderItem={({item}) => (
-                    <View style={styles.showTimesContainer}>
-                      <Text style={styles.showtimeVersionLabel}>
-                        <MovieVersionLookup
-                          // Make check to see if item[0] exists
-                          id={item[0].movie_version_id}
-                          movieVersions={movieVersions}
-                        />
-                      </Text>
-                      <FlatList
-                        keyboardShouldPersistTaps="always"
-                        keyExtractor={item => item.showtime_id.toString()}
-                        listKey={item => item.showtime_id.toString()}
-                        data={Object.values(item)}
-                        numColumns={(SIZES.width / 130).toFixed(0)}
-                        renderItem={({item}) => (
-                          <TouchableScale
-                            activeScale={0.9}
-                            tension={50}
-                            friction={7}
-                            useNativeDriver
-                            onPress={() => {
-                              setWebViewModalVisible(true),
-                                setShowtimeId(item.showtime_id),
-                                analytics().logScreenView({
-                                  screen_class: 'Spilletidsvisning_biograf',
-                                  screen_name: 'Spilletidsvisning_biograf',
-                                });
-                              analytics().logEvent(
-                                'Spilletidsvisning_biograf',
-                                {
-                                  Title: item.movie_title,
-                                  id: item.movie_nid,
-                                  showtime_date: item.start_time,
-                                  showtime_id: item.showtime_id,
-                                  cinema_id: id,
-                                },
-                              );
-                            }}
-                            style={styles.showTime}>
-                            <Text style={styles.showTimeText}>
-                              {item.start_time.slice(11, 16)}
-                            </Text>
-                          </TouchableScale>
-                        )}
-                      />
-                    </View>
-                  )}
-                />
-              </View>
-            </View>
-          )}
-        />
-      )}
+      <MovieMultipleCinemaShowTimes
+        selectedDate={selectedDate}
+        showtimes={showtimes}
+        movieVersions={movieVersions}
+      />
     </View>
   );
 };

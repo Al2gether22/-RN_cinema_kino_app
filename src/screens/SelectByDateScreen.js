@@ -32,47 +32,49 @@ const SelectByDateScreen = () => {
     trackData();
   }, []);
 
-  const requestMoviesOfDay = async () => {
-    const response = await fetch(
-      `https://www.kino.dk/appservices/date/${selectedDate.format(
-        'YYYY-MM-DD',
-      )}`,
-      {
-        mode: 'no-cors',
-      },
-    );
-    const data = await response.json();
-    setMovies(data);
-    return data;
-  };
-
-  const requestCinemasAndShowtimes = async (movie, index) => {
-    const response = await fetch(
-      `https://www.kino.dk/appservices/movie/${movie.id}/${selectedDate.format(
-        'YYYY-MM-DD',
-      )}`,
-      {
-        mode: 'no-cors',
-      },
-    );
-    const cinemas = await response.json();
-    const sortedCinemas = _.sortBy(cinemas, cinema =>
-      cinemaIdsSorted.indexOf(parseInt(cinema.cinema_id)),
-    );
-    movie.cinemas = sortedCinemas;
-    setMovies(prevState => {
-      let newState = [...prevState];
-      newState[index] = movie;
-      return newState;
-    });
-  };
-
-  const fetchData = async () => {
-    const movies = await requestMoviesOfDay();
-    movies.forEach((movie, index) => requestCinemasAndShowtimes(movie, index));
-  };
-
   useEffect(() => {
+    const requestMoviesOfDay = async () => {
+      const response = await fetch(
+        `https://www.kino.dk/appservices/date/${selectedDate.format(
+          'YYYY-MM-DD',
+        )}`,
+        {
+          mode: 'no-cors',
+        },
+      );
+      const data = await response.json();
+      setMovies(data);
+      return data;
+    };
+
+    const requestCinemasAndShowtimes = async (movie, index) => {
+      const response = await fetch(
+        `https://www.kino.dk/appservices/movie/${
+          movie.id
+        }/${selectedDate.format('YYYY-MM-DD')}`,
+        {
+          mode: 'no-cors',
+        },
+      );
+      const cinemas = await response.json();
+      const sortedCinemas = _.sortBy(cinemas, cinema =>
+        cinemaIdsSorted.indexOf(parseInt(cinema.cinema_id)),
+      );
+      movie.cinemas = sortedCinemas;
+      setMovies(prevState => {
+        let newState = [...prevState];
+        newState[index] = movie;
+        return newState;
+      });
+    };
+
+    const fetchData = async () => {
+      const movies = await requestMoviesOfDay();
+      movies.forEach((movie, index) =>
+        requestCinemasAndShowtimes(movie, index),
+      );
+    };
+
     fetchData();
   }, [selectedDate]);
 
