@@ -1,8 +1,7 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
-import {useNavigation} from '@react-navigation/native';
 import _ from 'lodash';
-import {Context} from '../context/MoviesContext';
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {Context} from '../context/CinemaContext';
+import {View, Text, FlatList} from 'react-native';
 import {PacmanIndicator} from 'react-native-indicators';
 import moment from 'moment';
 import styles from '../styles/MoviesStyles';
@@ -11,71 +10,70 @@ import {create1MonthDates} from '../helpers/date.utils';
 import DatePicker from '../components/shared/DatePicker';
 import analytics from '@react-native-firebase/analytics';
 import {sortCinemasByDistance} from '../helpers/sortCinemasByDistance';
+import Geolocation from '@react-native-community/geolocation';
 
 const now = moment();
 
 const SelectByDateScreen = () => {
-  const navigation = useNavigation();
   const {state} = useContext(Context);
-  const [movies, setMovies] = useState(
-    _.orderBy(state.movies, 'selling_position'),
-  );
-  const [filteredMovies, setFilteredMovies] = useState(movies);
-  const movieFlatListRef = useRef(null);
+  const cinemaIdsSorted = state.cinemas.map(cinema => cinema.id);
+  const [movies, setMovies] = useState([]);
   const datePickerRef = useRef();
   const [monthOfDates] = useState(create1MonthDates(now));
   const [selectedDate, setSelectedDate] = useState(monthOfDates[0]);
-  const [currentLocation, setCurrentLocation] = useState(null);
 
   useEffect(() => {
-    // Create an scoped async function in the hook
     async function trackData() {
       await analytics().logScreenView({
-        screen_class: 'Film oversigt',
-        screen_name: 'Film oversigt',
+        screen_class: 'Vælg dag',
+        screen_name: 'Vælg dag',
       });
     }
-    // Execute the created function directly
     trackData();
   }, []);
 
-  useEffect(() => {
-    const requestMoviesOfDay = async () => {
-      const response = await fetch(
-        `https://www.kino.dk/appservices/date/${selectedDate.format(
-          'YYYY-MM-DD',
-        )}`,
-        {
-          mode: 'no-cors',
-        },
-      );
-      const data = await response.json();
-      console.log(data);
-      setMovies(data);
-      return data;
-    };
-    const requestCinemasAndShowtimes = async (movie, index) => {
-      const response = await fetch(
-        `https://www.kino.dk/appservices/movie/${
-          movie.id
-        }/${selectedDate.format('YYYY-MM-DD')}`,
-        {
-          mode: 'no-cors',
-        },
-      );
-      const cinemas = await response.json();
-      movie.cinemas = cinemas;
-      setMovies(prevState => {
-        let newState = [...prevState];
-        newState[index] = movie;
-        return newState;
-      });
-    };
-    requestMoviesOfDay().then(movies => {
-      movies.forEach((movie, index) =>
-        requestCinemasAndShowtimes(movie, index),
-      );
+  const requestMoviesOfDay = async () => {
+    const response = await fetch(
+      `https://www.kino.dk/appservices/date/${selectedDate.format(
+        'YYYY-MM-DD',
+      )}`,
+      {
+        mode: 'no-cors',
+      },
+    );
+    const data = await response.json();
+    setMovies(data);
+    return data;
+  };
+
+  const requestCinemasAndShowtimes = async (movie, index) => {
+    const response = await fetch(
+      `https://www.kino.dk/appservices/movie/${movie.id}/${selectedDate.format(
+        'YYYY-MM-DD',
+      )}`,
+      {
+        mode: 'no-cors',
+      },
+    );
+    const cinemas = await response.json();
+    const sortedCinemas = _.sortBy(cinemas, cinema =>
+      cinemaIdsSorted.indexOf(parseInt(cinema.cinema_id)),
+    );
+    movie.cinemas = sortedCinemas;
+    setMovies(prevState => {
+      let newState = [...prevState];
+      newState[index] = movie;
+      return newState;
     });
+  };
+
+  const fetchData = async () => {
+    const movies = await requestMoviesOfDay();
+    movies.forEach((movie, index) => requestCinemasAndShowtimes(movie, index));
+  };
+
+  useEffect(() => {
+    fetchData();
   }, [selectedDate]);
 
   const cinemaList = (cinemas, id) => {
@@ -112,6 +110,7 @@ const SelectByDateScreen = () => {
         ref={datePickerRef}
       />
 
+      {movies.length === 0 && <PacmanIndicator size={45} color="white" />}
       <FlatList
         data={movies}
         renderItem={renderItem}
