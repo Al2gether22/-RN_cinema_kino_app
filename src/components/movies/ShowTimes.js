@@ -30,9 +30,7 @@ const ShowTimes = ({
   const datePickerRef = useRef();
   const [showtimes, setShowtimes] = useState([]);
   const [showtimeId, setShowtimeId] = useState([]);
-  const [monthOfDates, setMonthOfDates] = useState(
-    create1MonthDates(nextShowtime),
-  );
+  const [monthOfDates] = useState(create1MonthDates(nextShowtime));
   const [selectedDate, setSelectedDate] = useState(monthOfDates[0]);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
@@ -51,6 +49,7 @@ const ShowTimes = ({
       // sets showtimes to the response through the mergeArray method that calculates the distance
       .then(json => {
         if (isMounted) {
+          console.log(state.cinemas);
           setShowtimes(mergeArrays(json, state.cinemas));
         }
       })

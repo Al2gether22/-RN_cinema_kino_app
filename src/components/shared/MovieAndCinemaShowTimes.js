@@ -4,14 +4,15 @@ import TouchableScale from 'react-native-touchable-scale';
 import analytics from '@react-native-firebase/analytics';
 import styles from '../../styles/ShowTimeStyles';
 
-export default function MovieShowTimes({
-  cinemaMovies,
+export default function MovieAndCinemaShowTimes({
+  cinemaMovies = [],
   selectedDate,
   setWebViewModalVisible,
   setShowtimeId,
   setMovie,
   setMovieModalVisible,
 }) {
+  debugger;
   const noShowTimes = (
     <View style={styles.noShowtimesContainer}>
       <Text style={styles.sectionHeader}>
@@ -36,7 +37,7 @@ export default function MovieShowTimes({
     </TouchableScale>
   );
 
-  const MovieVersionsAndShowtimes = ({movie}) => {
+  const MovieVersionsAndShowtimes = ({movie, showtimes}) => {
     return Object.values(movie.versions).map(version => (
       <View key={movie.movie_id + version.version_id}>
         <Text style={styles.showtimeVersionLabel}>{version.version_name}</Text>
@@ -46,7 +47,7 @@ export default function MovieShowTimes({
             keyboardShouldPersistTaps="always"
             keyExtractor={showtime => showtime.showtime_id}
             listKey={showtime => showtime.showtime_id}
-            data={movie.showtimes}
+            data={showtimes}
             renderItem={({item: showtime}) => (
               <ShowTimeButton showtime={showtime} />
             )}
@@ -55,6 +56,16 @@ export default function MovieShowTimes({
       </View>
     ));
   };
+
+  const CinemaList = ({cinemas, movie}) =>
+    cinemas.map(cinema => (
+      <>
+        <Text style={{color: 'white', fontSize: 16}} key={cinema.cinema_id}>
+          {cinema.name}
+        </Text>
+        <MovieVersionsAndShowtimes movie={movie} showtimes={cinema.showtimes} />
+      </>
+    ));
 
   const ShowTimeButton = ({showtime}) => (
     <TouchableScale
@@ -84,13 +95,14 @@ export default function MovieShowTimes({
     </TouchableScale>
   );
 
+  //I assume every movie in this list has 1 showtime
   return cinemaMovies.length === 0 ? (
     noShowTimes
   ) : (
     <FlatList
       keyboardShouldPersistTaps="always"
-      keyExtractor={showtimes => showtimes.movie_id.toString()}
-      listKey={showtimes => showtimes.movie_id.toString()}
+      keyExtractor={movie => movie.id.toString()}
+      listKey={movie => movie.id.toString()}
       data={cinemaMovies}
       extraData={selectedDate}
       ItemSeparatorComponent={() => {
@@ -103,7 +115,9 @@ export default function MovieShowTimes({
             <Text numberOfLines={1} style={styles.sectionHeader}>
               {movie.danishTitle}
             </Text>
-            <MovieVersionsAndShowtimes movie={movie} />
+            {movie.cinemas && movie.cinemas.length !== 0 && (
+              <CinemaList cinemas={movie.cinemas} movie={movie} />
+            )}
           </View>
         </View>
       )}

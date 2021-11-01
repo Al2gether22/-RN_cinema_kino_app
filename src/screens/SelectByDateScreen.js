@@ -9,8 +9,8 @@ import {scrollToIndex} from '../helpers/datepicker.utils';
 import {create1MonthDates} from '../helpers/date.utils';
 import DatePicker from '../components/shared/DatePicker';
 import analytics from '@react-native-firebase/analytics';
-import {sortCinemasByDistance} from '../helpers/sortCinemasByDistance';
-import Geolocation from '@react-native-community/geolocation';
+import WebViewModal from '../modals/WebViewModal';
+import MovieAndCinemaShowTimes from '../components/shared/MovieAndCinemaShowTimes';
 
 const now = moment();
 
@@ -21,6 +21,10 @@ const SelectByDateScreen = () => {
   const datePickerRef = useRef();
   const [monthOfDates] = useState(create1MonthDates(now));
   const [selectedDate, setSelectedDate] = useState(monthOfDates[0]);
+  const [modalVisible, setWebViewModalVisible] = useState(false);
+  const [movie, setMovie] = useState({});
+  const [showtimeId, setShowtimeId] = useState();
+  const [movieModalVisible, setMovieModalVisible] = useState(false);
 
   useEffect(() => {
     async function trackData() {
@@ -64,6 +68,7 @@ const SelectByDateScreen = () => {
       setMovies(prevState => {
         let newState = [...prevState];
         newState[index] = movie;
+        console.log('newState', newState);
         return newState;
       });
     };
@@ -104,6 +109,12 @@ const SelectByDateScreen = () => {
 
   return (
     <View style={styles.container}>
+      <WebViewModal
+        modalVisible={modalVisible}
+        setModalVisible={() => setWebViewModalVisible(false)}
+        url={`https://kino.dk/ticketflow/${showtimeId}`}
+      />
+
       <DatePicker
         dates={monthOfDates}
         scrollToIndex={scrollToIndex}
@@ -113,11 +124,20 @@ const SelectByDateScreen = () => {
       />
 
       {movies.length === 0 && <PacmanIndicator size={45} color="white" />}
-      <FlatList
+      {/* <FlatList
         data={movies}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         extraData={movies}
+      /> */}
+
+      <MovieAndCinemaShowTimes
+        selectedDate={selectedDate}
+        cinemaMovies={movies}
+        setWebViewModalVisible={setWebViewModalVisible}
+        setShowtimeId={setShowtimeId}
+        setMovie={setMovie}
+        setMovieModalVisible={setMovieModalVisible}
       />
     </View>
   );

@@ -1,10 +1,9 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {View, Text, FlatList, ActivityIndicator, Image} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 import _ from 'lodash';
 import moment from 'moment';
 import Toast from 'react-native-toast-message';
 import crashlytics from '@react-native-firebase/crashlytics';
-import {useNavigation} from '@react-navigation/native';
 import DatePicker from '../shared/DatePicker';
 import WebViewModal from '../../modals/WebViewModal';
 import styles from '../../styles/ShowTimeStyles';
