@@ -41,71 +41,28 @@ const SelectByDateScreen = () => {
       const response = await fetch(
         `https://www.kino.dk/appservices/date/${selectedDate.format(
           'YYYY-MM-DD',
-        )}`,
+        )}/all`,
         {
           mode: 'no-cors',
         },
       );
       const data = await response.json();
-      setMovies(data);
-      return data;
-    };
-
-    const requestCinemasAndShowtimes = async (movie, index) => {
-      const response = await fetch(
-        `https://www.kino.dk/appservices/movie/${
-          movie.id
-        }/${selectedDate.format('YYYY-MM-DD')}`,
-        {
-          mode: 'no-cors',
-        },
-      );
-      const cinemas = await response.json();
-      const sortedCinemas = _.sortBy(cinemas, cinema =>
-        cinemaIdsSorted.indexOf(parseInt(cinema.cinema_id)),
-      );
-      movie.cinemas = sortedCinemas;
-      setMovies(prevState => {
-        let newState = [...prevState];
-        newState[index] = movie;
-        console.log('newState', newState);
-        return newState;
+      const sortedByGeoAndFavorites = data.map(movie => {
+        const cinemasSorted = _.sortBy(movie.cinemas, cinema =>
+          cinemaIdsSorted.indexOf(parseInt(cinema.id)),
+        );
+        movie.cinemas = cinemasSorted;
+        return movie;
       });
+      setMovies(sortedByGeoAndFavorites);
+      return data;
     };
 
     const fetchData = async () => {
       const movies = await requestMoviesOfDay();
-      movies.forEach((movie, index) =>
-        requestCinemasAndShowtimes(movie, index),
-      );
     };
-
     fetchData();
   }, [selectedDate]);
-
-  const cinemaList = (cinemas, id) => {
-    const cinemaList = cinemas.map(cinema => (
-      <Text key={`${id}-${cinema.cinema_id}`} style={fontStyle.whiteText}>
-        {cinema.name}
-      </Text>
-    ));
-    return cinemaList;
-  };
-
-  const Item = ({title, cinemas, id}) => (
-    <View style={styles.item}>
-      <Text style={fontStyle.whiteText}>{title}</Text>
-      {cinemas ? (
-        cinemaList(cinemas, id)
-      ) : (
-        <PacmanIndicator size={25} color="white" />
-      )}
-    </View>
-  );
-
-  const renderItem = ({item}) => (
-    <Item title={item.danishTitle} cinemas={item.cinemas} id={item.id} />
-  );
 
   return (
     <View style={styles.container}>
@@ -124,12 +81,6 @@ const SelectByDateScreen = () => {
       />
 
       {movies.length === 0 && <PacmanIndicator size={45} color="white" />}
-      {/* <FlatList
-        data={movies}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        extraData={movies}
-      /> */}
 
       <MovieAndCinemaShowTimes
         selectedDate={selectedDate}
