@@ -1,10 +1,11 @@
 import React, {useCallback} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, Dimensions} from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
 import analytics from '@react-native-firebase/analytics';
 import styles from '../../styles/ShowTimeStyles';
 import {PacmanIndicator} from 'react-native-indicators';
 import FastImage from 'react-native-fast-image';
+import {uniqueId} from 'lodash';
 
 export default function MovieAndCinemaShowTimes({
   cinemaMovies = [],
@@ -14,6 +15,21 @@ export default function MovieAndCinemaShowTimes({
   setMovie,
   setMovieModalVisible,
 }) {
+  const window = Dimensions.get('window');
+  const screen = Dimensions.get('screen');
+
+  const [dimensions, setDimensions] = React.useState({window, screen});
+
+  React.useEffect(() => {
+    const subscription = Dimensions.addEventListener(
+      'change',
+      ({window, screen}) => {
+        setDimensions({window, screen});
+      },
+    );
+    return () => subscription?.remove();
+  });
+
   const noShowTimes = (
     <View style={styles.noShowtimesContainer}>
       <Text style={styles.sectionHeader}>
@@ -44,9 +60,19 @@ export default function MovieAndCinemaShowTimes({
     return Object.values(movie.versions).map(version => (
       <View key={movie.movie_id + version.version_id}>
         <Text style={styles.showtimeVersionLabel}>{version.version_name}</Text>
-        <View style={styles.showTimesContainer}>
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            /*Removing flexDirection:column in movieShowTimeContainer will make
+            the flex items wrap nice, but removing it also messes up the layout, 
+            so ultimately I had to calculate the height for the item */
+            width: dimensions.window.width - styles.poster.width,
+          }}>
           {showtimes.map(showtime => (
-            <ShowTimeButton showtime={showtime} key={showtime.showtime_id} />
+            <View>
+              <ShowTimeButton showtime={showtime} key={showtime.showtime_id} />
+            </View>
           ))}
         </View>
       </View>
@@ -55,7 +81,7 @@ export default function MovieAndCinemaShowTimes({
 
   const CinemaList = ({cinemas, movie}) =>
     cinemas.map(cinema => (
-      <View key={cinema.cinema_id + movie.id}>
+      <View key={(cinema.cinema_id ? cinema.cinema_id : uniqueId()) + movie.id}>
         <Text style={{color: 'white', fontSize: 16}}>{cinema.name}</Text>
         {!cinema.showtimes && <PacmanIndicator size={10} />}
         <MovieVersionsAndShowtimes movie={movie} showtimes={cinema.showtimes} />
@@ -115,7 +141,6 @@ export default function MovieAndCinemaShowTimes({
     noShowTimes
   ) : (
     <FlatList
-      // contentContainerStyle={{ flex: 1}}
       initialNumToRender={5}
       keyboardShouldPersistTaps="always"
       keyExtractor={keyExtractor}
