@@ -1,5 +1,5 @@
-import React, {useCallback} from 'react';
-import {View, Text, FlatList, Dimensions} from 'react-native';
+import React, {useCallback, version} from 'react';
+import {View, Text, FlatList, Dimensions, Alert} from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
 import analytics from '@react-native-firebase/analytics';
 import styles from '../../styles/ShowTimeStyles';
@@ -19,6 +19,9 @@ export default function MovieAndCinemaShowTimes({
   const screen = Dimensions.get('screen');
 
   const [dimensions, setDimensions] = React.useState({window, screen});
+
+  const movieVersionsAndShowtimesWidth =
+    dimensions.window.width - styles.poster.width;
 
   React.useEffect(() => {
     const subscription = Dimensions.addEventListener(
@@ -56,35 +59,49 @@ export default function MovieAndCinemaShowTimes({
     </TouchableScale>
   );
 
-  const MovieVersionsAndShowtimes = ({movie, showtimes}) => {
-    return Object.values(movie.versions).map(version => (
-      <View key={movie.movie_id + version.version_id}>
-        <Text style={styles.showtimeVersionLabel}>{version.version_name}</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            /*Removing flexDirection:column in movieShowTimeContainer will make
-            the flex items wrap nice, but removing it also messes up the layout, 
-            so ultimately I had to calculate the height for the item */
-            width: dimensions.window.width - styles.poster.width,
-          }}>
-          {showtimes.map(showtime => (
-            <View>
+  const MovieVersionsAndShowtimes = ({movie, cinema}) => {
+    return movie.versions.map(version => {
+      const versionShowTimes = cinema.showtimes.filter(
+        showTime => showTime.movie_version_id === version.version_id,
+      );
+
+      if (versionShowTimes.length === 0) return null;
+
+      return (
+        <View key={movie.id + cinema.id + version.version_id}>
+          <Text style={styles.showtimeVersionLabel}>
+            {version.version_name}
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              width: movieVersionsAndShowtimesWidth,
+            }}>
+            {versionShowTimes.map(showtime => (
               <ShowTimeButton showtime={showtime} key={showtime.showtime_id} />
-            </View>
-          ))}
+            ))}
+          </View>
         </View>
-      </View>
-    ));
+      );
+    });
   };
 
-  const CinemaList = ({cinemas, movie}) =>
-    cinemas.map(cinema => (
+  const MovieVersionsCallBack = useCallback(({movie, cinema}) => (
+    <MovieVersionsAndShowtimes movie={movie} cinema={cinema} />
+  ));
+
+  const CinemaListCallBack = useCallback(({movie}) => (
+    <CinemaList movie={movie} />
+  ));
+
+  const CinemaList = ({movie}) =>
+    movie.cinemas.map(cinema => (
       <View key={(cinema.cinema_id ? cinema.cinema_id : uniqueId()) + movie.id}>
         <Text style={{color: 'white', fontSize: 16}}>{cinema.name}</Text>
         {!cinema.showtimes && <PacmanIndicator size={10} />}
-        <MovieVersionsAndShowtimes movie={movie} showtimes={cinema.showtimes} />
+        <MovieVersionsCallBack movie={movie} cinema={cinema} />
       </View>
     ));
 
@@ -130,7 +147,7 @@ export default function MovieAndCinemaShowTimes({
           {movie.danishTitle}
         </Text>
         {movie.cinemas && movie.cinemas.length !== 0 && (
-          <CinemaList cinemas={movie.cinemas} movie={movie} />
+          <CinemaListCallBack movie={movie} />
         )}
       </View>
     </View>
@@ -141,7 +158,6 @@ export default function MovieAndCinemaShowTimes({
     noShowTimes
   ) : (
     <FlatList
-      initialNumToRender={5}
       keyboardShouldPersistTaps="always"
       keyExtractor={keyExtractor}
       listKey={movie => movie.id.toString()}

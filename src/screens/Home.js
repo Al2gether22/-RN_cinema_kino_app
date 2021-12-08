@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState, useRef} from 'react';
 import {View, StyleSheet, Text, AppState} from 'react-native';
-import {PacmanIndicator} from 'react-native-indicators';
 import Geolocation from '@react-native-community/geolocation';
 import * as Animatable from 'react-native-animatable';
 import {Context as CinemaContext} from '../context/CinemaContext';
@@ -11,11 +10,12 @@ import FeaturedMovie from '../components/shared/FeaturedMovie';
 import Top10Movies from '../components/shared/Top10Movies';
 import TopCinemas from '../components/shared/TopCinemas';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
-import {COLORS, SIZES, FONTS} from '../constants/theme';
+import {COLORS, SIZES} from '../constants/theme';
 import analytics from '@react-native-firebase/analytics';
 import {firebase} from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
 import {Platform} from 'react-native';
+import LoadingScreen from '../components/shared/LoadingScreen';
 
 const Home = () => {
   const {state, updateCinemas} = useContext(CinemaContext);
@@ -127,27 +127,7 @@ const Home = () => {
   };
 
   if (state.cinemas.length == 0 || movies.length == 0) {
-    return (
-      <View
-        style={{
-          height: '100%',
-          flex: 1,
-          justifyContent: 'center',
-          backgroundColor: COLORS.backgroundColor,
-        }}>
-        <PacmanIndicator color="white" size={75} />
-        <Text
-          style={{
-            fontSize: 25,
-            textAlign: 'center',
-            color: 'white',
-            flex: 1,
-            ...FONTS.h2,
-          }}>
-          Loading...
-        </Text>
-      </View>
-    );
+    return <LoadingScreen />;
   }
 
   return (
