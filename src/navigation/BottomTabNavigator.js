@@ -9,7 +9,7 @@ import MoviesStackScreen from './MoviesStackScreen';
 import DaySelectStackScreen from './DaySelectStackScreen';
 import CinemasStackScreen from './CinemasStackScreen';
 import UserStackScreen from './UserStackScreen';
-import {COLORS, FONTS, SIZES} from '../constants/theme';
+import {SIZES} from '../constants/theme';
 import analytics from '@react-native-firebase/analytics';
 
 const Tab = createBottomTabNavigator();

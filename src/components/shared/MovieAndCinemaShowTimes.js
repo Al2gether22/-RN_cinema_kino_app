@@ -36,7 +36,7 @@ export default function MovieAndCinemaShowTimes({
   const noShowTimes = (
     <View style={styles.noShowtimesContainer}>
       <Text style={styles.sectionHeader}>
-        Der er ingen spilletider på den valgte dato
+        Der er ingen spilletider på den valgte dato og radius
       </Text>
     </View>
   );
