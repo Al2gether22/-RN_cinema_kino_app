@@ -80,7 +80,11 @@ export default function MovieAndCinemaShowTimes({
               width: movieVersionsAndShowtimesWidth,
             }}>
             {versionShowTimes.map(showtime => (
-              <ShowTimeButton showtime={showtime} key={showtime.showtime_id} />
+              <ShowTimeButton
+                showtime={showtime}
+                key={showtime.showtime_id}
+                cinemaId={cinema.id}
+              />
             ))}
           </View>
         </View>
@@ -105,20 +109,20 @@ export default function MovieAndCinemaShowTimes({
       </View>
     ));
 
-  const ShowTimeButton = ({showtime}) => {
-    const onPress = showtime => {
-      setWebViewModalVisible(true),
-        setShowtimeId(showtime.showtime_id),
-        analytics().logScreenView({
-          screen_class: 'Spilletidsvisning_biograf',
-          screen_name: 'Spilletidsvisning_biograf',
-        });
+  const ShowTimeButton = ({showtime, cinemaId}) => {
+    const onPress = () => {
+      setShowtimeId(showtime.showtime_id);
+      setWebViewModalVisible(true);
+      analytics().logScreenView({
+        screen_class: 'Spilletidsvisning_biograf',
+        screen_name: 'Spilletidsvisning_biograf',
+      });
       analytics().logEvent('Spilletidsvisning_biograf', {
         Title: showtime.movie_title,
         id: showtime.movie_nid,
         showtime_date: showtime.start_time,
         showtime_id: showtime.showtime_id,
-        cinema_id: id,
+        cinema_id: cinemaId,
       });
     };
 

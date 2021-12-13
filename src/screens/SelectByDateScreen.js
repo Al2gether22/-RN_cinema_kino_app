@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
-import _, {filter} from 'lodash';
+import _ from 'lodash';
 import {Context} from '../context/CinemaContext';
 import {View} from 'react-native';
 import moment from 'moment';
@@ -7,7 +7,6 @@ import styles from '../styles/MoviesStyles';
 import {scrollToIndex} from '../helpers/datepicker.utils';
 import {create1MonthDates} from '../helpers/date.utils';
 import DatePicker from '../components/shared/DatePicker';
-import analytics from '@react-native-firebase/analytics';
 import WebViewModal from '../modals/WebViewModal';
 import MovieAndCinemaShowTimes from '../components/shared/MovieAndCinemaShowTimes';
 import LoadingScreen from '../components/shared/LoadingScreen';
@@ -62,7 +61,8 @@ const SelectByDateScreen = () => {
         movie.cinemas = cinemasSortedWithDistanceProp;
         return movie;
       });
-      setLongestDistance(longestDist + 5);
+      const extraBufferDist = 5;
+      setLongestDistance(longestDist + extraBufferDist);
       setUnfilteredSortedByGeoAndFavs(sortedByGeoAndFavorites);
       setMovies(filterCinemasByDistance(sortedByGeoAndFavorites));
       setIsLoading(false);
@@ -116,8 +116,6 @@ const SelectByDateScreen = () => {
       />
     </>
   );
-
-  console.log('selectByDate movies', movies);
 
   return (
     <View style={styles.container}>
