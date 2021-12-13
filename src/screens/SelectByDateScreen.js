@@ -8,6 +8,7 @@ import {scrollToIndex} from '../helpers/datepicker.utils';
 import {create1MonthDates} from '../helpers/date.utils';
 import DatePicker from '../components/shared/DatePicker';
 import WebViewModal from '../modals/WebViewModal';
+import MovieModal from '../modals/MovieModal';
 import MovieAndCinemaShowTimes from '../components/shared/MovieAndCinemaShowTimes';
 import LoadingScreen from '../components/shared/LoadingScreen';
 import CinemaRadius from '../components/cinemas/CinemaRadius';
@@ -22,9 +23,9 @@ const SelectByDateScreen = () => {
   const [monthOfDates] = useState(create1MonthDates(now));
   const [selectedDate, setSelectedDate] = useState(monthOfDates[0]);
   const [modalVisible, setWebViewModalVisible] = useState(false);
-  const [, setMovie] = useState({});
+  const [movie, setMovie] = useState({});
   const [showtimeId, setShowtimeId] = useState();
-  const [, setMovieModalVisible] = useState(false);
+  const [movieModalVisible, setMovieModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [longestDistance, setLongestDistance] = useState(0);
   const [radius, setRadius] = useState(15);
@@ -123,6 +124,12 @@ const SelectByDateScreen = () => {
         modalVisible={modalVisible}
         setModalVisible={() => setWebViewModalVisible(false)}
         url={`https://kino.dk/ticketflow/${showtimeId}`}
+      />
+      <MovieModal
+        movieModalVisible={movieModalVisible}
+        hideMovieModal={() => setMovieModalVisible(false)}
+        passedMovie={movie}
+        hideShowTimes
       />
       <DatePicker
         dates={monthOfDates}

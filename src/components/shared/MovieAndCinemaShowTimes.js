@@ -1,5 +1,5 @@
-import React, {useCallback, version} from 'react';
-import {View, Text, FlatList, Dimensions, Alert} from 'react-native';
+import React, {useCallback} from 'react';
+import {View, Text, FlatList, Dimensions} from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
 import analytics from '@react-native-firebase/analytics';
 import styles from '../../styles/ShowTimeStyles';
@@ -41,23 +41,25 @@ export default function MovieAndCinemaShowTimes({
     </View>
   );
 
-  const onPressMoviePoster = () => {
-    setMovie(movie);
-    setMovieModalVisible(true);
-  };
+  const MoviePoster = ({movie}) => {
+    const onPressMoviePoster = () => {
+      setMovie(movie);
+      setMovieModalVisible(true);
+    };
 
-  const MoviePoster = ({movie}) => (
-    <TouchableScale
-      activeScale={0.9}
-      tension={50}
-      friction={7}
-      useNativeDriver
-      onPress={onPressMoviePoster}>
-      <View style={styles.moviePosterContainer}>
-        <FastImage source={{uri: movie.imageUrl}} style={styles.poster} />
-      </View>
-    </TouchableScale>
-  );
+    return (
+      <TouchableScale
+        activeScale={0.9}
+        tension={50}
+        friction={7}
+        useNativeDriver
+        onPress={onPressMoviePoster}>
+        <View style={styles.moviePosterContainer}>
+          <FastImage source={{uri: movie.imageUrl}} style={styles.poster} />
+        </View>
+      </TouchableScale>
+    );
+  };
 
   const MovieVersionsAndShowtimes = ({movie, cinema}) => {
     return movie.versions.map(version => {
