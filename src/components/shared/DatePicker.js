@@ -1,19 +1,19 @@
-import React, { forwardRef } from "react";
-import PropTypes from "prop-types";
-import { FlatList, View, Text, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { create1MonthDates } from "../../helpers/date.utils";
-import "moment/locale/da";
-import moment from "moment";
-moment.locale("da");
-import { COLORS, FONTS, SIZES} from "../../constants/theme"
+import React, {forwardRef} from 'react';
+import PropTypes from 'prop-types';
+import {FlatList, View, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {create1MonthDates} from '../../helpers/date.utils';
+import 'moment/locale/da';
+import moment from 'moment';
+moment.locale('da');
+import {COLORS, FONTS, SIZES} from '../../constants/theme';
 
 function dateLabelFromNow(myDate) {
   return moment(myDate).calendar(null, {
-    sameDay: "[I dag]",
-    nextDay: "[I morgen]",
-    nextWeek: "ddd Do MMM",
-    sameElse: "ddd Do MMM",
+    sameDay: '[I dag]',
+    nextDay: '[I morgen]',
+    nextWeek: 'ddd Do MMM',
+    sameElse: 'ddd Do MMM',
   });
 }
 
@@ -21,28 +21,33 @@ const defaultDates = create1MonthDates();
 
 const DatePicker = forwardRef(
   (
-    { selectedDate, setSelectedDate, dates = defaultDates, scrollToIndex },
-    ref
+    {selectedDate, setSelectedDate, dates = defaultDates, scrollToIndex},
+    ref,
   ) => {
-    const Item = ({ item, backgroundColor, color }) => (
-      
+    const Item = ({item, backgroundColor, color}) => (
       <TouchableOpacity
         onPress={() => {
           scrollToIndex(ref, dates, item);
           setSelectedDate(item);
-        }}
-      >
+        }}>
         <View style={[styles.showtimeContainer, backgroundColor]}>
-          <Text style={[styles.showtime, { color }]}>{dateLabelFromNow(item)}</Text>
+          <Text style={[styles.showtime, {color}]}>
+            {dateLabelFromNow(item)}
+          </Text>
         </View>
       </TouchableOpacity>
     );
 
-    const renderItem = ({ item }) => {
-      const backgroundColor = item === selectedDate ? "white" : "black";
-      const color = item === selectedDate ? "black" : "white"
+    const renderItem = ({item}) => {
+      const backgroundColor = item === selectedDate ? 'white' : 'black';
+      const color = item === selectedDate ? 'black' : 'white';
       return (
-        <Item key={item.toString()} item={item} color={color} backgroundColor={{ backgroundColor }} />
+        <Item
+          key={item.toString()}
+          item={item}
+          color={color}
+          backgroundColor={{backgroundColor}}
+        />
       );
     };
 
@@ -51,35 +56,37 @@ const DatePicker = forwardRef(
         keyboardShouldPersistTaps="always"
         horizontal
         ref={ref}
-        keyExtractor={(item) => item.toString()}
+        keyExtractor={item => item.toString()}
         data={dates}
         renderItem={renderItem}
         showsHorizontalScrollIndicator={false}
+        getItemLayout={(data, index) => ({
+          length: 45,
+          offset: 45 * index,
+          index,
+        })}
       />
     );
-  }
+  },
 );
 
 const styles = StyleSheet.create({
   showtimeContainer: {
-    minWidth: 80, 
+    minWidth: 80,
+    minHeight: 45,
     padding: 10,
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: 'black',
     borderRadius: 6,
     marginRight: 7,
     marginBottom: 15,
-    
   },
   showtime: {
-    textAlign: "center",
+    textAlign: 'center',
     ...FONTS.h4,
-
-    
   },
   dateLabel: {
     ...FONTS.h4,
-    
   },
 });
 
