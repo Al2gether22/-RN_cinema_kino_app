@@ -12,12 +12,20 @@ import MovieModal from '../modals/MovieModal';
 import MovieAndCinemaShowTimes from '../components/shared/MovieAndCinemaShowTimes';
 import LoadingScreen from '../components/shared/LoadingScreen';
 import CinemaRadius from '../components/cinemas/CinemaRadius';
+import CinemaCitySelector from '../components/cinemas/CinemaCitySelector';
 
 const now = moment();
 
 const SelectByDateScreen = () => {
   const {state} = useContext(Context);
   const cinemaIdsSorted = state.cinemas.map(cinema => cinema.id);
+  const cities = [...new Set(state.cinemas.map(cinema => cinema.city))];
+  const [cinemaCityNames, setCinemaCityNames] = useState(
+    cities.map(cinemaCity => ({
+      name: cinemaCity,
+      selected: true,
+    })),
+  );
   const [movies, setMovies] = useState([]);
   const datePickerRef = useRef();
   const [monthOfDates] = useState(create1MonthDates(now));
@@ -106,6 +114,10 @@ const SelectByDateScreen = () => {
         radius={radius}
         setRadius={setRadius}
         numberOfCinemasShown={numberOfCinemasShown}
+      />
+      <CinemaCitySelector
+        setCinemaCityNames={setCinemaCityNames}
+        cinemaCityNames={cinemaCityNames}
       />
       <MovieAndCinemaShowTimes
         selectedDate={selectedDate}
