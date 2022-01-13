@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
 import _ from 'lodash';
 import {Context} from '../context/CinemaContext';
-import {View} from 'react-native';
+import {View, Platform} from 'react-native';
 import moment from 'moment';
 import styles from '../styles/MoviesStyles';
 import {scrollToIndex} from '../helpers/datepicker.utils';
@@ -12,7 +12,9 @@ import MovieModal from '../modals/MovieModal';
 import MovieAndCinemaShowTimes from '../components/shared/MovieAndCinemaShowTimes';
 import LoadingScreen from '../components/shared/LoadingScreen';
 import CinemaRadius from '../components/cinemas/CinemaRadius';
-import CinemaCitySelector from '../components/cinemas/CinemaCitySelector';
+import CinemaCitySelector from '../components/cinemas/CinemaCitySelector/CinemaCitySelector';
+import Button from '../components/shared/Button';
+import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 
 const now = moment();
 
@@ -42,6 +44,12 @@ const SelectByDateScreen = () => {
     unfilteredSortedByGeoAndFavs,
     setUnfilteredSortedByGeoAndFavs,
   ] = useState([]);
+  const [showRadiusFilter, setShowRadiusFilter] = useState(false);
+  const [isSelectCitiesVisible, setIsSelectCitiesVisible] = useState(false);
+  const platformPermission =
+    Platform.OS === 'ios'
+      ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
+      : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
 
   useEffect(() => {
     const requestMoviesOfDay = async () => {
@@ -73,8 +81,7 @@ const SelectByDateScreen = () => {
       const extraBufferDist = 5;
       setLongestDistance(longestDist + extraBufferDist);
       setUnfilteredSortedByGeoAndFavs(sortedByGeoAndFavorites);
-      setMovies(filterCinemasByDistance(sortedByGeoAndFavorites));
-      setIsLoading(false);
+      checkPermissions(sortedByGeoAndFavorites);
     };
 
     const fetchData = async () => {
@@ -83,6 +90,23 @@ const SelectByDateScreen = () => {
     };
     fetchData();
   }, [selectedDate]);
+
+  const checkPermissions = sortedByGeoAndFavorites => {
+    check(platformPermission).then(result => {
+      switch (result) {
+        case RESULTS.GRANTED:
+          setMovies(filterCinemasByDistance(sortedByGeoAndFavorites));
+          setIsLoading(false);
+          setShowRadiusFilter(true);
+          break;
+        default:
+          setShowRadiusFilter(false);
+          setMovies(sortedByGeoAndFavorites);
+          setIsLoading(false);
+          break;
+      }
+    });
+  };
 
   function filterCinemasByDistance(movies) {
     const uniqueFilteredCinemaIds = new Set();
@@ -101,23 +125,38 @@ const SelectByDateScreen = () => {
     return filteredMoviesWithShowTimes;
   }
 
+  function filterCinemasByCityName(movies) {}
+
   useEffect(() => {
     setMovies(filterCinemasByDistance(unfilteredSortedByGeoAndFavs));
   }, [radius]);
+
+  useEffect(() => {
+    filterCinemasByCityName();
+  }, [cinemaCityNames]);
 
   const content = isLoading ? (
     <LoadingScreen />
   ) : (
     <>
-      <CinemaRadius
-        longestDistance={longestDistance}
-        radius={radius}
-        setRadius={setRadius}
-        numberOfCinemasShown={numberOfCinemasShown}
-      />
+      {showRadiusFilter && (
+        <CinemaRadius
+          longestDistance={longestDistance}
+          radius={radius}
+          setRadius={setRadius}
+          numberOfCinemasShown={numberOfCinemasShown}
+        />
+      )}
+      {!showRadiusFilter && (
+        <Button
+          label="Vælg byer"
+          onPress={() => setIsSelectCitiesVisible(true)}
+        />
+      )}
       <CinemaCitySelector
         setCinemaCityNames={setCinemaCityNames}
         cinemaCityNames={cinemaCityNames}
+        visible={isSelectCitiesVisible}
       />
       <MovieAndCinemaShowTimes
         selectedDate={selectedDate}
