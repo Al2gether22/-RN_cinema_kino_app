@@ -5,9 +5,11 @@ import {
   TouchableWithoutFeedback,
   FlatList,
   StatusBar,
+  TouchableOpacity,
   StyleSheet,
   Modal,
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 // import styles from '../../../styles/MovieStyles';
 import CheckBox from '@react-native-community/checkbox';
 import {COLORS, FONTS} from '../../../constants/theme';
@@ -16,6 +18,7 @@ export default function CinemaCitySelector({
   cinemaCityNames,
   setCinemaCityNames,
   visible,
+  setIsSelectCitiesVisible,
 }) {
   const [isAllDeselected, setIsAllDeselected] = useState(
     cinemaCityNames.filter(city => !city.selected).length ===
@@ -53,63 +56,99 @@ export default function CinemaCitySelector({
   }, [cinemaCityNames]);
 
   const renderItem = ({item: cinemaCity}) => (
-    <TouchableWithoutFeedback
-      onPress={() => setToggleCheckBox(cinemaCity)}
-      key={cinemaCity.name}>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          marginBottom: 10,
-        }}>
-        <CheckBox
-          boxType="square"
-          animationDuration={0.2}
-          value={cinemaCity.selected}
-          disabled //To avoid double value changing from touchablewithoutfeedback
-        />
-        <Text style={{color: 'white', fontSize: 20, marginLeft: 10}}>
-          {cinemaCity.name}
-        </Text>
-      </View>
-    </TouchableWithoutFeedback>
+    <View
+      style={{
+        backgroundColor: COLORS.backgroundColor,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10,
+        marginLeft: 25,
+      }}>
+      <CheckBox
+        boxType="square"
+        animationDuration={0.2}
+        value={cinemaCity.selected}
+        onValueChange={() => setToggleCheckBox(cinemaCity)}
+      />
+      {/* <TouchableWithoutFeedback
+        onPress={() => setToggleCheckBox(cinemaCity)}
+        key={cinemaCity.name}> */}
+      <Text style={{color: 'white', fontSize: 20, marginLeft: 10}}>
+        {cinemaCity.name}
+      </Text>
+      {/* </TouchableWithoutFeedback> */}
+    </View>
   );
 
   return (
     <Modal
-      onRequestClose={() => hideMovieModal()}
-      animationType="fade"
+      onRequestClose={() => setIsSelectCitiesVisible(false)}
+      animationType="none"
       presentationStyle={'fullScreen'}
+      hardwareAccelerated
       visible={visible}>
-      <StatusBar hidden />
-      <View style={styles.modalContainer}>
-        <View style={{flexDirection: 'row'}}>
-          <TouchableWithoutFeedback onPress={() => toggleAllCities(true)}>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{color: 'white', fontSize: 20, marginLeft: 10}}>
-                Vælg alle
-              </Text>
-              <CheckBox
-                boxType="square"
-                animationDuration={0.2}
-                value={isAllSelected}
-                disabled //To avoid double value changing from touchablewithoutfeedback
-              />
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={() => toggleAllCities(false)}>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{color: 'white', fontSize: 20, marginLeft: 10}}>
-                Fjern alle
-              </Text>
-              <CheckBox
-                boxType="square"
-                animationDuration={0.2}
-                value={isAllDeselected}
-                disabled //To avoid double value changing from touchablewithoutfeedback
-              />
-            </View>
-          </TouchableWithoutFeedback>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          backgroundColor: COLORS.backgroundColor,
+          paddingTop: 50,
+          paddingBottom: 50,
+        }}>
+        <TouchableOpacity
+          style={styles.goBackContainer}
+          onPress={() => {
+            setIsSelectCitiesVisible(false);
+          }}>
+          <MaterialCommunityIcons
+            name="arrow-left-circle"
+            size={35}
+            color="white"
+          />
+        </TouchableOpacity>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginBottom: 20,
+          }}>
+          <View style={{flexDirection: 'row'}}>
+            {/* <TouchableWithoutFeedback onPress={() => toggleAllCities(true)}> */}
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 20,
+                marginRight: 10,
+              }}>
+              Vælg alle
+            </Text>
+            {/* </TouchableWithoutFeedback> */}
+            <CheckBox
+              boxType="square"
+              animationDuration={0.2}
+              value={isAllSelected}
+              onPress={() => toggleAllCities(true)}
+            />
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            {/* <TouchableWithoutFeedback onPress={() => toggleAllCities(false)}> */}
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 20,
+                marginRight: 10,
+                marginLeft: 10,
+              }}>
+              Fjern alle
+            </Text>
+            {/* </TouchableWithoutFeedback> */}
+            <CheckBox
+              boxType="square"
+              animationDuration={0.2}
+              value={isAllDeselected}
+              onPress={() => toggleAllCities(false)}
+            />
+          </View>
         </View>
         <FlatList
           data={cinemaCityNames}

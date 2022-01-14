@@ -73,7 +73,8 @@ const SelectByDateScreen = () => {
           if (distance > longestDist) {
             longestDist = distance;
           }
-          return {...cinema, distance};
+          const city = state.cinemas[indexOfCinema].city;
+          return {...cinema, distance, city};
         });
         movie.cinemas = cinemasSortedWithDistanceProp;
         return movie;
@@ -125,7 +126,29 @@ const SelectByDateScreen = () => {
     return filteredMoviesWithShowTimes;
   }
 
-  function filterCinemasByCityName(movies) {}
+  /**
+   * Todo
+   * 1. Fix performance issues in city name selector
+   * 2. Fix showing cinemas again if deselected and selected again
+   * 3. Hide radius selector when scrolling down
+   */
+
+  function filterCinemasByCityName() {
+    const deselectedCities = cinemaCityNames
+      .filter(cinemaCity => !cinemaCity.selected)
+      .map(city => city.name);
+
+    const newFilteredByCity = unfilteredSortedByGeoAndFavs.map(movie => {
+      const cinemas = movie.cinemas.filter(
+        cinema => deselectedCities.indexOf(cinema.city) === -1,
+      );
+      return {...movie, cinemas};
+    });
+    const movies = newFilteredByCity.filter(
+      movie => movie.cinemas && movie.cinemas.length > 0,
+    );
+    setMovies(movies);
+  }
 
   useEffect(() => {
     setMovies(filterCinemasByDistance(unfilteredSortedByGeoAndFavs));
@@ -157,6 +180,7 @@ const SelectByDateScreen = () => {
         setCinemaCityNames={setCinemaCityNames}
         cinemaCityNames={cinemaCityNames}
         visible={isSelectCitiesVisible}
+        setIsSelectCitiesVisible={setIsSelectCitiesVisible}
       />
       <MovieAndCinemaShowTimes
         selectedDate={selectedDate}

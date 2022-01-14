@@ -3,6 +3,7 @@ import {HeaderBackButton} from '@react-navigation/stack';
 import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 
 import Movie from '../screens/Movie';
+
 import SelectByDateScreen from '../screens/SelectByDateScreen';
 
 const Stack = createSharedElementStackNavigator();
