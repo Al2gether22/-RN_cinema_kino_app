@@ -38,7 +38,7 @@ const SelectByDateScreen = () => {
   const [movieModalVisible, setMovieModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [longestDistance, setLongestDistance] = useState(0);
-  const [radius, setRadius] = useState(15);
+  const [radius, setRadius] = useState(20);
   const [numberOfCinemasShown, setNumberOfCinemasShown] = useState(0);
   const [
     unfilteredSortedByGeoAndFavs,
