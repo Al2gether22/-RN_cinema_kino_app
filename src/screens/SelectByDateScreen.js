@@ -126,37 +126,32 @@ const SelectByDateScreen = () => {
     return filteredMoviesWithShowTimes;
   }
 
-  /**
-   * Todo
-   * 1. Fix performance issues in city name selector
-   * 2. Fix showing cinemas again if deselected and selected again
-   * 3. Hide radius selector when scrolling down
-   */
+  // function filterCinemasByCityName() {
+  //   const deselectedCities = cinemaCityNames
+  //     .filter(cinemaCity => !cinemaCity.selected)
+  //     .map(city => city.name);
 
-  function filterCinemasByCityName() {
-    const deselectedCities = cinemaCityNames
-      .filter(cinemaCity => !cinemaCity.selected)
-      .map(city => city.name);
-
-    const newFilteredByCity = unfilteredSortedByGeoAndFavs.map(movie => {
-      const cinemas = movie.cinemas.filter(
-        cinema => deselectedCities.indexOf(cinema.city) === -1,
-      );
-      return {...movie, cinemas};
-    });
-    const movies = newFilteredByCity.filter(
-      movie => movie.cinemas && movie.cinemas.length > 0,
-    );
-    setMovies(movies);
-  }
+  //   const newFilteredByCity = unfilteredSortedByGeoAndFavs.map(movie => {
+  //     const cinemas = movie.cinemas.filter(
+  //       cinema => deselectedCities.indexOf(cinema.city) === -1,
+  //     );
+  //     return {...movie, cinemas};
+  //   });
+  //   const movies = newFilteredByCity.filter(
+  //     movie => movie.cinemas && movie.cinemas.length > 0,
+  //   );
+  //   setMovies(movies);
+  // }
 
   useEffect(() => {
     setMovies(filterCinemasByDistance(unfilteredSortedByGeoAndFavs));
   }, [radius]);
 
-  useEffect(() => {
-    filterCinemasByCityName();
-  }, [cinemaCityNames]);
+  // useEffect(() => {
+  //   if (!isSelectCitiesVisible) {
+  //     filterCinemasByCityName();
+  //   }
+  // }, [cinemaCityNames, isSelectCitiesVisible]);
 
   const content = isLoading ? (
     <LoadingScreen />
@@ -170,26 +165,28 @@ const SelectByDateScreen = () => {
           numberOfCinemasShown={numberOfCinemasShown}
         />
       )}
-      {!showRadiusFilter && (
+      {/* {!showRadiusFilter && (
         <Button
           label="Vælg byer"
           onPress={() => setIsSelectCitiesVisible(true)}
         />
-      )}
-      <CinemaCitySelector
+      )} */}
+      {/* <CinemaCitySelector
         setCinemaCityNames={setCinemaCityNames}
         cinemaCityNames={cinemaCityNames}
         visible={isSelectCitiesVisible}
         setIsSelectCitiesVisible={setIsSelectCitiesVisible}
-      />
-      <MovieAndCinemaShowTimes
-        selectedDate={selectedDate}
-        cinemaMovies={movies}
-        setWebViewModalVisible={setWebViewModalVisible}
-        setShowtimeId={setShowtimeId}
-        setMovie={setMovie}
-        setMovieModalVisible={setMovieModalVisible}
-      />
+      /> */}
+      {!isSelectCitiesVisible && (
+        <MovieAndCinemaShowTimes
+          selectedDate={selectedDate}
+          cinemaMovies={movies}
+          setWebViewModalVisible={setWebViewModalVisible}
+          setShowtimeId={setShowtimeId}
+          setMovie={setMovie}
+          setMovieModalVisible={setMovieModalVisible}
+        />
+      )}
     </>
   );
 

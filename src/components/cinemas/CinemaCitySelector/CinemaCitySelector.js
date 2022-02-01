@@ -68,15 +68,15 @@ export default function CinemaCitySelector({
         boxType="square"
         animationDuration={0.2}
         value={cinemaCity.selected}
-        onValueChange={() => setToggleCheckBox(cinemaCity)}
+        // onValueChange={() => setToggleCheckBox(cinemaCity)}
       />
-      {/* <TouchableWithoutFeedback
+      <TouchableWithoutFeedback
         onPress={() => setToggleCheckBox(cinemaCity)}
-        key={cinemaCity.name}> */}
-      <Text style={{color: 'white', fontSize: 20, marginLeft: 10}}>
-        {cinemaCity.name}
-      </Text>
-      {/* </TouchableWithoutFeedback> */}
+        key={cinemaCity.name}>
+        <Text style={{color: 'white', fontSize: 20, marginLeft: 10}}>
+          {cinemaCity.name}
+        </Text>
+      </TouchableWithoutFeedback>
     </View>
   );
 
@@ -127,7 +127,7 @@ export default function CinemaCitySelector({
               boxType="square"
               animationDuration={0.2}
               value={isAllSelected}
-              onPress={() => toggleAllCities(true)}
+              onValueChange={value => toggleAllCities(value)}
             />
           </View>
           <View style={{flexDirection: 'row'}}>
@@ -146,7 +146,7 @@ export default function CinemaCitySelector({
               boxType="square"
               animationDuration={0.2}
               value={isAllDeselected}
-              onPress={() => toggleAllCities(false)}
+              onValueChange={value => toggleAllCities(value)}
             />
           </View>
         </View>
